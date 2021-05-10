@@ -15,7 +15,23 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
+            $table->string('variation');
+            $table->integer('stammnummer');
+            $table->string('vin', 17);
+            $table->string('colour')->nullable();
+            $table->text('notes')->nullable();
+            $table->text('known_damage')->nullable();
+            $table->date('initial_date');
+            $table->date('bought_at');
+            $table->integer('buy_price');
+            $table->unsignedBigInteger('seller_contact_id');
+            $table->foreignId('car_model_id')
+                ->onUpdate('cascade')
+                ->onDelete('cascade')
+                ->constrained('car_models');
             $table->timestamps();
+
+            $table->foreign('seller_contact_id')->references('id')->on('contacts');
         });
     }
 
