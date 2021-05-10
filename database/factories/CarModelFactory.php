@@ -23,7 +23,7 @@ class CarModelFactory extends Factory
     public function definition()
     {
         return [
-            'car_model' => $this->faker->word(),
+            'name' => $this->faker->word(),
             'brand_id' => $this->faker->numberBetween(1, Brand::count()),
         ];
     }

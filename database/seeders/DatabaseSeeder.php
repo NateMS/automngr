@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Team;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\Brand;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        User::truncate();
         CarPayment::truncate();
         Contract::truncate();
         Document::truncate();
@@ -31,9 +33,21 @@ class DatabaseSeeder extends Seeder
         CarModel::truncate();
         Brand::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-    
+
+        $user = User::factory()->create([
+            'name' => 'Nadim Salloum',
+            'email' => 'hello@salloum.ch',
+            'password' => bcrypt('abc123'),
+        ]);
+
+        $team = Team::factory()->create([
+            'name' => 'Your SwissCar GmbH',
+            'user_id' => $user->id,
+            'personal_team' => false,
+        ]);
+
         foreach ($this->getBrands() as $brand) {
-            Brand::create(['brand' => $brand]);
+            Brand::create(['name' => $brand]);
         }
 
         $carModels = CarModel::factory()

@@ -30,7 +30,7 @@ class CreateCarsTable extends Migration
                 ->onDelete('cascade')
                 ->constrained('car_models');
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreign('seller_contact_id')->references('id')->on('contacts');
         });
     }

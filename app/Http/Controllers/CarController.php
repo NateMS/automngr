@@ -14,7 +14,31 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Cars/Index', [
+            'filters' => Request::all('search', 'trashed'),
+            'cars' => Car::all()
+                ->orderByName()
+                ->filter(Request::only('search', 'trashed'))
+                ->paginate()
+                ->withQueryString()
+                ->through(function ($car) {
+                    return [
+                        'id' => $car->id,
+                        'stammnummer' => $car->stammnummer,
+                        'vin' => $car->vin,
+                        'bought_at' => $car->bought_at,
+                        'buy_price' => $car->buy_price,
+                        'seller' => $car->seller->only('name');
+                        'buyer' => $car->buyer->only('name');
+                        'car_model' => $car->carModel->only('name'),
+                        'name' => $car->name,
+                        'phone' => $car->phone,
+                        'zipcode' => $car->city,
+                        'city' => $car->city,
+                        'deleted_at' => $car->deleted_at,
+                    ];
+                }),
+        ]);
     }
 
     /**
@@ -24,7 +48,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Cars/Create');
     }
 
     /**
@@ -80,6 +104,14 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car->delete();
+        return Redirect::back()->with('success', 'Auto gelöscht.');
+    }
+
+    public function restore(Car $car)
+    {
+        $car->restore();
+
+        return Redirect::back()->with('success', 'Auto wiederhergestellt.');
     }
 }

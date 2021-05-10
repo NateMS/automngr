@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Car extends Model
 {
-    use HasFactory;
+    use HasFactory, softDeletes;
 
     protected $fillable = [
         'variation',
-        'variation',
+        'stammnummer',
         'vin',
         'colour',
         'notes',
@@ -22,6 +23,11 @@ class Car extends Model
         'seller_contact_id',
         'car_model_id'
     ];
+
+    public function getNameAttribute()
+    {
+        return $this->brand->name . ' ' . $this->carModel->car_model . $this->variation ? '('  . $this->variation . ')' : '';
+    }
 
     public function brand()
     {

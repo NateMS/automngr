@@ -29,6 +29,7 @@ class CreateContractsTable extends Migration
             $table->enum('insurance_type', InsuranceType::getValues())
             ->default(InsuranceType::OptionOne);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
