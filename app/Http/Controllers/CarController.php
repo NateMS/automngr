@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
+use Inertia\Inertia;
 
 class CarController extends Controller
 {
@@ -15,10 +18,9 @@ class CarController extends Controller
     public function index()
     {
         return Inertia::render('Cars/Index', [
-            'filters' => Request::all('search', 'trashed'),
+            'filters' => request()->all('search', 'trashed'),
             'cars' => Car::all()
-                ->orderByName()
-                ->filter(Request::only('search', 'trashed'))
+                ->filter(request()->only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
                 ->through(function ($car) {
@@ -28,8 +30,8 @@ class CarController extends Controller
                         'vin' => $car->vin,
                         'bought_at' => $car->bought_at,
                         'buy_price' => $car->buy_price,
-                        'seller' => $car->seller->only('name');
-                        'buyer' => $car->buyer->only('name');
+                        'seller' => $car->seller->only('name'),
+                        'buyer' => $car->buyer->only('name'),
                         'car_model' => $car->carModel->only('name'),
                         'name' => $car->name,
                         'phone' => $car->phone,

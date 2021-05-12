@@ -1,84 +1,84 @@
 <template>
-  <div>
-    <h1 class="mb-8 font-bold text-3xl">Kontakte</h1>
-    <div class="mb-6 flex justify-between items-center">
-      <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="with">With Trashed</option>
-          <option value="only">Only Trashed</option>
-        </select>
-      </search-filter>
-      <inertia-link class="btn-indigo" :href="route('contacts.create')">
-        <span>Create</span>
-        <span class="hidden md:inline">Contact</span>
-      </inertia-link>
+  <app-layout>
+    <template #header>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Kontakte
+        </h2>
+    </template>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+              <div class="mb-6 flex justify-between items-center">
+                <!-- <search-filter ref="search" v-model="form.search" class="w-full max-w-md mr-4" @reset="reset"></search-filter> -->
+                <input type="text" ref="search" v-model="form.search" autofocus="true" name="search" placeholder="Suchen..." class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block w-full" autocomplete="off">
+                <jet-button class="ml-4" @click="createContact">
+                    Kontakt erstellen
+                </jet-button>
+            </div>
+            <div class="bg-grey overflow-hidden sm:rounded-lg">
+                <div class="whitespace-nowrap">
+                  <h3 class="font-semibold text-xl m-3 text-gray-800 leading-tight">{{ contacts.total }} Kontakte</h3>
+                </div>
+                <div class="bg-white rounded-md shadow overflow-x-auto">
+                  <table class="w-full whitespace-nowrap">
+                      <tr class="text-left font-bold">
+                        <th class="px-6 pt-4 pb-4">Name</th>
+                        <th class="px-6 pt-4 pb-4">Firma</th>
+                        <th class="px-6 pt-4 pb-4">Ort</th>
+                        <th class="px-6 pt-4 pb-4" colspan="2">Telefon</th>
+                      </tr>
+                      <tr v-for="contact in contacts.data" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+                          <td class="border-t">
+                              <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
+                                  {{ contact.name }}
+                              </inertia-link>
+                          </td>
+                          <td class="border-t">
+                              <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+                              {{ contact.company}}
+                              </inertia-link>
+                          </td>
+                          <td class="border-t">
+                              <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+                              {{ contact.fullCity }}
+                              </inertia-link>
+                          </td>
+                          <td class="border-t">
+                              <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+                              {{ contact.phone }}
+                              </inertia-link>
+                          </td>
+                          <td class="border-t w-px">
+                              <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+                              <unicon class="m-2" height="22" width="22" name="angle-right"></unicon>
+                              </inertia-link>
+                          </td>
+                      </tr>
+                      <tr v-if="contacts.length === 0">
+                        <td class="border-t px-6 py-4" colspan="4">Keine Kontakte gefunden</td>
+                      </tr>
+                  </table>
+                </div>
+            </div>
+            <Paginator class="mt-6" :links="contacts.links" />
+        </div>
     </div>
-    <div class="bg-white rounded-md shadow overflow-x-auto">
-      <table class="w-full whitespace-nowrap">
-        <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">Organization</th>
-          <th class="px-6 pt-6 pb-4">City</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Phone</th>
-        </tr>
-        <tr v-for="contact in contacts.data" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
-              {{ contact.name }}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
-            </inertia-link>
-          </td>
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              <div v-if="contact.organization">
-                {{ contact.organization.name }}
-              </div>
-            </inertia-link>
-          </td>
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.city }}
-            </inertia-link>
-          </td>
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.phone }}
-            </inertia-link>
-          </td>
-          <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-            </inertia-link>
-          </td>
-        </tr>
-        <tr v-if="contacts.data.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No contacts found.</td>
-        </tr>
-      </table>
-    </div>
-    <pagination class="mt-6" :links="contacts.links" />
-  </div>
+  </app-layout>
 </template>
 
 <script>
-import Icon from '@/Shared/Icon'
-import pickBy from 'lodash/pickBy'
-import Layout from '@/Shared/Layout'
-import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
-import Pagination from '@/Shared/Pagination'
-import SearchFilter from '@/Shared/SearchFilter'
+import { pickBy, throttle, mapValues } from 'lodash'
+import AppLayout from '@/Layouts/AppLayout'
+import Paginator from "@/Components/Paginator"
+import SearchFilter from '@/Components/SearchFilter'
+import JetButton from '@/Jetstream/Button'
 
 export default {
-  metaInfo: { title: 'Contacts' },
   components: {
-    Icon,
-    Pagination,
+    Paginator,
     SearchFilter,
+    JetButton,
+    AppLayout,
   },
-  layout: Layout,
   props: {
     filters: Object,
     contacts: Object,
@@ -95,13 +95,17 @@ export default {
     form: {
       deep: true,
       handler: throttle(function() {
-        this.$inertia.get(this.route('contacts'), pickBy(this.form), { preserveState: true })
-      }, 150),
+        this.$inertia.get(this.route('contacts'), pickBy(this.form), { preserveState: false })
+        // this.$refs.search.focus();
+      }, 300),
     },
   },
   methods: {
     reset() {
       this.form = mapValues(this.form, () => null)
+    },
+    createContact() {
+        this.$inertia.visit(route('contacts.create'), { method: 'get' })
     },
   },
 }

@@ -26,12 +26,15 @@ class Car extends Model
 
     public function getNameAttribute()
     {
-        return $this->brand->name . ' ' . $this->carModel->car_model . $this->variation ? '('  . $this->variation . ')' : '';
+        $out = $this->brand->name . ' ' . $this->carModel->name;
+        $out .= $this->variation ? ' ('  . $this->variation . ')' : '';
+
+        return $out;
     }
 
     public function brand()
     {
-        return $this->hasOneThrough(Brand::class, CarModel::class);
+        return $this->carModel->brand();
     }
 
     public function carModel()
@@ -57,5 +60,10 @@ class Car extends Model
     public function carPayment()
     {
         return $this->hasManyThrough(CarPayment::class, Contract::class);
+    }
+
+    public function scopeSoldThisYear($query)
+    {
+        return $query->whereDate('sold_at', \Carbon\Carbon::today());
     }
 }

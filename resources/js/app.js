@@ -4,6 +4,11 @@ require('./bootstrap');
 import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
+import Unicon from 'vue-unicons';
+import { uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt } from 'vue-unicons/dist/icons'
+
+Unicon.add([uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt])
+
 
 const el = document.getElementById('app');
 
@@ -16,6 +21,11 @@ createApp({
 })
     .mixin({ methods: { route } })
     .use(InertiaPlugin)
+    .use(Unicon, {
+        fill: '#4B5563',
+        height: 32,
+        width: 32
+      })
     .mount(el);
 
 InertiaProgress.init({ color: '#4B5563' });

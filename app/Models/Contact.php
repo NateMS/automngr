@@ -23,6 +23,25 @@ class Contact extends Model
         'notes',
     ];
 
+    public function getNameAttribute()
+    {
+        return $this->lastname . ' ' . $this->firstname;
+    }
+
+    public function getTitleAttribute()
+    {
+        if ($this->company != '') {
+            return $this->company;
+        }
+
+        return $this->name;
+    }
+
+    public function getFullCityAttribute()
+    {
+        return $this->zip . ' ' . $this->city;
+    }
+
     public function scopeOrderByName($query)
     {
         $query->orderBy('lastname')->orderBy('firstname');
@@ -30,12 +49,12 @@ class Contact extends Model
 
     public function contracts()
     {
-        return $this->hasMany(Contracts::class);
+        return $this->hasMany(Contract::class);
     }
 
     public function boughtCars()
     {
-        return $this->hasManyThrough(Car::class, Contracts::class);
+        return $this->hasManyThrough(Car::class, Contract::class);
     }
 
     public function soldCars()
@@ -49,6 +68,7 @@ class Contact extends Model
             $query->where(function ($query) use ($search) {
                 $query->where('firstname', 'like', '%' . $search . '%')
                     ->orWhere('lastname', 'like', '%' . $search . '%')
+                    ->orWhere('company', 'like', '%' . $search . '%')
                     ->orWhere('email', 'like', '%' . $search . '%');
             });
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {

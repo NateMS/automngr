@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Contact;
+use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Redirect;
 
 class ContactController extends Controller
 {
@@ -12,25 +16,22 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('Contacts/Index', [
-            'filters' => Request::all('search', 'trashed'),
-            'contacts' => Contact::all()
+            'filters' => $request->all('search', 'trashed'),
+            'contacts' => Contact::filter($request->only('search', 'trashed'))
                 ->orderByName()
-                ->filter(Request::only('search', 'trashed'))
-                ->paginate()
+                ->paginate(50)
                 ->withQueryString()
-                ->through(function ($contact) {
-                    return [
-                        'id' => $contact->id,
-                        'name' => $contact->name,
-                        'phone' => $contact->phone,
-                        'zipcode' => $contact->city,
-                        'city' => $contact->city,
-                        'deleted_at' => $contact->deleted_at,
-                    ];
-                }),
+                ->through(fn ($contact) => [
+                    'id' => $contact->id,
+                    'name' => $contact->name,
+                    'company' => $contact->company,
+                    'phone' => $contact->phone,
+                    'fullCity' => $contact->fullCity,
+                    'deleted_at' => $contact->deleted_at,
+                ]),
         ]);
     }
 
@@ -53,13 +54,13 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         Contact::create(
-            Request::validate([
+            $request->validate([
                 'firstname' => ['required', 'max:75'],
                 'lastname' => ['required', 'max:75'],
                 'email' => ['nullable', 'max:75', 'email'],
                 'phone' => ['max:75'],
                 'address' => ['nullable', 'max:150'],
-                'zipcode' => ['nullable', 'max:6'],
+                'zip' => ['nullable', 'max:6'],
                 'city' => ['nullable', 'max:75'],
                 'country' => ['nullable', 'max:2'],
                 'company' => ['nullable', 'max:75'],
@@ -80,15 +81,28 @@ class ContactController extends Controller
         return Inertia::render('Contacts/Edit', [
             'contact' => [
                 'id' => $contact->id,
-                'firstname' => $contact->first_name,
-                'lastname' => $contact->last_name,
+                'firstname' => $contact->firstname,
+                'lastname' => $contact->lastname,
+                'company' => $contact->company,
+                'title' => $contact->title,
                 'email' => $contact->email,
+                'notes' => $contact->notes,
                 'phone' => $contact->phone,
                 'address' => $contact->address,
-                'zipcode' => $contact->postal_code,
+                'zip' => $contact->zip,
                 'city' => $contact->city,
                 'country' => $contact->country,
                 'deleted_at' => $contact->deleted_at,
+                'contracts' => $contact->contracts()
+                    ->with('car')
+                    ->paginate(10)
+                    ->through(fn ($contract) => [
+                        'sold_at' => $contract->sold_at,
+                        'sell_price' => $contract->sell_price,
+                        'car' => $contract->car->name,
+                        'link' => route('cars.edit', $contract->car),
+                        'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
+                    ]),
             ]
         ]);
     }
@@ -103,20 +117,20 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact)
     {
         $contact->update(
-            Request::validate([
-                'firstname' => ['required', 'max:75'],
-                'lastname' => ['required', 'max:75'],
+            $request->validate([
+                'firstname' => ['max:75'],
+                'lastname' => ['max:75'],
                 'email' => ['nullable', 'max:75', 'email'],
                 'phone' => ['max:75'],
                 'address' => ['nullable', 'max:150'],
-                'zipcode' => ['nullable', 'max:6'],
+                'zip' => ['nullable', 'max:6'],
                 'city' => ['nullable', 'max:75'],
                 'country' => ['nullable', 'max:2'],
                 'company' => ['nullable', 'max:75'],
             ])
         );
 
-        return Redirect::route('contacts')->with('success', 'Kontakt geändert.');
+        return Redirect::back()->with('success', 'Kontakt geändert.');
     }
 
     /**

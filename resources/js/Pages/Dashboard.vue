@@ -9,7 +9,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <welcome />
+                    <p class="font-semibold text-xl mt-3 ml-3 mb-3 text-gray-800 leading-tight">hallo</p>
                 </div>
             </div>
         </div>
@@ -18,12 +18,10 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-    import Welcome from '@/Jetstream/Welcome'
 
     export default {
         components: {
             AppLayout,
-            Welcome,
         },
     }
 </script>

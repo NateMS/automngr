@@ -18,11 +18,23 @@
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                                    <unicon class="m-2" height="22" width="22" name="dashboard"></unicon>
                                     Dashboard
                                 </jet-nav-link>
                             </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('contacts')" :active="route().current('contacts')">
+                                    <unicon class="m-2" height="22" width="22" name="users-alt"></unicon>
+                                    Kontakte
+                                </jet-nav-link>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('cars')" :active="route().current('cars')">
+                                    <unicon class="m-2" height="22" width="22" name="car-sideview"></unicon>
+                                    Autos
+                                </jet-nav-link>
+                            </div>
                         </div>
-
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <div class="ml-3 relative">
                                 <!-- Teams Dropdown -->
