@@ -14,52 +14,7 @@
                     Kontakt erstellen
                 </jet-button>
             </div>
-            <div class="bg-grey overflow-hidden sm:rounded-lg">
-                <div class="whitespace-nowrap">
-                  <h3 class="font-semibold text-xl m-3 text-gray-800 leading-tight">{{ contacts.total }} Kontakte</h3>
-                </div>
-                <div class="bg-white rounded-md shadow overflow-x-auto">
-                  <table class="w-full whitespace-nowrap">
-                      <tr class="text-left font-bold">
-                        <th class="px-6 pt-4 pb-4">Name</th>
-                        <th class="px-6 pt-4 pb-4">Firma</th>
-                        <th class="px-6 pt-4 pb-4">Ort</th>
-                        <th class="px-6 pt-4 pb-4" colspan="2">Telefon</th>
-                      </tr>
-                      <tr v-for="contact in contacts.data" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-                          <td class="border-t">
-                              <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
-                                  {{ contact.name }}
-                              </inertia-link>
-                          </td>
-                          <td class="border-t">
-                              <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-                              {{ contact.company}}
-                              </inertia-link>
-                          </td>
-                          <td class="border-t">
-                              <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-                              {{ contact.fullCity }}
-                              </inertia-link>
-                          </td>
-                          <td class="border-t">
-                              <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-                              {{ contact.phone }}
-                              </inertia-link>
-                          </td>
-                          <td class="border-t w-px">
-                              <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-                              <unicon class="m-2" height="22" width="22" name="angle-right"></unicon>
-                              </inertia-link>
-                          </td>
-                      </tr>
-                      <tr v-if="contacts.length === 0">
-                        <td class="border-t px-6 py-4" colspan="4">Keine Kontakte gefunden</td>
-                      </tr>
-                  </table>
-                </div>
-            </div>
-            <Paginator class="mt-6" :links="contacts.links" />
+            <simple-table :title="contacts.total + ' Kontakte'" :data="contacts" :columns="columns" />
         </div>
     </div>
   </app-layout>
@@ -69,6 +24,7 @@
 import { pickBy, throttle, mapValues } from 'lodash'
 import AppLayout from '@/Layouts/AppLayout'
 import Paginator from "@/Components/Paginator"
+import SimpleTable from '@/Components/SimpleTable.vue'
 import SearchFilter from '@/Components/SearchFilter'
 import JetButton from '@/Jetstream/Button'
 
@@ -78,6 +34,7 @@ export default {
     SearchFilter,
     JetButton,
     AppLayout,
+    SimpleTable,
   },
   props: {
     filters: Object,
@@ -89,6 +46,12 @@ export default {
         search: this.filters.search,
         trashed: this.filters.trashed,
       },
+      columns: [
+        {key: 'name', value: 'Name'},
+        {key: 'company', value: 'Firma'},
+        {key: 'fullCity', value: 'Ort'},
+        {key: 'phone', value: 'Telefon'},
+      ],
     }
   },
   watch: {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Contact;
+use App\Models\Car;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -30,6 +31,7 @@ class ContactController extends Controller
                     'company' => $contact->company,
                     'phone' => $contact->phone,
                     'fullCity' => $contact->fullCity,
+                    'link' => route('contacts.edit', $contact),
                     'deleted_at' => $contact->deleted_at,
                 ]),
         ]);
@@ -93,15 +95,23 @@ class ContactController extends Controller
                 'city' => $contact->city,
                 'country' => $contact->country,
                 'deleted_at' => $contact->deleted_at,
-                'contracts' => $contact->contracts()
+                'bought_cars' => $contact->contracts()
                     ->with('car')
                     ->paginate(10)
                     ->through(fn ($contract) => [
                         'sold_at' => $contract->sold_at,
                         'sell_price' => $contract->sell_price,
-                        'car' => $contract->car->name,
+                        'name' => $contract->car->name,
                         'link' => route('cars.edit', $contract->car),
                         'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
+                    ]),
+                'sold_cars' => $contact->soldCars()
+                    ->paginate(10)
+                    ->through(fn ($car) => [
+                        'bought_at' => $car->bought_at,
+                        'buy_price' => $car->buy_price,
+                        'name' => $car->name,
+                        'link' => route('cars.edit', $car),
                     ]),
             ]
         ]);

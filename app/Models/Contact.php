@@ -59,7 +59,7 @@ class Contact extends Model
 
     public function soldCars()
     {
-        return $this->hasMany(Car::class, 'seller_id');
+        return $this->hasMany(Car::class, 'seller_contact_id');
     }
 
     public function scopeFilter($query, array $filters)
