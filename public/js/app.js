@@ -18017,12 +18017,19 @@ __webpack_require__.r(__webpack_exports__);
         country: this.contact.country,
         notes: this.contact.notes
       }),
-      contractColumns: {
-        car: 'Auto',
-        sold_at: 'Verkaufsdatum',
-        sell_price: 'Verkaufspreis',
-        insurance_type: 'Versicherungstyp'
-      }
+      contractColumns: [{
+        key: 'car',
+        value: 'Auto'
+      }, {
+        key: 'sold_at',
+        value: 'Verkaufsdatum'
+      }, {
+        key: 'sell_price',
+        value: 'Verkaufspreis'
+      }, {
+        key: 'insurance_type',
+        value: 'Versicherungstyp'
+      }]
     };
   },
   computed: {
@@ -19092,28 +19099,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("th", {
       key: col.key,
       "class": "px-6 pt-4 pb-4"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(col), 1
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(col.value), 1
     /* TEXT */
     );
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.data.data, function (index, row) {
+  ))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.data.data, function (row) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", {
       key: row.link,
       "class": "hover:bg-gray-100 focus-within:bg-gray-100"
-    }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.columns, function (val, col) {
+    }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.columns, function (col) {
       return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", {
-        key: col,
+        key: col.key,
         "class": "border-t"
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
         "class": "px-6 py-4 flex items-center focus:text-indigo-500",
-        href: row.link,
-        tabindex: "{ '-1': index !== 0 }"
+        href: row.link
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(row[col]) + " ", 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(row[col.key]) + " ", 1
           /* TEXT */
-          ), $props.columns[col] == $props.columns[$props.columns.length - 1] ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_unicon, {
+          ), col.key == $props.columns[$props.columns.length - 1].key ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_unicon, {
             key: 0,
             "class": "m-2",
             height: "22",
@@ -22587,7 +22593,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["onSubmitted"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_table, {
         title: 'An \'' + $options.title + '\' verkaufte Autos',
         data: $props.contact.contracts,
-        columns: Array.from($data.contractColumns)
+        columns: $data.contractColumns
       }, null, 8
       /* PROPS */
       , ["title", "data", "columns"])])])];

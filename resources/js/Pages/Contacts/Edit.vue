@@ -103,7 +103,7 @@
         </div>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <simple-table :title="'An \'' + title + '\' verkaufte Autos'" :data="contact.contracts" :columns="Array.from(contractColumns)" />
+                <simple-table :title="'An \'' + title + '\' verkaufte Autos'" :data="contact.contracts" :columns="contractColumns" />
             </div>
         </div>
     </app-layout>
@@ -151,12 +151,12 @@ export default {
                 country: this.contact.country,
                 notes: this.contact.notes,
             }),
-            contractColumns: {
-                car: 'Auto',
-                sold_at: 'Verkaufsdatum',
-                sell_price: 'Verkaufspreis',
-                insurance_type: 'Versicherungstyp',
-            }
+            contractColumns: [
+                {key: 'car', value: 'Auto'},
+                {key: 'sold_at', value: 'Verkaufsdatum'},
+                {key: 'sell_price', value: 'Verkaufspreis'},
+                {key: 'insurance_type', value: 'Versicherungstyp'},
+            ]
         }
     },
     computed: {
