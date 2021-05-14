@@ -8,12 +8,10 @@
                 <table class="w-full whitespace-nowrap">
                    <tr class="text-left font-bold">
                         <th v-for="(col, index) in columns" :key="col.key" class="px-6 pt-4 pb-4" :colspan="[index == (columns.length - 1) ? 2 : 1]">
-                            <a v-if="col.sortable" href="#" @click="sortTable(col.key)" class="flex items-center">
+                            <a v-if="col.sortable" href="#" @click="sortTable(col.key)" class="flex place-items-center">
                                 {{ col.value }}
-                                <div class="grid grid-cols-1 place-items-center ml-1">
-                                    <unicon :fill="getIconColor(col.key, 'asc')" height="22" width="22" name="angle-up"></unicon>
-                                    <unicon :fill="getIconColor(col.key, 'desc')" height="22" width="22" name="angle-down"></unicon>
-                                </div>
+                                <unicon v-if="isActiveSort(col.key, 'asc')" fill="#4B5563" height="22" width="22" name="arrow-up"></unicon>
+                                <unicon v-if="isActiveSort(col.key, 'desc')" fill="#4B5563" height="22" width="22" name="arrow-down"></unicon>
                             </a>
                             <span v-else class="flex items-center">
                                 {{ col.value }}
@@ -78,15 +76,11 @@ export default {
         } else {
             this.sort.direction = 'asc';
         }
-        //this.$inertia.get(this.route('contacts'), { preserveState: true })
         this.sort.by = col;
+        this.$inertia.get(this.data.path, {'sortby': this.sort.by, 'direction': this.sort.direction}, { preserveState: true })
     },
-    getIconColor(col, dir) {
-        if (col == this.sort.by && dir == this.sort.direction) {
-            return '#4B5563';
-        }
-
-        return '#a0a5b9';
+    isActiveSort(col, dir) {
+        return col == this.sort.by && dir == this.sort.direction;
     }
   },
 }

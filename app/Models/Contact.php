@@ -42,9 +42,9 @@ class Contact extends Model
         return $this->zip . ' ' . $this->city;
     }
 
-    public function scopeOrderByName($query)
+    public function scopeOrderByName($query, $direction)
     {
-        $query->orderBy('lastname')->orderBy('firstname');
+        $query->orderBy('lastname', $direction)->orderBy('firstname', $direction);
     }
 
     public function sellContracts()

@@ -15,11 +15,19 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $direction = $this->getDirection($request);
+        $sortBy = $this->getSortBy($request);
+        $cars = $this->getWithCustomSort($sortBy, $direction);
+
         return Inertia::render('Cars/Index', [
-            'filters' => request()->all('search', 'trashed'),
-            'cars' => Car::filter(request()->only('search', 'trashed'))
+            'filters' => $request->all('search', 'trashed'),
+            'sort' => [
+                'by' => $sortBy,
+                'direction' => $direction,
+            ],
+            'cars' => $cars->filter($request->only('search', 'trashed'))
                 ->orderByInitialDate()
                 ->paginate(50)
                 ->withQueryString()
@@ -39,6 +47,39 @@ class CarController extends Controller
                     ];
                 }),
         ]);
+    }
+
+    private function getWithCustomSort(string $sortBy, string $direction)
+    {
+        switch($sortBy) {
+            case 'initial_date':
+                return Car::orderBy('initial_date', $direction);
+            case 'stammnummer':
+                return Car::orderBy('stammnummer', $direction);
+            default:
+                //return Car::orderByName($direction);
+                return Car::orderBy('initial_date', $direction);
+        }
+    }
+
+    private function getSortBy(Request $request)
+    {
+        if ($request->has('sortby')) {
+            return $request->get('sortby');
+        }
+
+        return 'name';
+    }
+
+    private function getDirection(Request $request)
+    {
+        if ($request->has('direction')) {
+            if (in_array($request->get('direction'), ['asc', 'desc'])) {
+                return $request->get('direction');
+            }
+        }
+
+        return 'asc';
     }
 
     /**

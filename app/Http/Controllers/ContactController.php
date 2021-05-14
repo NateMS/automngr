@@ -19,16 +19,17 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
-        $sortby = $request->only('sortby') ?: 'lastname';
-        $direction = $request->only('direction') ?: 'asc';
+        $direction = $this->getDirection($request);
+        $sortBy = $this->getSortBy($request);
+        $contacts = $this->getWithCustomSort($sortBy, $direction);
+
         return Inertia::render('Contacts/Index', [
             'filters' => $request->all('search', 'trashed'),
             'sort' => [
-                'by' => $sortby,
+                'by' => $sortBy,
                 'direction' => $direction,
             ],
-            'contacts' => Contact::filter($request->only('search', 'trashed'))
-                ->orderBy($sortby, $direction)
+            'contacts' => $contacts->filter($request->only('search', 'trashed'))
                 ->paginate(50)
                 ->withQueryString()
                 ->through(fn ($contact) => [
@@ -41,6 +42,38 @@ class ContactController extends Controller
                     'deleted_at' => $contact->deleted_at,
                 ]),
         ]);
+    }
+
+    private function getWithCustomSort(string $sortBy, string $direction)
+    {
+        switch($sortBy) {
+            case 'company':
+                return Contact::orderBy('company', $direction);
+            case 'fullCity':
+                return Contact::orderBy('city', $direction);
+            default:
+                return Contact::orderByName($direction);
+        }
+    }
+
+    private function getSortBy(Request $request)
+    {
+        if ($request->has('sortby')) {
+            return $request->get('sortby');
+        }
+
+        return 'name';
+    }
+
+    private function getDirection(Request $request)
+    {
+        if ($request->has('direction')) {
+            if (in_array($request->get('direction'), ['asc', 'desc'])) {
+                return $request->get('direction');
+            }
+        }
+
+        return 'asc';
     }
 
     /**
