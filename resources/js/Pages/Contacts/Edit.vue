@@ -159,14 +159,14 @@ export default {
             }),
             boughtCarColumns: [
                 {key: 'name', value: 'Auto'},
-                {key: 'sold_at', value: 'Verkaufsdatum'},
-                {key: 'sell_price', value: 'Verkaufspreis'},
+                {key: 'date', value: 'Verkaufsdatum'},
+                {key: 'price', value: 'Verkaufspreis'},
                 {key: 'insurance_type', value: 'Versicherungstyp'},
             ],
             soldCarColumns: [
                 {key: 'name', value: 'Auto'},
-                {key: 'bought_at', value: 'Kaufdatum'},
-                {key: 'buy_price', value: 'Kaufpreis'},
+                {key: 'date', value: 'Kaufdatum'},
+                {key: 'price', value: 'Kaufpreis'},
             ]
         }
     },
@@ -189,7 +189,6 @@ export default {
                 zip: this.form.zip,
                 city: this.form.city,
                 country: this.form.country,
-                link: route('contacts.update', this.contact),
             }
         }
     },

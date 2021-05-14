@@ -21,9 +21,6 @@ class Car extends Model
         'initial_date',
         'last_check_date',
         'kilometers',
-        'bought_at',
-        'buy_price',
-        'seller_contact_id',
         'car_model_id',
     ];
 
@@ -39,21 +36,10 @@ class Car extends Model
         return $kilometers;
     }
 
-    public function getStammnummerAttribute($stammnummer)
-    {
-        $out = substr($stammnummer, 0, 3);
-        $out .= '.';
-        $out .= substr($stammnummer, 3, 3);
-        $out .= '.';
-        $out .= substr($stammnummer, 6, 3);
-        
-        return $out;
-    }
-
-    public function getBuyPriceAttribute($price)
-    {
-        return Money::CHF($price);
-    }
+    // public function getBuyPriceAttribute()
+    // {
+    //     return Money::CHF($this->buyContracts()->price);
+    // }
 
     public function getInitialDateAttribute($initialDate)
     {
@@ -69,41 +55,66 @@ class Car extends Model
     {
         return $this->belongsTo(CarModel::class);
     }
-
-    public function seller()
+    
+    public function latestSellerContract()
     {
-        return $this->belongsTo(Contact::class, 'seller_contact_id');
+        return $this->sellContracts()->latest('date')->first();
     }
 
-    public function buyer()
+    public function latestBuyerContracts()
     {
-        return $this->hasOneThrough(Contract::class, Contact::class);
+        return $this->buyContracts()->latest('date')->first();
     }
 
-    public function contract()
+    public function isUnsold()
     {
-        return $this->hasOne(Contract::class);
+        return $this->sellers()->count() > $this->buyers()->count();
+    }
+
+    public function isSold()
+    {
+        return $this->sellers()->count() == $this->buyers()->count();
+    }
+
+    public function sellers()
+    {
+        return $this->hasManyThrough(SellContract::class, Contact::class);
+    }
+
+    public function buyers()
+    {
+        return $this->hasManyThrough(BuyContract::class, Contact::class);
+    }
+
+    public function buyContracts()
+    {
+        return $this->hasMany(buyContract::class);
+    }
+
+    public function sellContracts()
+    {
+        return $this->hasMany(sellContract::class);
     }
 
     public function carPayment()
     {
-        return $this->hasManyThrough(CarPayment::class, Contract::class);
+        return $this->hasManyThrough(CarPayment::class, SellContract::class);
     }
 
-    public function scopeSoldThisYear($query)
-    {
-        return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
-    }
+    // public function scopeSoldThisYear($query)
+    // {
+    //     return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
+    // }
 
-    public function scopeSoldCars($query)
-    {
-        return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
-    }
+    // public function scopeSoldCars($query)
+    // {
+    //     return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
+    // }
 
-    public function scopeUnsoldCars($query)
-    {
-        return $query->whereDate('sold_at', );
-    }
+    // public function scopeUnsoldCars($query)
+    // {
+    //     return $query->whereDate('sold_at', );
+    // }
 
     public function scopeOrderByInitialDate($query)
     {

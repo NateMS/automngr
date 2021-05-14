@@ -8,14 +8,14 @@
                 <table class="w-full whitespace-nowrap">
                    <tr class="text-left font-bold">
                         <th v-for="(col, index) in columns" :key="col.key" class="px-6 pt-4 pb-4" :colspan="[index == (columns.length - 1) ? 2 : 1]">
-                            <a v-if="col.sortable" href="#" @click="sortTable(col.key)" class="px-4 flex items-center">
+                            <a v-if="col.sortable" href="#" @click="sortTable(col.key)" class="flex items-center">
                                 {{ col.value }}
                                 <div class="grid grid-cols-1 place-items-center ml-1">
                                     <unicon :fill="getIconColor(col.key, 'asc')" height="22" width="22" name="angle-up"></unicon>
                                     <unicon :fill="getIconColor(col.key, 'desc')" height="22" width="22" name="angle-down"></unicon>
                                 </div>
                             </a>
-                            <span v-else class="px-4 flex items-center">
+                            <span v-else class="flex items-center">
                                 {{ col.value }}
                             </span>
                         </th>

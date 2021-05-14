@@ -11,18 +11,18 @@ class CarPayment extends Model
 
     protected $fillable = [
         'amount',
-        'paid_at',
-        'payment_type',
-        'contract_id'
+        'date',
+        'type',
+        'sell_contract_id',
     ];
 
-    public function contract()
+    public function sellContract()
     {
-        return $this->belongsTo(Contract::class);
+        return $this->belongsTo(SellContract::class);
     }
 
     public function car()
     {
-        return $this->hasOneThrough(Car::class, Contract::class);
+        return $this->hasOneThrough(Car::class, SellContract::class);
     }
 }

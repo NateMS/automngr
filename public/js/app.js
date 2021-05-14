@@ -18156,10 +18156,10 @@ __webpack_require__.r(__webpack_exports__);
         key: 'name',
         value: 'Auto'
       }, {
-        key: 'sold_at',
+        key: 'date',
         value: 'Verkaufsdatum'
       }, {
-        key: 'sell_price',
+        key: 'price',
         value: 'Verkaufspreis'
       }, {
         key: 'insurance_type',
@@ -18169,10 +18169,10 @@ __webpack_require__.r(__webpack_exports__);
         key: 'name',
         value: 'Auto'
       }, {
-        key: 'bought_at',
+        key: 'date',
         value: 'Kaufdatum'
       }, {
-        key: 'buy_price',
+        key: 'price',
         value: 'Kaufpreis'
       }]
     };
@@ -18195,8 +18195,7 @@ __webpack_require__.r(__webpack_exports__);
         address: this.form.address,
         zip: this.form.zip,
         city: this.form.city,
-        country: this.form.country,
-        link: route('contacts.update', this.contact)
+        country: this.form.country
       };
     }
   },
@@ -18242,6 +18241,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     filters: Object,
+    sort: Object,
     contacts: Object
   },
   data: function data() {
@@ -19360,7 +19360,7 @@ var _hoisted_7 = {
 };
 var _hoisted_8 = {
   key: 1,
-  "class": "px-4 flex items-center"
+  "class": "flex items-center"
 };
 var _hoisted_9 = {
   key: 1,
@@ -19402,7 +19402,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.sortTable(col.key);
       },
-      "class": "px-4 flex items-center"
+      "class": "flex items-center"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(col.value) + " ", 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
@@ -23134,13 +23134,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         title: $props.contacts.total + ' Kontakte',
         data: $props.contacts,
         columns: $data.columns,
-        defaultSort: {
-          by: 'name',
-          direction: 'asc'
-        }
+        defaultSort: $props.sort
       }, null, 8
       /* PROPS */
-      , ["title", "data", "columns"])])])];
+      , ["title", "data", "columns", "defaultSort"])])])];
     }),
     _: 1
     /* STABLE */

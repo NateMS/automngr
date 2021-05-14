@@ -17,13 +17,13 @@ class CreateCarPaymentsTable extends Migration
         Schema::create('car_payments', function (Blueprint $table) {
             $table->id();
             $table->integer('amount');
-            $table->date('paid_at');
-            $table->enum('payment_type', PaymentType::getValues())
+            $table->date('date');
+            $table->enum('type', PaymentType::getValues())
             ->default(PaymentType::Transaction);
-            $table->foreignId('contract_id')
+            $table->foreignId('sell_contract_id')
             ->onUpdate('cascade')
             ->onDelete('cascade')
-            ->constrained('contracts');
+            ->constrained('sell_contracts');
             $table->timestamps();
         });
     }

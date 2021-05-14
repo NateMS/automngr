@@ -33,7 +33,7 @@ class ContactFactory extends Factory
             'address' => $this->faker->streetName() . ' ' . $this->faker->buildingNumber(),
             'zip' => $this->faker->randomNumber(4, true),
             'city' => $this->faker->city(),
-            'country' => $this->faker->countryCode(),
+            'country' => 'CH',
             'company' => $this->faker->company(),
             'notes' => $this->faker->text(),
         ];

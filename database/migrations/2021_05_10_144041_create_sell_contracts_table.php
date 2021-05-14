@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Enums\InsuranceType;
 
-class CreateContractsTable extends Migration
+class CreateSellContractsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class CreateContractsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contracts', function (Blueprint $table) {
+        Schema::create('sell_contracts', function (Blueprint $table) {
             $table->id();
-            $table->date('sold_at');
-            $table->integer('sell_price');
+            $table->date('date');
+            $table->integer('price');
             $table->foreignId('contact_id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade')
@@ -40,6 +40,6 @@ class CreateContractsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contracts');
+        Schema::dropIfExists('sell_contracts');
     }
 }

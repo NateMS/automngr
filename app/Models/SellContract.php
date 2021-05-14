@@ -2,21 +2,33 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Contract extends Model
+class SellContract extends Model
 {
     use HasFactory, softDeletes;
 
     protected $fillable = [
-        'sold_at',
-        'sell_price',
+        'date',
+        'price',
         'contact_id',
         'car_id',
         'insurance_type',
     ];
+
+    public function getDateAttribute($date)
+    {
+        return Carbon::parse($date)->format('d.m.Y');
+    }
+
+    public function getPriceAttribute($price)
+    {
+        return Money::CHF($price)->format();
+    }
 
     public function contact()
     {

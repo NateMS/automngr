@@ -19,10 +19,16 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
+        $sortby = $request->only('sortby') ?: 'lastname';
+        $direction = $request->only('direction') ?: 'asc';
         return Inertia::render('Contacts/Index', [
             'filters' => $request->all('search', 'trashed'),
+            'sort' => [
+                'by' => $sortby,
+                'direction' => $direction,
+            ],
             'contacts' => Contact::filter($request->only('search', 'trashed'))
-                ->orderByName()
+                ->orderBy($sortby, $direction)
                 ->paginate(50)
                 ->withQueryString()
                 ->through(fn ($contact) => [
@@ -95,23 +101,24 @@ class ContactController extends Controller
                 'city' => $contact->city,
                 'country' => $contact->country,
                 'deleted_at' => $contact->deleted_at,
-                'bought_cars' => $contact->contracts()
+                'bought_cars' => $contact->buyContracts()
                     ->with('car')
                     ->paginate(10)
                     ->through(fn ($contract) => [
-                        'sold_at' => $contract->sold_at,
-                        'sell_price' => $contract->sell_price,
+                        'date' => $contract->date,
+                        'price' => $contract->price,
                         'name' => $contract->car->name,
                         'link' => route('cars.edit', $contract->car),
                         'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
                     ]),
-                'sold_cars' => $contact->soldCars()
+                'sold_cars' => $contact->sellContracts()
+                    ->with('car')
                     ->paginate(10)
-                    ->through(fn ($car) => [
-                        'bought_at' => $car->bought_at,
-                        'buy_price' => $car->buy_price,
-                        'name' => $car->name,
-                        'link' => route('cars.edit', $car),
+                    ->through(fn ($contract) => [
+                        'date' => $contract->date,
+                        'price' => $contract->price,
+                        'name' => $contract->car->name,
+                        'link' => route('cars.edit', $contract->car),
                     ]),
             ]
         ]);

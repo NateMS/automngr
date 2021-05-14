@@ -47,19 +47,24 @@ class Contact extends Model
         $query->orderBy('lastname')->orderBy('firstname');
     }
 
-    public function contracts()
+    public function sellContracts()
     {
-        return $this->hasMany(Contract::class);
+        return $this->hasMany(SellContract::class);
+    }
+
+    public function buyContracts()
+    {
+        return $this->hasMany(BuyContract::class);
     }
 
     public function boughtCars()
     {
-        return $this->hasManyThrough(Car::class, Contract::class);
+        return $this->hasManyThrough(Car::class, SellContract::class);
     }
 
     public function soldCars()
     {
-        return $this->hasMany(Car::class, 'seller_contact_id');
+        return $this->hasManyThrough(Car::class, BuyContract::class);
     }
 
     public function scopeFilter($query, array $filters)

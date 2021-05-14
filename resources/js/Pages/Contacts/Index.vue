@@ -14,7 +14,7 @@
                     Kontakt erfassen
                 </jet-button>
             </div>
-            <simple-table :title="contacts.total + ' Kontakte'" :data="contacts" :columns="columns" :defaultSort="{ by: 'name', direction:'asc'}" />
+            <simple-table :title="contacts.total + ' Kontakte'" :data="contacts" :columns="columns" :defaultSort="sort" />
         </div>
     </div>
   </app-layout>
@@ -36,6 +36,7 @@ export default {
   },
   props: {
     filters: Object,
+    sort: Object,
     contacts: Object,
   },
   data() {

@@ -2,20 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Contract;
+use App\Models\BuyContract;
 use App\Models\Car;
 use App\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Enums\InsuranceType;
 
-class ContractFactory extends Factory
+class BuyContractFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Contract::class;
+    protected $model = BuyContract::class;
 
     /**
      * Define the model's default state.
@@ -25,11 +24,10 @@ class ContractFactory extends Factory
     public function definition()
     {
         return [
-            'sold_at' => $this->faker->date(),
-            'sell_price' => $this->faker->numberBetween(150000, 3500000),
+            'date' => $this->faker->date(),
+            'price' => $this->faker->numberBetween(150000, 3500000),
             'contact_id' => $this->faker->numberBetween(1, Contact::count()),
             'car_id' => $this->faker->unique()->numberBetween(1, Car::count()),
-            'insurance_type' => (string)InsuranceType::getRandomValue(),
         ];
     }
 }
