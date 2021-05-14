@@ -7,7 +7,18 @@
             <div v-if="data.total > 0" class="bg-white rounded-md shadow overflow-x-auto">
                 <table class="w-full whitespace-nowrap">
                    <tr class="text-left font-bold">
-                        <th v-for="(col, index) in columns" :key="col.key" class="px-6 pt-4 pb-4" :colspan="[index == (columns.length - 1) ? 2 : 1]">{{ col.value }}</th>
+                        <th v-for="(col, index) in columns" :key="col.key" class="px-6 pt-4 pb-4" :colspan="[index == (columns.length - 1) ? 2 : 1]">
+                            <a v-if="col.sortable" href="#" @click="sortTable(col.key)" class="px-4 flex items-center">
+                                {{ col.value }}
+                                <div class="grid grid-cols-1 place-items-center ml-1">
+                                    <unicon :fill="getIconColor(col.key, 'asc')" height="22" width="22" name="angle-up"></unicon>
+                                    <unicon :fill="getIconColor(col.key, 'desc')" height="22" width="22" name="angle-down"></unicon>
+                                </div>
+                            </a>
+                            <span v-else class="px-4 flex items-center">
+                                {{ col.value }}
+                            </span>
+                        </th>
                     </tr>
                     <tr v-for="row in data.data" :key="row.link" class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td v-for="col in columns" :key="col.key" class="border-t">
@@ -20,7 +31,7 @@
                         </td>
                         <td v-if="row.link" class="border-t w-px">
                             <inertia-link class="px-4 flex items-center" :href="row.link" tabindex="-1">
-                            <unicon class="m-2" height="22" width="22" name="angle-right"></unicon>
+                                <unicon class="m-2" height="22" width="22" name="angle-right"></unicon>
                             </inertia-link>
                         </td>
                     </tr>
@@ -52,6 +63,31 @@ export default {
     data: Object,
     columns: Array,
     title: String,
+    defaultSort: Object,
+  },
+  data() {
+      return {
+          sort: this.defaultSort,
+      }
+  },
+  methods: {
+    sortTable(col) {
+        event.preventDefault();
+        if (this.sort.by == col) {
+            this.sort.direction = this.sort.direction == 'asc' ? 'desc' : 'asc';
+        } else {
+            this.sort.direction = 'asc';
+        }
+        //this.$inertia.get(this.route('contacts'), { preserveState: true })
+        this.sort.by = col;
+    },
+    getIconColor(col, dir) {
+        if (col == this.sort.by && dir == this.sort.direction) {
+            return '#4B5563';
+        }
+
+        return '#a0a5b9';
+    }
   },
 }
 </script>

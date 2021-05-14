@@ -27,7 +27,7 @@ class CreateContractsTable extends Migration
                 ->onDelete('cascade')
                 ->constrained('cars');
             $table->enum('insurance_type', InsuranceType::getValues())
-            ->default(InsuranceType::OptionOne);
+            ->default(InsuranceType::QBase);
             $table->timestamps();
             $table->softDeletes();
         });

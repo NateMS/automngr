@@ -2,19 +2,18 @@
   <app-layout>
     <template #header>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Kontakte
+            Autos
         </h2>
     </template>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
               <div class="mb-6 flex justify-between items-center">
-                <!-- <search-filter ref="search" v-model="form.search" class="w-full max-w-md mr-4" @reset="reset"></search-filter> -->
                 <input type="text" ref="search" v-model="form.search" autofocus="true" name="search" placeholder="Suchen..." class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block w-full" autocomplete="off">
-                <jet-button class="ml-4" @click="createContact">
-                    Kontakt erfassen
+                <jet-button class="ml-4" @click="createCar">
+                    Auto erfassen
                 </jet-button>
             </div>
-            <simple-table :title="contacts.total + ' Kontakte'" :data="contacts" :columns="columns" :defaultSort="{ by: 'name', direction:'asc'}" />
+            <simple-table :title="cars.total + ' Autos'" :data="cars" :columns="columns" :defaultSort="{ by: 'name', direction:'asc'}" />
         </div>
     </div>
   </app-layout>
@@ -36,7 +35,7 @@ export default {
   },
   props: {
     filters: Object,
-    contacts: Object,
+    cars: Object,
   },
   data() {
     return {
@@ -46,9 +45,9 @@ export default {
       },
       columns: [
         {key: 'name', value: 'Name', sortable: true},
-        {key: 'company', value: 'Firma', sortable: true},
-        {key: 'fullCity', value: 'Ort', sortable: true},
-        {key: 'phone', value: 'Telefon'},
+        {key: 'stammnummer', value: 'Stammummer', sortable: true},
+        {key: 'buy_price', value: 'Kaufpreis', sortable: true},
+        {key: 'initial_date', value: 'Inverkehrssetzung', sortable: true},
       ],
     }
   },
@@ -56,7 +55,7 @@ export default {
     form: {
       deep: true,
       handler: throttle(function() {
-        this.$inertia.get(this.route('contacts'), pickBy(this.form), { preserveState: false })
+        this.$inertia.get(this.route('cars'), pickBy(this.form), { preserveState: false })
       }, 300),
     },
   },
@@ -64,8 +63,8 @@ export default {
     reset() {
       this.form = mapValues(this.form, () => null)
     },
-    createContact() {
-        this.$inertia.visit(route('contacts.create'), { method: 'get' })
+    createCar() {
+        this.$inertia.visit(route('cars.create'), { method: 'get' })
     },
   },
 }

@@ -15,7 +15,8 @@
                     </template>
 
                     <template #description>
-                        Kontaktinformationen anschauen &amp; anpassen
+                        Kontaktinformationen anschauen &amp; anpassen.
+                        <contact-card :contact="computedContact" />
                     </template>
 
                     <template #form>
@@ -103,10 +104,10 @@
         </div>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <simple-table :title="'An \'' + title + '\' verkaufte Autos'" :data="contact.bought_cars" :columns="boughtCarColumns" />
+                <simple-table :title="'An ' + title + ' verkaufte Autos'" :data="contact.bought_cars" :columns="boughtCarColumns" />
             </div>
             <div class="max-w-7xl pt-6 mx-auto sm:px-6 lg:px-8">    
-                <simple-table :title="'Von \'' + title + '\' gekaufte Autos'" :data="contact.sold_cars" :columns="soldCarColumns" />
+                <simple-table :title="'Von ' + title + ' gekaufte Autos'" :data="contact.sold_cars" :columns="soldCarColumns" />
             </div>
         </div>
     </app-layout>
@@ -116,6 +117,7 @@
 import AppLayout from '@/Layouts/AppLayout'
 import JetButton from '@/Jetstream/Button'
 import BreadCrumb from '@/Components/BreadCrumb.vue'
+import ContactCard from '@/Components/ContactCard.vue'
 import SimpleTable from '@/Components/SimpleTable.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInput from '@/Jetstream/Input.vue'
@@ -134,6 +136,7 @@ export default {
         JetInput,
         JetInputError,
         JetActionMessage,
+        ContactCard,
     },
 
     props: {
@@ -174,6 +177,20 @@ export default {
             }
 
             return this.form.lastname + ' ' + this.form.firstname;
+        }, 
+        computedContact: function () {
+            return {
+                firstname: this.form.firstname,
+                lastname: this.form.lastname,
+                company: this.form.company,
+                email: this.form.email,
+                phone: this.form.phone,
+                address: this.form.address,
+                zip: this.form.zip,
+                city: this.form.city,
+                country: this.form.country,
+                link: route('contacts.update', this.contact),
+            }
         }
     },
 

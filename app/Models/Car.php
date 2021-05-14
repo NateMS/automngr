@@ -2,34 +2,62 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Car extends Model
 {
     use HasFactory, softDeletes;
 
     protected $fillable = [
-        'variation',
         'stammnummer',
         'vin',
         'colour',
         'notes',
         'known_damage',
         'initial_date',
+        'last_check_date',
+        'kilometers',
         'bought_at',
         'buy_price',
         'seller_contact_id',
-        'car_model_id'
+        'car_model_id',
     ];
 
     public function getNameAttribute()
     {
         $out = $this->brand->name . ' ' . $this->carModel->name;
-        $out .= $this->variation ? ' ('  . $this->variation . ')' : '';
 
         return $out;
+    }
+
+    public function getKilometersAttrobute($kilometers)
+    {
+        return $kilometers;
+    }
+
+    public function getStammnummerAttribute($stammnummer)
+    {
+        $out = substr($stammnummer, 0, 3);
+        $out .= '.';
+        $out .= substr($stammnummer, 3, 3);
+        $out .= '.';
+        $out .= substr($stammnummer, 6, 3);
+        
+        return $out;
+    }
+
+    public function getBuyPriceAttribute($price)
+    {
+        return Money::CHF($price);
+    }
+
+    public function getInitialDateAttribute($initialDate)
+    {
+        return Carbon::parse($initialDate)->format('d.m.Y');
     }
 
     public function brand()
@@ -64,6 +92,44 @@ class Car extends Model
 
     public function scopeSoldThisYear($query)
     {
-        return $query->whereDate('sold_at', \Carbon\Carbon::today());
+        return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
+    }
+
+    public function scopeSoldCars($query)
+    {
+        return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
+    }
+
+    public function scopeUnsoldCars($query)
+    {
+        return $query->whereDate('sold_at', );
+    }
+
+    public function scopeOrderByInitialDate($query)
+    {
+        $query->orderBy('initial_date');
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->orWhere('colour', 'like', $search . '%')
+                    ->orWhere('stammnummer', 'like', $search . '%')
+                    ->orWhere('vin', 'like', $search . '%')
+                    ->orWhereHas('carModel', function ($query) use ($search) {
+                        $query->where('name', 'like', $search.'%')
+                        ->orWhereHas('brand', function ($query) use ($search) {
+                            $query->where('name', 'like', $search.'%');
+                        });
+                    });
+            });
+        })->when($filters['trashed'] ?? null, function ($query, $trashed) {
+            if ($trashed === 'with') {
+                $query->withTrashed();
+            } elseif ($trashed === 'only') {
+                $query->onlyTrashed();
+            }
+        });
     }
 }

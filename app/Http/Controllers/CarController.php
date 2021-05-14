@@ -19,9 +19,9 @@ class CarController extends Controller
     {
         return Inertia::render('Cars/Index', [
             'filters' => request()->all('search', 'trashed'),
-            'cars' => Car::all()
-                ->filter(request()->only('search', 'trashed'))
-                ->paginate()
+            'cars' => Car::filter(request()->only('search', 'trashed'))
+                ->orderByInitialDate()
+                ->paginate(50)
                 ->withQueryString()
                 ->through(function ($car) {
                     return [
@@ -29,14 +29,12 @@ class CarController extends Controller
                         'stammnummer' => $car->stammnummer,
                         'vin' => $car->vin,
                         'bought_at' => $car->bought_at,
-                        'buy_price' => $car->buy_price,
-                        'seller' => $car->seller->only('name'),
-                        'buyer' => $car->buyer->only('name'),
+                        'buy_price' => $car->buy_price->format(),
+                        // 'seller' => $car->seller->only('name'),
+                        // 'buyer' => $car->buyer->only('name'),
                         'car_model' => $car->carModel->only('name'),
                         'name' => $car->name,
-                        'phone' => $car->phone,
-                        'zipcode' => $car->city,
-                        'city' => $car->city,
+                        'initial_date' => $car->initial_date,
                         'deleted_at' => $car->deleted_at,
                     ];
                 }),
