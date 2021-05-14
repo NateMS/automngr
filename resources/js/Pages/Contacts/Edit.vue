@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 <bread-crumb text="Kontakte" :href="route('contacts')" />
@@ -8,7 +8,7 @@
         </template>
    
         <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="max-w-7xl py-10 sm:px-6 lg:px-8">
                 <jet-form-section @submitted="submitForm">
                     <template #title>
                         Kontaktinformationen
@@ -103,18 +103,18 @@
             </div>
         </div>
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl sm:px-6 lg:px-8">
                 <simple-table :title="'An ' + title + ' verkaufte Autos'" :data="contact.bought_cars" :columns="boughtCarColumns" />
             </div>
-            <div class="max-w-7xl pt-6 mx-auto sm:px-6 lg:px-8">    
+            <div class="max-w-7xl pt-6 sm:px-6 lg:px-8">    
                 <simple-table :title="'Von ' + title + ' gekaufte Autos'" :data="contact.sold_cars" :columns="soldCarColumns" />
             </div>
         </div>
-    </app-layout>
+    </layout>
 </template>
 
 <script>
-import AppLayout from '@/Layouts/AppLayout'
+import Layout from '@/Layouts/Layout'
 import JetButton from '@/Jetstream/Button'
 import BreadCrumb from '@/Components/BreadCrumb.vue'
 import ContactCard from '@/Components/ContactCard.vue'
@@ -129,7 +129,7 @@ export default {
     components: {
         JetButton,
         JetFormSection,
-        AppLayout,
+        Layout,
         BreadCrumb,
         SimpleTable,
         JetLabel,

@@ -37,6 +37,8 @@ class ContactController extends Controller
                     'name' => $contact->name,
                     'company' => $contact->company,
                     'phone' => $contact->phone,
+                    'email' => $contact->email,
+                    'address' => $contact->address,
                     'fullCity' => $contact->fullCity,
                     'link' => route('contacts.edit', $contact),
                     'deleted_at' => $contact->deleted_at,
@@ -51,6 +53,10 @@ class ContactController extends Controller
                 return Contact::orderBy('company', $direction);
             case 'fullCity':
                 return Contact::orderBy('city', $direction);
+            case 'email':
+                return Contact::orderBy('email', $direction);
+            case 'address':
+                return Contact::orderBy('address', $direction);
             default:
                 return Contact::orderByName($direction);
         }

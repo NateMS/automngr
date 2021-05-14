@@ -1,5 +1,5 @@
 <template>
-  <app-layout>
+  <layout>
     <template #header>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Autos
@@ -9,19 +9,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
               <div class="mb-6 flex justify-between items-center">
                 <input type="text" ref="search" v-model="form.search" autofocus="true" name="search" placeholder="Suchen..." class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block w-full" autocomplete="off">
-                <jet-button class="ml-4" @click="createCar">
-                    Auto erfassen
-                </jet-button>
             </div>
             <simple-table :title="cars.total + ' Autos'" :data="cars" :columns="columns" :defaultSort="{ by: 'name', direction:'asc'}" />
         </div>
     </div>
-  </app-layout>
+  </layout>
 </template>
 
 <script>
 import { pickBy, throttle, mapValues } from 'lodash'
-import AppLayout from '@/Layouts/AppLayout'
+import Layout from '@/Layouts/Layout'
 import SimpleTable from '@/Components/SimpleTable.vue'
 import SearchFilter from '@/Components/SearchFilter'
 import JetButton from '@/Jetstream/Button'
@@ -30,7 +27,7 @@ export default {
   components: {
     SearchFilter,
     JetButton,
-    AppLayout,
+    Layout,
     SimpleTable,
   },
   props: {
@@ -62,9 +59,6 @@ export default {
   methods: {
     reset() {
       this.form = mapValues(this.form, () => null)
-    },
-    createCar() {
-        this.$inertia.visit(route('cars.create'), { method: 'get' })
     },
   },
 }

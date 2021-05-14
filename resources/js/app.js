@@ -5,10 +5,35 @@ import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import Unicon from 'vue-unicons';
-import { uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt } from 'vue-unicons/dist/icons'
+import { createStore } from 'vuex'
+import { uniPlusCircle, uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt } from 'vue-unicons/dist/icons'
 
-Unicon.add([uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt])
+Unicon.add([uniPlusCircle, uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt])
 
+
+// Create a new store instance.
+const store = createStore({
+    state () {
+        return {
+            sideBarOpen: false
+        }
+    },
+    getters: {
+        sideBarOpen: state => {
+            return state.sideBarOpen
+        }
+    },
+    mutations: {
+        toggleSidebar (state) {
+            state.sideBarOpen = !state.sideBarOpen
+        }
+    },
+    actions: {
+        toggleSidebar(context) {
+            context.commit('toggleSidebar')
+        }
+    }
+})
 
 const el = document.getElementById('app');
 
@@ -21,6 +46,7 @@ createApp({
 })
     .mixin({ methods: { route } })
     .use(InertiaPlugin)
+    .use(store)
     .use(Unicon, {
         fill: '#4B5563',
         height: 32,

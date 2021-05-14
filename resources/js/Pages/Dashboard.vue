@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Dashboard
@@ -13,15 +13,15 @@
                 </div>
             </div>
         </div>
-    </app-layout>
+    </layout>
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
+    import Layout from '@/Layouts/Layout'
 
     export default {
         components: {
-            AppLayout,
+            Layout,
         },
     }
 </script>
