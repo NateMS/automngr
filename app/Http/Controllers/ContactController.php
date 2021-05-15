@@ -102,8 +102,8 @@ class ContactController extends Controller
     {
         Contact::create(
             $request->validate([
-                'firstname' => ['required', 'max:75'],
-                'lastname' => ['required', 'max:75'],
+                'firstname' => ['max:75'],
+                'lastname' => ['max:75'],
                 'email' => ['nullable', 'max:75', 'email'],
                 'phone' => ['max:75'],
                 'address' => ['nullable', 'max:150'],
@@ -114,7 +114,7 @@ class ContactController extends Controller
             ])
         );
 
-        return Redirect::route('contacts')->with('success', 'Kontakt erstellt.');
+        return Redirect::route('contacts/1')->with('success', 'Kontakt erstellt.');
     }
 
     /**

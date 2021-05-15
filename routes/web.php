@@ -34,11 +34,11 @@ Route::get('contacts', [ContactController::class, 'index'])
     ->name('contacts')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::post('contacts/buyers', [ContactController::class, 'index'])
+Route::get('contacts/buyers', [ContactController::class, 'index'])
     ->name('contacts.buyers')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::post('contacts/sellers', [ContactController::class, 'index'])
+Route::get('contacts/sellers', [ContactController::class, 'index'])
     ->name('contacts.sellers')
     ->middleware(['auth:sanctum', 'verified']);
 

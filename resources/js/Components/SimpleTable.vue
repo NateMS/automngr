@@ -1,8 +1,16 @@
 <template>
     <div>
         <div class="bg-grey overflow-hidden sm:rounded-lg">
-            <div v-if="title" class="whitespace-nowrap">
-                <h3 class="font-semibold text-xl m-3 text-gray-800 leading-tight">{{ title }}</h3>
+            <div v-if="title" class="whitespace-nowrap mb-3">
+                <h1 class="mb-1 font-bold text-3xl">{{ title }}</h1>
+            </div>
+            <div v-if="form" class="my-6 flex justify-between items-center">
+                <div class="flex items-center w-full max-w-md mr-4">
+                    <div class="flex w-full bg-white shadow rounded">
+                        <input type="text" ref="search" v-model="form.search" autofocus="true" name="search" placeholder="Suchen..." class="relative border-gray-200 w-full px-6 py-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded" autocomplete="off">
+                    </div>
+                    <button @click="reset" type="button" class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-blue-200">Reset</button>
+                </div>
             </div>
             <div v-if="data.total > 0" class="bg-white rounded-md shadow overflow-x-auto">
                 <table class="w-full whitespace-nowrap">
@@ -20,10 +28,10 @@
                     </tr>
                     <tr v-for="row in data.data" :key="row.link" class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td v-for="col in columns" :key="col.key" class="border-t">
-                            <inertia-link v-if="row.link" class="px-6 py-4 flex items-center focus:text-indigo-500" :href="row.link">
+                            <inertia-link v-if="row.link" class="px-6 py-4 flex items-center focus:text-blue-200" :href="row.link">
                                 {{ row[col.key] }}
                             </inertia-link>
-                            <span v-else class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            <span v-else class="px-6 py-4 flex items-center focus:text-blue-200">
                                 {{ row[col.key] }}
                             </span>
                         </td>
@@ -52,36 +60,53 @@
 
 <script>
 import Paginator from "@/Components/Paginator"
+import { pickBy, throttle, mapValues } from 'lodash'
 
 export default {
-  components: {
-    Paginator,
-  },
-  props: {
-    data: Object,
-    columns: Array,
-    title: String,
-    defaultSort: Object,
-  },
-  data() {
-      return {
-          sort: this.defaultSort,
-      }
-  },
-  methods: {
-    sortTable(col) {
-        event.preventDefault();
-        if (this.sort.by == col) {
-            this.sort.direction = this.sort.direction == 'asc' ? 'desc' : 'asc';
-        } else {
-            this.sort.direction = 'asc';
-        }
-        this.sort.by = col;
-        this.$inertia.get(this.data.path, {'sortby': this.sort.by, 'direction': this.sort.direction}, { preserveState: true })
+    components: {
+        Paginator,
     },
-    isActiveSort(col, dir) {
-        return col == this.sort.by && dir == this.sort.direction;
-    }
-  },
+    props: {
+        data: Object,
+        columns: Array,
+        title: String,
+        defaultSort: Object,
+        filters: Object,
+    },
+    data() {
+        return {
+            form: this.filters,
+            sort: this.defaultSort,
+        }
+    },
+    watch: {
+        form: {
+            deep: true,
+            handler: throttle(function() {
+                this.refreshTable();
+            }, 300),
+        },
+    },
+    methods: {
+        sortTable(col) {
+            event.preventDefault();
+            if (this.sort.by == col) {
+                this.sort.direction = this.sort.direction == 'asc' ? 'desc' : 'asc';
+            } else {
+                this.sort.direction = 'asc';
+            }
+            this.sort.by = col;
+            this.$inertia.get(this.data.path, {'sortby': this.sort.by, 'direction': this.sort.direction}, { preserveState: true })
+        },
+        reset() {
+            this.form = mapValues(this.form, () => null)
+        },
+        refreshTable() {
+            this.$inertia.get(this.route('contacts'), pickBy(this.form), { preserveState: true })
+        },
+        isActiveSort(col, dir) {
+            return col == this.sort.by && dir == this.sort.direction;
+        }
+    },
 }
 </script>
