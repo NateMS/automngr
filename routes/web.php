@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CarModelController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -92,4 +94,12 @@ Route::put('cars/{car}', [CarController::class, 'update'])
 
 Route::post('cars', [CarController::class, 'store'])
     ->name('cars.store')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::post('brands', [BrandController::class, 'store'])
+    ->name('brands.store')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::post('models', [CarModelController::class, 'store'])
+    ->name('models.store')
     ->middleware(['auth:sanctum', 'verified']);

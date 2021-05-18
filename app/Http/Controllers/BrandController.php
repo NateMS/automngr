@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class BrandController extends Controller
 {
@@ -31,11 +32,16 @@ class BrandController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $brand = Brand::create(
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+            ])
+        )->only('id', 'name');
+
+        return $brand;
     }
 
     /**

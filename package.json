@@ -27,6 +27,7 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "vue-multiselect": "^3.0.0-alpha.2",
         "vue-unicons": "^3.2.1",
         "vuex": "^4.0.0"
     }

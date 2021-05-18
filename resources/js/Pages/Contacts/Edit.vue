@@ -8,15 +8,13 @@
         </template>
    
         <div>
-            <div class="max-w-7xl py-10 sm:px-6 lg:px-8">
-                <contact-form :form="form" :meta="meta">
-                    <template #title>Kontaktinformationen</template>
-                    <template #description>
-                        Kontaktinformationen anschauen &amp; anpassen.
-                        <contact-card :contact="computedContact" />
-                    </template>
-                </contact-form>
-            </div>
+            <contact-form :form="form" :meta="meta">
+                <template #title>Kontaktinformationen</template>
+                <template #description>
+                    Kontaktinformationen anschauen &amp; anpassen.
+                    <contact-card :contact="computedContact" />
+                </template>
+            </contact-form>
         </div>
         <div class="py-12">
             <div class="max-w-7xl sm:px-6 lg:px-8">

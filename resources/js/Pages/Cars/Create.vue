@@ -8,7 +8,7 @@
         </template>
    
         <div>
-            <car-form :form="form" :meta="meta">
+            <car-form :form="form" :meta="meta" :brands="brands">
                 <template #title>Neues Auto erfassen</template>
                 <template #description>...</template>
             </car-form>
@@ -26,6 +26,9 @@ export default {
         Layout,
         BreadCrumb,
         CarForm,
+    },
+    props: {
+        brands: Array,
     },
     data() {
         return {

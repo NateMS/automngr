@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Inertia\Inertia;
+use App\Models\Brand;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -97,7 +98,21 @@ class CarController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Cars/Create');
+        return Inertia::render('Cars/Create', [
+            'brands' => Brand::all()->map(function ($brand) {
+                return [
+                    'id' => $brand->id,
+                    'name' => $brand->name,
+                    'models' => $brand->carModels()->get()
+                    ->map(function ($carModel) {
+                        return [
+                            'id' => $carModel->id,
+                            'name' => $carModel->name,
+                        ];
+                    }),
+                ];
+            }),
+        ]);
     }
 
     /**
@@ -110,17 +125,17 @@ class CarController extends Controller
     {
         $car = Car::create(
             $request->validate([
-                'stammnummer' => ['unique', 'max:11'],
-                'vin' => ['max:17'],
+                'stammnummer' => ['required', 'unique:cars', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
+                'vin' => ['required', 'unique:cars', 'string', 'size:17'],
                 'initial_date' => ['nullable', 'date'],
                 'last_check_date' => ['nullable', 'date'],
                 'colour' => ['nullable', 'max:75'],
-                // 'model_id' => ['nullable', 'max:150'],
+                'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
                 'kilometers' => ['nullable', 'max:75'],
             ])
         );
 
-        return Redirect::route('cars.edit', $car)->with('success', 'Kontakt erstellt.');
+        return Redirect::route('cars.edit', $car);
 
     }
 
@@ -137,7 +152,8 @@ class CarController extends Controller
                 'id' => $car->id,
                 'stammnummer' => $car->stammnummer,
                 'vin' => $car->vin,
-                'car_model' => $car->carModel->only('name'),
+                'car_model' => $car->carModel,
+                'brand' => $car->brand,
                 'name' => $car->name,
                 'initial_date' => $car->initial_date,
                 'colour' => $car->colour,

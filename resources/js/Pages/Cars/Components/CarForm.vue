@@ -11,10 +11,29 @@
 
             <template #form>
                 <div class="col-span-6 sm:col-span-4">
-                    <jet-label for="car_model_id" value="Modell" />
-                    <jet-input id="car_model_id" type="text" class="mt-1 block w-full" v-model="form.car_model_id" ref="car_model_id" autocomplete="car_model_id" />
-                    <jet-input-error :message="form.errors.car_model_id" class="mt-2" />
+                    <jet-label for="brand" value="Marke" />
+                    <multiselect v-model="brand" @SearchChange="updateBrandSearch" @select="updateCarModelsList" label="name" track-by="id" :options="brands" class="mt-1 block w-full" placeholder="Marke auswählen">
+                        <template v-slot:noResult>
+                            <span @click="addBrand">
+                                <b>{{ brandSearch }}</b> als neue Marke speichern?
+                            </span>
+                        </template>
+                    </multiselect>
                 </div>
+
+                <div v-if="brand" class="col-span-6 sm:col-span-4">
+                    <jet-label for="model" value="Modell" />
+                    <multiselect label="name" track-by="id" v-model="model" @SearchChange="updateCarModelSearch" :options="carModels" class="mt-1 block w-full" placeholder="Modell auswählen">
+                        <template v-slot:noResult>
+                            <span @click="addCarModel">
+                                <b>{{ modelSearch }}</b> als neues {{ brand.name }}-Modell speichern?
+                            </span>
+                        </template>
+                    </multiselect>
+                    <jet-input-error :message="form.errors.model" class="mt-2" />
+                </div>
+                
+
                 <div class="col-span-6 sm:col-span-4">
                     <div class="grid grid-cols-12 gap-6">
                         <div class="col-span-12 sm:col-span-5">
@@ -94,6 +113,7 @@ import Modal from '@/Jetstream/Modal.vue'
 import JetActionMessage from '@/Jetstream/ActionMessage'
 import JetInputError from '@/Jetstream/InputError'
 import JetFormSection from '@/Jetstream/FormSection'
+import Multiselect from 'vue-multiselect'
 
 export default {
     components: {
@@ -104,23 +124,60 @@ export default {
         JetInput,
         JetInputError,
         JetActionMessage,
+        Multiselect,
     },
-
     props: {
         form: Object,
+        brands: Array,
         meta: Object,
     },
     data() {
         return {
+            brand: this.form.brand,
+            brandSearch: null,
+            modelSearch: null,
+            carModels: [],
+            model: this.form.model,
         }
     },
-
     methods: {
         submitForm() {
             this.form.post(route(this.meta.link, this.form.data()), {
                 preserveScroll: true,
             });
         },
+        updateCarModelsList(brand) {
+            this.carModels = brand.models ?? [];
+            this.model = null;
+        },
+        updateBrandSearch(searchQuery, id) {
+            this.brandSearch = searchQuery
+        },
+        addBrand() {
+            axios.post(this.route('brands.store'), {
+                name: this.brandSearch,
+            }).then((response) => {
+                let newBrand = response.data;
+                this.brands.push(newBrand);
+                this.brand = newBrand;
+            });
+        },
+        updateCarModelSearch(searchQuery, id) {
+            this.modelSearch = searchQuery
+        },
+        addCarModel() {
+            axios.post(this.route('models.store'), {
+                name: this.modelSearch,
+                brand_id: this.brand.id,
+            }).then((response) => {
+                let newModel = response.data;
+                this.carModels.push(newModel);
+                this.model = newModel;
+            });
+        },
+    },
+    computed: {
     },
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
