@@ -95,8 +95,6 @@
 
 <script>
 import JetButton from '@/Jetstream/Button'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import SimpleTable from '@/Components/SimpleTable.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetActionMessage from '@/Jetstream/ActionMessage'
@@ -107,8 +105,6 @@ export default {
     components: {
         JetButton,
         JetFormSection,
-        BreadCrumb,
-        SimpleTable,
         JetLabel,
         JetInput,
         JetInputError,
@@ -116,30 +112,31 @@ export default {
     },
 
     props: {
-        contact: Object,
+        form: Object,
         meta: Object,
     },
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: 'PUT',
-                firstname: this.contact.firstname,
-                lastname: this.contact.lastname,
-                company: this.contact.company,
-                email: this.contact.email,
-                phone: this.contact.phone,
-                address: this.contact.address,
-                zip: this.contact.zip,
-                city: this.contact.city,
-                country: this.contact.country,
-                notes: this.contact.notes,
-            }),
-        }
+
+    computed: {
+        contact: function () {
+            return {
+                id: this.form.id,
+                firstname: this.form.firstname,
+                lastname: this.form.lastname,
+                company: this.form.company,
+                email: this.form.email,
+                phone: this.form.phone,
+                address: this.form.address,
+                zip: this.form.zip,
+                city: this.form.city,
+                country: this.form.country,
+                notes: this.form.notes,
+            }
+        },
     },
 
     methods: {
         submitForm() {
-            this.form.post(route(this.meta.link, this.form), {
+            this.form.post(route(this.meta.link, this.contact), {
                 preserveScroll: true,
             });
         },

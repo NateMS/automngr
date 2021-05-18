@@ -88,12 +88,12 @@ class Car extends Model
 
     public function buyContracts()
     {
-        return $this->hasMany(buyContract::class);
+        return $this->hasMany(BuyContract::class);
     }
 
     public function sellContracts()
     {
-        return $this->hasMany(sellContract::class);
+        return $this->hasMany(SellContract::class);
     }
 
     public function carPayment()
@@ -106,19 +106,19 @@ class Car extends Model
     //     return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
     // }
 
-    // public function scopeSoldCars($query)
-    // {
-    //     return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
-    // }
-
-    // public function scopeUnsoldCars($query)
-    // {
-    //     return $query->whereDate('sold_at', );
-    // }
-
     public function scopeOrderByInitialDate($query)
     {
         $query->orderBy('initial_date');
+    }
+
+    public function scopeSoldCars($query)
+    {
+        $query->withCount(['buyContracts', 'sellContracts'])->having('buy_contracts_count', '=', 'sell_contracts_count');
+    }
+
+    public function scopeUnsoldCars($query)
+    {
+        $query->withCount(['buyContracts', 'sellContracts'])->having('buy_contracts_count', '>', 'sell_contracts_count');
     }
 
     public function scopeFilter($query, array $filters)

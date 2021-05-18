@@ -3,62 +3,70 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use App\Enums\InsuranceType;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Redirect;
 
 class CarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
+        return $this->renderCarsList($request, Car::query(), 'Cars/Index');
+    }
+
+    public function unsold(Request $request)
+    {
+        return $this->renderCarsList($request, Car::unsoldCars(), 'Cars/Unsold');
+    }
+
+    public function sold(Request $request)
+    {
+        return $this->renderCarsList($request, Car::soldCars(), 'Cars/Sold');
+    }
+
+    private function renderCarsList(Request $request, $cars, string $renderPage) {
         $direction = $this->getDirection($request);
         $sortBy = $this->getSortBy($request);
-        $cars = $this->getWithCustomSort($sortBy, $direction);
+        $cars = $this->getWithCustomSort($cars, $sortBy, $direction);
 
-        return Inertia::render('Cars/Index', [
+        return Inertia::render($renderPage, [
             'filters' => $request->all('search', 'trashed'),
             'sort' => [
                 'by' => $sortBy,
                 'direction' => $direction,
             ],
             'cars' => $cars->filter($request->only('search', 'trashed'))
-                ->orderByInitialDate()
                 ->paginate(50)
                 ->withQueryString()
-                ->through(function ($car) {
-                    return [
-                        'id' => $car->id,
-                        'stammnummer' => $car->stammnummer,
-                        'vin' => $car->vin,
-                        'buy_price' => $car->latestSellerContract() ? $car->latestSellerContract()->price : '',
-                        // 'buy_price' => $car->buy_price->format(),
-                        // 'seller' => $car->seller->only('name'),
-                        // 'buyer' => $car->buyer->only('name'),
-                        'car_model' => $car->carModel->only('name'),
-                        'name' => $car->name,
-                        'initial_date' => $car->initial_date,
-                        'deleted_at' => $car->deleted_at,
-                    ];
-                }),
+                ->through(fn ($car) => [
+                    'id' => $car->id,
+                    'stammnummer' => $car->stammnummer,
+                    'vin' => $car->vin,
+                    'buy_price' => $car->latestSellerContract() ? $car->latestSellerContract()->price : '',
+                    // 'buy_price' => $car->buy_price->format(),
+                    // 'seller' => $car->seller->only('name'),
+                    // 'buyer' => $car->buyer->only('name'),
+                    'car_model' => $car->carModel->only('name'),
+                    'name' => $car->name,
+                    'initial_date' => $car->initial_date,
+                    'deleted_at' => $car->deleted_at,
+                    'link' => route('cars.edit', $car),
+                ]),
         ]);
     }
 
-    private function getWithCustomSort(string $sortBy, string $direction)
+    private function getWithCustomSort($cars, string $sortBy, string $direction)
     {
         switch($sortBy) {
             case 'initial_date':
-                return Car::orderBy('initial_date', $direction);
+                return $cars->orderBy('initial_date', $direction);
             case 'stammnummer':
-                return Car::orderBy('stammnummer', $direction);
+                return $cars->orderBy('stammnummer', $direction);
             default:
-                //return Car::orderByName($direction);
-                return Car::orderBy('initial_date', $direction);
+                //return $cars->orderByName($direction);
+                return $cars->orderBy('initial_date', $direction);
         }
     }
 
@@ -100,18 +108,20 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $car = Car::create(
+            $request->validate([
+                'stammnummer' => ['unique', 'max:11'],
+                'vin' => ['max:17'],
+                'initial_date' => ['nullable', 'date'],
+                'last_check_date' => ['nullable', 'date'],
+                'colour' => ['nullable', 'max:75'],
+                // 'model_id' => ['nullable', 'max:150'],
+                'kilometers' => ['nullable', 'max:75'],
+            ])
+        );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Car $car)
-    {
-        //
+        return Redirect::route('cars.edit', $car)->with('success', 'Kontakt erstellt.');
+
     }
 
     /**
@@ -122,7 +132,39 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        return Inertia::render('Cars/Edit', [
+            'car' => [
+                'id' => $car->id,
+                'stammnummer' => $car->stammnummer,
+                'vin' => $car->vin,
+                'car_model' => $car->carModel->only('name'),
+                'name' => $car->name,
+                'initial_date' => $car->initial_date,
+                'colour' => $car->colour,
+                'last_check_date' => $car->last_check_date,
+                'kilometers' => $car->kilometers,
+                'known_damage' => $car->known_damage,
+                'notes' => $car->notes,
+                'deleted_at' => $car->deleted_at,
+                // 'buy_contracts' => $car->buyContracts()
+                //     // ->with('contact')
+                //     ->through(fn ($contract) => [
+                //         'date' => $contract->date,
+                //         'price' => $contract->price,
+                //         'buyer' => 'aaa', // $contract->contact->name,
+                //         'link' => route('cars.edit', $car),
+                //     ]),
+                // 'sell_contracts' => $car->sellContracts()
+                //     // ->with('contact')
+                //     ->through(fn ($contract) => [
+                //         'date' => $contract->date,
+                //         'price' => $contract->price,
+                //         'seller' => 'bbb', // $contract->seller->name,
+                //         'link' => route('cars.edit', $car),
+                //         'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
+                //     ]),
+            ]
+        ]);
     }
 
     /**
@@ -134,7 +176,19 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        $car->update(
+            $request->validate([
+                'stammnummer' => ['unique', 'max:11'],
+                'vin' => ['max:17'],
+                'initial_date' => ['nullable', 'date'],
+                'last_check_date' => ['nullable', 'date'],
+                'colour' => ['nullable', 'max:75'],
+                // 'model_id' => ['nullable', 'max:150'],
+                'kilometers' => ['nullable', 'max:75'],
+            ])
+        );
+
+        return Redirect::back()->with('success', 'Auto geändert.');
     }
 
     /**

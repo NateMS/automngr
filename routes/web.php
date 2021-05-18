@@ -34,11 +34,11 @@ Route::get('contacts', [ContactController::class, 'index'])
     ->name('contacts')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('contacts/buyers', [ContactController::class, 'index'])
+Route::get('contacts/buyers', [ContactController::class, 'buyers'])
     ->name('contacts.buyers')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('contacts/sellers', [ContactController::class, 'index'])
+Route::get('contacts/sellers', [ContactController::class, 'sellers'])
     ->name('contacts.sellers')
     ->middleware(['auth:sanctum', 'verified']);
 
@@ -70,22 +70,26 @@ Route::get('cars', [CarController::class, 'index'])
     ->name('cars')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('cars/unsold', [CarController::class, 'index'])
+Route::get('cars/unsold', [CarController::class, 'unsold'])
     ->name('cars.unsold')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('cars/sold', [CarController::class, 'index'])
+Route::get('cars/sold', [CarController::class, 'sold'])
     ->name('cars.sold')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('cars/create', [ContactController::class, 'create'])
+Route::get('cars/create', [CarController::class, 'create'])
     ->name('cars.create')
-    ->middleware(['auth:sanctum', 'verified']);
-
-    Route::get('cars/{contact}', [CarController::class, 'edit'])
-    ->name('cars.edit')
     ->middleware(['auth:sanctum', 'verified']);
 
 Route::get('cars/{car}', [CarController::class, 'edit'])
     ->name('cars.edit')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::put('cars/{car}', [CarController::class, 'update'])
+    ->name('cars.update')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::post('cars', [CarController::class, 'store'])
+    ->name('cars.store')
     ->middleware(['auth:sanctum', 'verified']);

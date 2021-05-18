@@ -3,7 +3,7 @@
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 <bread-crumb text="Autos" :href="route('cars')" />
-                Alle Autos
+                Meine Autos
             </h2>
         </template>
         <div class="py-12">
@@ -32,12 +32,12 @@ export default {
     },
     data() {
         return {
-            currentRoute: 'cars',
+            currentRoute: 'cars.unsold',
             columns: [
-                {key: 'name', value: 'Name', sortable: true},
-                {key: 'stammnummer', value: 'Stammummer', sortable: true},
-                {key: 'buy_price', value: 'Kaufpreis', sortable: true},
-                {key: 'initial_date', value: 'Inverkehrssetzung', sortable: true},
+            {key: 'name', value: 'Name', sortable: true},
+            {key: 'stammnummer', value: 'Stammummer', sortable: true},
+            {key: 'buy_price', value: 'Kaufpreis', sortable: true},
+            {key: 'initial_date', value: 'Inverkehrssetzung', sortable: true},
             ],
         }
     },

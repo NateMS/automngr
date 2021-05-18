@@ -3,12 +3,12 @@
     <template #header>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <bread-crumb text="Kontakte" :href="route('contacts')" />
-            Alle Kontakte
+            Käufer
         </h2>
     </template>
     <div class="py-12">
         <div class="w-full mx-auto sm:px-6 lg:px-8">
-            <simple-table :title="contacts.total + ' Kontakte'" :data="contacts" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute" />
+            <simple-table :title="contacts.total + ' Käufer'" :data="contacts" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute"  />
         </div>
     </div>
   </layout>
@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      currentRoute: 'contacts',
+      currentRoute: 'contacts.buyers',
       columns: [
         {key: 'name', value: 'Name', sortable: true},
         {key: 'company', value: 'Firma', sortable: true},

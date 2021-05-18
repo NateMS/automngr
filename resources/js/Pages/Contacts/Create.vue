@@ -8,7 +8,7 @@
         </template>
    
         <div>
-            <contact-form :contact="form" :meta="meta">
+            <contact-form :form="form" :meta="meta">
                 <template #title>Neuen Kontakt erfassen</template>
                 <template #description>Anschliessend können mit dem neuen Kontakt Verträge abgeschlossen werden.</template>
             </contact-form>
@@ -27,9 +27,6 @@ export default {
         BreadCrumb,
         ContactForm,
     },
-
-    props: {
-    },
     data() {
         return {
             meta: {
@@ -38,7 +35,8 @@ export default {
                 on_success: 'Kontakt gespeichert',
             },
             form: this.$inertia.form({
-                _method: 'PUT',
+                _method: 'POST',
+                id: null,
                 firstname: null,
                 lastname: null,
                 company: null,

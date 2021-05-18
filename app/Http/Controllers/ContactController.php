@@ -19,11 +19,25 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
+        return $this->renderContactsList($request, Contact::query(), 'Contacts/Index');
+    }
+
+    public function sellers(Request $request)
+    {
+        return $this->renderContactsList($request, Contact::has('buyContracts'), 'Contacts/Sellers');
+    }
+
+    public function buyers(Request $request)
+    {
+        return $this->renderContactsList($request, Contact::has('sellContracts'), 'Contacts/Buyers');
+    }
+
+    private function renderContactsList(Request $request, $contacts, string $renderPage) {
         $direction = $this->getDirection($request);
         $sortBy = $this->getSortBy($request);
-        $contacts = $this->getWithCustomSort($sortBy, $direction);
+        $contacts = $this->getWithCustomSort($contacts, $sortBy, $direction);
 
-        return Inertia::render('Contacts/Index', [
+        return Inertia::render($renderPage, [
             'filters' => $request->all('search', 'trashed'),
             'sort' => [
                 'by' => $sortBy,
@@ -46,19 +60,19 @@ class ContactController extends Controller
         ]);
     }
 
-    private function getWithCustomSort(string $sortBy, string $direction)
+    private function getWithCustomSort($contacts, string $sortBy, string $direction)
     {
         switch($sortBy) {
             case 'company':
-                return Contact::orderBy('company', $direction);
+                return $contacts->orderBy('company', $direction);
             case 'fullCity':
-                return Contact::orderBy('city', $direction);
+                return $contacts->orderBy('city', $direction);
             case 'email':
-                return Contact::orderBy('email', $direction);
+                return $contacts->orderBy('email', $direction);
             case 'address':
-                return Contact::orderBy('address', $direction);
+                return $contacts->orderBy('address', $direction);
             default:
-                return Contact::orderByName($direction);
+                return $contacts->orderByName($direction);
         }
     }
 
@@ -100,12 +114,12 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        Contact::create(
+        $contact = Contact::create(
             $request->validate([
                 'firstname' => ['max:75'],
                 'lastname' => ['max:75'],
                 'email' => ['nullable', 'max:75', 'email'],
-                'phone' => ['max:75'],
+                'phone' => ['required', 'max:75'],
                 'address' => ['nullable', 'max:150'],
                 'zip' => ['nullable', 'max:6'],
                 'city' => ['nullable', 'max:75'],
@@ -114,7 +128,7 @@ class ContactController extends Controller
             ])
         );
 
-        return Redirect::route('contacts/1')->with('success', 'Kontakt erstellt.');
+        return Redirect::route('contacts.edit', $contact)->with('success', 'Kontakt erstellt.');
     }
 
     /**

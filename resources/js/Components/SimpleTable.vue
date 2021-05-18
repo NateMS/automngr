@@ -70,6 +70,7 @@ export default {
         data: Object,
         columns: Array,
         title: String,
+        currentRoute: String,
         defaultSort: Object,
         filters: Object,
     },
@@ -102,7 +103,9 @@ export default {
             this.form = mapValues(this.form, () => null)
         },
         refreshTable() {
-            this.$inertia.get(this.route('contacts'), pickBy(this.form), { preserveState: true })
+            if (this.currentRoute) {
+                this.$inertia.get(this.route(this.currentRoute), pickBy(this.form), { preserveState: true })
+            }
         },
         isActiveSort(col, dir) {
             return col == this.sort.by && dir == this.sort.direction;
