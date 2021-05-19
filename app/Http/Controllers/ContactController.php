@@ -128,7 +128,7 @@ class ContactController extends Controller
             ])
         );
 
-        return Redirect::route('contacts.edit', $contact)->with('success', 'Kontakt erstellt.');
+        return Redirect::route('contacts.edit', $contact);
     }
 
     /**

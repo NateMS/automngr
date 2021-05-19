@@ -127,11 +127,11 @@ class CarController extends Controller
             $request->validate([
                 'stammnummer' => ['required', 'unique:cars', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
                 'vin' => ['required', 'unique:cars', 'string', 'size:17'],
-                'initial_date' => ['nullable', 'date'],
-                'last_check_date' => ['nullable', 'date'],
+                'initial_date' => ['required', 'date'],
+                'last_check_date' => ['required', 'date'],
                 'colour' => ['nullable', 'max:75'],
                 'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
-                'kilometers' => ['nullable', 'max:75'],
+                'kilometers' => ['required', 'max:75'],
             ])
         );
 
@@ -152,7 +152,7 @@ class CarController extends Controller
                 'id' => $car->id,
                 'stammnummer' => $car->stammnummer,
                 'vin' => $car->vin,
-                'car_model' => $car->carModel,
+                'car_model' => $car->carModel->only('id', 'name'),
                 'brand' => $car->brand,
                 'name' => $car->name,
                 'initial_date' => $car->initial_date,
@@ -179,7 +179,20 @@ class CarController extends Controller
                 //         'link' => route('cars.edit', $car),
                 //         'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
                 //     ]),
-            ]
+            ],
+            'brands' => Brand::all()->map(function ($brand) {
+                return [
+                    'id' => $brand->id,
+                    'name' => $brand->name,
+                    'models' => $brand->carModels()->get()
+                    ->map(function ($carModel) {
+                        return [
+                            'id' => $carModel->id,
+                            'name' => $carModel->name,
+                        ];
+                    }),
+                ];
+            }),
         ]);
     }
 
@@ -194,13 +207,13 @@ class CarController extends Controller
     {
         $car->update(
             $request->validate([
-                'stammnummer' => ['unique', 'max:11'],
-                'vin' => ['max:17'],
-                'initial_date' => ['nullable', 'date'],
-                'last_check_date' => ['nullable', 'date'],
+                'stammnummer' => ['required', 'unique:cars,stammnummer,' . $car->id, 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
+                'vin' => ['required', 'unique:cars,vin,' . $car->id, 'string', 'size:17'],
+                'initial_date' => ['required', 'date'],
+                'last_check_date' => ['required', 'date'],
                 'colour' => ['nullable', 'max:75'],
-                // 'model_id' => ['nullable', 'max:150'],
-                'kilometers' => ['nullable', 'max:75'],
+                'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
+                'kilometers' => ['required', 'max:75'],
             ])
         );
 

@@ -12,7 +12,7 @@
             <template #form>
                 <div class="col-span-6 sm:col-span-4">
                     <jet-label for="brand" value="Marke" />
-                    <multiselect v-model="brand" @SearchChange="updateBrandSearch" @select="updateCarModelsList" label="name" track-by="id" :options="brands" class="mt-1 block w-full" placeholder="Marke auswählen">
+                    <multiselect v-model="brandSelection" @SearchChange="updateBrandSearch" @select="updateBrand" label="name" track-by="id" :options="brands" class="mt-1 block w-full" placeholder="Marke auswählen">
                         <template v-slot:noResult>
                             <span @click="addBrand">
                                 <b>{{ brandSearch }}</b> als neue Marke speichern?
@@ -21,18 +21,17 @@
                     </multiselect>
                 </div>
 
-                <div v-if="brand" class="col-span-6 sm:col-span-4">
+                <div v-if="brandSelection" class="col-span-6 sm:col-span-4">
                     <jet-label for="model" value="Modell" />
-                    <multiselect label="name" track-by="id" v-model="model" @SearchChange="updateCarModelSearch" :options="carModels" class="mt-1 block w-full" placeholder="Modell auswählen">
+                    <multiselect  v-model="car_modelSelection" @SearchChange="updateCarModelSearch" @select="updateCarModel" label="name" track-by="id" :options="carModels" class="mt-1 block w-full" placeholder="Modell auswählen">
                         <template v-slot:noResult>
                             <span @click="addCarModel">
                                 <b>{{ modelSearch }}</b> als neues {{ brand.name }}-Modell speichern?
                             </span>
                         </template>
                     </multiselect>
-                    <jet-input-error :message="form.errors.model" class="mt-2" />
+                    <jet-input-error :message="form.errors.car_model_id" class="mt-2" />
                 </div>
-                
 
                 <div class="col-span-6 sm:col-span-4">
                     <div class="grid grid-cols-12 gap-6">
@@ -114,6 +113,7 @@ import JetActionMessage from '@/Jetstream/ActionMessage'
 import JetInputError from '@/Jetstream/InputError'
 import JetFormSection from '@/Jetstream/FormSection'
 import Multiselect from 'vue-multiselect'
+import { useForm } from '@inertiajs/inertia-vue3'
 
 export default {
     components: {
@@ -127,28 +127,53 @@ export default {
         Multiselect,
     },
     props: {
-        form: Object,
+        data: Object,
         brands: Array,
         meta: Object,
+        brand: Object,
+        car_model: Object,
     },
     data() {
         return {
-            brand: this.form.brand,
             brandSearch: null,
             modelSearch: null,
             carModels: [],
-            model: this.form.model,
+            brandSelection: this.brand,
+            car_modelSelection: this.car_model,
+            form: useForm(this.meta.form_name, this.data),
         }
     },
     methods: {
         submitForm() {
-            this.form.post(route(this.meta.link, this.form.data()), {
-                preserveScroll: true,
-            });
+            this.form.submit(this.meta.method, this.meta.route);
+        },
+        updateBrand(brand) {
+            if (brand) {
+                this.brand.id = brand.id;
+                this.brand.name = brand.name;
+                this.brand.models = brand.models;
+            } else {
+                this.brand.id = null;
+                this.brand.name = null;
+                this.brand.models = [];
+            }
+            this.updateCarModelsList(brand);
+        },
+        updateCarModel(car_model) {
+            if (car_model) {
+                this.car_model.id = car_model.id;
+                this.car_model.name = car_model.name;
+                this.form.car_model_id = car_model.id;
+            } else {
+                this.car_model.id = null;
+                this.car_model.name = null;
+                this.form.car_model_id = null;
+            }
         },
         updateCarModelsList(brand) {
             this.carModels = brand.models ?? [];
-            this.model = null;
+            this.car_modelSelection = null;
+            this.updateCarModel(null);
         },
         updateBrandSearch(searchQuery, id) {
             this.brandSearch = searchQuery
@@ -157,9 +182,9 @@ export default {
             axios.post(this.route('brands.store'), {
                 name: this.brandSearch,
             }).then((response) => {
-                let newBrand = response.data;
-                this.brands.push(newBrand);
-                this.brand = newBrand;
+                this.brandSelection = response.data;
+                this.brands.push(this.brandSelection);
+                this.updateBrand(this.brandSelection);
             });
         },
         updateCarModelSearch(searchQuery, id) {
@@ -170,13 +195,19 @@ export default {
                 name: this.modelSearch,
                 brand_id: this.brand.id,
             }).then((response) => {
-                let newModel = response.data;
-                this.carModels.push(newModel);
-                this.model = newModel;
+                this.car_modelSelection = response.data;
+                this.carModels.push(this.car_modelSelection);
+                this.updateCarModel(this.car_modelSelection);
             });
         },
     },
-    computed: {
+    mounted: function () {
+        this.$nextTick(function () {
+            this.brandSelection = this.brands.find(x => x.id === this.brand.id);
+            if (this.brandSelection) {
+                this.carModels =  this.brandSelection.models ?? [];
+            }
+        })
     },
 }
 </script>

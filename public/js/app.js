@@ -18134,6 +18134,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/FormSection */ "./resources/js/Jetstream/FormSection.vue");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.esm.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+
 
 
 
@@ -18154,30 +18156,56 @@ __webpack_require__.r(__webpack_exports__);
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_7__.default
   },
   props: {
-    form: Object,
+    data: Object,
     brands: Array,
-    meta: Object
+    meta: Object,
+    brand: Object,
+    car_model: Object
   },
   data: function data() {
     return {
-      brand: this.form.brand,
       brandSearch: null,
       modelSearch: null,
       carModels: [],
-      model: this.form.model
+      brandSelection: this.brand,
+      car_modelSelection: this.car_model,
+      form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_8__.useForm)(this.meta.form_name, this.data)
     };
   },
   methods: {
     submitForm: function submitForm() {
-      this.form.post(route(this.meta.link, this.form.data()), {
-        preserveScroll: true
-      });
+      this.form.submit(this.meta.method, this.meta.route);
+    },
+    updateBrand: function updateBrand(brand) {
+      if (brand) {
+        this.brand.id = brand.id;
+        this.brand.name = brand.name;
+        this.brand.models = brand.models;
+      } else {
+        this.brand.id = null;
+        this.brand.name = null;
+        this.brand.models = [];
+      }
+
+      this.updateCarModelsList(brand);
+    },
+    updateCarModel: function updateCarModel(car_model) {
+      if (car_model) {
+        this.car_model.id = car_model.id;
+        this.car_model.name = car_model.name;
+        this.form.car_model_id = car_model.id;
+      } else {
+        this.car_model.id = null;
+        this.car_model.name = null;
+        this.form.car_model_id = null;
+      }
     },
     updateCarModelsList: function updateCarModelsList(brand) {
       var _brand$models;
 
       this.carModels = (_brand$models = brand.models) !== null && _brand$models !== void 0 ? _brand$models : [];
-      this.model = null;
+      this.car_modelSelection = null;
+      this.updateCarModel(null);
     },
     updateBrandSearch: function updateBrandSearch(searchQuery, id) {
       this.brandSearch = searchQuery;
@@ -18188,11 +18216,11 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(this.route('brands.store'), {
         name: this.brandSearch
       }).then(function (response) {
-        var newBrand = response.data;
+        _this.brandSelection = response.data;
 
-        _this.brands.push(newBrand);
+        _this.brands.push(_this.brandSelection);
 
-        _this.brand = newBrand;
+        _this.updateBrand(_this.brandSelection);
       });
     },
     updateCarModelSearch: function updateCarModelSearch(searchQuery, id) {
@@ -18205,15 +18233,29 @@ __webpack_require__.r(__webpack_exports__);
         name: this.modelSearch,
         brand_id: this.brand.id
       }).then(function (response) {
-        var newModel = response.data;
+        _this2.car_modelSelection = response.data;
 
-        _this2.carModels.push(newModel);
+        _this2.carModels.push(_this2.car_modelSelection);
 
-        _this2.model = newModel;
+        _this2.updateCarModel(_this2.car_modelSelection);
       });
     }
   },
-  computed: {}
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      var _this3 = this;
+
+      this.brandSelection = this.brands.find(function (x) {
+        return x.id === _this3.brand.id;
+      });
+
+      if (this.brandSelection) {
+        var _this$brandSelection$;
+
+        this.carModels = (_this$brandSelection$ = this.brandSelection.models) !== null && _this$brandSelection$ !== void 0 ? _this$brandSelection$ : [];
+      }
+    });
+  }
 });
 
 /***/ }),
@@ -18247,23 +18289,32 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       meta: {
-        link: 'cars.store',
+        form_name: 'CreateCar',
+        route: this.route('cars.store'),
+        method: 'post',
         button_text: 'Auto speichern',
         on_success: 'Auto gespeichert'
       },
-      form: this.$inertia.form({
-        _method: 'POST',
+      data: {
         id: null,
         stammnummer: null,
         vin: null,
         colour: null,
-        model_id: null,
+        car_model_id: null,
         initial_date: null,
         last_check_date: null,
         kilometers: null,
         known_damage: null,
         notes: null
-      })
+      },
+      brand: {
+        id: null,
+        name: null
+      },
+      car_model: {
+        id: null,
+        name: null
+      }
     };
   }
 });
@@ -18299,13 +18350,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     CarForm: _Components_CarForm_vue__WEBPACK_IMPORTED_MODULE_3__.default
   },
   props: {
-    car: Object
+    car: Object,
+    brands: Array
   },
   computed: {
-    title: function title() {// if (this.form.company) {
-      //     return this.form.company;
-      // }
-      // return this.form.lastname + ' ' + this.form.firstname;
+    name: function name() {
+      var out = '';
+
+      if (this.brand.name) {
+        out += this.brand.name;
+
+        if (this.car_model.name) {
+          out += ' ' + this.car_model.name;
+        }
+      }
+
+      return out;
     },
     computedCar: function computedCar() {
       return {// firstname: this.form.firstname,
@@ -18322,25 +18382,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      currentRoute: 'car.edit',
+      currentRoute: 'cars.edit',
       meta: {
-        link: 'cars.update',
+        form_name: 'EditCar' + this.car.id,
+        route: this.route('cars.update', this.car.id),
+        method: 'put',
         button_text: 'Änderungen speichern',
         on_success: 'Änderungen gespeichert'
       },
-      form: this.$inertia.form(_defineProperty({
-        _method: 'PUT',
+      brand: this.car.brand,
+      car_model: this.car.car_model,
+      data: _defineProperty({
         id: this.car.id,
         stammnummer: this.car.stammnummer,
         vin: this.car.vin,
         initial_date: this.car.initial_date,
         colour: this.car.colour,
         notes: this.car.notes,
-        model_id: this.car.model_id,
+        car_model_id: this.car.car_model.id,
         last_check_date: this.car.last_check_date,
         kilometers: this.car.kilometers,
         known_damage: this.car.known_damage
-      }, "notes", this.car.notes))
+      }, "notes", this.car.notes)
     };
   }
 });
@@ -23701,12 +23764,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "for": "brand",
         value: "Marke"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_multiselect, {
-        modelValue: $data.brand,
+        modelValue: $data.brandSelection,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-          return $data.brand = $event;
+          return $data.brandSelection = $event;
         }),
         onSearchChange: $options.updateBrandSearch,
-        onSelect: $options.updateCarModelsList,
+        onSelect: $options.updateBrand,
         label: "name",
         "track-by": "id",
         options: $props.brands,
@@ -23727,17 +23790,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["modelValue", "onSearchChange", "onSelect", "options"])]), $data.brand ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["modelValue", "onSearchChange", "onSelect", "options"])]), $data.brandSelection ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "model",
         value: "Modell"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_multiselect, {
-        label: "name",
-        "track-by": "id",
-        modelValue: $data.model,
+        modelValue: $data.car_modelSelection,
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-          return $data.model = $event;
+          return $data.car_modelSelection = $event;
         }),
         onSearchChange: $options.updateCarModelSearch,
+        onSelect: $options.updateCarModel,
+        label: "name",
+        "track-by": "id",
         options: $data.carModels,
         "class": "mt-1 block w-full",
         placeholder: "Modell auswählen"
@@ -23749,7 +23813,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.modelSearch), 1
           /* TEXT */
-          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" als neues " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.brand.name) + "-Modell speichern? ", 1
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" als neues " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.brand.name) + "-Modell speichern? ", 1
           /* TEXT */
           )])];
         }),
@@ -23758,8 +23822,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["modelValue", "onSearchChange", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $props.form.errors.model,
+      , ["modelValue", "onSearchChange", "onSelect", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+        message: $data.form.errors.car_model_id,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -23770,16 +23834,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "stammnummer",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: $props.form.stammnummer,
+        modelValue: $data.form.stammnummer,
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-          return $props.form.stammnummer = $event;
+          return $data.form.stammnummer = $event;
         }),
         ref: "stammnummer",
         autocomplete: "stammnummer"
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $props.form.errors.stammnummer,
+        message: $data.form.errors.stammnummer,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -23790,16 +23854,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "vin",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: $props.form.vin,
+        modelValue: $data.form.vin,
         "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-          return $props.form.vin = $event;
+          return $data.form.vin = $event;
         }),
         ref: "vin",
         autocomplete: "vin"
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $props.form.errors.vin,
+        message: $data.form.errors.vin,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -23810,16 +23874,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "initial_date",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: $props.form.initial_date,
+        modelValue: $data.form.initial_date,
         "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-          return $props.form.initial_date = $event;
+          return $data.form.initial_date = $event;
         }),
         ref: "initial_date",
         autocomplete: "initial_date"
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $props.form.errors.initial_date,
+        message: $data.form.errors.initial_date,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -23830,16 +23894,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "last_check_date",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: $props.form.last_check_date,
+        modelValue: $data.form.last_check_date,
         "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-          return $props.form.last_check_date = $event;
+          return $data.form.last_check_date = $event;
         }),
         ref: "last_check_date",
         autocomplete: "last_check_date"
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $props.form.errors.last_check_date,
+        message: $data.form.errors.last_check_date,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -23850,16 +23914,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "kilometers",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: $props.form.kilometers,
+        modelValue: $data.form.kilometers,
         "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-          return $props.form.kilometers = $event;
+          return $data.form.kilometers = $event;
         }),
         ref: "kilometers",
         autocomplete: "kilometers"
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $props.form.errors.kilometers,
+        message: $data.form.errors.kilometers,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -23870,16 +23934,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "colour",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: $props.form.colour,
+        modelValue: $data.form.colour,
         "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-          return $props.form.colour = $event;
+          return $data.form.colour = $event;
         }),
         ref: "colour",
         autocomplete: "colour"
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $props.form.errors.colour,
+        message: $data.form.errors.colour,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -23889,13 +23953,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
         "class": "mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
         "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-          return $props.form.known_damage = $event;
+          return $data.form.known_damage = $event;
         }),
         ref: "input"
       }, "\n                    ", 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.form.known_damage]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $props.form.errors.known_damage,
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.known_damage]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+        message: $data.form.errors.known_damage,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -23905,13 +23969,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
         "class": "mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
         "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-          return $props.form.notes = $event;
+          return $data.form.notes = $event;
         }),
         ref: "input"
       }, "\n                    ", 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.form.notes]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $props.form.errors.notes,
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.notes]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+        message: $data.form.errors.notes,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -23919,7 +23983,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_message, {
-        on: $props.form.recentlySuccessful,
+        on: $data.form.recentlySuccessful,
         "class": "mr-3"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -23934,9 +23998,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["on"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
         "class": {
-          'opacity-25': $props.form.processing
+          'opacity-25': $data.form.processing
         },
-        disabled: $props.form.processing
+        disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.button_text), 1
@@ -24001,8 +24065,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_car_form, {
-        form: $data.form,
+        data: $data.data,
         meta: $data.meta,
+        car_model: $data.car_model,
+        brand: $data.brand,
         brands: $props.brands
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -24016,7 +24082,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["form", "meta", "brands"])])];
+      , ["data", "meta", "car_model", "brand", "brands"])])];
     }),
     _: 1
     /* STABLE */
@@ -24053,7 +24119,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_bread_crumb = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("bread-crumb");
 
-  var _component_contact_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("contact-form");
+  var _component_car_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("car-form");
 
   var _component_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("layout");
 
@@ -24064,14 +24130,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         href: _ctx.route('cars')
       }, null, 8
       /* PROPS */
-      , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.name), 1
+      , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.name), 1
       /* TEXT */
       )])];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_contact_form, {
-        form: $data.form,
-        meta: $data.meta
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_car_form, {
+        data: $data.data,
+        meta: $data.meta,
+        car_model: $data.car_model,
+        brand: $data.brand,
+        brands: $props.brands
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_3];
@@ -24084,7 +24153,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["form", "meta"])])])];
+      , ["data", "meta", "car_model", "brand", "brands"])])])];
     }),
     _: 1
     /* STABLE */

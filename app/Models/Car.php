@@ -41,10 +41,10 @@ class Car extends Model
     //     return Money::CHF($this->buyContracts()->price);
     // }
 
-    public function getInitialDateAttribute($initialDate)
-    {
-        return Carbon::parse($initialDate)->format('d.m.Y');
-    }
+    // public function getInitialDateAttribute($initialDate)
+    // {
+    //     return Carbon::parse($initialDate)->format('d.m.Y');
+    // }
 
     public function brand()
     {

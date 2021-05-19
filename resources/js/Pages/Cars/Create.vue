@@ -8,7 +8,7 @@
         </template>
    
         <div>
-            <car-form :form="form" :meta="meta" :brands="brands">
+            <car-form :data="data" :meta="meta" :car_model="car_model" :brand="brand" :brands="brands">
                 <template #title>Neues Auto erfassen</template>
                 <template #description>...</template>
             </car-form>
@@ -33,23 +33,26 @@ export default {
     data() {
         return {
             meta: {
-                link: 'cars.store',
+                form_name: 'CreateCar',
+                route: this.route('cars.store'),
+                method: 'post',
                 button_text: 'Auto speichern',
                 on_success: 'Auto gespeichert',
             },
-            form: this.$inertia.form({
-                _method: 'POST',
+            data: {
                 id: null,
                 stammnummer: null,
                 vin: null,
                 colour: null,
-                model_id: null,
+                car_model_id: null,
                 initial_date: null,
                 last_check_date: null,
                 kilometers: null,
                 known_damage: null,
                 notes: null,
-            }),
+            },
+            brand: {id: null, name: null},
+            car_model: {id: null, name: null},
         }
     },
 }
