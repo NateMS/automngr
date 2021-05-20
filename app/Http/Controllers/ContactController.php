@@ -125,6 +125,7 @@ class ContactController extends Controller
                 'city' => ['nullable', 'max:75'],
                 'country' => ['nullable', 'max:2'],
                 'company' => ['nullable', 'max:75'],
+                'notes' => ['nullable'],
             ])
         );
 
@@ -197,6 +198,7 @@ class ContactController extends Controller
                 'city' => ['nullable', 'max:75'],
                 'country' => ['nullable', 'max:2'],
                 'company' => ['nullable', 'max:75'],
+                'notes' => ['nullable'],
             ])
         );
 

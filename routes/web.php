@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CarModelController;
+use App\Http\Controllers\ContractController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -84,8 +85,12 @@ Route::get('cars/create', [CarController::class, 'create'])
     ->name('cars.create')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('cars/{car}', [CarController::class, 'edit'])
+Route::get('cars/{car}/edit', [CarController::class, 'edit'])
     ->name('cars.edit')
+    ->middleware(['auth:sanctum', 'verified']);
+
+    Route::get('cars/{car}', [CarController::class, 'show'])
+    ->name('cars.show')
     ->middleware(['auth:sanctum', 'verified']);
 
 Route::put('cars/{car}', [CarController::class, 'update'])
@@ -102,4 +107,16 @@ Route::post('brands', [BrandController::class, 'store'])
 
 Route::post('models', [CarModelController::class, 'store'])
     ->name('models.store')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('contracts', [ContractController::class, 'index'])
+    ->name('contracts')
+    ->middleware(['auth:sanctum', 'verified']);
+ 
+Route::get('contracts/ankaufvertraege', [ContractController::class, 'buyContracts'])
+    ->name('contracts.buy_contracts')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('contracts/kaufvertraege', [ContractController::class, 'sellContracts'])
+    ->name('contracts.sell_contracts')
     ->middleware(['auth:sanctum', 'verified']);

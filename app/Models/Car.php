@@ -58,12 +58,12 @@ class Car extends Model
     
     public function latestSellerContract()
     {
-        return $this->sellContracts()->latest('date')->first();
+        return $this->buyContracts()->latest('date')->first();
     }
 
     public function latestBuyerContracts()
     {
-        return $this->buyContracts()->latest('date')->first();
+        return $this->sellContracts()->latest('date')->first();
     }
 
     public function isUnsold()
@@ -78,12 +78,12 @@ class Car extends Model
 
     public function sellers()
     {
-        return $this->hasManyThrough(SellContract::class, Contact::class);
+        return $this->hasManyThrough(BuyContract::class, Contact::class);
     }
 
     public function buyers()
     {
-        return $this->hasManyThrough(BuyContract::class, Contact::class);
+        return $this->hasManyThrough(SellContract::class, Contact::class);
     }
 
     public function buyContracts()

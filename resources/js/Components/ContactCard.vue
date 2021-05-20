@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3 p-3 bg-white shadow rounded-md font-medium">
+    <div class="mt-3 p-5 bg-white shadow rounded-md font-medium">
         <div v-if="contact.company" class="font-bold">
             {{ contact.company }}
         </div>
@@ -36,14 +36,8 @@
 <script>
 
 export default ({
-    components: {
-    },
-
     props: {
         contact: Object,
     },
-    computed: {
-
-    }
 })
 </script>

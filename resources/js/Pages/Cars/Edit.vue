@@ -8,14 +8,12 @@
         </template>
 
         <div>
-            <div class="max-w-7xl py-10 sm:px-6 lg:px-8">
-                <car-form :data="data" :meta="meta" :car_model="car_model" :brand="brand" :brands="brands">
-                    <template #title>Autoangaben</template>
-                    <template #description>
-                        Autodetails anschauen &amp; anpassen.
-                    </template>
-                </car-form>
-            </div>
+            <car-form :data="data" :meta="meta" :car_model="car_model" :brand="brand" :brands="brands">
+                <template #title>Autoangaben</template>
+                <template #description>
+                    Autodetails &amp; anpassen.
+                </template>
+            </car-form>
         </div>
     </layout>
 </template>
@@ -23,7 +21,6 @@
 <script>
 import Layout from '@/Layouts/Layout'
 import BreadCrumb from '@/Components/BreadCrumb.vue'
-import SimpleTable from '@/Components/SimpleTable.vue'
 import CarForm from './Components/CarForm.vue'
 
 
@@ -31,7 +28,6 @@ export default {
     components: {
         BreadCrumb,
         Layout,
-        SimpleTable,
         CarForm,
     },
     props: {
@@ -48,20 +44,7 @@ export default {
                 }
             }
             return out;
-        }, 
-        computedCar: function () {
-            return {
-                // firstname: this.form.firstname,
-                // lastname: this.form.lastname,
-                // company: this.form.company,
-                // email: this.form.email,
-                // phone: this.form.phone,
-                // address: this.form.address,
-                // zip: this.form.zip,
-                // city: this.form.city,
-                // country: this.form.country,
-            }
-        }
+        },
     },
     data() {
         return {

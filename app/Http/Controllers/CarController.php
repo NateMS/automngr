@@ -53,7 +53,7 @@ class CarController extends Controller
                     'name' => $car->name,
                     'initial_date' => $car->initial_date,
                     'deleted_at' => $car->deleted_at,
-                    'link' => route('cars.edit', $car),
+                    'link' => route('cars.show', $car),
                 ]),
         ]);
     }
@@ -132,11 +132,61 @@ class CarController extends Controller
                 'colour' => ['nullable', 'max:75'],
                 'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
                 'kilometers' => ['required', 'max:75'],
+                'known_damage' => ['nullable'],
+                'notes' => ['nullable'],
             ])
         );
 
-        return Redirect::route('cars.edit', $car);
+        return Redirect::route('cars.show', $car);
 
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Car  $car
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Car $car)
+    {
+        return Inertia::render('Cars/Show', [
+            'car' => [
+                'id' => $car->id,
+                'stammnummer' => $car->stammnummer,
+                'vin' => $car->vin,
+                'car_model' => $car->carModel->only('id', 'name'),
+                'brand' => $car->brand,
+                'name' => $car->name,
+                'initial_date' => $car->initial_date,
+                'colour' => $car->colour,
+                'last_check_date' => $car->last_check_date,
+                'kilometers' => $car->kilometers,
+                'known_damage' => $car->known_damage,
+                'notes' => $car->notes,
+                'deleted_at' => $car->deleted_at,
+                'buy_contracts' => $car->buyContracts()
+                    ->with('contact')
+                    ->orderBy('date', 'desc')
+                    ->paginate(10)
+                    ->through(fn ($contract) => [
+                        'date' => $contract->date,
+                        'price' => $contract->price,
+                        'seller' => $contract->contact->name,
+                        'link' => route('contacts.edit', $contract->contact->id),
+                    ]),
+                'sell_contracts' => $car->sellContracts()
+                    ->with('contact')
+                    ->orderBy('date', 'desc')
+                    ->paginate(10)
+                    ->through(fn ($contract) => [
+                        'date' => $contract->date,
+                        'price' => $contract->price,
+                        'buyer' => $contract->contact->name,
+                        'link' => route('contacts.edit', $contract->contact->id),
+                        'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
+                    ]),
+            ],
+        ]);
     }
 
     /**
@@ -162,35 +212,39 @@ class CarController extends Controller
                 'known_damage' => $car->known_damage,
                 'notes' => $car->notes,
                 'deleted_at' => $car->deleted_at,
-                // 'buy_contracts' => $car->buyContracts()
-                //     // ->with('contact')
-                //     ->through(fn ($contract) => [
-                //         'date' => $contract->date,
-                //         'price' => $contract->price,
-                //         'buyer' => 'aaa', // $contract->contact->name,
-                //         'link' => route('cars.edit', $car),
-                //     ]),
-                // 'sell_contracts' => $car->sellContracts()
-                //     // ->with('contact')
-                //     ->through(fn ($contract) => [
-                //         'date' => $contract->date,
-                //         'price' => $contract->price,
-                //         'seller' => 'bbb', // $contract->seller->name,
-                //         'link' => route('cars.edit', $car),
-                //         'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
-                //     ]),
+                'buy_contracts' => $car->buyContracts()
+                    ->with('contact')
+                    ->orderBy('date', 'desc')
+                    ->paginate(10)
+                    ->through(fn ($contract) => [
+                        'date' => $contract->date,
+                        'price' => $contract->price,
+                        'seller' => $contract->contact->name,
+                        'link' => route('contacts.edit', $contract->contact->id),
+                    ]),
+                'sell_contracts' => $car->sellContracts()
+                    ->with('contact')
+                    ->orderBy('date', 'desc')
+                    ->paginate(10)
+                    ->through(fn ($contract) => [
+                        'date' => $contract->date,
+                        'price' => $contract->price,
+                        'buyer' => $contract->contact->name,
+                        'link' => route('contacts.edit', $contract->contact->id),
+                        'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
+                    ]),
             ],
             'brands' => Brand::all()->map(function ($brand) {
                 return [
                     'id' => $brand->id,
                     'name' => $brand->name,
                     'models' => $brand->carModels()->get()
-                    ->map(function ($carModel) {
-                        return [
-                            'id' => $carModel->id,
-                            'name' => $carModel->name,
-                        ];
-                    }),
+                        ->map(function ($carModel) {
+                            return [
+                                'id' => $carModel->id,
+                                'name' => $carModel->name,
+                            ];
+                        }),
                 ];
             }),
         ]);
@@ -214,10 +268,12 @@ class CarController extends Controller
                 'colour' => ['nullable', 'max:75'],
                 'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
                 'kilometers' => ['required', 'max:75'],
+                'known_damage' => ['nullable'],
+                'notes' => ['nullable'],
             ])
         );
 
-        return Redirect::back()->with('success', 'Auto geändert.');
+        return Redirect::route('cars.show', $car)->with('success', 'Auto geändert.');
     }
 
     /**
