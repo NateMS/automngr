@@ -89,12 +89,20 @@ Route::get('cars/{car}/edit', [CarController::class, 'edit'])
     ->name('cars.edit')
     ->middleware(['auth:sanctum', 'verified']);
 
-    Route::get('cars/{car}', [CarController::class, 'show'])
+Route::get('cars/{car}', [CarController::class, 'show'])
     ->name('cars.show')
     ->middleware(['auth:sanctum', 'verified']);
 
 Route::put('cars/{car}', [CarController::class, 'update'])
     ->name('cars.update')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('cars/{car}/delete', [CarController::class, 'destroy'])
+    ->name('cars.destroy')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('cars/{car}/restore', [CarController::class, 'restore'])
+    ->name('cars.restore')
     ->middleware(['auth:sanctum', 'verified']);
 
 Route::post('cars', [CarController::class, 'store'])
@@ -112,7 +120,15 @@ Route::post('models', [CarModelController::class, 'store'])
 Route::get('contracts', [ContractController::class, 'index'])
     ->name('contracts')
     ->middleware(['auth:sanctum', 'verified']);
- 
+
+Route::get('contracts/{contract}', [ContractController::class, 'show'])
+    ->name('contracts.show')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('contracts/{contract}/print', [ContractController::class, 'print'])
+    ->name('contracts.print')
+    ->middleware(['auth:sanctum', 'verified']);
+
 Route::get('contracts/ankaufvertraege', [ContractController::class, 'buyContracts'])
     ->name('contracts.buy_contracts')
     ->middleware(['auth:sanctum', 'verified']);

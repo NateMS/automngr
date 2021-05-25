@@ -169,9 +169,11 @@ class CarController extends Controller
                     ->orderBy('date', 'desc')
                     ->paginate(10)
                     ->through(fn ($contract) => [
+                        'id' => $contract->id,
                         'date' => $contract->date,
                         'price' => $contract->price,
-                        'seller' => $contract->contact->name,
+                        'contact' => $contract->contact,
+                        'type' => 'Ankaufsvertrag',
                         'link' => route('contacts.edit', $contract->contact->id),
                     ]),
                 'sell_contracts' => $car->sellContracts()
@@ -179,9 +181,11 @@ class CarController extends Controller
                     ->orderBy('date', 'desc')
                     ->paginate(10)
                     ->through(fn ($contract) => [
+                        'id' => $contract->id,
                         'date' => $contract->date,
                         'price' => $contract->price,
-                        'buyer' => $contract->contact->name,
+                        'contact' => $contract->contact,
+                        'type' => 'Verkaufsvertrag',
                         'link' => route('contacts.edit', $contract->contact->id),
                         'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
                     ]),
@@ -212,27 +216,6 @@ class CarController extends Controller
                 'known_damage' => $car->known_damage,
                 'notes' => $car->notes,
                 'deleted_at' => $car->deleted_at,
-                'buy_contracts' => $car->buyContracts()
-                    ->with('contact')
-                    ->orderBy('date', 'desc')
-                    ->paginate(10)
-                    ->through(fn ($contract) => [
-                        'date' => $contract->date,
-                        'price' => $contract->price,
-                        'seller' => $contract->contact->name,
-                        'link' => route('contacts.edit', $contract->contact->id),
-                    ]),
-                'sell_contracts' => $car->sellContracts()
-                    ->with('contact')
-                    ->orderBy('date', 'desc')
-                    ->paginate(10)
-                    ->through(fn ($contract) => [
-                        'date' => $contract->date,
-                        'price' => $contract->price,
-                        'buyer' => $contract->contact->name,
-                        'link' => route('contacts.edit', $contract->contact->id),
-                        'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
-                    ]),
             ],
             'brands' => Brand::all()->map(function ($brand) {
                 return [
@@ -285,13 +268,12 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
         $car->delete();
-        return Redirect::back()->with('success', 'Auto gelöscht.');
+        return Redirect::route('cars.show', $car)->with('success', 'Auto gelöscht.');
     }
 
     public function restore(Car $car)
     {
         $car->restore();
-
         return Redirect::back()->with('success', 'Auto wiederhergestellt.');
     }
 }
