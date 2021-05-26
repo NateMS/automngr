@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Inertia\Inertia;
 use App\Models\Brand;
+use App\Models\Contract;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -19,12 +20,12 @@ class CarController extends Controller
 
     public function unsold(Request $request)
     {
-        return $this->renderCarsList($request, Car::unsoldCars(), 'Cars/Unsold');
+        return $this->renderCarsList($request, Car::unsoldOnly(), 'Cars/Unsold');
     }
 
     public function sold(Request $request)
     {
-        return $this->renderCarsList($request, Car::soldCars(), 'Cars/Sold');
+        return $this->renderCarsList($request, Car::soldOnly(), 'Cars/Sold');
     }
 
     private function renderCarsList(Request $request, $cars, string $renderPage) {
@@ -45,10 +46,8 @@ class CarController extends Controller
                     'id' => $car->id,
                     'stammnummer' => $car->stammnummer,
                     'vin' => $car->vin,
-                    'buy_price' => $car->latestSellerContract() ? $car->latestSellerContract()->price : '',
-                    // 'buy_price' => $car->buy_price->format(),
-                    // 'seller' => $car->seller->only('name'),
-                    // 'buyer' => $car->buyer->only('name'),
+                    'buy_contract' => $this->getContractFields($car->latestBuyContract),
+                    'sell_contract' => $this->getContractFields($car->latestSellContract),
                     'car_model' => $car->carModel->only('name'),
                     'name' => $car->name,
                     'initial_date' => $car->initial_date,
@@ -56,6 +55,35 @@ class CarController extends Controller
                     'link' => route('cars.show', $car),
                 ]),
         ]);
+    }
+
+    private function getContractFields(?Contract $contract) {
+        if (!$contract) {
+            return null;
+        }
+        $contact = $contract->contact;
+        return [
+            'id' => $contract->id,
+            'date' => $contract->date,
+            'price' => $contract->price,
+            'type' => $contract->type,
+            'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
+            'contact' => [
+                'id' => $contact->id,
+                'name' => $contact->name,
+                'firstname' => $contact->firstname,
+                'lastname' => $contact->lastname,
+                'phone' => $contact->phone,
+                'address' => $contact->address,
+                'zip' => $contact->zip,
+                'city' => $contact->city,
+                'country' => $contact->country,
+                'company' => $contact->company,
+                'email' => $contact->email,
+                'link' => route('contacts.edit', $contact),
+            ],
+            'link' => route('contracts.show', $contract),
+        ];
     }
 
     private function getWithCustomSort($cars, string $sortBy, string $direction)
@@ -78,17 +106,6 @@ class CarController extends Controller
         }
 
         return 'name';
-    }
-
-    private function getDirection(Request $request)
-    {
-        if ($request->has('direction')) {
-            if (in_array($request->get('direction'), ['asc', 'desc'])) {
-                return $request->get('direction');
-            }
-        }
-
-        return 'asc';
     }
 
     /**
@@ -165,30 +182,13 @@ class CarController extends Controller
                 'notes' => $car->notes,
                 'deleted_at' => $car->deleted_at,
                 'buy_contracts' => $car->buyContracts()
-                    ->with('contact')
                     ->orderBy('date', 'desc')
-                    ->paginate(10)
-                    ->through(fn ($contract) => [
-                        'id' => $contract->id,
-                        'date' => $contract->date,
-                        'price' => $contract->price,
-                        'contact' => $contract->contact,
-                        'type' => 'Ankaufsvertrag',
-                        'link' => route('contacts.edit', $contract->contact->id),
-                    ]),
+                    ->paginate(50)
+                    ->through(fn ($contract) => $this->getContractFields($contract)),
                 'sell_contracts' => $car->sellContracts()
-                    ->with('contact')
                     ->orderBy('date', 'desc')
-                    ->paginate(10)
-                    ->through(fn ($contract) => [
-                        'id' => $contract->id,
-                        'date' => $contract->date,
-                        'price' => $contract->price,
-                        'contact' => $contract->contact,
-                        'type' => 'Verkaufsvertrag',
-                        'link' => route('contacts.edit', $contract->contact->id),
-                        'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
-                    ]),
+                    ->paginate(50)
+                    ->through(fn ($contract) => $this->getContractFields($contract)),
             ],
         ]);
     }

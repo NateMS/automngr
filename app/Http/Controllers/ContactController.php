@@ -85,17 +85,6 @@ class ContactController extends Controller
         return 'name';
     }
 
-    private function getDirection(Request $request)
-    {
-        if ($request->has('direction')) {
-            if (in_array($request->get('direction'), ['asc', 'desc'])) {
-                return $request->get('direction');
-            }
-        }
-
-        return 'asc';
-    }
-
     /**
      * Show the form for creating a new resource.
      *

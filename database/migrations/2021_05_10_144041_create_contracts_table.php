@@ -4,8 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Enums\InsuranceType;
+use App\Enums\ContractType;
 
-class CreateSellContractsTable extends Migration
+class CreateContractsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +15,7 @@ class CreateSellContractsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sell_contracts', function (Blueprint $table) {
+        Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->date('date');
             $table->integer('price');
@@ -27,7 +28,9 @@ class CreateSellContractsTable extends Migration
                 ->onDelete('cascade')
                 ->constrained('cars');
             $table->enum('insurance_type', InsuranceType::getValues())
-            ->default(InsuranceType::QBase);
+            ->default(InsuranceType::None);
+            $table->enum('type', ContractType::getValues())
+            ->default(ContractType::SellContract);
             $table->timestamps();
             $table->softDeletes();
         });

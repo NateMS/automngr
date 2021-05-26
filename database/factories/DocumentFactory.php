@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Document;
-use App\Models\Car;
+use App\Models\Contract;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Enums\DocumentType;
 
@@ -26,8 +26,9 @@ class DocumentFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'car_id' => $this->faker->numberBetween(1, Car::count()),
-            'document_type' => (string)DocumentType::getRandomValue(),
+            'documentable_id' => $this->faker->numberBetween(1, Contract::count()),
+            'documentable_type' => 'App\Models\Contract',
+            'type' => (string)DocumentType::getRandomValue(),
         ];
     }
 }

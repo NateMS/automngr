@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ContractType;
 use Carbon\Carbon;
 use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Model;
@@ -55,50 +56,35 @@ class Car extends Model
     {
         return $this->belongsTo(CarModel::class);
     }
-    
-    public function latestSellerContract()
+
+    public function getLatestBuyContractAttribute()
     {
         return $this->buyContracts()->latest('date')->first();
     }
 
-    public function latestBuyerContracts()
+    public function getLatestSellContractAttribute()
     {
         return $this->sellContracts()->latest('date')->first();
     }
 
     public function isUnsold()
     {
-        return $this->sellers()->count() > $this->buyers()->count();
+        return $this->buyContracts()->count() > $this->sellContracts()->count();
     }
 
     public function isSold()
     {
-        return $this->sellers()->count() == $this->buyers()->count();
+        return $this->buyContracts()->count() == $this->sellContracts()->count();
     }
 
-    public function sellers()
+    public function documents()
     {
-        return $this->hasManyThrough(BuyContract::class, Contact::class);
+        return $this->morphMany(Document::class, 'documentable');
     }
 
-    public function buyers()
+    public function contracts()
     {
-        return $this->hasManyThrough(SellContract::class, Contact::class);
-    }
-
-    public function buyContracts()
-    {
-        return $this->hasMany(BuyContract::class);
-    }
-
-    public function sellContracts()
-    {
-        return $this->hasMany(SellContract::class);
-    }
-
-    public function carPayment()
-    {
-        return $this->hasManyThrough(CarPayment::class, SellContract::class);
+        return $this->hasMany(Contract::class);
     }
 
     // public function scopeSoldThisYear($query)
@@ -111,14 +97,36 @@ class Car extends Model
         $query->orderBy('initial_date');
     }
 
-    public function scopeSoldCars($query)
+    public function buyContracts()
     {
-        $query->withCount(['buyContracts', 'sellContracts'])->having('buy_contracts_count', '=', 'sell_contracts_count');
+        return $this->hasMany(Contract::class)->buyContracts();
     }
 
-    public function scopeUnsoldCars($query)
+    public function sellContracts()
     {
-        $query->withCount(['buyContracts', 'sellContracts'])->having('buy_contracts_count', '>', 'sell_contracts_count');
+        return $this->hasMany(Contract::class)->sellContracts();
+    }
+
+    public function scopeWithContractCount($query)
+    {
+        return $query->withCount([
+            'contracts AS buy_contracts_count' => function ($query) {
+                $query->where('type', (string)ContractType::BuyContract);
+            },
+            'contracts AS sell_contracts_count' => function ($query) {
+                $query->where('type', (string)ContractType::SellContract);
+            },
+        ]);
+    }
+
+    public function scopeUnsoldOnly($query)
+    {
+        return $query->withContractCount()->havingRaw('buy_contracts_count > sell_contracts_count');
+    }
+
+    public function scopeSoldOnly($query)
+    {
+        return $query->withContractCount()->having('sell_contracts_count', '>', 0)->havingRaw('buy_contracts_count <= sell_contracts_count');
     }
 
     public function scopeFilter($query, array $filters)

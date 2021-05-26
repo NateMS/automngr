@@ -29,10 +29,10 @@
                     <tr v-for="row in data.data" :key="row.link" class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td v-for="col in columns" :key="col.key" class="border-t">
                             <inertia-link v-if="row.link" class="px-6 py-4 flex items-center focus:text-blue-200" :href="row.link">
-                                {{ row[col.key] }}
+                                {{ resolve(col.key, row) }}
                             </inertia-link>
                             <span v-else class="px-6 py-4 flex items-center focus:text-blue-200">
-                                {{ row[col.key] }}
+                                {{ resolve(col.key, row) }}
                             </span>
                         </td>
                         <td v-if="row.link" class="border-t w-px">
@@ -89,6 +89,11 @@ export default {
         },
     },
     methods: {
+        resolve(path, obj) {
+            return path.split('.').reduce(function(prev, curr) {
+                return prev ? prev[curr] : null
+            }, obj || self)
+        },
         sortTable(col) {
             event.preventDefault();
             if (this.sort.by == col) {

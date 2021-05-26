@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\CarPayment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Enums\PaymentType;
-use App\Models\SellContract;
+use App\Models\Contract;
 
 class CarPaymentFactory extends Factory
 {
@@ -27,7 +27,7 @@ class CarPaymentFactory extends Factory
             'amount' => $this->faker->numberBetween(1000, 10000),
             'date' => $this->faker->date(),
             'type' => (string)PaymentType::getRandomValue(),
-            'sell_contract_id' => $this->faker->numberBetween(1, SellContract::count()),
+            'contract_id' => $this->faker->numberBetween(1, Contract::count()),
         ];
     }
 }

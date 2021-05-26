@@ -15,8 +15,8 @@ class Document extends Model
         'car_id',
     ];
 
-    public function car()
+    public function documentable()
     {
-        return $this->belongsTo(Car::class);
+        return $this->morphTo();
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\ContractType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Contact extends Model
 {
@@ -47,24 +48,19 @@ class Contact extends Model
         $query->orderBy('lastname', $direction)->orderBy('firstname', $direction);
     }
 
-    public function sellContracts()
+    public function contracts()
     {
-        return $this->hasMany(SellContract::class);
+        return $this->hasMany(Contract::class);
     }
 
     public function buyContracts()
     {
-        return $this->hasMany(BuyContract::class);
+        return $this->contracts()->buyContracts();
     }
 
-    public function boughtCars()
+    public function sellContracts()
     {
-        return $this->hasManyThrough(Car::class, SellContract::class);
-    }
-
-    public function soldCars()
-    {
-        return $this->hasManyThrough(Car::class, BuyContract::class);
+        return $this->contracts()->sellContracts();
     }
 
     public function scopeFilter($query, array $filters)

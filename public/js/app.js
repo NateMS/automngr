@@ -16912,6 +16912,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    resolve: function resolve(path, obj) {
+      return path.split('.').reduce(function (prev, curr) {
+        return prev ? prev[curr] : null;
+      }, obj || self);
+    },
     sortTable: function sortTable(col) {
       event.preventDefault();
 
@@ -18565,8 +18570,20 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Stammummer',
         sortable: true
       }, {
-        key: 'buy_price',
-        value: 'Kaufpreis',
+        key: 'buy_contract.date',
+        value: 'Einkaufsdatum',
+        sortable: true
+      }, {
+        key: 'buy_contract.price',
+        value: 'Einkaufspreis',
+        sortable: true
+      }, {
+        key: 'sell_contract.date',
+        value: 'Verkaufssdatum',
+        sortable: true
+      }, {
+        key: 'sell_contract.price',
+        value: 'Verkaufspreis',
         sortable: true
       }, {
         key: 'initial_date',
@@ -18687,8 +18704,20 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Stammummer',
         sortable: true
       }, {
-        key: 'buy_price',
-        value: 'Kaufpreis',
+        key: 'buy_contract.date',
+        value: 'Einkaufsdatum',
+        sortable: true
+      }, {
+        key: 'buy_contract.price',
+        value: 'Einkaufspreis',
+        sortable: true
+      }, {
+        key: 'sell_contract.date',
+        value: 'Verkaufssdatum',
+        sortable: true
+      }, {
+        key: 'sell_contract.price',
+        value: 'Verkaufspreis',
         sortable: true
       }, {
         key: 'initial_date',
@@ -18741,8 +18770,20 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Stammummer',
         sortable: true
       }, {
-        key: 'buy_price',
-        value: 'Kaufpreis',
+        key: 'buy_contract.date',
+        value: 'Einkaufsdatum',
+        sortable: true
+      }, {
+        key: 'buy_contract.price',
+        value: 'Einkaufspreis',
+        sortable: true
+      }, {
+        key: 'sell_contract.date',
+        value: 'Verkaufssdatum',
+        sortable: true
+      }, {
+        key: 'sell_contract.price',
+        value: 'Verkaufspreis',
         sortable: true
       }, {
         key: 'initial_date',
@@ -20287,38 +20328,35 @@ var _hoisted_7 = {
   key: 2
 };
 var _hoisted_8 = {
+  key: 3,
+  "class": "pt-3 mt-3 border-t"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Zum Vertrag ");
+
+var _hoisted_10 = {
   key: 1,
   "class": "col-span-4 xs:col-span-12"
 };
-var _hoisted_9 = {
+var _hoisted_11 = {
   "class": "col-span-2 xs:col-span-12 py-9"
 };
-var _hoisted_10 = {
+var _hoisted_12 = {
   "class": "w-full flex flex-col"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ausdrucken ");
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "py-12"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "max-w-7xl sm:px-6 lg:px-8"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <simple-table title=\"Ankaufverträge\" :data=\"car.buy_contracts\" :columns=\"buyContractsColumns\" /> ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "max-w-7xl pt-6 sm:px-6 lg:px-8"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <simple-table title=\"Verkaufverträge\" :data=\"car.sell_contracts\" :columns=\"sellContractsColumns\" /> ")])], -1
-/* HOISTED */
-);
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" drucken ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_contact_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("contact-card");
-
-  var _component_car_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("car-card");
 
   var _component_unicon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("unicon");
 
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [$props.contract.contact ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.contact), 1
+  var _component_car_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("car-card");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [$props.contract.contact ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.contact), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_contact_card, {
     contact: $props.contract.contact
@@ -20326,39 +20364,47 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["contact"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.title), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [$props.contract.date ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(' vom ' + $props.contract.date), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [$props.contract.date ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.date), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.price ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, " Preis: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.price), 1
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.price ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, " Betrag: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.price), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.insurance_type ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, " Versicherungstyp: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.insurance_type), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), $props.contract.car ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.car), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_car_card, {
-    car: $props.contract.car
-  }, null, 8
-  /* PROPS */
-  , ["car"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
-    href: _ctx.route('contracts.print', $props.contract.id),
-    "class": "mb-5 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+    href: $props.contract.link,
+    "class": "pt-1 pb-1 flex items-center"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
-        fill: "white",
         "class": "mr-1",
         height: "22",
         width: "22",
-        name: "file-download"
-      }), _hoisted_11];
+        name: "arrow-right"
+      }), _hoisted_9];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["href"])])])]), _hoisted_12], 64
-  /* STABLE_FRAGMENT */
-  );
+  , ["href"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), $props.contract.car ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.car), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_car_card, {
+    car: $props.contract.car
+  }, null, 8
+  /* PROPS */
+  , ["car"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    href: _ctx.route('contracts.print', $props.contract.id),
+    "class": "mb-5 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
+    fill: "white",
+    "class": "mr-1",
+    height: "22",
+    width: "22",
+    name: "file-download"
+  }), _hoisted_13], 8
+  /* PROPS */
+  , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <inertia-link :href=\"route('contracts.print', contract.id)\" class=\"mb-5 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition\" >\n                    <unicon fill=\"white\" class=\"mr-1\" height=\"22\" width=\"22\" name=\"file-download\"></unicon>\n                    ausdrucken\n                </inertia-link> ")])])]);
 }
 
 /***/ }),
@@ -21028,7 +21074,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         href: row.link
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(row[col.key]), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.resolve(col.key, row)), 1
           /* TEXT */
           )];
         }),
@@ -21037,7 +21083,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 1032
       /* PROPS, DYNAMIC_SLOTS */
-      , ["href"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(row[col.key]), 1
+      , ["href"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.resolve(col.key, row)), 1
       /* TEXT */
       ))]);
     }), 128

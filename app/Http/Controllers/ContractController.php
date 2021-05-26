@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Contract;
 use Illuminate\Http\Request;
 
 class ContractController extends Controller
@@ -14,7 +16,6 @@ class ContractController extends Controller
     public function index(Request $request)
     {
         return [];
-       // return $this->renderContactsList($request, Contact::query(), 'Contacts/Index');
     }
 
     /**
@@ -33,6 +34,16 @@ class ContractController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function sellContracts(Request $request)
+    {
+        return [];
+    }
+
+    public function show(Contract $contract)
+    {
+       return [];
+    }
+
+    public function print(Contract $contract)
     {
         return [];
     }

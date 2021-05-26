@@ -17,12 +17,10 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('document_type', DocumentType::getValues())
+            $table->enum('type', DocumentType::getValues())
             ->default(DocumentType::Other);
-            $table->foreignId('car_id')
-            ->onUpdate('cascade')
-            ->onDelete('cascade')
-            ->constrained('cars');
+            $table->integer('documentable_id');
+            $table->string('documentable_type');
             $table->timestamps();
         });
     }

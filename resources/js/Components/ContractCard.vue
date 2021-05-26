@@ -8,13 +8,19 @@
             <h3>{{ meta.title }}</h3>
             <div class="mt-3 p-5 bg-white shadow rounded-md font-medium">
                 <div v-if="contract.date" class="font-bold">
-                    {{' vom ' + contract.date }}
+                    {{ contract.date }}
                 </div>
                 <div v-if="contract.price">
-                    Preis: {{ contract.price }}
+                    Betrag: {{ contract.price }}
                 </div>
                 <div v-if="contract.insurance_type">
                     Versicherungstyp: {{ contract.insurance_type }}
+                </div>
+                <div v-if="contract.link" class="pt-3 mt-3 border-t">
+                    <inertia-link :href="contract.link" class="pt-1 pb-1 flex items-center">
+                        <unicon class="mr-1" height="22" width="22" name="arrow-right"></unicon>
+                        Zum Vertrag
+                    </inertia-link>
                 </div>
             </div>
         </div>
@@ -24,19 +30,15 @@
         </div>
         <div class="col-span-2 xs:col-span-12 py-9">
             <div class="w-full flex flex-col">
-                <inertia-link :href="route('contracts.print', contract.id)" class="mb-5 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition" >
+                <a :href="route('contracts.print', contract.id)" class="mb-5 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition" >
+                    <unicon fill="white" class="mr-1" height="22" width="22" name="file-download"></unicon>
+                    drucken
+                </a>
+                <!-- <inertia-link :href="route('contracts.print', contract.id)" class="mb-5 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition" >
                     <unicon fill="white" class="mr-1" height="22" width="22" name="file-download"></unicon>
                     ausdrucken
-                </inertia-link>
+                </inertia-link> -->
             </div>
-        </div>
-    </div>
-    <div class="py-12">
-        <div class="max-w-7xl sm:px-6 lg:px-8">
-            <!-- <simple-table title="Ankaufverträge" :data="car.buy_contracts" :columns="buyContractsColumns" /> -->
-        </div>
-        <div class="max-w-7xl pt-6 sm:px-6 lg:px-8">    
-            <!-- <simple-table title="Verkaufverträge" :data="car.sell_contracts" :columns="sellContractsColumns" /> -->
         </div>
     </div>
 </template>

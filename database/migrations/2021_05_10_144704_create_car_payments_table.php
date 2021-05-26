@@ -20,10 +20,10 @@ class CreateCarPaymentsTable extends Migration
             $table->date('date');
             $table->enum('type', PaymentType::getValues())
             ->default(PaymentType::Transaction);
-            $table->foreignId('sell_contract_id')
+            $table->foreignId('contract_id')
             ->onUpdate('cascade')
             ->onDelete('cascade')
-            ->constrained('sell_contracts');
+            ->constrained('contracts');
             $table->timestamps();
         });
     }

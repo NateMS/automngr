@@ -11,9 +11,8 @@ use BenSampo\Enum\Enum;
  * @method static static SellContractSigned()
  * @method static static Other()
  */
-final class DocumentType extends Enum
+final class ContractType extends Enum
 {
-    const ContractUnsigned =   0;
-    const ContractSigned =   1;
-    const Other = 3;
+    const BuyContract = 0;
+    const SellContract = 1;
 }
