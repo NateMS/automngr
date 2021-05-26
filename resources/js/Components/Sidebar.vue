@@ -57,24 +57,6 @@
                 Verkäufer
             </jet-nav-link>
         </div>
-
-        <div class="mb-4 px-4">
-            <p class="text-sm font-semibold mb-1 text-gray-400 flex items-center">
-                Verträge
-            </p>
-            <jet-nav-link :href="route('contracts')" :active="route().current('contracts')">
-                <unicon class="mr-2" height="22" width="22" name="car-sideview"></unicon>
-                Alle Verträge
-            </jet-nav-link>
-            <jet-nav-link :href="route('contracts.buy_contracts')" :active="route().current('contracts.buy_contracts')">
-                <unicon class="mr-2 ml-3" height="22" width="22" name="angle-right"></unicon> 
-                Ankaufverträge
-            </jet-nav-link>
-            <jet-nav-link :href="route('contracts.sell_contracts')" :active="route().current('contracts.sell_contracts')">
-                <unicon class="mr-2 ml-3" height="22" width="22" name="angle-right"></unicon>
-                Verkaufverträge
-            </jet-nav-link>
-        </div>
     </div>
 </template>
 

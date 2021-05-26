@@ -1,5 +1,5 @@
 <template>
-    <div class="py-6 grid grid-cols-12 gap-3 w-full">
+    <div class="py-3 grid grid-cols-12 gap-3 w-full">
 
         <div v-if="contract.contact" class="col-span-6 xs:col-span-12">
             <h3>{{ meta.contact }}</h3>
@@ -16,7 +16,7 @@
                     Datum: {{ contract.date }}
                 </div>
                 <div v-if="contract.insurance_type">
-                    Versicherungstyp: {{ contract.insurance_type }}
+                    Versicherung: {{ contract.insurance_type }}
                 </div>
                 <div v-if="contract.price" class="pt-8 font-bold text-2xl">
                     {{ contract.price }}
@@ -30,7 +30,7 @@
             </div>
             <div class="absolute left-0 right-0 bottom-0">
                 <div class="w-full flex flex-col">
-                    <a :href="route('contracts.print', contract.id)" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition" >
+                    <a :href="route('contracts.print', contract.id)" class="justify-center inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition" >
                         <unicon fill="white" class="mr-1" height="22" width="22" name="file-download"></unicon>
                         drucken
                     </a>

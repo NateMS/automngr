@@ -224,7 +224,7 @@ class CarController extends Controller
                 'name' => $car->name,
                 'initial_date' => $car->initial_date_formatted,
                 'colour' => $car->colour,
-                'last_check_date' => $car->last_check_date,
+                'last_check_date' => $car->last_check_date_formatted,
                 'kilometers' => $car->kilometers,
                 'known_damage' => $car->known_damage,
                 'notes' => $car->notes,
@@ -322,6 +322,6 @@ class CarController extends Controller
     public function restore(Car $car)
     {
         $car->restore();
-        return Redirect::back()->with('success', 'Auto wiederhergestellt.');
+        return Redirect::route('cars.show', $car)->with('success', 'Auto wiederhergestellt.');
     }
 }

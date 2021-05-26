@@ -42,6 +42,20 @@ class Car extends Model
         return Carbon::parse($this->initial_date)->format('d.m.Y');
     }
 
+    public function getLastCheckDateFormattedAttribute()
+    {
+        return Carbon::parse($this->last_check_date)->format('d.m.Y');
+    }
+
+    public function getDeletedAtAttribute($deleted_at)
+    {
+        if ($deleted_at) {
+            return Carbon::parse($deleted_at)->format('d.m.Y');
+        }
+        
+        return null;
+    }
+
     public function brand()
     {
         return $this->carModel->brand();
@@ -90,11 +104,6 @@ class Car extends Model
     // {
     //     return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
     // }
-
-    public function scopeOrderByInitialDate($query)
-    {
-        $query->orderBy('initial_date');
-    }
 
     public function buyContracts()
     {
