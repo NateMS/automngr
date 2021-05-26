@@ -29,7 +29,7 @@ class Contract extends Model
 
     public function getPriceAttribute($price)
     {
-        return Money::CHF($price)->format();
+        return Money::CHF($price);
     }
 
     public function documents()

@@ -16649,7 +16649,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       meta: {
-        'title': 'Ankaufsvertrag',
         'contact': 'Verkäufer'
       }
     };
@@ -16830,7 +16829,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       meta: {
-        'title': 'Verkaufsvertrag',
         'contact': 'Käufer'
       }
     };
@@ -18586,8 +18584,8 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Verkaufspreis',
         sortable: true
       }, {
-        key: 'initial_date',
-        value: 'Inverkehrssetzung',
+        key: 'profit',
+        value: 'Profit',
         sortable: true
       }]
     };
@@ -18720,8 +18718,8 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Verkaufspreis',
         sortable: true
       }, {
-        key: 'initial_date',
-        value: 'Inverkehrssetzung',
+        key: 'profit',
+        value: 'Profit',
         sortable: true
       }]
     };
@@ -18770,24 +18768,16 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Stammummer',
         sortable: true
       }, {
+        key: 'initial_date',
+        value: 'Inverkehrssetzung',
+        sortable: true
+      }, {
         key: 'buy_contract.date',
         value: 'Einkaufsdatum',
         sortable: true
       }, {
         key: 'buy_contract.price',
         value: 'Einkaufspreis',
-        sortable: true
-      }, {
-        key: 'sell_contract.date',
-        value: 'Verkaufssdatum',
-        sortable: true
-      }, {
-        key: 'sell_contract.price',
-        value: 'Verkaufspreis',
-        sortable: true
-      }, {
-        key: 'initial_date',
-        value: 'Inverkehrssetzung',
         sortable: true
       }]
     };
@@ -20078,60 +20068,98 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = {
   key: 0,
-  "class": "font-bold py-1 flex align-items"
+  "class": "font-bold pb-1 mb-1 text-2xl border-b"
 };
 var _hoisted_3 = {
-  key: 1,
-  "class": "py-1 flex align-items"
-};
-var _hoisted_4 = {
-  key: 2,
-  "class": "py-1 flex align-items"
-};
-var _hoisted_5 = {
-  key: 3,
-  "class": "py-1 flex align-items"
-};
-var _hoisted_6 = {
-  key: 4,
-  "class": "py-1 flex align-items"
-};
-var _hoisted_7 = {
-  key: 5,
-  "class": "py-1 flex align-items"
-};
-var _hoisted_8 = {
-  key: 6,
-  "class": "py-1 flex align-items"
-};
-var _hoisted_9 = {
-  key: 7,
-  "class": "py-3"
+  "class": "grid grid-cols-4 gap-2 w-full"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-span-1 xs:col-span-2"
+}, " Stammnummer ", -1
+/* HOISTED */
+);
+
+var _hoisted_5 = {
+  key: 0,
+  "class": "col-span-3 xs:col-span-2"
+};
+var _hoisted_6 = {
+  key: 1,
+  "class": "col-span-1 xs:col-span-2"
+};
+var _hoisted_7 = {
+  key: 2,
+  "class": "col-span-3 xs:col-span-2"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-span-1 xs:col-span-2"
+}, " Farbe ", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = {
+  "class": "col-span-1 xs:col-span-2"
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-span-1 xs:col-span-2"
+}, " Kilometerstand ", -1
+/* HOISTED */
+);
+
+var _hoisted_11 = {
+  "class": "col-span-1 xs:col-span-2"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-span-1 xs:col-span-2"
+}, " Erstzulassung ", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = {
+  "class": "col-span-1 xs:col-span-2"
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-span-1 xs:col-span-2"
+}, " Letzte Prüfung ", -1
+/* HOISTED */
+);
+
+var _hoisted_15 = {
+  "class": "col-span-1 xs:col-span-2"
+};
+var _hoisted_16 = {
+  key: 1,
+  "class": "mt-3"
+};
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "font-bold"
 }, "Bekannter Schaden", -1
 /* HOISTED */
 );
 
-var _hoisted_11 = {
-  key: 8,
-  "class": "py-3"
+var _hoisted_18 = {
+  key: 2,
+  "class": "mt-3"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "font-bold"
 }, "Notizen", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = {
-  key: 9,
+var _hoisted_20 = {
+  key: 3,
   "class": "pt-3 mt-3 border-t"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Zum Auto ");
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Zum Auto ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_unicon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("unicon");
@@ -20140,33 +20168,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [$props.car.name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.name), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.colour ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
-    "class": "mr-1",
-    height: "22",
-    width: "22",
-    name: "palette"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.colour), 1
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [_hoisted_4, $props.car.stammnummer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.stammnummer ? $props.car.stammnummer : '-'), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.stammnummer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, " St-Nr: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.stammnummer), 1
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.vin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, " Chassisnummer ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.vin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.vin ? $props.car.vin : '-'), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.vin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, " VIN: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.vin), 1
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.colour ? $props.car.colour : '-'), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.kilometers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.kilometers) + " KM ", 1
+  ), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.kilometers ? $props.car.kilometers + ' KM' : '-'), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.initial_date ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
-    "class": "mr-1",
-    height: "22",
-    width: "22",
-    name: "calendar-alt"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.initial_date), 1
+  ), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.initial_date ? $props.car.initial_date : '-'), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.last_check_date ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, " Letzte Prüfung: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.last_check_date), 1
+  ), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.last_check_date ? $props.car.last_check_date : '-'), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.known_damage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.known_damage), 1
+  )]), $props.car.known_damage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.known_damage), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.notes ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.notes), 1
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.notes ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.notes), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     href: $props.car.link,
     "class": "pt-1 pb-1 flex items-center"
   }, {
@@ -20176,7 +20194,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         height: "22",
         width: "22",
         name: "arrow-right"
-      }), _hoisted_14];
+      }), _hoisted_21];
     }),
     _: 1
     /* STABLE */
@@ -20305,56 +20323,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "py-6 grid grid-cols-12 gap-12 max-w-7xl"
+  "class": "py-6 grid grid-cols-12 gap-3 w-full"
 };
 var _hoisted_2 = {
   key: 0,
-  "class": "col-span-4 xs:col-span-12"
+  "class": "col-span-6 xs:col-span-12"
 };
 var _hoisted_3 = {
-  "class": "col-span-4 xs:col-span-12"
+  key: 1,
+  "class": "col-span-6 xs:col-span-12"
 };
 var _hoisted_4 = {
+  "class": "col-span-6 xs:col-span-12 h-full relative"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, "Vertragsinformationen", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = {
   "class": "mt-3 p-5 bg-white shadow rounded-md font-medium"
 };
-var _hoisted_5 = {
-  key: 0,
-  "class": "font-bold"
-};
-var _hoisted_6 = {
-  key: 1
-};
 var _hoisted_7 = {
-  key: 2
+  key: 0
 };
 var _hoisted_8 = {
-  key: 3,
-  "class": "pt-3 mt-3 border-t"
+  key: 1
 };
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Zum Vertrag ");
-
+var _hoisted_9 = {
+  key: 2,
+  "class": "pt-8 font-bold text-2xl"
+};
 var _hoisted_10 = {
-  key: 1,
-  "class": "col-span-4 xs:col-span-12"
+  key: 3,
+  "class": "pt-3 mt-7 border-t"
 };
-var _hoisted_11 = {
-  "class": "col-span-2 xs:col-span-12 py-9"
-};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Zum Vertrag ");
+
 var _hoisted_12 = {
+  "class": "absolute left-0 right-0 bottom-0"
+};
+var _hoisted_13 = {
   "class": "w-full flex flex-col"
 };
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" drucken ");
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" drucken ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_contact_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("contact-card");
 
+  var _component_car_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("car-card");
+
   var _component_unicon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("unicon");
 
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
-
-  var _component_car_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("car-card");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [$props.contract.contact ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.contact), 1
   /* TEXT */
@@ -20362,15 +20385,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     contact: $props.contract.contact
   }, null, 8
   /* PROPS */
-  , ["contact"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.title), 1
+  , ["contact"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.car ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.car), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [$props.contract.date ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.date), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_car_card, {
+    car: $props.contract.car
+  }, null, 8
+  /* PROPS */
+  , ["car"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [$props.contract.date ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, " Datum: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.date), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.price ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, " Betrag: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.price), 1
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.insurance_type ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, " Versicherungstyp: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.insurance_type), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.insurance_type ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, " Versicherungstyp: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.insurance_type), 1
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.price ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.contract.price), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.contract.link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     href: $props.contract.link,
     "class": "pt-1 pb-1 flex items-center"
   }, {
@@ -20380,31 +20407,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         height: "22",
         width: "22",
         name: "arrow-right"
-      }), _hoisted_9];
+      }), _hoisted_11];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["href"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), $props.contract.car ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.meta.car), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_car_card, {
-    car: $props.contract.car
-  }, null, 8
-  /* PROPS */
-  , ["car"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  , ["href"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     href: _ctx.route('contracts.print', $props.contract.id),
-    "class": "mb-5 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+    "class": "inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
     fill: "white",
     "class": "mr-1",
     height: "22",
     width: "22",
     name: "file-download"
-  }), _hoisted_13], 8
+  }), _hoisted_14], 8
   /* PROPS */
-  , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <inertia-link :href=\"route('contracts.print', contract.id)\" class=\"mb-5 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition\" >\n                    <unicon fill=\"white\" class=\"mr-1\" height=\"22\" width=\"22\" name=\"file-download\"></unicon>\n                    ausdrucken\n                </inertia-link> ")])])]);
+  , ["href"])])])])]);
 }
 
 /***/ }),
@@ -24849,32 +24870,26 @@ var _hoisted_9 = {
   key: 2
 };
 var _hoisted_10 = {
-  "class": "py-12"
+  "class": "py-12 grid grid-cols-12 gap-12 w-full"
 };
 var _hoisted_11 = {
-  "class": "max-w-7xl sm:px-6 lg:px-8"
+  "class": "w-full sm:px-6 lg:px-8 col-span-6 xs:col-span-12"
 };
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_12 = {
   "class": "whitespace-nowrap mb-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
-  "class": "mb-1 font-bold text-3xl"
-}, "Ankaufsverträge")], -1
-/* HOISTED */
-);
-
+};
 var _hoisted_13 = {
-  "class": "max-w-7xl pt-6 sm:px-6 lg:px-8"
-};
-
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "whitespace-nowrap mb-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
   "class": "mb-1 font-bold text-3xl"
-}, "Verkaufsverträge")], -1
-/* HOISTED */
-);
-
+};
+var _hoisted_14 = {
+  "class": "w-full sm:px-6 lg:px-8 col-span-6 xs:col-span-12"
+};
+var _hoisted_15 = {
+  "class": "whitespace-nowrap mb-3"
+};
+var _hoisted_16 = {
+  "class": "mb-1 font-bold text-3xl"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_bread_crumb = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("bread-crumb");
 
@@ -24964,7 +24979,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.car.deleted_at ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, " gelöscht: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.deleted_at), 1
       /* TEXT */
-      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.car.buy_contracts.data, function (contract) {
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.buy_contracts.total > 1 ? $props.car.buy_contracts.total + ' Ankaufsverträge' : 'Ankaufsvertrag'), 1
+      /* TEXT */
+      )]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.car.buy_contracts.data, function (contract) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: contract.id
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_buy_contract_card, {
@@ -24974,7 +24991,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["contract"])]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [_hoisted_14, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.car.sell_contracts.data, function (contract) {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.car.sell_contracts.total > 1 ? $props.car.sell_contracts.total + ' Verkaufsverträge' : 'Verkaufsvertrag'), 1
+      /* TEXT */
+      )]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.car.sell_contracts.data, function (contract) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: contract.id
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_sell_contract_card, {

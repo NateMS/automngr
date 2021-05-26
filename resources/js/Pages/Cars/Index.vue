@@ -40,7 +40,7 @@ export default {
                 {key: 'buy_contract.price', value: 'Einkaufspreis', sortable: true},
                 {key: 'sell_contract.date', value: 'Verkaufssdatum', sortable: true},
                 {key: 'sell_contract.price', value: 'Verkaufspreis', sortable: true},
-                {key: 'initial_date', value: 'Inverkehrssetzung', sortable: true},
+                {key: 'profit', value: 'Profit', sortable: true},
             ],
         }
     },

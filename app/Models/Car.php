@@ -37,15 +37,10 @@ class Car extends Model
         return $kilometers;
     }
 
-    // public function getBuyPriceAttribute()
-    // {
-    //     return Money::CHF($this->buyContracts()->price);
-    // }
-
-    // public function getInitialDateAttribute($initialDate)
-    // {
-    //     return Carbon::parse($initialDate)->format('d.m.Y');
-    // }
+    public function getInitialDateFormattedAttribute()
+    {
+        return Carbon::parse($this->initial_date)->format('d.m.Y');
+    }
 
     public function brand()
     {
@@ -57,24 +52,28 @@ class Car extends Model
         return $this->belongsTo(CarModel::class);
     }
 
-    public function getLatestBuyContractAttribute()
+    public function latestSellContract()
     {
-        return $this->buyContracts()->latest('date')->first();
+        return $this->hasOne(Contract::class)->sellContracts()->latest('date')->first();
     }
 
-    public function getLatestSellContractAttribute()
+    public function latestBuyContract()
     {
-        return $this->sellContracts()->latest('date')->first();
-    }
-
-    public function isUnsold()
-    {
-        return $this->buyContracts()->count() > $this->sellContracts()->count();
+        return $this->hasOne(Contract::class)->buyContracts()->latest('date')->first();
     }
 
     public function isSold()
     {
-        return $this->buyContracts()->count() == $this->sellContracts()->count();
+        return $this->buyContracts()->count() >= 1 && $this->buyContracts()->count() <= $this->sellContracts()->count();
+    }
+
+    public function latestProfit()
+    {
+        if (!$this->isSold()) {
+            return null;
+        }
+
+        return $this->latestSellContract()->price->subtract($this->latestBuyContract()->price)->format();
     }
 
     public function documents()

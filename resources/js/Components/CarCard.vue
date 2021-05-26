@@ -1,33 +1,53 @@
 <template>
     <div class="p-5 bg-white shadow rounded-md font-medium">
-        <div v-if="car.name" class="font-bold py-1 flex align-items">
+        <div v-if="car.name" class="font-bold pb-1 mb-1 text-2xl border-b">
             {{ car.name }}
         </div>
-        <div v-if="car.colour" class="py-1 flex align-items">
-            <unicon class="mr-1" height="22" width="22" name="palette"></unicon>
-            {{ car.colour }}
+        <div class="grid grid-cols-4 gap-2 w-full">
+            <div class="col-span-1 xs:col-span-2">
+                Stammnummer
+            </div>
+            <div v-if="car.stammnummer" class="col-span-3 xs:col-span-2">
+                {{ car.stammnummer ? car.stammnummer : '-' }}
+            </div>
+            <div v-if="car.vin" class="col-span-1 xs:col-span-2">
+                Chassisnummer
+            </div>
+            <div v-if="car.vin" class="col-span-3 xs:col-span-2">
+                {{ car.vin ? car.vin : '-'}}
+            </div>
+            <div class="col-span-1 xs:col-span-2">
+                Farbe
+            </div>
+            <div class="col-span-1 xs:col-span-2">
+                {{ car.colour ? car.colour : '-' }}
+            </div>
+            <div class="col-span-1 xs:col-span-2">
+                Kilometerstand
+            </div>
+            <div class="col-span-1 xs:col-span-2">
+                {{ car.kilometers ? car.kilometers + ' KM' : '-' }}
+            </div>
+
+            <div class="col-span-1 xs:col-span-2">
+                Erstzulassung
+            </div>
+            <div class="col-span-1 xs:col-span-2">
+                {{ car.initial_date ? car.initial_date  : '-' }}
+            </div>
+
+            <div class="col-span-1 xs:col-span-2">
+                Letzte Prüfung
+            </div>
+            <div class="col-span-1 xs:col-span-2">
+                {{ car.last_check_date ? car.last_check_date  : '-' }}
+            </div>
         </div>
-        <div v-if="car.stammnummer" class="py-1 flex align-items">
-            St-Nr: {{ car.stammnummer }}
-        </div>
-        <div v-if="car.vin" class="py-1 flex align-items">
-            VIN: {{ car.vin }}
-        </div>
-        <div v-if="car.kilometers" class="py-1 flex align-items">
-            {{ car.kilometers }} KM
-        </div>
-        <div v-if="car.initial_date" class="py-1 flex align-items">
-            <unicon class="mr-1" height="22" width="22" name="calendar-alt"></unicon>
-            {{ car.initial_date }}
-        </div>
-        <div v-if="car.last_check_date" class="py-1 flex align-items">
-            Letzte Prüfung: {{ car.last_check_date }}
-        </div>
-        <div v-if="car.known_damage" class="py-3">
+        <div v-if="car.known_damage" class="mt-3">
             <p class="font-bold">Bekannter Schaden</p>
             {{ car.known_damage }}
         </div>
-        <div v-if="car.notes" class="py-3">
+        <div v-if="car.notes" class="mt-3">
             <p class="font-bold">Notizen</p>
             {{ car.notes }}
         </div>

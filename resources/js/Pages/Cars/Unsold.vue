@@ -36,11 +36,9 @@ export default {
             columns: [
             {key: 'name', value: 'Name', sortable: true},
             {key: 'stammnummer', value: 'Stammummer', sortable: true},
+            {key: 'initial_date', value: 'Inverkehrssetzung', sortable: true},
             {key: 'buy_contract.date', value: 'Einkaufsdatum', sortable: true},
             {key: 'buy_contract.price', value: 'Einkaufspreis', sortable: true},
-            {key: 'sell_contract.date', value: 'Verkaufssdatum', sortable: true},
-            {key: 'sell_contract.price', value: 'Verkaufspreis', sortable: true},
-            {key: 'initial_date', value: 'Inverkehrssetzung', sortable: true},
             ],
         }
     },

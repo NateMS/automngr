@@ -31,19 +31,19 @@
                    
                 </div>
         </div>
-        <div class="py-12">
-            <div class="max-w-7xl sm:px-6 lg:px-8">
+        <div class="py-12 grid grid-cols-12 gap-12 w-full">
+            <div class="w-full sm:px-6 lg:px-8 col-span-6 xs:col-span-12">
                 <div class="whitespace-nowrap mb-3">
-                    <h1 class="mb-1 font-bold text-3xl">Ankaufsverträge</h1>
+                    <h1 class="mb-1 font-bold text-3xl">{{ car.buy_contracts.total > 1 ? car.buy_contracts.total + ' Ankaufsverträge' : 'Ankaufsvertrag' }}</h1>
                 </div>
                 <div v-for="contract in car.buy_contracts.data" :key="contract.id">
                     <buy-contract-card :contract="contract"/>
                 </div>
                 
             </div>
-            <div class="max-w-7xl pt-6 sm:px-6 lg:px-8">  
+            <div class="w-full sm:px-6 lg:px-8 col-span-6 xs:col-span-12">
                 <div class="whitespace-nowrap mb-3">
-                    <h1 class="mb-1 font-bold text-3xl">Verkaufsverträge</h1>
+                    <h1 class="mb-1 font-bold text-3xl">{{ car.sell_contracts.total > 1 ? car.sell_contracts.total + ' Verkaufsverträge' : 'Verkaufsvertrag' }}</h1>
                 </div>
                 <div v-for="contract in car.sell_contracts.data" :key="contract.id">
                     <sell-contract-card :contract="contract"/>

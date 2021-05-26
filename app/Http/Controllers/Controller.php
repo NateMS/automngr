@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function getDirection(Request $request)
+    protected function getDirection(Request $request, $default = 'asc')
     {
         if ($request->has('direction')) {
             if (in_array($request->get('direction'), ['asc', 'desc'])) {
@@ -20,6 +20,6 @@ class Controller extends BaseController
             }
         }
 
-        return 'asc';
+        return $default;
     }
 }
