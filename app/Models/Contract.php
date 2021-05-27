@@ -22,14 +22,33 @@ class Contract extends Model
         'insurance_type',
     ];
 
-    public function getDateAttribute($date)
+    public function getDateFormattedAttribute()
     {
-        return Carbon::parse($date)->format('d.m.Y');
+        return Carbon::parse($this->date)->format('d.m.Y');
     }
 
     public function getPriceAttribute($price)
     {
         return Money::CHF($price);
+    }
+
+    public function getDeletedAtAttribute($deleted_at)
+    {
+        if ($deleted_at) {
+            return Carbon::parse($deleted_at)->format('d.m.Y');
+        }
+        
+        return null;
+    }
+
+    public function isBuyContract()
+    {
+        return $this->type === (string)ContractType::BuyContract;
+    }
+
+    public function isSellContract()
+    {
+        return $this->type === (string)ContractType::SellContract;
     }
 
     public function documents()

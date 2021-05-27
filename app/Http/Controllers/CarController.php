@@ -68,10 +68,11 @@ class CarController extends Controller
         $contact = $contract->contact;
         return [
             'id' => $contract->id,
-            'date' => $contract->date,
+            'date' => $contract->date_formatted,
             'price' => $contract->price->format(),
             'type' => $contract->type,
-            'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
+            'is_sell_contract' => $contract->isSellContract(),
+            'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue((int)$contract->insurance_type)->key : null,
             'contact' => [
                 'id' => $contact->id,
                 'name' => $contact->name,
@@ -180,12 +181,6 @@ class CarController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $car = Car::create(
@@ -206,12 +201,6 @@ class CarController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
     public function show(Car $car)
     {
         return Inertia::render('Cars/Show', [
@@ -241,12 +230,6 @@ class CarController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Car $car)
     {
         return Inertia::render('Cars/Edit', [
@@ -281,13 +264,6 @@ class CarController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Car $car)
     {
         $car->update(
@@ -307,12 +283,6 @@ class CarController extends Controller
         return Redirect::route('cars.show', $car)->with('success', 'Auto geändert.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Car $car)
     {
         $car->delete();

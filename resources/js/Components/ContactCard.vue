@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3 p-5 bg-white shadow rounded-md font-medium">
+    <div class="p-5 bg-white shadow rounded-md font-medium">
         <div v-if="contact.company" class="font-bold">
             {{ contact.company }}
         </div>

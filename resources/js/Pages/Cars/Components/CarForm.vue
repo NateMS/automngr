@@ -23,7 +23,7 @@
 
                 <div v-if="brandSelection" class="col-span-6 sm:col-span-4">
                     <jet-label for="model" value="Modell" />
-                    <multiselect  v-model="car_modelSelection" @SearchChange="updateCarModelSearch" @select="updateCarModel" label="name" track-by="id" :options="carModels" class="mt-1 block w-full" placeholder="Modell auswählen">
+                    <multiselect v-model="car_modelSelection" @SearchChange="updateCarModelSearch" @select="updateCarModel" label="name" track-by="id" :options="carModels" class="mt-1 block w-full" placeholder="Modell auswählen">
                         <template v-slot:noResult>
                             <span @click="addCarModel">
                                 <b>{{ modelSearch }}</b> als neues {{ brand.name }}-Modell speichern?

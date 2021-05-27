@@ -6,7 +6,6 @@
                 {{ name }}
             </h2>
         </template>
-
         <div>
             <car-form :data="data" :meta="meta" :car_model="car_model" :brand="brand" :brands="brands">
                 <template #title>Autoangaben</template>

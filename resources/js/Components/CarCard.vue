@@ -7,13 +7,13 @@
             <div class="col-span-1 xs:col-span-2">
                 Stammnummer
             </div>
-            <div v-if="car.stammnummer" class="col-span-3 xs:col-span-2">
+            <div class="col-span-3 xs:col-span-2">
                 {{ car.stammnummer ? car.stammnummer : '-' }}
             </div>
-            <div v-if="car.vin" class="col-span-1 xs:col-span-2">
+            <div class="col-span-1 xs:col-span-2">
                 Chassisnummer
             </div>
-            <div v-if="car.vin" class="col-span-3 xs:col-span-2">
+            <div class="col-span-3 xs:col-span-2">
                 {{ car.vin ? car.vin : '-'}}
             </div>
             <div class="col-span-1 xs:col-span-2">

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ContractType;
+use App\Models\Car;
 use Inertia\Inertia;
+use App\Models\Contact;
 use App\Models\Contract;
+use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ContractController extends Controller
 {
@@ -36,15 +41,186 @@ class ContractController extends Controller
     public function sellContracts(Request $request)
     {
         return [];
+    }       
+
+    public function create(Request $request, Car $car, Contact $contact)
+    {
+        return Inertia::render('Contracts/Create', [
+            'car' => $this->getCarFields($car),
+            'contact' => $this->getContactFields($contact),
+            'type' => (string)ContractType::BuyContract,
+        ]);
+    }
+
+    public function createFromCar(Request $request, Car $car)
+    {
+        return Inertia::render('Contracts/CreateFromCar', [
+            'car' => $this->getCarFields($car),
+            'contacts' => Contact::all()->map(function ($contact) {
+                return [
+                    'id' => $contact->id,
+                    'name' => $contact->name,
+                ];
+            }),
+        ]);
+    }
+
+    public function createFromContact(Request $request, Contact $contact)
+    {
+        return Inertia::render('Contracts/CreateFromContact', [
+            'contact' => $this->getContactFields($contact),
+            'cars' => Car::all()->map(function ($car) {
+                return [
+                    'id' => $car->id,
+                    'name' => $car->name,
+                    'stammnummer' => $car->stammnummer,
+                ];
+            }),
+        ]);
+    }
+
+    private function getCarFields(?Car $car) {
+        if (!$car) {
+            return null;
+        }
+        return [
+            'id' => $car->id,
+            'stammnummer' => $car->stammnummer,
+            'vin' => $car->vin,
+            'name' => $car->name,
+            'colour' => $car->colour,
+            'last_check_date' => $car->last_check_date_formatted,
+            'kilometers' => $car->kilometers,
+            'initial_date' => $car->initial_date_formatted,
+        ];
+    }
+
+    private function getContactFields(?Contact $contact) {
+        if (!$contact) {
+            return null;
+        }
+        return [
+            'id' => $contact->id,
+            'name' => $contact->name,
+            'firstname' => $contact->firstname,
+            'lastname' => $contact->lastname,
+            'phone' => $contact->phone,
+            'address' => $contact->address,
+            'zip' => $contact->zip,
+            'city' => $contact->city,
+            'country' => $contact->country,
+            'company' => $contact->company,
+            'email' => $contact->email,
+        ];
+    }
+
+    public function store(Request $request)
+    {
+        $contract = Contract::create(
+            $request->validate([
+                'date' => ['required', 'date'],
+                'price' => ['required', 'integer'],
+                'car_id' => ['required', 'exists:App\Models\Car,id'],
+                'contact_id' => ['required', 'exists:App\Models\Contact,id'],
+                'insurance_type' => ['nullable', 'max:75'],
+            ])
+        );
+
+        return Redirect::route('contracts.show', $contract);
+
+    }
+
+    public function edit(Contract $contract)
+    {
+        return Inertia::render('Contracts/Edit', [
+            'contract' => [
+                'id' => $contract->id,
+                'date' => $contract->date,
+                'is_sell_contract' => $contract->isSellContract(),
+                'price' => $contract->price->getAmount(),
+                'insurance_type' => (string)$contract->insurance_type,
+                'car' => [
+                    'id' => $contract->car->id,
+                    'name' => $contract->car->name,
+                ],
+            ],
+            'insurance_types' => InsuranceType::asArray(),
+        ]);
+    }
+
+    public function update(Request $request, Contract $contract)
+    {
+        $contract->update(
+            $request->validate([
+                'date' => ['required', 'date'],
+                'price' => ['required', 'integer'],
+                'insurance_type' => ['nullable', 'max:75'],
+            ])
+        );
+
+        return Redirect::route('contracts.show', $contract)->with('success', 'Vertrag angepasst.');
+    
     }
 
     public function show(Contract $contract)
     {
-       return [];
+       return Inertia::render('Contracts/Show', [
+        'contract' => [
+            'id' => $contract->id,
+            'date' => $contract->date_formatted,
+            'price' => $contract->price->format(),
+            'type' => $contract->type,
+            'is_sell_contract' => $contract->isSellContract(),
+            'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue((int)$contract->insurance_type)->key : null,
+            'deleted_at' => $contract->deleted_at,
+            'contact' => [
+                'id' => $contract->contact->id,
+                'name' => $contract->contact->name,
+                'firstname' => $contract->contact->firstname,
+                'lastname' => $contract->contact->lastname,
+                'phone' => $contract->contact->phone,
+                'address' => $contract->contact->address,
+                'zip' => $contract->contact->zip,
+                'city' => $contract->contact->city,
+                'country' => $contract->contact->country,
+                'company' => $contract->contact->company,
+                'email' => $contract->contact->email,
+                'link' => route('contacts.edit', $contract->contact),
+            ],
+            'car' => [
+                'id' => $contract->car->id,
+                'stammnummer' => $contract->car->stammnummer,
+                'vin' => $contract->car->vin,
+                'car_model' => $contract->car->carModel->only('id', 'name'),
+                'brand' => $contract->car->brand,
+                'name' => $contract->car->name,
+                'initial_date' => $contract->car->initial_date_formatted,
+                'colour' => $contract->car->colour,
+                'last_check_date' => $contract->car->last_check_date_formatted,
+                'kilometers' => $contract->car->kilometers,
+                'known_damage' => $contract->car->known_damage,
+                'notes' => $contract->car->notes,
+                'deleted_at' => $contract->car->deleted_at,
+                'link' => route('cars.show', $contract->car),
+            ],
+        ],
+    ]);
     }
 
     public function print(Contract $contract)
     {
         return [];
+    }
+
+    public function destroy(Contract $contract)
+    {
+        $contract->delete();
+        return Redirect::route('contracts.show', $contract)->with('success', 'Vertrag gelöscht.');
+    }
+
+    public function restore(Contract $contract)
+    {
+        $contract->restore();
+        return Redirect::route('contracts.show', $contract)->with('success', 'Vertrag wiederhergestellt.');
     }
 }

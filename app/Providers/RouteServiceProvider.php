@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Car;
+use App\Models\Contract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -53,6 +54,13 @@ class RouteServiceProvider extends ServiceProvider
                     return Car::withTrashed()->find($value);
                 }
                 return Car::find($value);
+            });
+
+            Route::bind('contract', function ($value) {
+                if (in_array(Route::currentRouteName(), ['contracts.show', 'contracts.restore'])) {
+                    return Contract::withTrashed()->find($value);
+                }
+                return Contract::find($value);
             });
         });
     }

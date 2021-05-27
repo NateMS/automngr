@@ -117,10 +117,6 @@ Route::post('models', [CarModelController::class, 'store'])
     ->name('models.store')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('contracts', [ContractController::class, 'index'])
-    ->name('contracts')
-    ->middleware(['auth:sanctum', 'verified']);
-
 Route::get('contracts/{contract}', [ContractController::class, 'show'])
     ->name('contracts.show')
     ->middleware(['auth:sanctum', 'verified']);
@@ -129,10 +125,30 @@ Route::get('contracts/{contract}/print', [ContractController::class, 'print'])
     ->name('contracts.print')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('contracts/ankaufvertraege', [ContractController::class, 'buyContracts'])
-    ->name('contracts.buy_contracts')
+Route::get('contracts/create/car/{car}/contact/{contact}', [ContractController::class, 'create'])
+    ->name('contracts.create')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('contracts/kaufvertraege', [ContractController::class, 'sellContracts'])
-    ->name('contracts.sell_contracts')
+Route::get('contracts/create/car/{car}', [ContractController::class, 'createFromCar'])
+    ->name('contracts.create_from_car')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::post('contracts', [ContractController::class, 'store'])
+    ->name('contracts.store')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('contracts/{contract}/edit', [ContractController::class, 'edit'])
+    ->name('contracts.edit')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::put('contracts/{contract}', [ContractController::class, 'update'])
+    ->name('contracts.update')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('contracts/{contract}/delete', [ContractController::class, 'destroy'])
+    ->name('contracts.destroy')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('contracts/{contract}/restore', [ContractController::class, 'restore'])
+    ->name('contracts.restore')
     ->middleware(['auth:sanctum', 'verified']);
