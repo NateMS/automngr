@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use Inertia\Inertia;
 use App\Models\Contact;
-use App\Models\Car;
+use App\Models\Contract;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -12,11 +13,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         return $this->renderContactsList($request, Contact::query(), 'Contacts/Index');
@@ -54,7 +50,7 @@ class ContactController extends Controller
                     'email' => $contact->email,
                     'address' => $contact->address,
                     'fullCity' => $contact->fullCity,
-                    'link' => route('contacts.edit', $contact),
+                    'link' => route('contacts.show', $contact),
                     'deleted_at' => $contact->deleted_at,
                 ]),
         ]);
@@ -85,22 +81,11 @@ class ContactController extends Controller
         return 'name';
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return Inertia::render('Contacts/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $contact = Contact::create(
@@ -118,15 +103,9 @@ class ContactController extends Controller
             ])
         );
 
-        return Redirect::route('contacts.edit', $contact);
+        return Redirect::route('contacts.show', $contact);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Contact $contact)
     {
         return Inertia::render('Contacts/Edit', [
@@ -144,36 +123,68 @@ class ContactController extends Controller
                 'city' => $contact->city,
                 'country' => $contact->country,
                 'deleted_at' => $contact->deleted_at,
-                'bought_cars' => $contact->buyContracts()
-                    ->with('car')
-                    ->paginate(10)
-                    ->through(fn ($contract) => [
-                        'date' => $contract->date,
-                        'price' => $contract->price,
-                        'name' => $contract->car->name,
-                        'link' => route('cars.edit', $contract->car),
-                        'insurance_type' => InsuranceType::fromValue((int)$contract->insurance_type)->key,
-                    ]),
-                'sold_cars' => $contact->sellContracts()
-                    ->with('car')
-                    ->paginate(10)
-                    ->through(fn ($contract) => [
-                        'date' => $contract->date,
-                        'price' => $contract->price,
-                        'name' => $contract->car->name,
-                        'link' => route('cars.edit', $contract->car),
-                    ]),
             ]
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
+    public function show(Contact $contact)
+    {
+        return Inertia::render('Contacts/Show', [
+            'contact' => [
+                'id' => $contact->id,
+                'firstname' => $contact->firstname,
+                'lastname' => $contact->lastname,
+                'company' => $contact->company,
+                'title' => $contact->title,
+                'email' => $contact->email,
+                'notes' => $contact->notes,
+                'phone' => $contact->phone,
+                'address' => $contact->address,
+                'zip' => $contact->zip,
+                'city' => $contact->city,
+                'country' => $contact->country,
+                'deleted_at' => $contact->deleted_at,
+                'buy_contracts' => $contact->buyContracts()
+                    ->with('car')
+                    ->paginate(50)
+                    ->through(fn ($contract) => $this->getContractFields($contract)),
+                'sell_contracts' => $contact->sellContracts()
+                    ->with('car')
+                    ->paginate(50)
+                    ->through(fn ($contract) => $this->getContractFields($contract)),
+            ]
+        ]);
+    }
+
+    private function getContractFields(?Contract $contract) {
+        if (!$contract) {
+            return null;
+        }
+        $car = $contract->car;
+        return [
+            'id' => $contract->id,
+            'date' => $contract->date_formatted,
+            'price' => $contract->price->format(),
+            'type' => $contract->type,
+            'is_sell_contract' => $contract->isSellContract(),
+            'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue((int)$contract->insurance_type)->key : null,
+            'car' => [
+                 'id' => $car->id,
+                    'stammnummer' => $car->stammnummer,
+                    'vin' => $car->vin,
+                    'name' => $car->name,
+                    'initial_date' => $car->initial_date_formatted,
+                    'colour' => $car->colour,
+                    'last_check_date' => $car->last_check_date_formatted,
+                    'kilometers' => $car->kilometers,
+                    'known_damage' => $car->known_damage,
+                    'notes' => $car->notes,
+                    'link' => route('cars.show', $car),
+            ],
+            'link' => route('contracts.show', $contract),
+        ];
+    }
+
     public function update(Request $request, Contact $contact)
     {
         $contact->update(
@@ -191,15 +202,9 @@ class ContactController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Kontakt geändert.');
+        return Redirect::route('contacts.show', $contact)->with('success', 'Kontakt geändert.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Contact $contact)
     {
         $contact->delete();

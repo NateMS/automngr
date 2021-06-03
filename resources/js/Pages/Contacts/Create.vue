@@ -8,7 +8,7 @@
         </template>
    
         <div>
-            <contact-form :form="form" :meta="meta">
+            <contact-form :data="data" :meta="meta">
                 <template #title>Neuen Kontakt erfassen</template>
                 <template #description>Anschliessend können mit dem neuen Kontakt Verträge abgeschlossen werden.</template>
             </contact-form>
@@ -30,12 +30,13 @@ export default {
     data() {
         return {
             meta: {
-                link: 'contacts.store',
+                form_name: 'CreateContact',
+                route: this.route('contacts.store'),
+                method: 'post',
                 button_text: 'Kontakt speichern',
                 on_success: 'Kontakt gespeichert',
             },
-            form: this.$inertia.form({
-                _method: 'POST',
+            data: {
                 id: null,
                 firstname: null,
                 lastname: null,
@@ -47,7 +48,7 @@ export default {
                 city: null,
                 country: null,
                 notes: null,
-            }),
+            },
         }
     },
 }

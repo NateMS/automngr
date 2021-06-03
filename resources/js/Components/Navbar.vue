@@ -1,6 +1,6 @@
 <template>
     <div class="sticky top-0 z-40">
-            <div class="w-full h-20 px-6 bg-white-100 border-b flex items-center justify-between">
+            <div class="w-full h-20 px-6 bg-white border-b flex items-center justify-between">
 
               <!-- left navbar -->
               <div class="flex">
@@ -79,7 +79,10 @@ export default {
     methods: {
         toggleSidebar() {
             this.$store.dispatch('toggleSidebar')
-        }
+        },
+        logout() {
+            this.$inertia.post(route('logout'));
+        },
     }
 }
 </script>

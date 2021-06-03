@@ -6,10 +6,8 @@
             Käufer
         </h2>
     </template>
-    <div class="py-12">
-        <div class="w-full mx-auto sm:px-6 lg:px-8">
-            <simple-table :title="contacts.total + ' Verkäufer'" :data="contacts" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute" />
-        </div>
+    <div class="w-full mx-auto">
+        <simple-table :title="contacts.total + ' Verkäufer'" :data="contacts" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute" />
     </div>
   </layout>
 </template>
@@ -38,7 +36,6 @@ export default {
         {key: 'company', value: 'Firma', sortable: true},
         {key: 'address', value: 'Adresse', sortable: true},
         {key: 'fullCity', value: 'Ort', sortable: true},
-        {key: 'email', value: 'E-Mail', sortable: true},
         {key: 'phone', value: 'Telefon'},
       ],
     }

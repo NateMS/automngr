@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl py-10 sm:px-6 lg:px-8">
+    <div class="max-w-7xl">
         <jet-form-section @submitted="submitForm">
             <template #title>
                 <slot name="title"></slot>

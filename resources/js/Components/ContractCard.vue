@@ -7,7 +7,7 @@
         </div>
         <div v-if="contract.car" class="col-span-6 xs:col-span-12">
             <h3 class="mb-3">Auto</h3>
-            <car-card :car="contract.car" />
+            <car-card hide-empty="true" :car="contract.car" />
         </div>
         <div class="col-span-6 xs:col-span-12 h-full relative">
             <h3>Vertragsinformationen</h3>

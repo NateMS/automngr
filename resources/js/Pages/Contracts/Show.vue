@@ -33,7 +33,7 @@
             </div>
         </template>
         <template #actions>
-            <edit-button :href="route('contracts.edit', contract.id)" />
+            <edit-button v-if="!contract.deleted_at" :href="route('contracts.edit', contract.id)" />
             <print-button class="mb-3" :href="route('contracts.print', contract.id)" />
             <delete-button v-if="!contract.deleted_at" :href="route('contracts.destroy', contract.id)" />
             <restore-button v-if="contract.deleted_at" :href="route('contracts.restore', contract.id)" />
@@ -42,11 +42,11 @@
             </div>
         </template>
         <template #more>
-            <div class="sm:px-6 lg:px-8 col-span-6 xs:col-span-12">
+            <div class="col-span-6 xs:col-span-12">
                 <h3 class="mb-3">Auto</h3>
                 <car-card :car="contract.car" />
             </div>
-            <div class="sm:px-6 lg:px-8 col-span-4 xs:col-span-12">
+            <div class="col-span-5 xs:col-span-12">
                 <h3 class="mb-3">{{ contactTitle }}</h3>
                 <contact-card :contact="contract.contact" />
             </div>

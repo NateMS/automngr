@@ -4,42 +4,40 @@
             {{ car.name }}
         </div>
         <div class="grid grid-cols-4 gap-2 w-full">
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.stammnummer" class="col-span-1 xs:col-span-2">
                 Stammnummer
             </div>
-            <div class="col-span-3 xs:col-span-2">
+            <div v-if="!hideEmpty || car.stammnummer" class="col-span-3 xs:col-span-2">
                 {{ car.stammnummer ? car.stammnummer : '-' }}
             </div>
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.vin" class="col-span-1 xs:col-span-2">
                 Chassisnummer
             </div>
-            <div class="col-span-3 xs:col-span-2">
+            <div v-if="!hideEmpty || car.vin" class="col-span-3 xs:col-span-2">
                 {{ car.vin ? car.vin : '-'}}
             </div>
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.colour" class="col-span-1 xs:col-span-2">
                 Farbe
             </div>
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.colour" class="col-span-1 xs:col-span-2">
                 {{ car.colour ? car.colour : '-' }}
             </div>
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.kilometers" class="col-span-1 xs:col-span-2">
                 Kilometerstand
             </div>
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.kilometers" class="col-span-1 xs:col-span-2">
                 {{ car.kilometers ? car.kilometers + ' KM' : '-' }}
             </div>
-
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.initial_date" class="col-span-1 xs:col-span-2">
                 Erstzulassung
             </div>
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.initial_date" class="col-span-1 xs:col-span-2">
                 {{ car.initial_date ? car.initial_date  : '-' }}
             </div>
-
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.last_check_date" class="col-span-1 xs:col-span-2">
                 Letzte Prüfung
             </div>
-            <div class="col-span-1 xs:col-span-2">
+            <div v-if="!hideEmpty || car.last_check_date" class="col-span-1 xs:col-span-2">
                 {{ car.last_check_date ? car.last_check_date  : '-' }}
             </div>
         </div>
@@ -65,6 +63,7 @@
 export default ({
     props: {
         car: Object,
+        hideEmpty: String,
     },
 })
 </script>

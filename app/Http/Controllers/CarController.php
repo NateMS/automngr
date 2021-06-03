@@ -85,7 +85,7 @@ class CarController extends Controller
                 'country' => $contact->country,
                 'company' => $contact->company,
                 'email' => $contact->email,
-                'link' => route('contacts.edit', $contact),
+                'link' => route('contacts.show', $contact),
             ],
             'link' => route('contracts.show', $contract),
         ];

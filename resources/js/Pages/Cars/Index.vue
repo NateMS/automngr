@@ -6,10 +6,8 @@
                 Alle Autos
             </h2>
         </template>
-        <div class="py-12">
-            <div class="w-full mx-auto sm:px-6 lg:px-8">
-                <simple-table :title="cars.total + ' Autos'" :data="cars" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute"  />
-            </div>
+        <div class="w-full mx-auto">
+            <simple-table :title="cars.total + ' Autos'" :data="cars" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute"  />
         </div>
     </layout>
 </template>

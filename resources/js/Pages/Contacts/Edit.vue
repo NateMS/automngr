@@ -8,21 +8,12 @@
         </template>
    
         <div>
-            <contact-form :form="form" :meta="meta">
+            <contact-form :data="data" :meta="meta">
                 <template #title>Kontaktinformationen</template>
                 <template #description>
                     Kontaktinformationen anschauen &amp; anpassen.
-                    <contact-card :contact="computedContact" />
                 </template>
             </contact-form>
-        </div>
-        <div class="py-12">
-            <div class="max-w-7xl sm:px-6 lg:px-8">
-                <simple-table :title="'An ' + title + ' verkaufte Autos'" :data="contact.bought_cars" :columns="boughtCarColumns" />
-            </div>
-            <div class="max-w-7xl pt-6 sm:px-6 lg:px-8">    
-                <simple-table :title="'Von ' + title + ' gekaufte Autos'" :data="contact.sold_cars" :columns="soldCarColumns" />
-            </div>
         </div>
     </layout>
 </template>
@@ -30,17 +21,13 @@
 <script>
 import Layout from '@/Layouts/Layout'
 import BreadCrumb from '@/Components/BreadCrumb.vue'
-import ContactCard from '@/Components/ContactCard.vue'
-import SimpleTable from '@/Components/SimpleTable.vue'
 import ContactForm from './Components/ContactForm.vue'
 
 export default {
     components: {
         Layout,
         BreadCrumb,
-        SimpleTable,
         ContactForm,
-        ContactCard,
     },
 
     props: {
@@ -49,12 +36,13 @@ export default {
     data() {
         return {
             meta: {
-                link: 'contacts.update',
+                form_name: 'EditContact' + this.contact.id,
+                route: this.route('contacts.update', this.contact.id),
+                method: 'put',
                 button_text: 'Änderungen speichern',
                 on_success: 'Änderungen gespeichert',
             },
-            form: this.$inertia.form({
-                _method: 'PUT',
+            data: {
                 id: this.contact.id,
                 firstname: this.contact.firstname,
                 lastname: this.contact.lastname,
@@ -66,41 +54,17 @@ export default {
                 city: this.contact.city,
                 country: this.contact.country,
                 notes: this.contact.notes,
-            }),
-            boughtCarColumns: [
-                {key: 'name', value: 'Auto'},
-                {key: 'date', value: 'Verkaufsdatum'},
-                {key: 'price', value: 'Verkaufspreis'},
-                {key: 'insurance_type', value: 'Versicherungstyp'},
-            ],
-            soldCarColumns: [
-                {key: 'name', value: 'Auto'},
-                {key: 'date', value: 'Kaufdatum'},
-                {key: 'price', value: 'Kaufpreis'},
-            ]
+            },
         }
     },
     computed: {
         title: function () {
-            if (this.form.company) {
-                return this.form.company;
+            if (this.data.company) {
+                return this.data.company;
             }
 
-            return this.form.lastname + ' ' + this.form.firstname;
+            return this.data.lastname + ' ' + this.data.firstname;
         }, 
-        computedContact: function () {
-            return {
-                firstname: this.form.firstname,
-                lastname: this.form.lastname,
-                company: this.form.company,
-                email: this.form.email,
-                phone: this.form.phone,
-                address: this.form.address,
-                zip: this.form.zip,
-                city: this.form.city,
-                country: this.form.country,
-            }
-        }
     },
 }
 </script>

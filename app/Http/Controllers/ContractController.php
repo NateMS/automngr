@@ -185,7 +185,7 @@ class ContractController extends Controller
                 'country' => $contract->contact->country,
                 'company' => $contract->contact->company,
                 'email' => $contract->contact->email,
-                'link' => route('contacts.edit', $contract->contact),
+                'link' => route('contacts.show', $contract->contact),
             ],
             'car' => [
                 'id' => $contract->car->id,

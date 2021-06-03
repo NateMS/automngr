@@ -7,7 +7,7 @@
             </h2>
         </template>
         <div>
-            <jet-form-section class="max-w-7xl pb-5 sm:px-6 lg:px-8">
+            <jet-form-section class="max-w-7xl">
                 <template #title>
                     Auto
                 </template>

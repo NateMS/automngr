@@ -53,8 +53,12 @@ Route::post('contacts', [ContactController::class, 'store'])
     ->name('contacts.store')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('contacts/{contact}', [ContactController::class, 'edit'])
+Route::get('contacts/{contact}/edit', [ContactController::class, 'edit'])
     ->name('contacts.edit')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('contacts/{contact}', [ContactController::class, 'show'])
+    ->name('contacts.show')
     ->middleware(['auth:sanctum', 'verified']);
 
 Route::put('contacts/{contact}', [ContactController::class, 'update'])
@@ -131,6 +135,10 @@ Route::get('contracts/create/car/{car}/contact/{contact}', [ContractController::
 
 Route::get('contracts/create/car/{car}', [ContractController::class, 'createFromCar'])
     ->name('contracts.create_from_car')
+    ->middleware(['auth:sanctum', 'verified']);
+
+    Route::get('contracts/create/contact/{contact}', [ContractController::class, 'createFromContact'])
+    ->name('contracts.create_from_contact')
     ->middleware(['auth:sanctum', 'verified']);
 
 Route::post('contracts', [ContractController::class, 'store'])

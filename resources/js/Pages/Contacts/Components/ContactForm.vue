@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl py-10 sm:px-6 lg:px-8">
+    <div class="max-w-7xl">
         <jet-form-section @submitted="submitForm">
             <template #title>
                 <slot name="title"></slot>
@@ -100,6 +100,7 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetActionMessage from '@/Jetstream/ActionMessage'
 import JetInputError from '@/Jetstream/InputError'
 import JetFormSection from '@/Jetstream/FormSection'
+import { useForm } from '@inertiajs/inertia-vue3'
 
 export default {
     components: {
@@ -110,35 +111,18 @@ export default {
         JetInputError,
         JetActionMessage,
     },
-
     props: {
-        form: Object,
+        data: Object,
         meta: Object,
     },
-
-    computed: {
-        contact: function () {
-            return {
-                id: this.form.id,
-                firstname: this.form.firstname,
-                lastname: this.form.lastname,
-                company: this.form.company,
-                email: this.form.email,
-                phone: this.form.phone,
-                address: this.form.address,
-                zip: this.form.zip,
-                city: this.form.city,
-                country: this.form.country,
-                notes: this.form.notes,
-            }
-        },
+    data() {
+        return {
+            form: useForm(this.meta.form_name, this.data),
+        }
     },
-
     methods: {
         submitForm() {
-            this.form.post(route(this.meta.link, this.contact), {
-                preserveScroll: true,
-            });
+            this.form.submit(this.meta.method, this.meta.route);
         },
     },
 }

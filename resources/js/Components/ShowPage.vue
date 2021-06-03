@@ -3,7 +3,7 @@
         <template #header>
             <slot name="header"></slot>
         </template>
-        <div class="py-6 grid grid-cols-12 gap-12 max-w-7xl sm:px-6 lg:px-8">
+        <div class="grid grid-cols-12 gap-12 w-full mb-10">
             <div class="col-span-6 xs:col-span-12">
                 <slot name="info"></slot>
             </div>
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="py-6 grid grid-cols-12 gap-8 w-full">
+        <div class="grid grid-cols-12 gap-12 w-full">
             <slot name="more"></slot>
         </div>
     </layout>

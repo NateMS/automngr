@@ -10,7 +10,7 @@
             <car-card :car="car" />
         </template>
         <template #actions>
-            <edit-button v-if="!car.deleted_at" :href="route('cars.destroy', car.id)" />
+            <edit-button v-if="!car.deleted_at" :href="route('cars.edit', car.id)" />
             <delete-button v-if="!car.deleted_at" :href="route('cars.destroy', car.id)" />
             <restore-button v-if="car.deleted_at" :href="route('cars.restore', car.id)" />
             <div v-if="car.deleted_at">
@@ -18,7 +18,7 @@
             </div>
         </template>
         <template #more>
-            <div class="sm:px-6 lg:px-8 col-span-6 xs:col-span-12">
+            <div class="col-span-6 xs:col-span-12">
                 <div class="whitespace-nowrap">
                     <h1 class="font-bold text-3xl">{{ car.buy_contracts.total > 1 ? car.buy_contracts.total + ' Ankaufsverträge' : 'Ankaufsvertrag' }}</h1>
                 </div>
@@ -32,7 +32,7 @@
                     </inertia-link>
                 </div>
             </div>
-            <div class="sm:px-6 lg:px-8 col-span-6 xs:col-span-12">
+            <div class="col-span-6 xs:col-span-12">
                 <div class="whitespace-nowrap">
                     <h1 class="font-bold text-3xl">{{ car.sell_contracts.total > 1 ? car.sell_contracts.total + ' Verkaufsverträge' : 'Verkaufsvertrag' }}</h1>
                 </div>
@@ -53,7 +53,6 @@
 <script>
 import ShowPage from '@/Components/ShowPage.vue'
 import BreadCrumb from '@/Components/BreadCrumb.vue'
-import SimpleTable from '@/Components/SimpleTable.vue'
 import CarCard from '@/Components/CarCard.vue'
 import BuyContractCard from '@/Components/BuyContractCard.vue'
 import SellContractCard from '@/Components/SellContractCard.vue'
@@ -65,7 +64,6 @@ export default {
     components: {
         ShowPage,
         BreadCrumb,
-        SimpleTable,
         CarCard,
         BuyContractCard,
         SellContractCard,
@@ -79,17 +77,6 @@ export default {
     data() {
         return {
             currentRoute: 'cars.show',
-            buyContractsColumns: [
-                {key: 'contact', value: 'Verkäufer'},
-                {key: 'date', value: 'Kaufdatum'},
-                {key: 'price', value: 'Kaufpreis'},
-            ],
-            sellContractsColumns: [
-                {key: 'contact', value: 'Käufer'},
-                {key: 'date', value: 'Verkaufsdatum'},
-                {key: 'price', value: 'Verkaufspreis'},
-                {key: 'insurance_type', value: 'Versicherungstyp'},
-            ],
         }
     },
 }
