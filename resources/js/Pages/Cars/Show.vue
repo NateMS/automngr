@@ -26,7 +26,7 @@
                     <buy-contract-card :contract="contract"/>
                 </div>
                 <div v-if="!car.deleted_at && car.buy_contracts.total <= car.sell_contracts.total">
-                    <inertia-link :href="route('contracts.create_from_car', car.id)" class="w-full py-6 mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
+                    <inertia-link :href="route('contracts.create_from_car', [0, car.id])" class="w-full py-6 mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
                         <unicon fill="white" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
                         Neuer Ankaufsvertrag
                     </inertia-link>
@@ -40,7 +40,7 @@
                     <sell-contract-card :contract="contract"/>
                 </div>
                 <div v-if="!car.deleted_at && car.buy_contracts.total > car.sell_contracts.total">
-                    <inertia-link :href="route('contracts.create_from_car', car.id)" class="py-6 w-full mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
+                    <inertia-link :href="route('contracts.create_from_car', [1, car.id])" class="py-6 w-full mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
                         <unicon fill="white" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
                         Neuer Verkaufssvertrag
                     </inertia-link>

@@ -53,6 +53,10 @@ Route::post('contacts', [ContactController::class, 'store'])
     ->name('contacts.store')
     ->middleware(['auth:sanctum', 'verified']);
 
+Route::post('contacts/store_for_contract', [ContactController::class, 'storeForContract'])
+    ->name('contacts.store_for_contract')
+    ->middleware(['auth:sanctum', 'verified']);
+
 Route::get('contacts/{contact}/edit', [ContactController::class, 'edit'])
     ->name('contacts.edit')
     ->middleware(['auth:sanctum', 'verified']);
@@ -113,6 +117,10 @@ Route::post('cars', [CarController::class, 'store'])
     ->name('cars.store')
     ->middleware(['auth:sanctum', 'verified']);
 
+Route::post('cars/store_for_contract', [CarController::class, 'storeForContract'])
+    ->name('cars.store_for_contract')
+    ->middleware(['auth:sanctum', 'verified']);
+
 Route::post('brands', [BrandController::class, 'store'])
     ->name('brands.store')
     ->middleware(['auth:sanctum', 'verified']);
@@ -129,15 +137,18 @@ Route::get('contracts/{contract}/print', [ContractController::class, 'print'])
     ->name('contracts.print')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('contracts/create/car/{car}/contact/{contact}', [ContractController::class, 'create'])
+Route::get('contracts/create/{type}/car/{car}/contact/{contact}', [ContractController::class, 'create'])
+    ->where('type', '0|1')
     ->name('contracts.create')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::get('contracts/create/car/{car}', [ContractController::class, 'createFromCar'])
+Route::get('contracts/create/{type}/car/{car}', [ContractController::class, 'createFromCar'])
+    ->where('type', '0|1')
     ->name('contracts.create_from_car')
     ->middleware(['auth:sanctum', 'verified']);
 
-    Route::get('contracts/create/contact/{contact}', [ContractController::class, 'createFromContact'])
+Route::get('contracts/create/{type}/contact/{contact}', [ContractController::class, 'createFromContact'])
+    ->where('type', '0|1')
     ->name('contracts.create_from_contact')
     ->middleware(['auth:sanctum', 'verified']);
 

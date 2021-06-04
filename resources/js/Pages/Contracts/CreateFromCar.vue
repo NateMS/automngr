@@ -3,41 +3,63 @@
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 <bread-crumb text="Autos" :href="route('cars')" />
-                Neuen Vertrag erstellen
+                <bread-crumb :text="car.name" :href="route('cars.show', car.id)" />
+                Neuen {{ contractType }} erstellen
             </h2>
         </template>
         <div>
-            <jet-form-section class="max-w-7xl">
+            <jet-form-section class="max-w-7xl" emptyBg="true">
                 <template #title>
                     Auto
                 </template>
                 <template #description>
-                    Ausgewähltes Auto für diesen Vertrag
+                    Ausgewähltes Auto für diesen {{ contractType }}
                 </template>
                 <template #form>
                     <car-card class="col-span-12" :car="car" />
                 </template>
             </jet-form-section>
-            <jet-form-section class="max-w-7xl py-5 sm:px-6 lg:px-8">
+            <jet-form-section class="max-w-7xl mt-5">
                 <template #title>
-                    Kontakt
+                    {{ contactType }}
                 </template>
                 <template #description>
-                    Kontakt auswählen oder neu erfassen
-                    <contact-card v-if="contact.firstname || contact.company" class="col-span-4" :contact="contact" />
+                    {{ contactType }} auswählen oder neu erfassen
                 </template>
                 <template #form>
                     <div class="col-span-3">
-                        <jet-label for="contact" value="Marke" />
-                        <jet-input id="contact" type="text" class="mt-1 block w-full" v-model="contact.id" ref="contact" autocomplete="contact" />
-                        <!-- <jet-input-error :message="form.errors.contact" class="mt-2" /> -->
+                        <jet-label for="contact" :value="contactType" />
+                        <multiselect :disabled="createContact" v-model="contact" label="title" track-by="id" :options="contactsChoice" class="mt-1 block w-full" placeholder="Vertragspartner auswählen" />
+                    </div>
+                    <div class="col-span-6">
+                        <contact-card v-if="contact.id" class="mt-3 col-span-4" :contact="contact" />
                     </div>
                     <div class="col-span-6">
                         oder
                     </div>
-                    <div class="col-span-6">
-                        <standard-button class="" href="" colour="gray">Neu erfassen</standard-button>
+                    <div v-if="!createContact" class="col-span-6">
+                        <button @click="openContactForm" class="bg-gray-800 hover:bg-gray-700 active:bg-gray-900 focus:border-gray-900 focus:ring-gray-300 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition">
+                            Neu erfassen
+                        </button>
                     </div>
+                    <div v-else class="col-span-6">
+                        <p class="w-full mb-1 font-bold">Neuen Kontakt erfassen:</p>
+                        <form @submit="submitCreateContactForm">
+                            <div class="grid grid-cols-6 gap-6">
+                                <contact-form-fields :form="contact" />
+                                <div class="col-span-6 sm:col-span-4 flex items-center justify-end text-right">
+                                    <jet-button>
+                                        Kontakt speichern
+                                    </jet-button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </template>
+                <template #actions>
+                    <jet-button :disabled="!contact.id" @click="nextPage">
+                        Nächster Schritt
+                    </jet-button>
                 </template>
             </jet-form-section>
         </div>
@@ -47,11 +69,14 @@
 <script>
 import Layout from '@/Layouts/Layout'
 import BreadCrumb from '@/Components/BreadCrumb.vue'
-import ContactForm from '@/Pages/Contacts/Components/ContactForm.vue'
+import ContactFormFields from '@/Pages/Contacts/Components/ContactFormFields.vue'
 import CarCard from '@/Components/CarCard.vue'
 import ContactCard from '@/Components/ContactCard.vue'
 import JetFormSection from '@/Jetstream/FormSection'
-import StandardButton from '@/Components/Buttons/StandardButton.vue'
+import Multiselect from 'vue-multiselect'
+import JetLabel from '@/Jetstream/Label.vue'
+import JetButton from '@/Jetstream/Button'
+import JetActionMessage from '@/Jetstream/ActionMessage'
 
 export default {
     components: {
@@ -60,8 +85,11 @@ export default {
         CarCard,
         ContactCard,
         JetFormSection,
-        ContactForm,
-        StandardButton,
+        ContactFormFields,
+        Multiselect,
+        JetLabel,
+        JetButton,
+        JetActionMessage,
     },
     props: {
         car: Object,
@@ -70,11 +98,7 @@ export default {
     },
     data() {
         return {
-            meta: {
-                link: 'contacts.store',
-                button_text: 'Kontakt speichern',
-                on_success: 'Kontakt gespeichert',
-            },
+            contactsChoice: this.contacts,
             contact: {
                 id: null,
                 firstname: null,
@@ -87,15 +111,70 @@ export default {
                 city: null,
                 country: null,
                 notes: null,
+                errors: {},
             },
-            meta: {
-                form_name: 'CreateContractFromCar',
-                // route: this.route('contracts.create', this.car.id, this.contact.id),
-                method: 'post',
-                button_text: 'Vertrag speichern',
-                on_success: 'Vertrag gespeichert',
-            },
+            createContact: false,
         }
+    },
+    computed: {
+        contractType: function () {
+           return this.isSellContract ? "Verkaufsvertrag" : "Ankaufsvertrag";
+        },
+        contactType: function () {
+           return this.isSellContract ? "Käufer" : "Verkäufer";
+        },
+        isSellContract: function () {
+            return this.type == "SellContract";
+        },
+        emptyContact: function() {
+            return {
+                id: null,
+                firstname: null,
+                lastname: null,
+                company: null,
+                email: null,
+                phone: null,
+                address: null,
+                zip: null,
+                city: null,
+                country: null,
+                notes: null,
+                errors: {},
+            };
+        },
+    },
+    methods: {
+        nextPage() {
+            this.$inertia.get(route('contracts.create', {
+                type: this.isSellContract ? 1 : 0,
+                car: this.car.id,
+                contact: this.contact.id,
+            }), { preserveScroll: true, carFirst: true, });
+        },
+        openContactForm() {
+            this.createContact = true;
+            this.contact = this.emptyContact;
+        },
+        submitCreateContactForm(e) {
+            e.preventDefault();
+            axios.post(this.route('contacts.store_for_contract'), this.contact)
+                .then(res => {
+                    this.contactsChoice.push(res.data);
+                    this.contact = res.data;
+                    this.createContact = false;
+                }).catch(err => {
+                    if (err.response) {
+                        let errors = err.response.data.errors;
+
+                        Object.keys(errors).map(function(key, index) {
+                            errors[key] = errors[key].join(' ');
+                        });
+                        this.contact.errors = errors;
+                    }
+                   
+                });
+        },
     },
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

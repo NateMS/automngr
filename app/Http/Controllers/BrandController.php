@@ -15,7 +15,19 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        return Brand::all()->map(function ($brand) {
+            return [
+                'id' => $brand->id,
+                'name' => $brand->name,
+                'models' => $brand->carModels()->get()
+                ->map(function ($carModel) {
+                    return [
+                        'id' => $carModel->id,
+                        'name' => $carModel->name,
+                    ];
+                }),
+            ];
+        });
     }
 
     /**

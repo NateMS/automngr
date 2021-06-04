@@ -38,6 +38,11 @@ class Contact extends Model
         return $this->name;
     }
 
+    public function getFullTitleAttribute()
+    {
+        return implode(', ', array_filter([$this->company, $this->name]));
+    }
+
     public function getFullCityAttribute()
     {
         return $this->zip . ' ' . $this->city;

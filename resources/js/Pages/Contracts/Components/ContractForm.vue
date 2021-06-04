@@ -10,23 +10,26 @@
             </template>
 
             <template #form>
-                <div class="col-span-6 sm:col-span-4">
-                    <jet-label for="date" value="Datum" />
-                    <jet-input id="date" type="text" class="mt-1 block w-full" v-model="form.date" ref="date" autocomplete="date" />
-                    <jet-input-error :message="form.errors.date" class="mt-2" />
-                </div>
+                <div class="col-span-3 grid grid-cols-6 gap-3">
+                    <div class="col-span-6 sm:col-span-4">
+                        <jet-label for="date" value="Datum" />
+                        <jet-input id="date" type="text" class="mt-1 block w-full" v-model="form.date" ref="date" autocomplete="date" />
+                        <jet-input-error :message="form.errors.date" class="mt-2" />
+                    </div>
 
-                <div class="col-span-6 sm:col-span-4">
-                    <jet-label for="price" value="Betrag" />
-                    <jet-input id="price" type="text" class="mt-1 block w-full" v-model="form.price" ref="price" autocomplete="price" />
-                    <jet-input-error :message="form.errors.price" class="mt-2" />
-                </div>
+                    <div class="col-span-6 sm:col-span-4">
+                        <jet-label for="price" value="Betrag" />
+                        <jet-input id="price" type="text" class="mt-1 block w-full" v-model="form.price" ref="price" autocomplete="price" />
+                        <jet-input-error :message="form.errors.price" class="mt-2" />
+                    </div>
 
-                <div v-if="form.is_sell_contract" class="col-span-6 sm:col-span-4">
-                    <jet-label for="insurance_type" value="Versicherung" />
-                    <multiselect class="mt-1 block w-full" @select="updateInsuranceSelection" v-model="insuranceSelection" deselect-label="Kann nicht entfernt werden" track-by="key" label="label" placeholder="Versicherung auswählen" :options="insurances" :searchable="false" :allow-empty="false" />
-                    <jet-input-error :message="form.errors.insurance_type" class="mt-2" />
+                    <div v-if="form.is_sell_contract" class="col-span-6 sm:col-span-4">
+                        <jet-label for="insurance_type" value="Versicherung" />
+                        <multiselect class="mt-1 block w-full" @select="updateInsuranceSelection" v-model="insuranceSelection" deselect-label="Kann nicht entfernt werden" track-by="key" label="label" placeholder="Versicherung auswählen" :options="insurances" :searchable="false" :allow-empty="false" />
+                        <jet-input-error :message="form.errors.insurance_type" class="mt-2" />
+                    </div>
                 </div>
+                
             </template>
 
             <template #actions>

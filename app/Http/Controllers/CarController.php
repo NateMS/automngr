@@ -184,21 +184,44 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $car = Car::create(
-            $request->validate([
-                'stammnummer' => ['required', 'unique:cars', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
-                'vin' => ['required', 'unique:cars', 'string', 'size:17'],
-                'initial_date' => ['required', 'date'],
-                'last_check_date' => ['required', 'date'],
-                'colour' => ['nullable', 'max:75'],
-                'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
-                'kilometers' => ['required', 'max:75'],
-                'known_damage' => ['nullable'],
-                'notes' => ['nullable'],
-            ])
+            $request->validate($this->getValidationRules())
         );
 
+        session()->flash('flash.banner', 'Auto erstellt.');
         return Redirect::route('cars.show', $car);
+    }
 
+    public function storeForContract(Request $request)
+    {
+        $car = Car::create(
+            $request->validate($this->getValidationRules())
+        );
+
+        return response()->json([
+            'id' => $car->id,
+            'stammnummer' => $car->stammnummer,
+            'vin' => $car->vin,
+            'name' => $car->name,
+            'colour' => $car->colour,
+            'last_check_date' => $car->last_check_date_formatted,
+            'kilometers' => $car->kilometers,
+            'initial_date' => $car->initial_date_formatted,
+        ]);
+    }
+
+    private function getValidationRules()
+    {
+        return [
+            'stammnummer' => ['required', 'unique:cars', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
+            'vin' => ['required', 'unique:cars', 'string', 'size:17'],
+            'initial_date' => ['required', 'date'],
+            'last_check_date' => ['required', 'date'],
+            'colour' => ['nullable', 'max:75'],
+            'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
+            'kilometers' => ['required', 'max:75'],
+            'known_damage' => ['nullable'],
+            'notes' => ['nullable'],
+        ];
     }
 
     public function show(Car $car)
@@ -280,18 +303,21 @@ class CarController extends Controller
             ])
         );
 
-        return Redirect::route('cars.show', $car)->with('success', 'Auto geändert.');
+        session()->flash('flash.banner', 'Auto geändert.');
+        return Redirect::route('cars.show', $car);
     }
 
     public function destroy(Car $car)
     {
         $car->delete();
-        return Redirect::route('cars.show', $car)->with('success', 'Auto gelöscht.');
+        session()->flash('flash.banner', 'Auto gelöscht.');
+        return Redirect::route('cars.show', $car);
     }
 
     public function restore(Car $car)
     {
         $car->restore();
-        return Redirect::route('cars.show', $car)->with('success', 'Auto wiederhergestellt.');
+        session()->flash('flash.banner', 'Auto wiederhergestellt.');
+        return Redirect::route('cars.show', $car);
     }
 }

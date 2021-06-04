@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ContractType;
 use App\Models\Car;
 use Inertia\Inertia;
+use App\Models\Brand;
 use App\Models\Contact;
 use App\Models\Contract;
+use App\Enums\ContractType;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -43,37 +44,49 @@ class ContractController extends Controller
         return [];
     }       
 
-    public function create(Request $request, Car $car, Contact $contact)
+    public function create(Request $request, int $type, Car $car, Contact $contact)
     {
         return Inertia::render('Contracts/Create', [
             'car' => $this->getCarFields($car),
             'contact' => $this->getContactFields($contact),
-            'type' => (string)ContractType::BuyContract,
+            'type' => ContractType::coerce($type)->key,
+            'car_first' => $request->query('carFirst'),
         ]);
     }
 
-    public function createFromCar(Request $request, Car $car)
+    public function createFromCar(Request $request, int $type, Car $car)
     {
         return Inertia::render('Contracts/CreateFromCar', [
             'car' => $this->getCarFields($car),
+            'type' => ContractType::coerce($type)->key,
             'contacts' => Contact::all()->map(function ($contact) {
-                return [
-                    'id' => $contact->id,
-                    'name' => $contact->name,
-                ];
+                return $this->getContactFields($contact);
             }),
         ]);
     }
 
-    public function createFromContact(Request $request, Contact $contact)
+    public function createFromContact(Request $request, int $type, Contact $contact)
     {
+        $contractType = ContractType::coerce($type);
+        $cars = $contractType->value == ContractType::SellContract ? Car::unsoldOnly() : Car::soldOnly();
+
         return Inertia::render('Contracts/CreateFromContact', [
             'contact' => $this->getContactFields($contact),
-            'cars' => Car::all()->map(function ($car) {
+            'type' => $contractType->key,
+            'cars' => $cars->get()->map(function ($car) {
+                return $this->getCarFields($car);
+            }),
+            'brands' => Brand::all()->map(function ($brand) {
                 return [
-                    'id' => $car->id,
-                    'name' => $car->name,
-                    'stammnummer' => $car->stammnummer,
+                    'id' => $brand->id,
+                    'name' => $brand->name,
+                    'models' => $brand->carModels()->get()
+                        ->map(function ($carModel) {
+                            return [
+                                'id' => $carModel->id,
+                                'name' => $carModel->name,
+                            ];
+                        }),
                 ];
             }),
         ]);
@@ -101,6 +114,7 @@ class ContractController extends Controller
         }
         return [
             'id' => $contact->id,
+            'title' => $contact->full_title,
             'name' => $contact->name,
             'firstname' => $contact->firstname,
             'lastname' => $contact->lastname,
@@ -126,6 +140,7 @@ class ContractController extends Controller
             ])
         );
 
+        session()->flash('flash.banner', 'Vertrag erstellt.');
         return Redirect::route('contracts.show', $contract);
 
     }
@@ -158,7 +173,8 @@ class ContractController extends Controller
             ])
         );
 
-        return Redirect::route('contracts.show', $contract)->with('success', 'Vertrag angepasst.');
+        session()->flash('flash.banner', 'Vertrag geändert.');
+        return Redirect::route('contracts.show', $contract);
     
     }
 
@@ -215,12 +231,14 @@ class ContractController extends Controller
     public function destroy(Contract $contract)
     {
         $contract->delete();
-        return Redirect::route('contracts.show', $contract)->with('success', 'Vertrag gelöscht.');
+        session()->flash('flash.banner', 'Vertrag gelöscht.');
+        return Redirect::route('contracts.show', $contract);
     }
 
     public function restore(Contract $contract)
     {
         $contract->restore();
-        return Redirect::route('contracts.show', $contract)->with('success', 'Vertrag wiederhergestellt.');
+        session()->flash('flash.banner', 'Vertrag wiederhergestellt.');
+        return Redirect::route('contracts.show', $contract);
     }
 }

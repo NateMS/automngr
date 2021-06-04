@@ -28,10 +28,10 @@
                     </tr>
                     <tr v-for="row in data.data" :key="row.link" class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td v-for="col in columns" :key="col.key" class="border-t">
-                            <inertia-link v-if="row.link" class="px-6 py-4 flex items-center focus:text-blue-200" :href="row.link">
+                            <inertia-link v-if="row.link" class="px-6 py-4 flex items-center" :href="row.link">
                                 {{ resolve(col.key, row) }}
                             </inertia-link>
-                            <span v-else class="px-6 py-4 flex items-center focus:text-blue-200">
+                            <span v-else class="px-6 py-4 flex items-center">
                                 {{ resolve(col.key, row) }}
                             </span>
                         </td>

@@ -10,7 +10,7 @@
         <div>
             <car-form :data="data" :meta="meta" :car_model="car_model" :brand="brand" :brands="brands">
                 <template #title>Neues Auto erfassen</template>
-                <template #description>...</template>
+                <template #description>Daten für ein neues Auto eingeben und speichern</template>
             </car-form>
         </div>
     </layout>

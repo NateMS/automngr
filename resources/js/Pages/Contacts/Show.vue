@@ -29,7 +29,7 @@
                     <buy-contract-card :contract="contract"/>
                 </div>
                 <div v-if="!contact.deleted_at">
-                    <inertia-link :href="route('contracts.create_from_contact', contact.id)" class="w-full py-6 mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
+                    <inertia-link :href="route('contracts.create_from_contact', [0, contact.id])" class="w-full py-6 mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
                         <unicon fill="white" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
                         Neuer Ankaufsvertrag
                     </inertia-link>
@@ -43,7 +43,7 @@
                     <sell-contract-card :contract="contract"/>
                 </div>
                 <div v-if="!contact.deleted_at">
-                    <inertia-link :href="route('contracts.create_from_contact', contact.id)" class="py-6 w-full mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
+                    <inertia-link :href="route('contracts.create_from_contact', [1, contact.id])" class="py-6 w-full mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
                         <unicon fill="white" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
                         Neuer Verkaufssvertrag
                     </inertia-link>

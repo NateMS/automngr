@@ -8,7 +8,8 @@
                     <slot name="header"></slot>
                   </h2>
                 </Navbar>
-                <div class="p-12 bg-gray-100 mb-20">
+                <jet-banner class="sticky top-20 z-40" />
+                <div class="pt-12 px-12 bg-gray-100 mb-20">
                     <main>
                         <slot></slot>
                     </main>
@@ -22,6 +23,7 @@
 import { mapState } from 'vuex'
 import Sidebar from "@/Components/Sidebar"
 import Navbar from "@/Components/Navbar"
+import JetBanner from '@/Jetstream/Banner'
 
 export default {
   computed: {
@@ -30,6 +32,7 @@ export default {
   components: {
     Sidebar,
     Navbar,
+    JetBanner,
   }
 }
 </script>

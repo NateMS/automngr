@@ -89,21 +89,33 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $contact = Contact::create(
-            $request->validate([
-                'firstname' => ['max:75'],
-                'lastname' => ['max:75'],
-                'email' => ['nullable', 'max:75', 'email'],
-                'phone' => ['required', 'max:75'],
-                'address' => ['nullable', 'max:150'],
-                'zip' => ['nullable', 'max:6'],
-                'city' => ['nullable', 'max:75'],
-                'country' => ['nullable', 'max:2'],
-                'company' => ['nullable', 'max:75'],
-                'notes' => ['nullable'],
-            ])
+            $request->validate($this->getValidationRules())
         );
 
+        session()->flash('flash.banner', 'Kontakt erstellt.');
         return Redirect::route('contacts.show', $contact);
+    }
+
+    public function storeForContract(Request $request)
+    {
+        $contact = Contact::create(
+            $request->validate($this->getValidationRules())
+        );
+
+        return response()->json([
+            'id' => $contact->id,
+            'title' => $contact->full_title,
+            'name' => $contact->name,
+            'firstname' => $contact->firstname,
+            'lastname' => $contact->lastname,
+            'phone' => $contact->phone,
+            'address' => $contact->address,
+            'zip' => $contact->zip,
+            'city' => $contact->city,
+            'country' => $contact->country,
+            'company' => $contact->company,
+            'email' => $contact->email,
+        ]);
     }
 
     public function edit(Contact $contact)
@@ -188,33 +200,40 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact)
     {
         $contact->update(
-            $request->validate([
-                'firstname' => ['max:75'],
-                'lastname' => ['max:75'],
-                'email' => ['nullable', 'max:75', 'email'],
-                'phone' => ['max:75'],
-                'address' => ['nullable', 'max:150'],
-                'zip' => ['nullable', 'max:6'],
-                'city' => ['nullable', 'max:75'],
-                'country' => ['nullable', 'max:2'],
-                'company' => ['nullable', 'max:75'],
-                'notes' => ['nullable'],
-            ])
+            $request->validate($this->getValidationRules())
         );
 
-        return Redirect::route('contacts.show', $contact)->with('success', 'Kontakt geändert.');
+        session()->flash('flash.banner', 'Kontakt geändert.');
+        return Redirect::route('contacts.show', $contact);
+    }
+
+    private function getValidationRules()
+    {
+        return [
+            'firstname' => ['max:75'],
+            'lastname' => ['max:75'],
+            'email' => ['nullable', 'max:75', 'email'],
+            'phone' => ['required', 'max:75'],
+            'address' => ['nullable', 'max:150'],
+            'zip' => ['nullable', 'max:6'],
+            'city' => ['nullable', 'max:75'],
+            'country' => ['nullable', 'max:2'],
+            'company' => ['nullable', 'max:75'],
+            'notes' => ['nullable'],
+        ];
     }
 
     public function destroy(Contact $contact)
     {
         $contact->delete();
-        return Redirect::back()->with('success', 'Kontakt gelöscht.');
+        session()->flash('flash.banner', 'Kontakt gelöscht.');
+        return Redirect::back();
     }
 
     public function restore(Contact $contact)
     {
         $contact->restore();
-
-        return Redirect::back()->with('success', 'Kontakt wiederhergestellt.');
+        session()->flash('flash.banner', 'Kontakt wiederhergestellt.');
+        return Redirect::back();
     }
 }

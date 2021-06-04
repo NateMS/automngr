@@ -3,7 +3,8 @@
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 <bread-crumb text="Kontakte" :href="route('contacts')" />
-                {{ title }}
+                <bread-crumb :text="title" :href="route('contacts.show', contact.id)" />
+                bearbeiten
             </h2>
         </template>
    
