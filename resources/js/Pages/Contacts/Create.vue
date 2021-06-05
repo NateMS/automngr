@@ -46,7 +46,7 @@ export default {
                 address: null,
                 zip: null,
                 city: null,
-                country: null,
+                country: 'CH',
                 notes: null,
             },
         }

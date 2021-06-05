@@ -9,7 +9,7 @@
             </h2>
         </template>
         <div>
-            <contract-form :data="contract" :insurance_types="insurance_types" :meta="meta">
+            <contract-form :data="data" :insurance_types="insurance_types" :meta="meta">
                 <template #title>Vertragsangaben</template>
                 <template #description>
                     Vertrag &amp; anpassen.
@@ -23,7 +23,7 @@
 import Layout from '@/Layouts/Layout'
 import BreadCrumb from '@/Components/BreadCrumb.vue'
 import ContractForm from './Components/ContractForm.vue'
-
+import { ref } from 'vue'
 
 export default {
     components: {
@@ -45,6 +45,11 @@ export default {
                 button_text: 'Änderungen speichern',
                 on_success: 'Änderungen gespeichert',
             },
+            data: {
+                date: ref(Date.parse(this.contract.date)),
+                price: this.contract.price,
+                insurance_type: this.contract.insurance_type,
+            }
         }
     },
 }

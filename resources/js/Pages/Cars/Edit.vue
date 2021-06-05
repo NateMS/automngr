@@ -22,7 +22,7 @@
 import Layout from '@/Layouts/Layout'
 import BreadCrumb from '@/Components/BreadCrumb.vue'
 import CarForm from './Components/CarForm.vue'
-
+import { ref } from 'vue'
 
 export default {
     components: {
@@ -62,11 +62,11 @@ export default {
                 id: this.car.id,
                 stammnummer: this.car.stammnummer,
                 vin: this.car.vin,
-                initial_date: this.car.initial_date,
+                initial_date: ref(Date.parse(this.car.initial_date)),
                 colour: this.car.colour,
                 notes: this.car.notes,
                 car_model_id: this.car.car_model.id,
-                last_check_date: this.car.last_check_date,
+                last_check_date: ref(Date.parse(this.car.last_check_date)),
                 kilometers: this.car.kilometers,
                 known_damage: this.car.known_damage,
                 notes: this.car.notes,

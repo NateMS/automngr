@@ -60,6 +60,7 @@ import ContractForm from './Components/ContractForm.vue'
 import CarCard from '@/Components/CarCard.vue'
 import ContactCard from '@/Components/ContactCard.vue'
 import JetFormSection from '@/Jetstream/FormSection'
+import { ref } from 'vue'
 
 export default {
     components: {
@@ -87,7 +88,7 @@ export default {
             },
             data: {
                 id: null,
-                date: null,
+                date: ref(new Date()),
                 price: null,
                 type: this.type == "SellContract" ? 0 : 1,
                 insurance_type: '0',

@@ -20,6 +20,7 @@
 import Layout from '@/Layouts/Layout'
 import BreadCrumb from '@/Components/BreadCrumb.vue'
 import CarForm from './Components/CarForm.vue'
+import { ref } from 'vue'
 
 export default {
     components: {
@@ -45,8 +46,8 @@ export default {
                 vin: null,
                 colour: null,
                 car_model_id: null,
-                initial_date: null,
-                last_check_date: null,
+                initial_date: ref(new Date()),
+                last_check_date: ref(new Date()),
                 kilometers: null,
                 known_damage: null,
                 notes: null,

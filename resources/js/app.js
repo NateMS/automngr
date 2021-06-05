@@ -10,7 +10,6 @@ import { uniPalette, uniCalendarAlt, uniPlusCircle, uniMeh, uniUsersAlt, uniCarS
 
 Unicon.add([uniPalette, uniCalendarAlt, uniPlusCircle, uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt])
 
-
 // Create a new store instance.
 const store = createStore({
     state () {

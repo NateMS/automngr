@@ -13,7 +13,7 @@
                 <div class="col-span-3 grid grid-cols-6 gap-3">
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="date" value="Datum" />
-                        <jet-input id="date" type="text" class="mt-1 block w-full" v-model="form.date" ref="date" autocomplete="date" />
+                        <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full" />
                         <jet-input-error :message="form.errors.date" class="mt-2" />
                     </div>
 
@@ -53,6 +53,7 @@ import JetActionMessage from '@/Jetstream/ActionMessage'
 import JetInputError from '@/Jetstream/InputError'
 import JetFormSection from '@/Jetstream/FormSection'
 import Multiselect from 'vue-multiselect'
+import Datepicker from 'vue3-datepicker'
 import { useForm } from '@inertiajs/inertia-vue3'
 
 export default {
@@ -64,6 +65,7 @@ export default {
         JetInputError,
         JetActionMessage,
         Multiselect,
+        Datepicker,
     },
     props: {
         data: Object,
@@ -87,6 +89,7 @@ export default {
     },
     methods: {
         submitForm() {
+            this.form.date = this.form.date.toISOString().split("T")[0];
             this.form.submit(this.meta.method, this.meta.route);
         },
         updateInsuranceSelection(selection) {
