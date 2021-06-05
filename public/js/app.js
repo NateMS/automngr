@@ -19528,7 +19528,7 @@ __webpack_require__.r(__webpack_exports__);
         id: null,
         date: null,
         price: null,
-        type: this.type,
+        type: this.type == "SellContract" ? 0 : 1,
         insurance_type: '0',
         car_id: this.car.id,
         contact_id: this.contact.id

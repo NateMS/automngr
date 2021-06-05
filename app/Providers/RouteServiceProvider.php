@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Car;
+use App\Models\Contact;
 use App\Models\Contract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,13 @@ class RouteServiceProvider extends ServiceProvider
                     return Car::withTrashed()->find($value);
                 }
                 return Car::find($value);
+            });
+
+            Route::bind('contact', function ($value) {
+                if (in_array(Route::currentRouteName(), ['contacts.show', 'contacts.restore'])) {
+                    return Contact::withTrashed()->find($value);
+                }
+                return Contact::find($value);
             });
 
             Route::bind('contract', function ($value) {

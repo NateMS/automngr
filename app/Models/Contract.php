@@ -58,12 +58,12 @@ class Contract extends Model
 
     public function contact()
     {
-        return $this->belongsTo(Contact::class);
+        return $this->belongsTo(Contact::class)->withTrashed();
     }
 
     public function car()
     {
-        return $this->belongsTo(Car::class);
+        return $this->belongsTo(Car::class)->withTrashed();
     }
 
     public function scopeThisYear($query)

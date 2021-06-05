@@ -69,7 +69,7 @@ Route::put('contacts/{contact}', [ContactController::class, 'update'])
     ->name('contacts.update')
     ->middleware(['auth:sanctum', 'verified']);
 
-Route::delete('contacts/{contact}', [ContactController::class, 'destroy'])
+Route::get('contacts/{contact}/delete', [ContactController::class, 'destroy'])
     ->name('contacts.destroy')
     ->middleware(['auth:sanctum', 'verified']);
 

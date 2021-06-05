@@ -132,6 +132,7 @@ class ContractController extends Controller
     {
         $contract = Contract::create(
             $request->validate([
+                'type' => ['required'],
                 'date' => ['required', 'date'],
                 'price' => ['required', 'integer'],
                 'car_id' => ['required', 'exists:App\Models\Car,id'],
