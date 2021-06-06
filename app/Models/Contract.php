@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Cknow\Money\Money;
 use App\Enums\ContractType;
+use App\Enums\InsuranceType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +31,24 @@ class Contract extends Model
     public function getPriceAttribute($price)
     {
         return Money::CHF($price);
+    }
+
+    public function getInsuranceTypeFormattedAttribute()
+    {
+        switch ($this->insurance_type) {
+            case InsuranceType::QBase: 
+                return 'Q Basis';
+            case InsuranceType::OneStar:
+                return '1 Stern';
+            case InsuranceType::ThreeStar:
+                return '3 Stern';
+            case InsuranceType::FiveStar:
+                return '5 Stern';
+            case InsuranceType::FiveStarPlus:
+                return '5 Stern+';
+            default:
+                return 'Nein';
+        }
     }
 
     public function getDeletedAtAttribute($deleted_at)

@@ -226,7 +226,7 @@ class ContractController extends Controller
 
     public function print(Contract $contract)
     {
-        return [];
+        return view('contract', ['contract' => $contract]);
     }
 
     public function destroy(Contract $contract)
