@@ -90,7 +90,7 @@ export default {
                 id: null,
                 date: ref(new Date()),
                 price: null,
-                type: this.type == "SellContract" ? 0 : 1,
+                type: this.type == "SellContract" ? '0' : '1',
                 insurance_type: '0',
                 car_id: this.car.id,
                 contact_id: this.contact.id,

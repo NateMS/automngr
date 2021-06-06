@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Contact;
 use App\Models\Contract;
 use App\Enums\ContractType;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -226,7 +227,16 @@ class ContractController extends Controller
 
     public function print(Contract $contract)
     {
-        return view('contract', ['contract' => $contract]);
+        $contxt = stream_context_create([
+            'ssl' => [
+            'verify_peer' => FALSE,
+            'verify_peer_name' => FALSE,
+            'allow_self_signed'=> TRUE
+            ]
+            ]);
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contract', compact('contract'));//->setPaper('a4', 'portrait');
+        $pdf->getDomPDF()->setHttpContext($contxt);
+        return $pdf->stream($contract->date . '_' . $contract->type_formatted . '.pdf');
     }
 
     public function destroy(Contract $contract)

@@ -16876,15 +16876,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _StandardButton_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StandardButton.vue */ "./resources/js/Components/Buttons/StandardButton.vue");
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    StandardButton: _StandardButton_vue__WEBPACK_IMPORTED_MODULE_0__.default
-  },
   props: {
     "class": String,
     href: String
+  },
+  data: function data() {
+    return {
+      colour: 'indigo'
+    };
+  },
+  computed: {
+    allClasses: function allClasses() {
+      var classes = "justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition";
+      classes += " bg-".concat(this.colour, "-800 hover:bg-").concat(this.colour, "-700 active:bg-").concat(this.colour, "-900 focus:border-").concat(this.colour, "-900 focus:ring-").concat(this.colour, "-300");
+      return classes + " " + this["class"];
+    }
   }
 });
 
@@ -19732,7 +19739,7 @@ __webpack_require__.r(__webpack_exports__);
         id: null,
         date: (0,vue__WEBPACK_IMPORTED_MODULE_6__.ref)(new Date()),
         price: null,
-        type: this.type == "SellContract" ? 0 : 1,
+        type: this.type == "SellContract" ? '0' : '1',
         insurance_type: '0',
         car_id: this.car.id,
         contact_id: this.contact.id
@@ -21112,28 +21119,19 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_unicon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("unicon");
 
-  var _component_standard_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("standard-button");
-
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_standard_button, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
     href: $props.href,
-    "class": this["class"],
-    colour: "gray"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
-        fill: "white",
-        "class": "mr-1",
-        height: "22",
-        width: "22",
-        name: "file-download"
-      }), _hoisted_1];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["href", "class"]);
+    target: "_blank",
+    "class": $options.allClasses
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
+    fill: "white",
+    "class": "mr-1",
+    height: "22",
+    width: "22",
+    name: "file-download"
+  }), _hoisted_1], 10
+  /* CLASS, PROPS */
+  , ["href"]);
 }
 
 /***/ }),

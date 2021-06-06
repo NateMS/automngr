@@ -70,6 +70,11 @@ class Contract extends Model
         return $this->type === (string)ContractType::SellContract;
     }
 
+    public function getTypeFormattedAttribute()
+    {
+        return $this->isSellContract() ? 'Kaufsvertrag' : 'Ankaufsvertrag';
+    }
+
     public function documents()
     {
         return $this->morphMany(Document::class, 'documentable');
