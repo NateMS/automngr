@@ -77,7 +77,7 @@ class Contract extends Model
 
     public function documents()
     {
-        return $this->morphMany(Document::class, 'documentable');
+        return $this->hasMany(Document::class);
     }
 
     public function contact()

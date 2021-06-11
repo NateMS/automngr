@@ -42,6 +42,15 @@
             </div>
         </template>
         <template #more>
+            <div class="col-span-12">
+                <h3 class="mb-3">Dokumente</h3>
+                <div class="w-full grid grid-cols-12 xs:grid-cols-4 gap-3">
+                    <template v-for="document in documents" :key="document.id">
+                        <document-item :document="document" />
+                    </template>
+                    <document-upload :contract="contract" :documents="documents" />
+                </div>
+            </div>
             <div class="col-span-6 xs:col-span-12">
                 <h3 class="mb-3">Auto</h3>
                 <car-card :car="contract.car" />
@@ -63,7 +72,9 @@ import RestoreButton from '@/Components/Buttons/RestoreButton.vue'
 import CarCard from '@/Components/CarCard.vue'
 import PrintButton from '@/Components/Buttons/PrintButton.vue'
 import ContactCard from '@/Components/ContactCard.vue'
-import EditButton from '../../Components/Buttons/EditButton.vue'
+import EditButton from '@/Components/Buttons/EditButton.vue'
+import DocumentItem from '@/Components/Documents/Item.vue'
+import DocumentUpload from '@/Components/Documents/Upload.vue'
 
 export default {
     components: {
@@ -77,6 +88,8 @@ export default {
         ContactCard,
         EditButton,
         CarCard,
+        DocumentItem,
+        DocumentUpload,
     },
     props: {
         contract: Object,
@@ -92,6 +105,7 @@ export default {
     data() {
         return {
             currentRoute: 'contracts.show',
+            documents: this.contract.documents,
             buyContractsColumns: [
                 {key: 'contact', value: 'Verkäufer'},
                 {key: 'date', value: 'Kaufdatum'},

@@ -6,6 +6,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CarModelController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -170,4 +171,16 @@ Route::get('contracts/{contract}/delete', [ContractController::class, 'destroy']
 
 Route::get('contracts/{contract}/restore', [ContractController::class, 'restore'])
     ->name('contracts.restore')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::post('documents/{contract}', [DocumentController::class, 'store'])
+    ->name('documents.store')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('documents/{document}/delete', [DocumentController::class, 'destroy'])
+    ->name('documents.destroy')
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::get('documents/{document}', [DocumentController::class, 'show'])
+    ->name('documents.show')
     ->middleware(['auth:sanctum', 'verified']);

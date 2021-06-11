@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\DocumentType;
 
 class CreateDocumentsTable extends Migration
 {
@@ -17,10 +16,13 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type', DocumentType::getValues())
-            ->default(DocumentType::Other);
-            $table->integer('documentable_id');
-            $table->string('documentable_type');
+            $table->string('internal_name');
+            $table->integer('size');
+            $table->string('extension');
+            $table->foreignId('contract_id')
+                ->onUpdate('cascade')
+                ->onDelete('cascade')
+                ->constrained('contracts');
             $table->timestamps();
         });
     }

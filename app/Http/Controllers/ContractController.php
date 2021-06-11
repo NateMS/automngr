@@ -190,6 +190,17 @@ class ContractController extends Controller
             'price' => $contract->price->format(),
             'type' => $contract->type,
             'is_sell_contract' => $contract->isSellContract(),
+            'documents' => $contract->documents()->get()
+                ->map(function ($document) {
+                    return [
+                        'id' => $document->id,
+                        'name' => $document->name,
+                        'size' => $document->size,
+                        'extension' => $document->extension,
+                        'link' => $document->link,
+                        'created_at' => $document->created_at,
+                    ];
+                }),
             'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue((int)$contract->insurance_type)->key : null,
             'deleted_at' => $contract->deleted_at,
             'contact' => [
@@ -230,11 +241,11 @@ class ContractController extends Controller
     {
         $contxt = stream_context_create([
             'ssl' => [
-            'verify_peer' => FALSE,
-            'verify_peer_name' => FALSE,
-            'allow_self_signed'=> TRUE
+                'verify_peer' => FALSE,
+                'verify_peer_name' => FALSE,
+                'allow_self_signed'=> TRUE
             ]
-            ]);
+        ]);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contract', compact('contract'));//->setPaper('a4', 'portrait');
         $pdf->getDomPDF()->setHttpContext($contxt);
         return $pdf->stream($contract->date . '_' . $contract->type_formatted . '.pdf');

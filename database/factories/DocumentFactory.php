@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Document;
 use App\Models\Contract;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Enums\DocumentType;
 
 
 class DocumentFactory extends Factory
@@ -25,10 +24,11 @@ class DocumentFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'documentable_id' => $this->faker->numberBetween(1, Contract::count()),
-            'documentable_type' => 'App\Models\Contract',
-            'type' => (string)DocumentType::getRandomValue(),
+            'name' => 'Vertrag.pdf',
+            'internal_name' => '2021-06-11-13:11:12.pdf',
+            'contract_id' => $this->faker->numberBetween(1, Contract::count()),
+            'size' => $this->faker->numberBetween(1, 30000),
+            'extension' => 'pdf',
         ];
     }
 }

@@ -90,11 +90,6 @@ class Car extends Model
         return $this->latestSellContract()->price->subtract($this->latestBuyContract()->price)->format();
     }
 
-    public function documents()
-    {
-        return $this->morphMany(Document::class, 'documentable');
-    }
-
     public function contracts()
     {
         return $this->hasMany(Contract::class);
