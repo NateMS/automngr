@@ -41,7 +41,9 @@ class DocumentController extends Controller
 
     public function destroy(Document $document)
     {
-        unlink($document->path);
+        if (file_exists($document->path)) {
+            unlink($document->path);
+        }
         $document->delete();
         session()->flash('flash.banner', 'Dokument gelöscht.');
         return Redirect::back();

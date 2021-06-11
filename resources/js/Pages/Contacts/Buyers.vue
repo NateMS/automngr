@@ -6,7 +6,7 @@
             Käufer
         </h2>
     </template>
-    <div class="w-full mx-auto sm:px-6 lg:px-8">
+    <div class="w-full mx-auto">
       <simple-table :title="contacts.total + ' Käufer'" :data="contacts" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute"  />
     </div>
   </layout>

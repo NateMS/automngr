@@ -27620,7 +27620,7 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Käufer ");
 
 var _hoisted_3 = {
-  "class": "w-full mx-auto sm:px-6 lg:px-8"
+  "class": "w-full mx-auto"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_bread_crumb = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("bread-crumb");
