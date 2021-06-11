@@ -12,7 +12,7 @@
         </template>
    
         <div>
-            <jet-form-section v-if="!car_first" emptyBg="true" class="max-w-7xl mb-5">
+            <jet-form-section v-if="!car_first" :emptyBg="true" class="max-w-7xl mb-5">
                 <template #title>
                     {{ contactType }}
                 </template>
@@ -23,7 +23,7 @@
                     <contact-card class="col-span-12" :contact="contact" />
                 </template>
             </jet-form-section>
-            <jet-form-section class="max-w-7xl" emptyBg="true">
+            <jet-form-section class="max-w-7xl" :emptyBg="true">
                 <template #title>
                     Auto
                 </template>
@@ -34,7 +34,7 @@
                     <car-card class="col-span-12" :car="car" />
                 </template>
             </jet-form-section>
-            <jet-form-section v-if="car_first" emptyBg="true" class="max-w-7xl mt-5">
+            <jet-form-section v-if="car_first" :emptyBg="true" class="max-w-7xl mt-5">
                 <template #title>
                     {{ contactType }}
                 </template>
@@ -94,6 +94,7 @@ export default {
                 insurance_type: '0',
                 car_id: this.car.id,
                 contact_id: this.contact.id,
+                is_sell_contract: this.type == "SellContract",
             },
         }
     },

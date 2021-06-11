@@ -51,7 +51,7 @@ class ContractController extends Controller
             'car' => $this->getCarFields($car),
             'contact' => $this->getContactFields($contact),
             'type' => ContractType::coerce($type)->key,
-            'car_first' => $request->query('carFirst'),
+            'car_first' => (bool)$request->query('carFirst'),
         ]);
     }
 
@@ -153,6 +153,7 @@ class ContractController extends Controller
             'contract' => [
                 'id' => $contract->id,
                 'date' => $contract->date,
+                'date_formatted' => $contract->date_formatted,
                 'is_sell_contract' => $contract->isSellContract(),
                 'price' => $contract->price->getAmount(),
                 'insurance_type' => (string)$contract->insurance_type,

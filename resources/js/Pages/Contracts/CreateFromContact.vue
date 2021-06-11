@@ -8,7 +8,7 @@
             </h2>
         </template>
         <div>
-            <jet-form-section class="max-w-7xl" emptyBg="true">
+            <jet-form-section class="max-w-7xl" :emptyBg="true">
                 <template #title>
                     {{ contactType }}
                 </template>

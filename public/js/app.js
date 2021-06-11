@@ -18922,11 +18922,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: this.car.id,
         stammnummer: this.car.stammnummer,
         vin: this.car.vin,
-        initial_date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(Date.parse(this.car.initial_date)),
+        initial_date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(new Date(this.car.initial_date)),
         colour: this.car.colour,
         notes: this.car.notes,
         car_model_id: this.car.car_model.id,
-        last_check_date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(Date.parse(this.car.last_check_date)),
+        last_check_date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(new Date(this.car.last_check_date)),
         kilometers: this.car.kilometers,
         known_damage: this.car.known_damage
       }, "notes", this.car.notes)
@@ -19742,7 +19742,8 @@ __webpack_require__.r(__webpack_exports__);
         type: this.type == "SellContract" ? '0' : '1',
         insurance_type: '0',
         car_id: this.car.id,
-        contact_id: this.contact.id
+        contact_id: this.contact.id,
+        is_sell_contract: this.type == "SellContract"
       }
     };
   },
@@ -20077,9 +20078,10 @@ __webpack_require__.r(__webpack_exports__);
         on_success: 'Änderungen gespeichert'
       },
       data: {
-        date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(Date.parse(this.contract.date)),
+        date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(new Date(this.contract.date)),
         price: this.contract.price,
-        insurance_type: this.contract.insurance_type
+        insurance_type: this.contract.insurance_type,
+        is_sell_contract: this.contract.is_sell_contract
       }
     };
   }
@@ -27406,7 +27408,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [!$props.car_first ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_form_section, {
         key: 0,
-        emptyBg: "true",
+        emptyBg: true,
         "class": "max-w-7xl mb-5"
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -27432,7 +27434,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_form_section, {
         "class": "max-w-7xl",
-        emptyBg: "true"
+        emptyBg: true
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_2];
@@ -27455,7 +27457,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }), $props.car_first ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_form_section, {
         key: 1,
-        emptyBg: "true",
+        emptyBg: true,
         "class": "max-w-7xl mt-5"
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -27601,7 +27603,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_form_section, {
         "class": "max-w-7xl",
-        emptyBg: "true"
+        emptyBg: true
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_2];
@@ -27810,7 +27812,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_form_section, {
         "class": "max-w-7xl",
-        emptyBg: "true"
+        emptyBg: true
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.contactType), 1
@@ -27963,7 +27965,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8
       /* PROPS */
       , ["text", "href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_bread_crumb, {
-        text: 'Vertrag vom ' + $props.contract.date,
+        text: 'Vertrag vom ' + $props.contract.date_formatted,
         href: _ctx.route('contracts.show', $props.contract.id)
       }, null, 8
       /* PROPS */

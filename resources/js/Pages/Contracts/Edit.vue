@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 <bread-crumb text="Autos" :href="route('cars')" />
                 <bread-crumb :text="contract.car.name" :href="route('cars.show', contract.car.id)" />
-                <bread-crumb :text="'Vertrag vom ' + contract.date" :href="route('contracts.show', contract.id)" />
+                <bread-crumb :text="'Vertrag vom ' + contract.date_formatted" :href="route('contracts.show', contract.id)" />
                 bearbeiten
             </h2>
         </template>
@@ -46,9 +46,10 @@ export default {
                 on_success: 'Änderungen gespeichert',
             },
             data: {
-                date: ref(Date.parse(this.contract.date)),
+                date: ref(new Date(this.contract.date)),
                 price: this.contract.price,
                 insurance_type: this.contract.insurance_type,
+                is_sell_contract: this.contract.is_sell_contract,
             }
         }
     },
