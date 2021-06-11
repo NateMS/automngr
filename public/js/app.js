@@ -23120,7 +23120,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "grid grid-cols-12 gap-12 w-full mb-10"
+  "class": "grid grid-cols-12 gap-12 w-full mb-8"
 };
 var _hoisted_2 = {
   "class": "col-span-6 xs:col-span-12"
@@ -29436,12 +29436,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["document"]);
       }), 128
       /* KEYED_FRAGMENT */
-      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_document_upload, {
+      )), !$props.contract.deleted_at ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_document_upload, {
+        key: 0,
         contract: $props.contract,
         documents: $data.documents
       }, null, 8
       /* PROPS */
-      , ["contract", "documents"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_car_card, {
+      , ["contract", "documents"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_car_card, {
         car: $props.contract.car
       }, null, 8
       /* PROPS */

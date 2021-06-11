@@ -3,7 +3,7 @@
         <template #header>
             <slot name="header"></slot>
         </template>
-        <div class="grid grid-cols-12 gap-12 w-full mb-10">
+        <div class="grid grid-cols-12 gap-12 w-full mb-8">
             <div class="col-span-6 xs:col-span-12">
                 <slot name="info"></slot>
             </div>

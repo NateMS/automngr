@@ -30,10 +30,15 @@ class Document extends Model
 
     public function getSizeAttribute($size)
     {
-        if ($size / 1024 / 1024 < 1) {
-            return (string)floor($size / 1024) . " KB";
+        if ($size / 1024 < 1) {
+            return $size . " B";
         }
-        return (string)floor($size / 1024 / 1024) . " MB";
+
+        if ($size / 1024 / 1024 < 1) {
+            return floor($size / 1024) . " KB";
+        }
+
+        return floor($size / 1024 / 1024) . " MB";
     }
 
     public function getLinkAttribute()

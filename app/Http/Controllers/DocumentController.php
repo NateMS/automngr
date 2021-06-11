@@ -12,8 +12,12 @@ class DocumentController extends Controller
 {
     public function show(Document $document)
     {
-        header('Content-Disposition: filename="' . $document->name . '"');
-        return response()->file($document->path);
+        if (file_exists($document->path)) {
+            header('Content-Disposition: filename="' . $document->name . '"');
+            return response()->file($document->path);
+        }
+        
+        abort(404);
     }
 
     public function store(Request $request, Contract $contract)
@@ -24,7 +28,7 @@ class DocumentController extends Controller
             'name' => $file->getClientOriginalName(),
             'internal_name' => $internalName,
             'size' => $file->getSize(),
-            'extension' => $file->extension(),
+            'extension' => $file->extension() ?? '',
             'contract_id' => $contract->id,
         ]);
         $file->move(public_path("documents/contracts/{$contract->id}/"), $internalName);

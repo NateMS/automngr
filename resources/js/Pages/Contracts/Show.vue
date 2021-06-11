@@ -48,7 +48,7 @@
                     <template v-for="document in documents" :key="document.id">
                         <document-item :document="document" />
                     </template>
-                    <document-upload :contract="contract" :documents="documents" />
+                    <document-upload v-if="!contract.deleted_at" :contract="contract" :documents="documents" />
                 </div>
             </div>
             <div class="col-span-6 xs:col-span-12">
