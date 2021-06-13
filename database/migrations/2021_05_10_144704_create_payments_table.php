@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Enums\PaymentType;
 
-class CreateCarPaymentsTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateCarPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('car_payments', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->integer('amount');
             $table->date('date');
@@ -35,6 +35,6 @@ class CreateCarPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car_payments');
+        Schema::dropIfExists('payments');
     }
 }

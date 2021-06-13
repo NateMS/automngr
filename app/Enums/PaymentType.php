@@ -10,6 +10,6 @@ use BenSampo\Enum\Enum;
  */
 final class PaymentType extends Enum
 {
-    const Transaction = 0;
-    const Cash = 1;
+    const Transaction = '0';
+    const Cash = '1';
 }

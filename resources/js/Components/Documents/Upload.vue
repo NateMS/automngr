@@ -22,7 +22,7 @@ const STATUS_INITIAL = 0, STATUS_SAVING = 1, STATUS_FAILED = 2;
 
 export default {
     props: {
-        contract: Object,
+        id: Number,
         documents: Object,
     },
     data() {
@@ -52,7 +52,7 @@ export default {
         save(formData) {
             // upload data to the server
             this.currentStatus = STATUS_SAVING;
-            axios.post(this.route('documents.store', this.contract.id), formData)
+            axios.post(this.route('documents.store', this.id), formData)
                 .then(response => {
                     this.documents.push(response.data);
                     this.reset();

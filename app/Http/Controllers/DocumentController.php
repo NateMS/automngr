@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class DocumentController extends Controller
 {
-    public function show(Document $document)
+    public function show(Contract $contract, Document $document)
     {
         if (file_exists($document->path)) {
             header('Content-Disposition: filename="' . $document->name . '"');
@@ -43,11 +43,19 @@ class DocumentController extends Controller
         ];
     }
 
-    public function destroy(Document $document)
+    public function destroy(Request $request, Contract $contract)
     {
+        $document = Document::find((int)$request->get('id'));
+        
+        if (!$document) {
+            session()->flash('flash.banner', 'Fehler beim Löschen, Dokument nicht gefunden.');
+            return Redirect::back();
+        }
+
         if (file_exists($document->path)) {
             unlink($document->path);
         }
+
         $document->delete();
         session()->flash('flash.banner', 'Dokument gelöscht.');
         return Redirect::back();

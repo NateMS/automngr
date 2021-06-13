@@ -43,7 +43,7 @@ class Document extends Model
 
     public function getLinkAttribute()
     {
-        return route('documents.show', $this->id);
+        return route('documents.show', [$this->contract->id, $this->id]);
     }
 
     public function getPathAttribute()

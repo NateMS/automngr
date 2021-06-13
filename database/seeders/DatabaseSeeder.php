@@ -8,7 +8,7 @@ use App\Models\Team;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\Brand;
-use App\Models\CarPayment;
+use App\Models\Payment;
 use App\Models\Contract;
 use App\Models\Contact;
 use App\Models\Document;
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         User::truncate();
-        CarPayment::truncate();
+        Payment::truncate();
         Contract::truncate();
         Document::truncate();
         Car::truncate();
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
             ->count($nOfCars * 2)
             ->create();
 
-        $carPayments = CarPayment::factory()
+        $payments = Payment::factory()
             ->count(60)
             ->create();
 

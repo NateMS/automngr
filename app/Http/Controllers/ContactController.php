@@ -179,7 +179,7 @@ class ContactController extends Controller
             'price' => $contract->price->format(),
             'type' => $contract->type,
             'is_sell_contract' => $contract->isSellContract(),
-            'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue((int)$contract->insurance_type)->key : null,
+            'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue($contract->insurance_type)->key : null,
             'car' => [
                  'id' => $car->id,
                     'stammnummer' => $car->stammnummer,

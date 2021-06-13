@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Car;
 use Inertia\Inertia;
 use App\Models\Brand;
@@ -72,7 +73,7 @@ class CarController extends Controller
             'price' => $contract->price->format(),
             'type' => $contract->type,
             'is_sell_contract' => $contract->isSellContract(),
-            'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue((int)$contract->insurance_type)->key : null,
+            'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue($contract->insurance_type)->key : null,
             'contact' => [
                 'id' => $contact->id,
                 'name' => $contact->name,
@@ -183,6 +184,11 @@ class CarController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge([
+            'initial_date' => Carbon::parse($request->get('initial_date'))->format('Y-m-d'),
+            'last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d'),
+        ]);
+
         $car = Car::create(
             $request->validate($this->getValidationRules())
         );
@@ -289,6 +295,11 @@ class CarController extends Controller
 
     public function update(Request $request, Car $car)
     {
+        $request->merge([
+            'initial_date' => Carbon::parse($request->get('initial_date'))->format('Y-m-d'),
+            'last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d'),
+        ]);
+
         $car->update(
             $request->validate([
                 'stammnummer' => ['required', 'unique:cars,stammnummer,' . $car->id, 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],

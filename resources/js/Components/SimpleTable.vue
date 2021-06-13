@@ -31,6 +31,9 @@
                             <inertia-link v-if="row.link" class="px-6 py-4 flex items-center" :href="row.link">
                                 {{ resolve(col.key, row) }}
                             </inertia-link>
+                            <span v-else-if="col.key == 'delete'" class="p-3 cursor-pointer" @click="this.$emit('delete', row.id)">
+                                <unicon fill="red" height="24" width="24" name="trash-alt"></unicon>
+                            </span>
                             <span v-else class="px-6 py-4 flex items-center">
                                 {{ resolve(col.key, row) }}
                             </span>
@@ -114,7 +117,7 @@ export default {
         },
         isActiveSort(col, dir) {
             return col == this.sort.by && dir == this.sort.direction;
-        }
+        },
     },
 }
 </script>

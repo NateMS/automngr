@@ -80,6 +80,11 @@ class Contract extends Model
         return $this->hasMany(Document::class);
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
     public function contact()
     {
         return $this->belongsTo(Contact::class)->withTrashed();

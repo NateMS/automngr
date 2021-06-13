@@ -42,15 +42,6 @@
             </div>
         </template>
         <template #more>
-            <div class="col-span-12">
-                <h3 class="mb-3">Dokumente</h3>
-                <div class="w-full grid grid-cols-12 xs:grid-cols-4 gap-3">
-                    <template v-for="document in documents" :key="document.id">
-                        <document-item :document="document" />
-                    </template>
-                    <document-upload v-if="!contract.deleted_at" :contract="contract" :documents="documents" />
-                </div>
-            </div>
             <div class="col-span-6 xs:col-span-12">
                 <h3 class="mb-3">Auto</h3>
                 <car-card :car="contract.car" />
@@ -58,6 +49,12 @@
             <div class="col-span-5 xs:col-span-12">
                 <h3 class="mb-3">{{ contactTitle }}</h3>
                 <contact-card :contact="contract.contact" />
+            </div>
+            <div class="col-span-6 xs:col-span-12 mt-4">
+                <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
+            </div>
+            <div class="col-span-5 xs:col-span-12">
+                <payments-view :payments="contract.payments" :id="contract.id" />
             </div>
         </template>
     </show-page>
@@ -73,8 +70,9 @@ import CarCard from '@/Components/CarCard.vue'
 import PrintButton from '@/Components/Buttons/PrintButton.vue'
 import ContactCard from '@/Components/ContactCard.vue'
 import EditButton from '@/Components/Buttons/EditButton.vue'
-import DocumentItem from '@/Components/Documents/Item.vue'
-import DocumentUpload from '@/Components/Documents/Upload.vue'
+import DocumentsView from '@/Components/Documents/View.vue'
+import PaymentsView from '@/Components/Payments/View.vue'
+
 
 export default {
     components: {
@@ -88,8 +86,8 @@ export default {
         ContactCard,
         EditButton,
         CarCard,
-        DocumentItem,
-        DocumentUpload,
+        DocumentsView,
+        PaymentsView,
     },
     props: {
         contract: Object,
@@ -104,8 +102,7 @@ export default {
     },
     data() {
         return {
-            currentRoute: 'contracts.show',
-            documents: this.contract.documents,
+            currentRoute: 'contracts.show', 
             buyContractsColumns: [
                 {key: 'contact', value: 'Verkäufer'},
                 {key: 'date', value: 'Kaufdatum'},
