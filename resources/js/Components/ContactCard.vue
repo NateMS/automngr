@@ -24,6 +24,10 @@
                 {{ contact.phone }}
             </a>
         </div>
+        <div v-if="contact.notes" class="mt-3">
+            <p class="font-bold">Notizen</p>
+            {{ contact.notes }}
+        </div>
         <div v-if="contact.link" class="pt-3 mt-3 border-t">
             <inertia-link :href="contact.link" class="pt-1 pb-1 flex items-center">
                 <unicon class="mr-1" height="22" width="22" name="arrow-right"></unicon>
