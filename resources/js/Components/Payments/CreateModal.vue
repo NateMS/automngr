@@ -14,7 +14,7 @@
 
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="amount" value="Betrag" />
-                        <jet-input id="amount" type="text" class="mt-1 block w-full" v-model="form.amount" ref="amount" autocomplete="amount" />
+                        <currency-input v-model="form.amount" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" ref="amount"/>
                         <jet-input-error :message="form.errors.amount" class="mt-2" />
                     </div>
 
@@ -35,7 +35,6 @@
             </jet-button>
         </template>
     </dialog-modal>
-    <!-- <multiselect class="mt-1 block w-full" @select="updateTypeSelection" v-model="typeSelection" deselect-label="Kann nicht entfernt werden" track-by="key" label="label" placeholder="Versicherung auswählen" :options="types" :searchable="false" :allow-empty="false" /> -->
 </template>
 
 <script>
@@ -47,6 +46,7 @@ import Datepicker from 'vue3-datepicker'
 import { useForm } from '@inertiajs/inertia-vue3'
 import { ref } from 'vue'
 import DialogModal from '@/Jetstream/DialogModal.vue'
+import CurrencyInput from '@/Components/CurrencyInput'
 
 export default {
     components: {
@@ -56,6 +56,7 @@ export default {
         JetInputError,
         DialogModal,
         Datepicker,
+        CurrencyInput,
     },
     props: {
         id: Number,
@@ -70,6 +71,12 @@ export default {
                 type: '1',
                 contract_id: this.id,
             }),
+            currencyOptions: {
+                currency: 'CHF',
+                locale: 'de-CH',
+                exportValueAsInteger: true,
+                hideGroupingSeparatorOnFocus: false,
+            },
         }
     },
     methods: {

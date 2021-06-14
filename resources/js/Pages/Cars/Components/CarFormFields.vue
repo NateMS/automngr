@@ -55,7 +55,7 @@
 
     <div class="col-span-6 sm:col-span-4">
         <jet-label for="kilometers" value="Kilometerstand" />
-        <jet-input id="kilometers" type="text" class="mt-1 block w-full" v-model="form.kilometers" ref="kilometers" autocomplete="kilometers" />
+        <currency-input v-model="form.kilometers" :options="currencyOptions" id="kilometers" class="w-full mt-1 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" ref="kilometers" />
         <jet-input-error :message="form.errors.kilometers" class="mt-2" />
     </div>
 
@@ -87,6 +87,7 @@ import JetActionMessage from '@/Jetstream/ActionMessage'
 import JetInputError from '@/Jetstream/InputError'
 import Multiselect from 'vue-multiselect'
 import Datepicker from 'vue3-datepicker'
+import CurrencyInput from '@/Components/CurrencyInput'
 
 export default {
     components: {
@@ -96,6 +97,7 @@ export default {
         JetActionMessage,
         Multiselect,
         Datepicker,
+        CurrencyInput,
     },
     props: {
         form: Object,
@@ -110,6 +112,14 @@ export default {
             carModels: [],
             brandSelection: this.brand,
             car_modelSelection: this.car_model,
+            currencyOptions: {
+                currency: 'CHF',
+                locale: 'de-CH',
+                exportValueAsInteger: true,
+                hideGroupingSeparatorOnFocus: false,
+                precision: 0,
+                currencyDisplay: 'hidden',
+            },
         }
     },
     methods: {

@@ -32,9 +32,9 @@ class Car extends Model
         return $out;
     }
 
-    public function getKilometersAttrobute($kilometers)
+    public function getKilometersFormattedAttribute()
     {
-        return $kilometers;
+        return number_format($this->kilometers, 0, '.', '\'');
     }
 
     public function getInitialDateFormattedAttribute()

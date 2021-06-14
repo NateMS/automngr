@@ -191,7 +191,7 @@ class ContactController extends Controller
                     'initial_date' => $car->initial_date_formatted,
                     'colour' => $car->colour,
                     'last_check_date' => $car->last_check_date_formatted,
-                    'kilometers' => $car->kilometers,
+                    'kilometers' => $car->kilometers_formatted,
                     'known_damage' => $car->known_damage,
                     'notes' => $car->notes,
                     'link' => route('cars.show', $car),

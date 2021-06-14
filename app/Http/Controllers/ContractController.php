@@ -80,7 +80,7 @@ class ContractController extends Controller
             'name' => $car->name,
             'colour' => $car->colour,
             'last_check_date' => $car->last_check_date_formatted,
-            'kilometers' => $car->kilometers,
+            'kilometers' => $car->kilometers_formatted,
             'initial_date' => $car->initial_date_formatted,
         ];
     }
@@ -139,7 +139,7 @@ class ContractController extends Controller
                 'is_sell_contract' => $contract->isSellContract(),
                 'type' => $contract->type,
                 'type_formatted' => $contract->type_formatted,
-                'price' => $contract->price->getAmount(),
+                'price' => (int)$contract->price->getAmount(),
                 'insurance_type' => (string)$contract->insurance_type,
                 'car' => [
                     'id' => $contract->car->id,
@@ -227,7 +227,7 @@ class ContractController extends Controller
                 'initial_date' => $contract->car->initial_date_formatted,
                 'colour' => $contract->car->colour,
                 'last_check_date' => $contract->car->last_check_date_formatted,
-                'kilometers' => $contract->car->kilometers,
+                'kilometers' => $contract->car->kilometers_formatted,
                 'known_damage' => $contract->car->known_damage,
                 'notes' => $contract->car->notes,
                 'deleted_at' => $contract->car->deleted_at,

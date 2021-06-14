@@ -18101,6 +18101,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/CurrencyInput.vue?vue&type=script&lang=js":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/CurrencyInput.vue?vue&type=script&lang=js ***!
+  \*******************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue_currency_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-currency-input */ "./node_modules/vue-currency-input/dist/index.esm.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'CurrencyInput',
+  props: {
+    modelValue: Number,
+    options: Object
+  },
+  setup: function setup(props) {
+    var _useCurrencyInput = (0,vue_currency_input__WEBPACK_IMPORTED_MODULE_0__.default)(props.options),
+        formattedValue = _useCurrencyInput.formattedValue,
+        inputRef = _useCurrencyInput.inputRef;
+
+    return {
+      inputRef: inputRef,
+      formattedValue: formattedValue
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Documents/Item.vue?vue&type=script&lang=js":
 /*!********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Documents/Item.vue?vue&type=script&lang=js ***!
@@ -18338,6 +18371,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Jetstream_DialogModal_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/DialogModal.vue */ "./resources/js/Jetstream/DialogModal.vue");
+/* harmony import */ var _Components_CurrencyInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/CurrencyInput */ "./resources/js/Components/CurrencyInput.vue");
+
 
 
 
@@ -18353,7 +18388,8 @@ __webpack_require__.r(__webpack_exports__);
     JetInput: _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_3__.default,
     DialogModal: _Jetstream_DialogModal_vue__WEBPACK_IMPORTED_MODULE_7__.default,
-    Datepicker: vue3_datepicker__WEBPACK_IMPORTED_MODULE_4__.default
+    Datepicker: vue3_datepicker__WEBPACK_IMPORTED_MODULE_4__.default,
+    CurrencyInput: _Components_CurrencyInput__WEBPACK_IMPORTED_MODULE_8__.default
   },
   props: {
     id: Number,
@@ -18367,7 +18403,13 @@ __webpack_require__.r(__webpack_exports__);
         amount: null,
         type: '1',
         contract_id: this.id
-      })
+      }),
+      currencyOptions: {
+        currency: 'CHF',
+        locale: 'de-CH',
+        exportValueAsInteger: true,
+        hideGroupingSeparatorOnFocus: false
+      }
     };
   },
   methods: {
@@ -20006,6 +20048,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.esm.js");
 /* harmony import */ var vue3_datepicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue3-datepicker */ "./node_modules/vue3-datepicker/dist/vue3-datepicker.esm.js");
+/* harmony import */ var _Components_CurrencyInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/CurrencyInput */ "./resources/js/Components/CurrencyInput.vue");
+
 
 
 
@@ -20019,7 +20063,8 @@ __webpack_require__.r(__webpack_exports__);
     JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_3__.default,
     JetActionMessage: _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_2__.default,
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_4__.default,
-    Datepicker: vue3_datepicker__WEBPACK_IMPORTED_MODULE_5__.default
+    Datepicker: vue3_datepicker__WEBPACK_IMPORTED_MODULE_5__.default,
+    CurrencyInput: _Components_CurrencyInput__WEBPACK_IMPORTED_MODULE_6__.default
   },
   props: {
     form: Object,
@@ -20033,7 +20078,15 @@ __webpack_require__.r(__webpack_exports__);
       modelSearch: null,
       carModels: [],
       brandSelection: this.brand,
-      car_modelSelection: this.car_model
+      car_modelSelection: this.car_model,
+      currencyOptions: {
+        currency: 'CHF',
+        locale: 'de-CH',
+        exportValueAsInteger: true,
+        hideGroupingSeparatorOnFocus: false,
+        precision: 0,
+        currencyDisplay: 'hidden'
+      }
     };
   },
   methods: {
@@ -20921,6 +20974,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/FormSection */ "./resources/js/Jetstream/FormSection.vue");
 /* harmony import */ var vue3_datepicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue3-datepicker */ "./node_modules/vue3-datepicker/dist/vue3-datepicker.esm.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Components_CurrencyInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/CurrencyInput */ "./resources/js/Components/CurrencyInput.vue");
+
 
 
 
@@ -20937,7 +20992,8 @@ __webpack_require__.r(__webpack_exports__);
     JetInput: _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_4__.default,
     JetActionMessage: _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_3__.default,
-    Datepicker: vue3_datepicker__WEBPACK_IMPORTED_MODULE_6__.default
+    Datepicker: vue3_datepicker__WEBPACK_IMPORTED_MODULE_6__.default,
+    CurrencyInput: _Components_CurrencyInput__WEBPACK_IMPORTED_MODULE_8__.default
   },
   props: {
     data: Object,
@@ -20946,7 +21002,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_7__.useForm)(this.meta.form_name, this.data)
+      form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_7__.useForm)(this.meta.form_name, this.data),
+      currencyOptions: {
+        currency: 'CHF',
+        locale: 'de-CH',
+        exportValueAsInteger: true,
+        hideGroupingSeparatorOnFocus: false
+      }
     };
   },
   methods: {
@@ -22934,6 +22996,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/CurrencyInput.vue?vue&type=template&id=08bc457e":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/CurrencyInput.vue?vue&type=template&id=08bc457e ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+    ref: "inputRef",
+    type: "text",
+    value: $setup.formattedValue
+  }, null, 8
+  /* PROPS */
+  , ["value"]);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Documents/Item.vue?vue&type=template&id=56a69635":
 /*!************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Documents/Item.vue?vue&type=template&id=56a69635 ***!
@@ -23351,13 +23438,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_jet_input_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-input-error");
 
-  var _component_jet_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-input");
+  var _component_currency_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("currency-input");
 
   var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
 
   var _component_dialog_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("dialog-modal");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_dialog_modal, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_dialog_modal, {
     show: $props.showModal,
     onClose: _cache[5] || (_cache[5] = function ($event) {
       return _ctx.$emit('close');
@@ -23393,19 +23480,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "amount",
         value: "Betrag"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-        id: "amount",
-        type: "text",
-        "class": "mt-1 block w-full",
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
         modelValue: $data.form.amount,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.form.amount = $event;
         }),
-        ref: "amount",
-        autocomplete: "amount"
+        options: $data.currencyOptions,
+        id: "price",
+        "class": "w-full mt-1 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
+        ref: "amount"
       }, null, 8
       /* PROPS */
-      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+      , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
         message: $data.form.errors.amount,
         "class": "mt-2"
       }, null, 8
@@ -23462,9 +23548,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <multiselect class=\"mt-1 block w-full\" @select=\"updateTypeSelection\" v-model=\"typeSelection\" deselect-label=\"Kann nicht entfernt werden\" track-by=\"key\" label=\"label\" placeholder=\"Versicherung auswählen\" :options=\"types\" :searchable=\"false\" :allow-empty=\"false\" /> ")], 2112
-  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  );
+  , ["show"]);
 }
 
 /***/ }),
@@ -27375,6 +27459,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("datepicker");
 
+  var _component_currency_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("currency-input");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
     "for": "brand",
     value: "Marke"
@@ -27523,19 +27609,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
     "for": "kilometers",
     value: "Kilometerstand"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-    id: "kilometers",
-    type: "text",
-    "class": "mt-1 block w-full",
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
     modelValue: $props.form.kilometers,
     "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
       return $props.form.kilometers = $event;
     }),
-    ref: "kilometers",
-    autocomplete: "kilometers"
+    options: $data.currencyOptions,
+    id: "kilometers",
+    "class": "w-full mt-1 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
+    ref: "kilometers"
   }, null, 8
   /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+  , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
     message: $props.form.errors.kilometers,
     "class": "mt-2"
   }, null, 8
@@ -28972,7 +29057,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_jet_input_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-input-error");
 
-  var _component_jet_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-input");
+  var _component_currency_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("currency-input");
 
   var _component_jet_action_message = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-action-message");
 
@@ -29012,19 +29097,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "price",
         value: "Betrag"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-        id: "price",
-        type: "text",
-        "class": "mt-1 block w-full",
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <jet-input id=\"price\" type=\"text\" class=\"mt-1 block w-full\" v-model=\"form.price\" ref=\"price\" autocomplete=\"price\" /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
         modelValue: $data.form.price,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.form.price = $event;
         }),
-        ref: "price",
-        autocomplete: "price"
+        options: $data.currencyOptions,
+        id: "price",
+        "class": "w-full mt-1 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
+        ref: "price"
       }, null, 8
       /* PROPS */
-      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+      , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
         message: $data.form.errors.price,
         "class": "mt-2"
       }, null, 8
@@ -61189,6 +61273,696 @@ module.exports = function getSideChannel() {
 
 /***/ }),
 
+/***/ "./node_modules/vue-currency-input/dist/index.esm.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/vue-currency-input/dist/index.esm.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "CurrencyDisplay": () => (/* binding */ CurrencyDisplay)
+/* harmony export */ });
+/* harmony import */ var vue_demi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-demi */ "./node_modules/vue-currency-input/node_modules/vue-demi/lib/index.esm.js");
+/**
+ * Vue Currency Input 2.0.0
+ * (c) 2018-2021 Matthias Stiller
+ * @license MIT
+ */
+
+
+const escapeRegExp = (str) => {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
+const removeLeadingZeros = (str) => {
+    return str.replace(/^0+(0$|[^0])/, '$1');
+};
+const count = (str, search) => {
+    return (str.match(new RegExp(escapeRegExp(search), 'g')) || []).length;
+};
+const substringBefore = (str, search) => {
+    return str.substring(0, str.indexOf(search));
+};
+
+var CurrencyDisplay;
+(function (CurrencyDisplay) {
+    CurrencyDisplay["symbol"] = "symbol";
+    CurrencyDisplay["narrowSymbol"] = "narrowSymbol";
+    CurrencyDisplay["code"] = "code";
+    CurrencyDisplay["name"] = "name";
+    CurrencyDisplay["hidden"] = "hidden";
+})(CurrencyDisplay || (CurrencyDisplay = {}));
+
+const DECIMAL_SEPARATORS = [',', '.', '٫'];
+const INTEGER_PATTERN = '(0|[1-9]\\d*)';
+class CurrencyFormat {
+    constructor(options) {
+        const { currency, currencyDisplay, locale, precision } = options;
+        this.currencyDisplay = currencyDisplay !== CurrencyDisplay.hidden ? currencyDisplay : undefined;
+        const numberFormat = new Intl.NumberFormat(locale, { currency, currencyDisplay: this.currencyDisplay, style: 'currency' });
+        const ps = numberFormat.format(123456);
+        this.locale = locale;
+        this.currency = currency;
+        this.digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => i.toLocaleString(locale));
+        this.decimalSymbol = count(ps, this.digits[0]) ? ps.substr(ps.indexOf(this.digits[6]) + 1, 1) : undefined;
+        this.groupingSymbol = ps.substr(ps.indexOf(this.digits[3]) + 1, 1);
+        this.minusSymbol = substringBefore(Number(-1).toLocaleString(locale), this.digits[1]);
+        if (this.decimalSymbol === undefined) {
+            this.minimumFractionDigits = this.maximumFractionDigits = 0;
+        }
+        else if (precision !== undefined) {
+            this.minimumFractionDigits = this.maximumFractionDigits = precision;
+        }
+        else {
+            this.minimumFractionDigits = numberFormat.resolvedOptions().minimumFractionDigits;
+            this.maximumFractionDigits = numberFormat.resolvedOptions().maximumFractionDigits;
+        }
+        this.prefix = substringBefore(ps, this.digits[1]);
+        this.negativePrefix = substringBefore(numberFormat.format(-1), this.digits[1]);
+        this.suffix = ps.substring(ps.lastIndexOf(this.decimalSymbol ? this.digits[0] : this.digits[6]) + 1);
+    }
+    parse(str) {
+        if (str) {
+            const negative = this.isNegative(str);
+            str = this.normalizeDigits(str);
+            str = this.stripCurrencySymbol(str, negative);
+            str = this.stripMinusSymbol(str);
+            const fraction = this.decimalSymbol ? `(?:${escapeRegExp(this.decimalSymbol)}(\\d*))?` : '';
+            const match = this.stripGroupingSeparator(str).match(new RegExp(`^${INTEGER_PATTERN}${fraction}$`));
+            if (match && this.isValidIntegerFormat(this.decimalSymbol ? str.split(this.decimalSymbol)[0] : str, Number(match[1]))) {
+                return Number(`${negative ? '-' : ''}${this.onlyDigits(match[1])}.${this.onlyDigits(match[2] || '')}`);
+            }
+        }
+        return null;
+    }
+    isValidIntegerFormat(formattedNumber, integerNumber) {
+        const options = { style: 'currency', currency: this.currency, currencyDisplay: this.currencyDisplay, minimumFractionDigits: 0 };
+        return [
+            this.stripCurrencySymbol(this.normalizeDigits(integerNumber.toLocaleString(this.locale, {
+                ...options,
+                useGrouping: true
+            })), false),
+            this.stripCurrencySymbol(this.normalizeDigits(integerNumber.toLocaleString(this.locale, {
+                ...options,
+                useGrouping: false
+            })), false)
+        ].includes(formattedNumber);
+    }
+    format(value, options = {
+        minimumFractionDigits: this.minimumFractionDigits,
+        maximumFractionDigits: this.maximumFractionDigits
+    }) {
+        return value != null
+            ? value.toLocaleString(this.locale, {
+                style: 'currency',
+                currency: this.currency,
+                currencyDisplay: this.currencyDisplay,
+                ...options
+            })
+            : '';
+    }
+    toFraction(str) {
+        return `${this.digits[0]}${this.decimalSymbol}${this.onlyLocaleDigits(str.substr(1)).substr(0, this.maximumFractionDigits)}`;
+    }
+    isFractionIncomplete(str) {
+        return !!this.normalizeDigits(this.stripGroupingSeparator(str)).match(new RegExp(`^${INTEGER_PATTERN}${escapeRegExp(this.decimalSymbol)}$`));
+    }
+    isNegative(str) {
+        return str.startsWith(this.negativePrefix) || str.replace('-', this.minusSymbol).startsWith(this.minusSymbol);
+    }
+    insertCurrencySymbol(str, negative) {
+        return `${negative ? this.negativePrefix : this.prefix}${str}${this.suffix}`;
+    }
+    stripGroupingSeparator(str) {
+        return str.replace(new RegExp(escapeRegExp(this.groupingSymbol), 'g'), '');
+    }
+    stripMinusSymbol(str) {
+        return str.replace('-', this.minusSymbol).replace(this.minusSymbol, '');
+    }
+    stripCurrencySymbol(str, negative) {
+        return str.replace(negative ? this.negativePrefix : this.prefix, '').replace(this.suffix, '');
+    }
+    normalizeDecimalSeparator(str, from) {
+        DECIMAL_SEPARATORS.forEach((s) => {
+            str = str.substr(0, from) + str.substr(from).replace(s, this.decimalSymbol);
+        });
+        return str;
+    }
+    normalizeDigits(str) {
+        if (this.digits[0] !== '0') {
+            this.digits.forEach((digit, index) => {
+                str = str.replace(new RegExp(digit, 'g'), String(index));
+            });
+        }
+        return str;
+    }
+    onlyDigits(str) {
+        return this.normalizeDigits(str).replace(/\D+/g, '');
+    }
+    onlyLocaleDigits(str) {
+        return str.replace(new RegExp(`[^${this.digits.join('')}]*`, 'g'), '');
+    }
+}
+
+class AbstractInputMask {
+    constructor(currencyFormat) {
+        this.currencyFormat = currencyFormat;
+    }
+}
+class DefaultInputMask extends AbstractInputMask {
+    conformToMask(str, previousConformedValue = '') {
+        const negative = this.currencyFormat.isNegative(str);
+        const checkIncompleteValue = (str) => {
+            if (str === '' && negative && previousConformedValue !== this.currencyFormat.negativePrefix) {
+                return '';
+            }
+            else if (this.currencyFormat.maximumFractionDigits > 0) {
+                if (this.currencyFormat.isFractionIncomplete(str)) {
+                    return str;
+                }
+                else if (str.startsWith(this.currencyFormat.decimalSymbol)) {
+                    return this.currencyFormat.toFraction(str);
+                }
+            }
+            return null;
+        };
+        let value = str;
+        value = this.currencyFormat.stripCurrencySymbol(value, negative);
+        value = this.currencyFormat.stripMinusSymbol(value);
+        const incompleteValue = checkIncompleteValue(value);
+        if (incompleteValue != null) {
+            return this.currencyFormat.insertCurrencySymbol(incompleteValue, negative);
+        }
+        const [integer, ...fraction] = value.split(this.currencyFormat.decimalSymbol);
+        const integerDigits = removeLeadingZeros(this.currencyFormat.onlyDigits(integer));
+        const fractionDigits = this.currencyFormat.onlyDigits(fraction.join('')).substr(0, this.currencyFormat.maximumFractionDigits);
+        const invalidFraction = fraction.length > 0 && fractionDigits.length === 0;
+        const invalidNegativeValue = integerDigits === '' && negative && (previousConformedValue === str.slice(0, -1) || previousConformedValue !== this.currencyFormat.negativePrefix);
+        if (invalidFraction || invalidNegativeValue) {
+            return previousConformedValue;
+        }
+        else if (integerDigits.match(/\d+/)) {
+            return {
+                numberValue: Number(`${negative ? '-' : ''}${integerDigits}.${fractionDigits}`),
+                fractionDigits
+            };
+        }
+        else {
+            return '';
+        }
+    }
+}
+class AutoDecimalDigitsInputMask extends AbstractInputMask {
+    conformToMask(str, previousConformedValue = '') {
+        if (str === '' ||
+            (this.currencyFormat.parse(previousConformedValue) === 0 &&
+                this.currencyFormat.stripCurrencySymbol(previousConformedValue, true).slice(0, -1) === this.currencyFormat.stripCurrencySymbol(str, true))) {
+            return '';
+        }
+        const negative = this.currencyFormat.isNegative(str);
+        const numberValue = this.currencyFormat.stripMinusSymbol(str) === ''
+            ? -0
+            : Number(`${negative ? '-' : ''}${removeLeadingZeros(this.currencyFormat.onlyDigits(str))}`) / Math.pow(10, this.currencyFormat.minimumFractionDigits);
+        return {
+            numberValue,
+            fractionDigits: numberValue.toFixed(this.currencyFormat.minimumFractionDigits).slice(-this.currencyFormat.minimumFractionDigits)
+        };
+    }
+}
+
+const DEFAULT_OPTIONS = {
+    locale: undefined,
+    currency: undefined,
+    currencyDisplay: undefined,
+    exportValueAsInteger: false,
+    hideGroupingSeparatorOnFocus: true,
+    hideCurrencySymbolOnFocus: true,
+    hideNegligibleDecimalDigitsOnFocus: true,
+    precision: undefined,
+    autoDecimalDigits: false,
+    valueRange: undefined,
+    autoSign: true,
+    useGrouping: true
+};
+class CurrencyInput {
+    constructor(el, options) {
+        this.el = el;
+        this.numberValue = null;
+        this.addEventListener();
+        this.init(options);
+        this.setValue(this.currencyFormat.parse(this.el.value));
+    }
+    setOptions(options) {
+        this.init(options);
+        this.applyFixedFractionFormat(this.numberValue, true);
+    }
+    getValue() {
+        const numberValue = this.options.exportValueAsInteger && this.numberValue != null ? this.toInteger(this.numberValue) : this.numberValue;
+        return { number: numberValue, formatted: this.formattedValue };
+    }
+    setValue(value) {
+        const newValue = this.options.exportValueAsInteger && value != null ? this.toFloat(value) : value;
+        if (newValue !== this.numberValue) {
+            this.applyFixedFractionFormat(newValue);
+        }
+    }
+    dispatchEvent(eventName) {
+        this.el.dispatchEvent(new CustomEvent(eventName, { detail: this.getValue() }));
+    }
+    init(options) {
+        this.options = {
+            ...DEFAULT_OPTIONS,
+            ...options
+        };
+        if (this.options.autoDecimalDigits) {
+            this.options.hideNegligibleDecimalDigitsOnFocus = false;
+            this.el.setAttribute('inputmode', 'numeric');
+        }
+        else {
+            this.el.setAttribute('inputmode', 'decimal');
+        }
+        this.currencyFormat = new CurrencyFormat(this.options);
+        this.numberMask = this.options.autoDecimalDigits ? new AutoDecimalDigitsInputMask(this.currencyFormat) : new DefaultInputMask(this.currencyFormat);
+        this.minValue = this.getMinValue();
+        this.maxValue = this.getMaxValue();
+    }
+    getMinValue() {
+        let min = this.toFloat(-Number.MAX_SAFE_INTEGER);
+        if (this.options.valueRange?.min !== undefined) {
+            min = Math.max(this.options.valueRange?.min, this.toFloat(-Number.MAX_SAFE_INTEGER));
+        }
+        if (!this.options.autoSign && min < 0) {
+            min = 0;
+        }
+        return min;
+    }
+    getMaxValue() {
+        let max = this.toFloat(Number.MAX_SAFE_INTEGER);
+        if (this.options.valueRange?.max !== undefined) {
+            max = Math.min(this.options.valueRange?.max, this.toFloat(Number.MAX_SAFE_INTEGER));
+        }
+        if (!this.options.autoSign && max < 0) {
+            max = this.toFloat(Number.MAX_SAFE_INTEGER);
+        }
+        return max;
+    }
+    toFloat(value) {
+        return value / Math.pow(10, this.currencyFormat.maximumFractionDigits);
+    }
+    toInteger(value) {
+        return Number(value.toFixed(this.currencyFormat.maximumFractionDigits).split('.').join(''));
+    }
+    validateValueRange(value) {
+        return value != null ? Math.min(Math.max(value, this.minValue), this.maxValue) : value;
+    }
+    applyFixedFractionFormat(number, forcedChange = false) {
+        this.format(this.currencyFormat.format(this.validateValueRange(number)));
+        if (number !== this.numberValue || forcedChange) {
+            this.dispatchEvent('change');
+        }
+    }
+    format(value, hideNegligibleDecimalDigits = false) {
+        if (value != null) {
+            if (this.decimalSymbolInsertedAt !== undefined) {
+                value = this.currencyFormat.normalizeDecimalSeparator(value, this.decimalSymbolInsertedAt);
+                this.decimalSymbolInsertedAt = undefined;
+            }
+            const conformedValue = this.numberMask.conformToMask(value, this.formattedValue);
+            let formattedValue;
+            if (typeof conformedValue === 'object') {
+                const { numberValue, fractionDigits } = conformedValue;
+                let { maximumFractionDigits, minimumFractionDigits } = this.currencyFormat;
+                if (this.focus) {
+                    minimumFractionDigits = hideNegligibleDecimalDigits
+                        ? fractionDigits.replace(/0+$/, '').length
+                        : Math.min(maximumFractionDigits, fractionDigits.length);
+                }
+                else if (Number.isInteger(numberValue) && !this.options.autoDecimalDigits && (this.options.precision === undefined || minimumFractionDigits === 0)) {
+                    minimumFractionDigits = maximumFractionDigits = 0;
+                }
+                formattedValue =
+                    numberValue > this.toInteger(Math.abs(numberValue))
+                        ? this.formattedValue
+                        : this.currencyFormat.format(numberValue, {
+                            useGrouping: this.options.useGrouping && !(this.focus && this.options.hideGroupingSeparatorOnFocus),
+                            minimumFractionDigits,
+                            maximumFractionDigits
+                        });
+            }
+            else {
+                formattedValue = conformedValue;
+            }
+            if (this.options.autoSign) {
+                if (this.maxValue <= 0 && !this.currencyFormat.isNegative(formattedValue) && this.currencyFormat.parse(formattedValue) !== 0) {
+                    formattedValue = formattedValue.replace(this.currencyFormat.prefix, this.currencyFormat.negativePrefix);
+                }
+                if (this.minValue >= 0) {
+                    formattedValue = formattedValue.replace(this.currencyFormat.negativePrefix, this.currencyFormat.prefix);
+                }
+            }
+            if (this.options.currencyDisplay === CurrencyDisplay.hidden || (this.focus && this.options.hideCurrencySymbolOnFocus)) {
+                formattedValue = formattedValue
+                    .replace(this.currencyFormat.negativePrefix, this.currencyFormat.minusSymbol)
+                    .replace(this.currencyFormat.prefix, '')
+                    .replace(this.currencyFormat.suffix, '');
+            }
+            this.el.value = formattedValue;
+            this.numberValue = this.currencyFormat.parse(formattedValue);
+        }
+        else {
+            this.el.value = '';
+            this.numberValue = null;
+        }
+        this.formattedValue = this.el.value;
+        this.dispatchEvent('input');
+    }
+    addEventListener() {
+        this.el.addEventListener('input', (e) => {
+            if (!e.isTrusted) {
+                return;
+            }
+            const { value, selectionStart } = this.el;
+            const inputEvent = e;
+            if (selectionStart && inputEvent.data && DECIMAL_SEPARATORS.includes(inputEvent.data)) {
+                this.decimalSymbolInsertedAt = selectionStart - 1;
+            }
+            this.format(value);
+            if (this.focus && selectionStart != null) {
+                const getCaretPositionAfterFormat = () => {
+                    const { prefix, suffix, decimalSymbol, maximumFractionDigits, groupingSymbol } = this.currencyFormat;
+                    let caretPositionFromLeft = value.length - selectionStart;
+                    const newValueLength = this.formattedValue.length;
+                    if (this.formattedValue.substr(selectionStart, 1) === groupingSymbol &&
+                        count(this.formattedValue, groupingSymbol) === count(value, groupingSymbol) + 1) {
+                        return newValueLength - caretPositionFromLeft - 1;
+                    }
+                    if (decimalSymbol) {
+                        const decimalSymbolPosition = value.indexOf(decimalSymbol) + 1;
+                        if (Math.abs(newValueLength - value.length) > 1 && selectionStart <= decimalSymbolPosition) {
+                            return this.formattedValue.indexOf(decimalSymbol) + 1;
+                        }
+                        else {
+                            if (!this.options.autoDecimalDigits && selectionStart > decimalSymbolPosition) {
+                                if (this.currencyFormat.onlyDigits(value.substr(decimalSymbolPosition)).length - 1 === maximumFractionDigits) {
+                                    caretPositionFromLeft -= 1;
+                                }
+                            }
+                        }
+                    }
+                    return this.options.hideCurrencySymbolOnFocus
+                        ? newValueLength - caretPositionFromLeft
+                        : Math.max(newValueLength - Math.max(caretPositionFromLeft, suffix.length), prefix.length);
+                };
+                this.setCaretPosition(getCaretPositionAfterFormat());
+            }
+        }, { capture: true });
+        this.el.addEventListener('focus', () => {
+            this.focus = true;
+            setTimeout(() => {
+                const { value, selectionStart, selectionEnd } = this.el;
+                this.format(value, this.options.hideNegligibleDecimalDigitsOnFocus);
+                if (selectionStart != null && selectionEnd != null && Math.abs(selectionStart - selectionEnd) > 0) {
+                    this.setCaretPosition(0, this.el.value.length);
+                }
+                else if (selectionStart != null) {
+                    const getCaretPositionOnFocus = () => {
+                        const { prefix, suffix, groupingSymbol } = this.currencyFormat;
+                        if (!this.options.hideCurrencySymbolOnFocus) {
+                            if (selectionStart >= value.length - suffix.length) {
+                                return this.formattedValue.length - suffix.length;
+                            }
+                            else if (selectionStart < prefix.length) {
+                                return prefix.length;
+                            }
+                        }
+                        let result = selectionStart;
+                        if (this.options.hideCurrencySymbolOnFocus) {
+                            result -= prefix.length;
+                        }
+                        if (this.options.hideGroupingSeparatorOnFocus) {
+                            result -= count(value.substring(0, selectionStart), groupingSymbol);
+                        }
+                        return result;
+                    };
+                    this.setCaretPosition(getCaretPositionOnFocus());
+                }
+            });
+        });
+        this.el.addEventListener('blur', () => {
+            this.focus = false;
+            this.applyFixedFractionFormat(this.numberValue);
+        });
+        this.el.addEventListener('change', (e) => {
+            if (!e.isTrusted) {
+                return;
+            }
+            this.dispatchEvent('change');
+        }, { capture: true });
+    }
+    setCaretPosition(start, end = start) {
+        this.el.setSelectionRange(start, end);
+    }
+}
+
+const findInput = (el) => (el.tagName.toLowerCase() === 'input' ? el : el.querySelector('input'));
+var useCurrencyInput = (options) => {
+    let numberInput, input;
+    const inputRef = (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    const formattedValue = (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    const instance = (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance)();
+    if (instance == null) {
+        throw new Error();
+    }
+    const emit = (event, value) => (vue_demi__WEBPACK_IMPORTED_MODULE_0__.isVue3 ? instance.emit(event, value) : instance.proxy?.$emit(event, value));
+    const lazyModel = vue_demi__WEBPACK_IMPORTED_MODULE_0__.isVue3 && instance.attrs.modelModifiers?.lazy;
+    const numberValue = (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.computed)(() => (vue_demi__WEBPACK_IMPORTED_MODULE_0__.isVue3 ? instance.props.modelValue : instance.props.value));
+    const inputEvent = vue_demi__WEBPACK_IMPORTED_MODULE_0__.isVue3 ? 'update:modelValue' : 'input';
+    const changeEvent = vue_demi__WEBPACK_IMPORTED_MODULE_0__.isVue3 && lazyModel ? 'update:modelValue' : 'change';
+    const hasInputEventListener = vue_demi__WEBPACK_IMPORTED_MODULE_0__.isVue3 ? !!instance.attrs['onUpdate:modelValue'] && !lazyModel : !!instance.proxy?.$listeners[inputEvent];
+    const hasChangeEventListener = vue_demi__WEBPACK_IMPORTED_MODULE_0__.isVue3 ? lazyModel || !!instance.attrs.onChange : !!instance.proxy.$listeners[changeEvent];
+    const onInput = (e) => {
+        if (e.detail) {
+            if (numberValue.value !== e.detail.number) {
+                emit(inputEvent, e.detail.number);
+            }
+            formattedValue.value = e.detail.formatted;
+        }
+    };
+    const onChange = (e) => {
+        if (e.detail) {
+            emit(changeEvent, e.detail.number);
+            formattedValue.value = e.detail.formatted;
+        }
+    };
+    (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.onMounted)(() => {
+        if (inputRef.value) {
+            input = ('$el' in inputRef.value ? findInput(inputRef.value.$el) : inputRef.value);
+            if (input == null) {
+                throw new Error('No input element found');
+            }
+            else {
+                numberInput = new CurrencyInput(input, options);
+                if (hasInputEventListener) {
+                    input.addEventListener('input', onInput);
+                }
+                if (hasChangeEventListener) {
+                    input.addEventListener('change', onChange);
+                }
+                numberInput.setValue(numberValue.value);
+            }
+        }
+    });
+    (0,vue_demi__WEBPACK_IMPORTED_MODULE_0__.onUnmounted)(() => {
+        if (hasInputEventListener) {
+            input.removeEventListener('input', onInput);
+        }
+        if (hasChangeEventListener) {
+            input.removeEventListener('change', onChange);
+        }
+    });
+    return {
+        inputRef,
+        formattedValue,
+        setValue: (value) => numberInput.setValue(value),
+        setOptions: (options) => numberInput.setOptions(options)
+    };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useCurrencyInput);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-currency-input/node_modules/vue-demi/lib/index.esm.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/vue-currency-input/node_modules/vue-demi/lib/index.esm.js ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "set": () => (/* binding */ set),
+/* harmony export */   "del": () => (/* binding */ del),
+/* harmony export */   "BaseTransition": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.BaseTransition),
+/* harmony export */   "Comment": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Comment),
+/* harmony export */   "Fragment": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Fragment),
+/* harmony export */   "KeepAlive": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.KeepAlive),
+/* harmony export */   "Static": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Static),
+/* harmony export */   "Suspense": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Suspense),
+/* harmony export */   "Teleport": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Teleport),
+/* harmony export */   "Text": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Text),
+/* harmony export */   "Transition": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.Transition),
+/* harmony export */   "TransitionGroup": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.TransitionGroup),
+/* harmony export */   "callWithAsyncErrorHandling": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.callWithAsyncErrorHandling),
+/* harmony export */   "callWithErrorHandling": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.callWithErrorHandling),
+/* harmony export */   "camelize": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.camelize),
+/* harmony export */   "capitalize": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.capitalize),
+/* harmony export */   "cloneVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.cloneVNode),
+/* harmony export */   "compatUtils": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.compatUtils),
+/* harmony export */   "compile": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.compile),
+/* harmony export */   "computed": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.computed),
+/* harmony export */   "createApp": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createApp),
+/* harmony export */   "createBlock": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createBlock),
+/* harmony export */   "createCommentVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode),
+/* harmony export */   "createHydrationRenderer": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createHydrationRenderer),
+/* harmony export */   "createRenderer": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createRenderer),
+/* harmony export */   "createSSRApp": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createSSRApp),
+/* harmony export */   "createSlots": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createSlots),
+/* harmony export */   "createStaticVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode),
+/* harmony export */   "createTextVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode),
+/* harmony export */   "createVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.createVNode),
+/* harmony export */   "customRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.customRef),
+/* harmony export */   "defineAsyncComponent": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineAsyncComponent),
+/* harmony export */   "defineComponent": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent),
+/* harmony export */   "defineEmit": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineEmit),
+/* harmony export */   "defineProps": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.defineProps),
+/* harmony export */   "devtools": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.devtools),
+/* harmony export */   "getCurrentInstance": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance),
+/* harmony export */   "getTransitionRawChildren": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.getTransitionRawChildren),
+/* harmony export */   "h": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.h),
+/* harmony export */   "handleError": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.handleError),
+/* harmony export */   "hydrate": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.hydrate),
+/* harmony export */   "initCustomFormatter": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.initCustomFormatter),
+/* harmony export */   "inject": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.inject),
+/* harmony export */   "isProxy": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isProxy),
+/* harmony export */   "isReactive": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isReactive),
+/* harmony export */   "isReadonly": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isReadonly),
+/* harmony export */   "isRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isRef),
+/* harmony export */   "isRuntimeOnly": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isRuntimeOnly),
+/* harmony export */   "isVNode": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.isVNode),
+/* harmony export */   "markRaw": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.markRaw),
+/* harmony export */   "mergeProps": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps),
+/* harmony export */   "nextTick": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.nextTick),
+/* harmony export */   "onActivated": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onActivated),
+/* harmony export */   "onBeforeMount": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount),
+/* harmony export */   "onBeforeUnmount": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeUnmount),
+/* harmony export */   "onBeforeUpdate": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeUpdate),
+/* harmony export */   "onDeactivated": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onDeactivated),
+/* harmony export */   "onErrorCaptured": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onErrorCaptured),
+/* harmony export */   "onMounted": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onMounted),
+/* harmony export */   "onRenderTracked": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onRenderTracked),
+/* harmony export */   "onRenderTriggered": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onRenderTriggered),
+/* harmony export */   "onServerPrefetch": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onServerPrefetch),
+/* harmony export */   "onUnmounted": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted),
+/* harmony export */   "onUpdated": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.onUpdated),
+/* harmony export */   "openBlock": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.openBlock),
+/* harmony export */   "popScopeId": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId),
+/* harmony export */   "provide": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.provide),
+/* harmony export */   "proxyRefs": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.proxyRefs),
+/* harmony export */   "pushScopeId": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId),
+/* harmony export */   "queuePostFlushCb": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.queuePostFlushCb),
+/* harmony export */   "reactive": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.reactive),
+/* harmony export */   "readonly": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.readonly),
+/* harmony export */   "ref": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.ref),
+/* harmony export */   "registerRuntimeCompiler": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.registerRuntimeCompiler),
+/* harmony export */   "render": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "renderList": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.renderList),
+/* harmony export */   "renderSlot": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot),
+/* harmony export */   "resolveComponent": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent),
+/* harmony export */   "resolveDirective": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective),
+/* harmony export */   "resolveDynamicComponent": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent),
+/* harmony export */   "resolveFilter": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveFilter),
+/* harmony export */   "resolveTransitionHooks": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.resolveTransitionHooks),
+/* harmony export */   "setBlockTracking": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.setBlockTracking),
+/* harmony export */   "setDevtoolsHook": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.setDevtoolsHook),
+/* harmony export */   "setTransitionHooks": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.setTransitionHooks),
+/* harmony export */   "shallowReactive": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.shallowReactive),
+/* harmony export */   "shallowReadonly": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.shallowReadonly),
+/* harmony export */   "shallowRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.shallowRef),
+/* harmony export */   "ssrContextKey": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.ssrContextKey),
+/* harmony export */   "ssrUtils": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.ssrUtils),
+/* harmony export */   "toDisplayString": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString),
+/* harmony export */   "toHandlerKey": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toHandlerKey),
+/* harmony export */   "toHandlers": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toHandlers),
+/* harmony export */   "toRaw": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toRaw),
+/* harmony export */   "toRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toRef),
+/* harmony export */   "toRefs": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.toRefs),
+/* harmony export */   "transformVNodeArgs": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.transformVNodeArgs),
+/* harmony export */   "triggerRef": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.triggerRef),
+/* harmony export */   "unref": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.unref),
+/* harmony export */   "useContext": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useContext),
+/* harmony export */   "useCssModule": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useCssModule),
+/* harmony export */   "useCssVars": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useCssVars),
+/* harmony export */   "useSSRContext": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useSSRContext),
+/* harmony export */   "useTransitionState": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.useTransitionState),
+/* harmony export */   "vModelCheckbox": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox),
+/* harmony export */   "vModelDynamic": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelDynamic),
+/* harmony export */   "vModelRadio": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio),
+/* harmony export */   "vModelSelect": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect),
+/* harmony export */   "vModelText": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vModelText),
+/* harmony export */   "vShow": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.vShow),
+/* harmony export */   "version": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.version),
+/* harmony export */   "warn": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.warn),
+/* harmony export */   "watch": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.watch),
+/* harmony export */   "watchEffect": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect),
+/* harmony export */   "withCtx": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withCtx),
+/* harmony export */   "withDirectives": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives),
+/* harmony export */   "withKeys": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withKeys),
+/* harmony export */   "withModifiers": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers),
+/* harmony export */   "withScopeId": () => (/* reexport safe */ vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId),
+/* harmony export */   "Vue": () => (/* reexport module object */ vue__WEBPACK_IMPORTED_MODULE_0__),
+/* harmony export */   "Vue2": () => (/* binding */ Vue2),
+/* harmony export */   "isVue2": () => (/* binding */ isVue2),
+/* harmony export */   "isVue3": () => (/* binding */ isVue3),
+/* harmony export */   "install": () => (/* binding */ install)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var isVue2 = false
+var isVue3 = true
+var Vue2 = undefined
+
+function install() {}
+
+function set(target, key, val) {
+  if (Array.isArray(target)) {
+    target.length = Math.max(target.length, key)
+    target.splice(key, 1, val)
+    return val
+  }
+  target[key] = val
+  return val
+}
+
+function del(target, key) {
+  if (Array.isArray(target)) {
+    target.splice(key, 1)
+    return
+  }
+  delete target[key]
+}
+
+
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Components/BreadCrumb.vue":
 /*!************************************************!*\
   !*** ./resources/js/Components/BreadCrumb.vue ***!
@@ -61446,6 +62220,32 @@ if (false) {}
 _ContractCard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/Components/ContractCard.vue"
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_ContractCard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
+/***/ "./resources/js/Components/CurrencyInput.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/Components/CurrencyInput.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CurrencyInput_vue_vue_type_template_id_08bc457e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CurrencyInput.vue?vue&type=template&id=08bc457e */ "./resources/js/Components/CurrencyInput.vue?vue&type=template&id=08bc457e");
+/* harmony import */ var _CurrencyInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CurrencyInput.vue?vue&type=script&lang=js */ "./resources/js/Components/CurrencyInput.vue?vue&type=script&lang=js");
+
+
+
+_CurrencyInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _CurrencyInput_vue_vue_type_template_id_08bc457e__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_CurrencyInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/Components/CurrencyInput.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_CurrencyInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
 
 /***/ }),
 
@@ -63740,6 +64540,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/CurrencyInput.vue?vue&type=script&lang=js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/Components/CurrencyInput.vue?vue&type=script&lang=js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CurrencyInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CurrencyInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CurrencyInput.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/CurrencyInput.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Components/Documents/Item.vue?vue&type=script&lang=js":
 /*!****************************************************************************!*\
   !*** ./resources/js/Components/Documents/Item.vue?vue&type=script&lang=js ***!
@@ -65128,6 +65944,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ContractCard_vue_vue_type_template_id_156a120d__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ContractCard_vue_vue_type_template_id_156a120d__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ContractCard.vue?vue&type=template&id=156a120d */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/ContractCard.vue?vue&type=template&id=156a120d");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/CurrencyInput.vue?vue&type=template&id=08bc457e":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Components/CurrencyInput.vue?vue&type=template&id=08bc457e ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CurrencyInput_vue_vue_type_template_id_08bc457e__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CurrencyInput_vue_vue_type_template_id_08bc457e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CurrencyInput.vue?vue&type=template&id=08bc457e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/CurrencyInput.vue?vue&type=template&id=08bc457e");
 
 
 /***/ }),

@@ -19,7 +19,7 @@
 
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="price" value="Betrag" />
-                        <jet-input id="price" type="text" class="mt-1 block w-full" v-model="form.price" ref="price" autocomplete="price" />
+                        <currency-input v-model="form.price" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" ref="price"/>
                         <jet-input-error :message="form.errors.price" class="mt-2" />
                     </div>
 
@@ -55,6 +55,7 @@ import JetInputError from '@/Jetstream/InputError'
 import JetFormSection from '@/Jetstream/FormSection'
 import Datepicker from 'vue3-datepicker'
 import { useForm } from '@inertiajs/inertia-vue3'
+import CurrencyInput from '@/Components/CurrencyInput'
 
 export default {
     components: {
@@ -65,6 +66,7 @@ export default {
         JetInputError,
         JetActionMessage,
         Datepicker,
+        CurrencyInput,
     },
     props: {
         data: Object,
@@ -74,6 +76,12 @@ export default {
     data() {
         return {
             form: useForm(this.meta.form_name, this.data),
+            currencyOptions: {
+                currency: 'CHF',
+                locale: 'de-CH',
+                exportValueAsInteger: true,
+                hideGroupingSeparatorOnFocus: false,
+            },
         }
     },
     methods: {

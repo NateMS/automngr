@@ -27,6 +27,7 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "vue-currency-input": "^2.0.0",
         "vue-multiselect": "^3.0.0-alpha.2",
         "vue-unicons": "^3.2.1",
         "vue3-datepicker": "^0.2.4",
