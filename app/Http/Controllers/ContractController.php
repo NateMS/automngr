@@ -246,7 +246,7 @@ class ContractController extends Controller
                 'allow_self_signed'=> TRUE
             ]
         ]);
-        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contract', compact('contract'));//->setPaper('a4', 'portrait');
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contract', compact('contract'));
         $pdf->getDomPDF()->setHttpContext($contxt);
         return $pdf->stream($contract->date . '_' . $contract->type_formatted . '.pdf');
     }

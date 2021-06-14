@@ -20022,8 +20022,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submitForm: function submitForm() {
-      this.form.initial_date = this.form.initial_date.toISOString().split("T")[0];
-      this.form.last_check_date = this.form.last_check_date.toISOString().split("T")[0];
       this.form.submit(this.meta.method, this.meta.route);
     }
   }
@@ -29097,7 +29095,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "price",
         value: "Betrag"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <jet-input id=\"price\" type=\"text\" class=\"mt-1 block w-full\" v-model=\"form.price\" ref=\"price\" autocomplete=\"price\" /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
         modelValue: $data.form.price,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.form.price = $event;

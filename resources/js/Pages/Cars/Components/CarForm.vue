@@ -54,8 +54,6 @@ export default {
     },
     methods: {
         submitForm() {
-            this.form.initial_date = this.form.initial_date.toISOString().split("T")[0];
-            this.form.last_check_date = this.form.last_check_date.toISOString().split("T")[0];
             this.form.submit(this.meta.method, this.meta.route);
         },
     }

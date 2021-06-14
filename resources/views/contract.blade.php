@@ -135,7 +135,7 @@ MwSt-Nr: CHE-226.272.050
         </tr>
         <tr>
             <td>Kilometerstand</td>
-            <td>{{ $contract->car->kilometers }}</td>
+            <td>{{ $contract->car->kilometers_formatted }}</td>
             <td>Garantie</td>
             <td>{{ $contract->insurance_type_formatted }}</td>
         </tr>
@@ -146,11 +146,11 @@ MwSt-Nr: CHE-226.272.050
         </tr>
         <tr>
             <td>Anzahlung</td>
-            <td></td>
+            <td>{{ $contract->paid }}</td>
         </tr>
         <tr>
             <td>Restbetrag</td>
-            <td></td>
+            <td>{{ $contract->left_to_pay }}</td>
         </tr>
         <tr>
             <td>Bankverbindung IBAN</td>
