@@ -172,6 +172,8 @@ class ContractController extends Controller
             'date' => $contract->date_formatted,
             'price' => $contract->price->format(),
             'type' => $contract->type,
+            'paid' => $contract->paid->format(),
+            'left_to_pay' => $contract->left_to_pay->format(),
             'is_sell_contract' => $contract->isSellContract(),
             'documents' => $contract->documents()->orderBy('created_at', 'asc')->get()
                 ->map(function ($document) {
@@ -188,7 +190,7 @@ class ContractController extends Controller
                 ->through(fn ($payment) => [
                         'id' => $payment->id,
                         'date' => $payment->date,
-                        'amount' => $payment->amount,
+                        'amount' => $payment->amount->format(),
                         'type' => $payment->type,
                         'delete_link' => $payment->delete_link,
                 ]),

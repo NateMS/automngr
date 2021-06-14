@@ -43,7 +43,6 @@ import JetButton from '@/Jetstream/Button'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetInputError from '@/Jetstream/InputError'
-import Multiselect from 'vue-multiselect'
 import Datepicker from 'vue3-datepicker'
 import { useForm } from '@inertiajs/inertia-vue3'
 import { ref } from 'vue'
@@ -55,7 +54,6 @@ export default {
         JetLabel,
         JetInput,
         JetInputError,
-        Multiselect,
         DialogModal,
         Datepicker,
     },
@@ -72,7 +70,6 @@ export default {
                 type: '1',
                 contract_id: this.id,
             }),
-            // typeSelection: {key: this.data.type, label: 'asd'},
         }
     },
     methods: {
@@ -85,9 +82,6 @@ export default {
                 },
             });
         },
-        // updateTypeSelection(selection) {
-        //     this.form.type = (selection.key).toString();
-        // },
     },
 }
 </script>

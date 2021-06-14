@@ -32,7 +32,12 @@ class Payment extends Model
 
     public function getAmountAttribute($amount)
     {
-        return Money::CHF($amount)->format();
+        return Money::CHF($amount);
+    }
+
+    public function getAmountRawAttribute()
+    {
+        return $this->amount;
     }
 
     public function getTypeAttribute($type)

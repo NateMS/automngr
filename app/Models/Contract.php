@@ -33,6 +33,18 @@ class Contract extends Model
         return Money::CHF($price);
     }
 
+    public function getPaidAttribute()
+    {
+        
+        return Money::CHF($this->payments()->sum('amount'));
+    }
+
+    public function getLeftToPayAttribute()
+    {
+        
+        return $this->price->subtract($this->paid);
+    }
+
     public function getInsuranceTypeFormattedAttribute()
     {
         switch ($this->insurance_type) {

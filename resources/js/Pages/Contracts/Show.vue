@@ -29,6 +29,18 @@
                     <div class="col-span-3 xs:col-span-2 font-bold">
                         {{ contract.price }}
                     </div>
+                    <div class="col-span-1 xs:col-span-2">
+                        Bezahlt
+                    </div>
+                    <div class="col-span-3 xs:col-span-2">
+                        {{ contract.paid }}
+                    </div>
+                    <div class="col-span-1 xs:col-span-2">
+                        Offener Betrag
+                    </div>
+                    <div class="col-span-3 xs:col-span-2">
+                        {{ contract.left_to_pay }}
+                    </div>
                 </div>
             </div>
         </template>
@@ -54,7 +66,7 @@
                 <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
             </div>
             <div class="col-span-5 xs:col-span-12">
-                <payments-view :payments="contract.payments" :id="contract.id" />
+                <payments-view :payments="contract.payments" :contract="contract" />
             </div>
         </template>
     </show-page>
