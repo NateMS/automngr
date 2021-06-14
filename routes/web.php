@@ -52,10 +52,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::prefix('contracts')->group(function () {
         Route::post('/', [ContractController::class, 'store'])->name('contracts.store');
 
-        Route::prefix('create/{0|1}/')->group(function () {
-            Route::get('car/{car}/contact/{contact}', [ContractController::class, 'create'])->name('contracts.create');
-            Route::get('car/{car}', [ContractController::class, 'createFromCar'])->name('contracts.create_from_car');
-            Route::get('contact/{contact}', [ContractController::class, 'createFromContact'])->name('contracts.create_from_contact');
+        Route::prefix('create/{type}')->group(function () {
+            Route::get('car/{car}/contact/{contact}', [ContractController::class, 'create'])->where('type', '0|1')->name('contracts.create');
+            Route::get('car/{car}', [ContractController::class, 'createFromCar'])->where('type', '0|1')->name('contracts.create_from_car');
+            Route::get('contact/{contact}', [ContractController::class, 'createFromContact'])->where('type', '0|1')->name('contracts.create_from_contact');
         });
 
         Route::prefix('{contract}')->group(function () {

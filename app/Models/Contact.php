@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Enums\ContractType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,7 +27,7 @@ class Contact extends Model
 
     public function getNameAttribute()
     {
-        return $this->lastname . ' ' . $this->firstname;
+        return implode(' ', array_filter([$this->lastname, $this->firstname]));
     }
 
     public function getTitleAttribute()
@@ -36,6 +37,15 @@ class Contact extends Model
         }
 
         return $this->name;
+    }
+
+    public function getDeletedAtAttribute($deleted_at)
+    {
+        if ($deleted_at) {
+            return Carbon::parse($deleted_at)->format('d.m.Y');
+        }
+        
+        return null;
     }
 
     public function getFullTitleAttribute()

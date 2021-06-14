@@ -3,12 +3,12 @@
         <template #header>
             <bread-crumb text="Autos" :href="route('cars')" />
             <bread-crumb :text="contract.car.name" :href="route('cars.show', contract.car.id)" />
-            {{ contractType}} vom {{ contract.date }}
+            {{ contract.type_formatted }} vom {{ contract.date }}
         </template>
         <template #info>
             <div class="p-5 bg-white shadow rounded-md font-medium">
                 <div class="font-bold pb-1 mb-1 text-2xl border-b">
-                    {{ contractType}} vom {{ contract.date }}
+                    {{ contract.type_formatted }} vom {{ contract.date }}
                 </div>
                 <div class="grid grid-cols-4 gap-2 w-full">
                     <div class="col-span-1 xs:col-span-2">
@@ -105,11 +105,8 @@ export default {
         contract: Object,
     },
     computed: {
-        contractType: function() {
-            return this.contract.type == 0 ? 'Ankaufsvertrag' : 'Verkaufsvertrag';
-        },
         contactTitle: function() {
-            return this.contract.type == 0 ? 'Verkäufer' : 'Käufer';
+            return this.contract.is_sell_contract ? 'Käufer' : 'Verkäufer';
         }
     },
     data() {

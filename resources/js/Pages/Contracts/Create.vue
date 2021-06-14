@@ -45,7 +45,7 @@
                     <contact-card class="col-span-12" :contact="contact" />
                 </template>
             </jet-form-section>
-            <contract-form class="mt-5" :data="data" :meta="meta">
+            <contract-form class="mt-5" :data="data" :meta="meta" :insurance_types="insurance_types">
                 <template #title>Vertragsinformationen erfassen</template>
                 <template #description>Der Vertrag kann anschliessend gespeichert werden.</template>
             </contract-form>
@@ -76,6 +76,7 @@ export default {
         contact: Object,
         type: String,
         car_first: Boolean,
+        insurance_types: Array,
     },
     data() {
         return {
@@ -90,7 +91,7 @@ export default {
                 id: null,
                 date: ref(new Date()),
                 price: null,
-                type: this.type == "SellContract" ? '0' : '1',
+                type: this.type,
                 insurance_type: '0',
                 car_id: this.car.id,
                 contact_id: this.contact.id,

@@ -148,6 +148,7 @@ class ContactController extends Controller
                 'lastname' => $contact->lastname,
                 'company' => $contact->company,
                 'title' => $contact->title,
+                'name' => $contact->name,
                 'email' => $contact->email,
                 'notes' => $contact->notes,
                 'phone' => $contact->phone,

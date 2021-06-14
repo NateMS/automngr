@@ -3,7 +3,7 @@
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 <bread-crumb text="Kontakte" :href="route('contacts')" />
-                {{ title }}
+                {{ contact.title }}
             </h2>
         </template>
 
@@ -82,15 +82,6 @@ export default {
         return {
             currentRoute: 'contacts.show',
         }
-    },
-    computed: {
-        title: function () {
-            if (this.contact.company) {
-                return this.contact.company;
-            }
-
-            return this.contact.lastname + ' ' + this.contact.firstname;
-        }, 
     },
 }
 </script>

@@ -25,11 +25,12 @@
 
                     <div v-if="form.is_sell_contract" class="col-span-6 sm:col-span-4">
                         <jet-label for="insurance_type" value="Versicherung" />
-                        <multiselect class="mt-1 block w-full" @select="updateInsuranceSelection" v-model="insuranceSelection" deselect-label="Kann nicht entfernt werden" track-by="key" label="label" placeholder="Versicherung auswählen" :options="insurances" :searchable="false" :allow-empty="false" />
+                        <select v-model="form.insurance_type" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option v-for="(insurance, index) in insurance_types" :value="index" :selected="form.insurance_type == index">{{ insurance }}</option>
+                        </select>
                         <jet-input-error :message="form.errors.insurance_type" class="mt-2" />
                     </div>
                 </div>
-                
             </template>
 
             <template #actions>
@@ -52,7 +53,6 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetActionMessage from '@/Jetstream/ActionMessage'
 import JetInputError from '@/Jetstream/InputError'
 import JetFormSection from '@/Jetstream/FormSection'
-import Multiselect from 'vue-multiselect'
 import Datepicker from 'vue3-datepicker'
 import { useForm } from '@inertiajs/inertia-vue3'
 
@@ -64,43 +64,22 @@ export default {
         JetInput,
         JetInputError,
         JetActionMessage,
-        Multiselect,
         Datepicker,
     },
     props: {
         data: Object,
         meta: Object,
-        insurance_types: Object,
+        insurance_types: Array,
     },
     data() {
         return {
             form: useForm(this.meta.form_name, this.data),
-            insuranceSelection: {key: this.data.insurance_type, label: 'asd'},
         }
-    },
-    computed: {
-        insurances: function() {
-            let insurances = [];
-            for (const label in this.insurance_types) {
-                insurances.push({key: this.insurance_types[label], label: label});
-            }
-            return insurances;
-        },
     },
     methods: {
         submitForm() {
-            this.form.date = this.form.date.toISOString().split("T")[0];
             this.form.submit(this.meta.method, this.meta.route);
         },
-        updateInsuranceSelection(selection) {
-            this.form.insurance_type = (selection.key).toString();
-        },
-    },
-    mounted: function () {
-        this.$nextTick(function () {
-            this.insuranceSelection = this.insurances.find(x => x.key === parseInt(this.data.insurance_type));
-        })
     },
 }
 </script>
-<style src="vue-multiselect/dist/vue-multiselect.css"></style>

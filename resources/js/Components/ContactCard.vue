@@ -3,8 +3,8 @@
         <div v-if="contact.company" class="font-bold">
             {{ contact.company }}
         </div>
-        <div v-if="contact.lastname && contact.firstname">
-            {{ contact.lastname + ' ' + contact.firstname }}
+        <div v-if="contact.name">
+            {{ contact.name }}
         </div>
         <div v-if="contact.address">
             {{ contact.address }}

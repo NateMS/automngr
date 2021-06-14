@@ -3,7 +3,7 @@
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 <bread-crumb text="Kontakte" :href="route('contacts')" />
-                <bread-crumb :text="title" :href="route('contacts.show', contact.id)" />
+                <bread-crumb :text="contact.title" :href="route('contacts.show', contact.id)" />
                 bearbeiten
             </h2>
         </template>
@@ -57,15 +57,6 @@ export default {
                 notes: this.contact.notes,
             },
         }
-    },
-    computed: {
-        title: function () {
-            if (this.data.company) {
-                return this.data.company;
-            }
-
-            return this.data.lastname + ' ' + this.data.firstname;
-        }, 
     },
 }
 </script>

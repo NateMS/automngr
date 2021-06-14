@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 <bread-crumb text="Autos" :href="route('cars')" />
                 <bread-crumb :text="contract.car.name" :href="route('cars.show', contract.car.id)" />
-                <bread-crumb :text="'Vertrag vom ' + contract.date_formatted" :href="route('contracts.show', contract.id)" />
+                <bread-crumb :text="contract.type_formatted + ' vom ' + contract.date_formatted" :href="route('contracts.show', contract.id)" />
                 bearbeiten
             </h2>
         </template>
@@ -12,7 +12,7 @@
             <contract-form :data="data" :insurance_types="insurance_types" :meta="meta">
                 <template #title>Vertragsangaben</template>
                 <template #description>
-                    Vertrag &amp; anpassen.
+                    {{ contract.type_formatted }} &amp; anpassen.
                 </template>
             </contract-form>
         </div>
@@ -33,7 +33,7 @@ export default {
     },
     props: {
         contract: Object,
-        insurance_types: Object,
+        insurance_types: Array,
     },
     data() {
         return {

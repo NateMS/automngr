@@ -17,35 +17,39 @@ use Illuminate\Support\Facades\Redirect;
 
 class ContractController extends Controller
 {
-    public function create(Request $request, int $type, Car $car, Contact $contact)
+    public function create(Request $request, string $type, Car $car, Contact $contact)
     {
         return Inertia::render('Contracts/Create', [
             'car' => $this->getCarFields($car),
             'contact' => $this->getContactFields($contact),
-            'type' => ContractType::coerce($type)->key,
+            'is_sell_contract' => ContractType::coerce($type) == ContractType::SellContract,
+            'type' => $type,
             'car_first' => (bool)$request->query('carFirst'),
+            'insurance_types' => InsuranceType::asSelectArray(),
         ]);
     }
 
-    public function createFromCar(Request $request, int $type, Car $car)
+    public function createFromCar(Request $request, string $type, Car $car)
     {
         return Inertia::render('Contracts/CreateFromCar', [
             'car' => $this->getCarFields($car),
-            'type' => ContractType::coerce($type)->key,
+            'is_sell_contract' => ContractType::coerce($type) == ContractType::SellContract,
+            'type' => $type,
             'contacts' => Contact::all()->map(function ($contact) {
                 return $this->getContactFields($contact);
             }),
         ]);
     }
 
-    public function createFromContact(Request $request, int $type, Contact $contact)
+    public function createFromContact(Request $request, string $type, Contact $contact)
     {
         $contractType = ContractType::coerce($type);
         $cars = $contractType->value == ContractType::SellContract ? Car::unsoldOnly() : Car::soldOnly();
 
         return Inertia::render('Contracts/CreateFromContact', [
             'contact' => $this->getContactFields($contact),
-            'type' => $contractType->key,
+            'is_sell_contract' => $contractType == ContractType::SellContract,
+            'type' => $type,
             'cars' => $cars->get()->map(function ($car) {
                 return $this->getCarFields($car);
             }),
@@ -133,6 +137,8 @@ class ContractController extends Controller
                 'date' => $contract->date,
                 'date_formatted' => $contract->date_formatted,
                 'is_sell_contract' => $contract->isSellContract(),
+                'type' => $contract->type,
+                'type_formatted' => $contract->type_formatted,
                 'price' => $contract->price->getAmount(),
                 'insurance_type' => (string)$contract->insurance_type,
                 'car' => [
@@ -140,7 +146,7 @@ class ContractController extends Controller
                     'name' => $contract->car->name,
                 ],
             ],
-            'insurance_types' => InsuranceType::asArray(),
+            'insurance_types' => InsuranceType::asSelectArray(),
         ]);
     }
 
@@ -172,6 +178,7 @@ class ContractController extends Controller
             'date' => $contract->date_formatted,
             'price' => $contract->price->format(),
             'type' => $contract->type,
+            'type_formatted' => $contract->type_formatted,
             'paid' => $contract->paid->format(),
             'left_to_pay' => $contract->left_to_pay->format(),
             'is_sell_contract' => $contract->isSellContract(),
