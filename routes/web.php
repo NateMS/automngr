@@ -38,8 +38,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::prefix('cars')->group(function () {
         Route::get('/', [CarController::class, 'index'])->name('cars');
+        Route::get('/print', [CarController::class, 'print'])->name('cars.print');
         Route::get('unsold', [CarController::class, 'unsold'])->name('cars.unsold');
+        Route::get('unsold/print', [CarController::class, 'unsoldPrint'])->name('cars.unsold.print');
         Route::get('sold', [CarController::class, 'sold'])->name('cars.sold');
+        Route::get('sold/print', [CarController::class, 'soldPrint'])->name('cars.sold.print');
         Route::get('create', [CarController::class, 'create'])->name('cars.create');
         Route::post('/', [CarController::class, 'store'])->name('cars.store');
         Route::post('/store_for_contract', [CarController::class, 'storeForContract'])->name('cars.store_for_contract');

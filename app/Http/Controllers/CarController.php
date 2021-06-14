@@ -8,10 +8,12 @@ use Inertia\Inertia;
 use App\Models\Brand;
 use App\Models\Contract;
 use App\Enums\ContractType;
+use App\Exports\CarsExport;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
 
 class CarController extends Controller
@@ -30,6 +32,103 @@ class CarController extends Controller
     {
         
         return $this->renderCarsList($request, Car::soldOnly(), 'Cars/Sold', 'sell_contract.date');
+    }
+
+    public function print(Request $request)
+    {
+        $headings = [
+            'Name',
+            'Stammnummer',
+            'Einkaufsdatum',
+            'Einkaufspreis',
+            'Verkaufsdatum',
+            'Verkaufspreis',
+            'Profit',
+        ];
+
+        $direction = $this->getDirection($request, 'desc');
+        $sortBy = $this->getSortBy($request, 'buy_contract.date');
+        $cars = $this->getWithCustomSort(Car::query(), $sortBy, $direction)
+            ->filter($request->only('search', 'trashed'))
+            ->get()
+            ->map(function ($car) {
+                $bcontract = $car->latestBuyContract();
+                $scontract = $car->latestSellContract();
+                return [
+                    'name' => $car->name,
+                    'stammnummer' => $car->stammnummer,
+                    'buy_date' =>  $bcontract ? $bcontract->date_formatted : null,
+                    'buy_price' => $bcontract ? $bcontract->price : null,
+                    'sell_date' =>  $scontract ? $scontract->date_formatted : null,
+                    'sell_price' => $scontract ? $scontract->price : null,
+                    'profit' => $car->latestProfit(),
+                ];
+            });
+    
+        return Excel::download(new CarsExport($cars, $headings), date('Y-m-d') . '-Alle-Autos.xlsx');
+    }
+
+    public function unsoldPrint(Request $request)
+    {
+        $headings = [
+            'Name',
+            'Stammnummer',
+            'Inverkehrssetzung',
+            'Einkaufsdatum',
+            'Einkaufspreis',
+        ];
+
+        $direction = $this->getDirection($request, 'desc');
+        $sortBy = $this->getSortBy($request, 'buy_contract.date');
+        $cars = $this->getWithCustomSort(Car::unsoldOnly(), $sortBy, $direction)
+            ->filter($request->only('search', 'trashed'))
+            ->get()
+            ->map(function ($car) {
+                $contract = $car->latestBuyContract();
+                return [
+                    'name' => $car->name,
+                    'stammnummer' => $car->stammnummer,
+                    'initial_date' => $car->initial_date_formatted,
+                    'buy_date' =>  $contract ? $contract->date_formatted : null,
+                    'price' => $contract ? $contract->price : null,
+                ];
+            });
+    
+        return Excel::download(new CarsExport($cars, $headings), date('Y-m-d') . '-Meine-Autos.xlsx');
+    }
+
+    public function soldPrint(Request $request)
+    {
+        $headings = [
+            'Name',
+            'Stammnummer',
+            'Einkaufsdatum',
+            'Einkaufspreis',
+            'Verkaufsdatum',
+            'Verkaufspreis',
+            'Profit',
+        ];
+
+        $direction = $this->getDirection($request, 'desc');
+        $sortBy = $this->getSortBy($request, 'buy_contract.date');
+        $cars = $this->getWithCustomSort(Car::soldOnly(), $sortBy, $direction)
+            ->filter($request->only('search', 'trashed'))
+            ->get()
+            ->map(function ($car) {
+                $bcontract = $car->latestBuyContract();
+                $scontract = $car->latestSellContract();
+                return [
+                    'name' => $car->name,
+                    'stammnummer' => $car->stammnummer,
+                    'buy_date' =>  $bcontract ? $bcontract->date_formatted : null,
+                    'buy_price' => $bcontract ? $bcontract->price : null,
+                    'sell_date' =>  $scontract ? $scontract->date_formatted : null,
+                    'sell_price' => $scontract ? $scontract->price : null,
+                    'profit' => $car->latestProfit(),
+                ];
+            });
+    
+        return Excel::download(new CarsExport($cars, $headings), date('Y-m-d') . '-Verkaufte-Autos.xlsx');
     }
 
     private function renderCarsList(Request $request, $cars, string $renderPage, string $defaultSort = 'buy_contract.date') {

@@ -24,9 +24,4 @@ class ContractsExport implements WithMultipleSheets
 
         return $sheets;
     }
-
-    public function collection()
-    {
-        return Contract::whereYear('date', '=', $this->year)->orderBy('date', 'asc')->get();
-    }
 }

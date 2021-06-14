@@ -7,7 +7,7 @@
             </h2>
         </template>
         <div class="w-full mx-auto">
-            <simple-table :title="cars.total + ' Autos'" :data="cars" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute"  />
+            <simple-table :title="cars.total + ' Autos'" :data="cars" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute" :print="true" />
         </div>
     </layout>
 </template>
@@ -32,11 +32,11 @@ export default {
         return {
             currentRoute: 'cars.unsold',
             columns: [
-            {key: 'name', value: 'Name', sortable: true},
-            {key: 'stammnummer', value: 'Stammummer', sortable: true},
-            {key: 'initial_date', value: 'Inverkehrssetzung', sortable: true},
-            {key: 'buy_contract.date', value: 'Einkaufsdatum', sortable: true},
-            {key: 'buy_contract.price', value: 'Einkaufspreis', sortable: true},
+                {key: 'name', value: 'Name', sortable: true},
+                {key: 'stammnummer', value: 'Stammummer', sortable: true},
+                {key: 'initial_date', value: 'Inverkehrssetzung', sortable: true},
+                {key: 'buy_contract.date', value: 'Einkaufsdatum', sortable: true},
+                {key: 'buy_contract.price', value: 'Einkaufspreis', sortable: true},
             ],
         }
     },

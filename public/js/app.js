@@ -18597,13 +18597,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Components_Paginator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Paginator */ "./resources/js/Components/Paginator.vue");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Components_Buttons_StandardButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Buttons/StandardButton.vue */ "./resources/js/Components/Buttons/StandardButton.vue");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Paginator: _Components_Paginator__WEBPACK_IMPORTED_MODULE_0__.default
+    Paginator: _Components_Paginator__WEBPACK_IMPORTED_MODULE_0__.default,
+    StandardButton: _Components_Buttons_StandardButton_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   props: {
     data: Object,
@@ -18611,7 +18614,8 @@ __webpack_require__.r(__webpack_exports__);
     title: String,
     currentRoute: String,
     defaultSort: Object,
-    filters: Object
+    filters: Object,
+    print: Boolean
   },
   data: function data() {
     return {
@@ -18622,7 +18626,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     form: {
       deep: true,
-      handler: (0,lodash__WEBPACK_IMPORTED_MODULE_1__.throttle)(function () {
+      handler: (0,lodash__WEBPACK_IMPORTED_MODULE_2__.throttle)(function () {
         this.refreshTable();
       }, 300)
     }
@@ -18651,13 +18655,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     reset: function reset() {
-      this.form = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.mapValues)(this.form, function () {
+      this.form = (0,lodash__WEBPACK_IMPORTED_MODULE_2__.mapValues)(this.form, function () {
         return null;
       });
     },
     refreshTable: function refreshTable() {
       if (this.currentRoute) {
-        this.$inertia.get(this.route(this.currentRoute), (0,lodash__WEBPACK_IMPORTED_MODULE_1__.pickBy)(this.form), {
+        this.$inertia.get(this.route(this.currentRoute), (0,lodash__WEBPACK_IMPORTED_MODULE_2__.pickBy)(this.form), {
           preserveState: true
         });
       }
@@ -24047,39 +24051,42 @@ var _hoisted_5 = {
 var _hoisted_6 = {
   "class": "flex w-full bg-white shadow rounded"
 };
-var _hoisted_7 = {
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Excel-Export ");
+
+var _hoisted_8 = {
   key: 2,
   "class": "bg-white rounded-md shadow overflow-x-auto"
 };
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "w-full whitespace-nowrap"
 };
-var _hoisted_9 = {
+var _hoisted_10 = {
   "class": "text-left font-bold"
 };
-var _hoisted_10 = {
+var _hoisted_11 = {
   key: 1,
   "class": "flex items-center"
 };
-var _hoisted_11 = {
+var _hoisted_12 = {
   key: 2,
   "class": "px-6 py-4 flex items-center"
 };
-var _hoisted_12 = {
+var _hoisted_13 = {
   key: 0,
   "class": "border-t w-px"
 };
-var _hoisted_13 = {
+var _hoisted_14 = {
   key: 0
 };
-var _hoisted_14 = {
+var _hoisted_15 = {
   key: 3
 };
-var _hoisted_15 = {
+var _hoisted_16 = {
   "class": "inline-flex font-medium text-gray-500 ml-3"
 };
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Keine Einträge gefunden ");
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Keine Einträge gefunden ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
@@ -24111,7 +24118,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "button",
     "class": "ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-blue-200"
-  }, "Reset")])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.data.total > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.columns, function (col, index) {
+  }, "Reset")]), $props.print ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
+    key: 0,
+    href: _ctx.route($props.currentRoute + '.print', {
+      search: $data.form.search,
+      sortBy: $data.sort.by,
+      direction: $data.sort.direction
+    }),
+    "class": "justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition bg-green-800 hover:bg-green-700 active:bg-green-900 focus:border-green-900 focus:ring-green-300 py-3"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
+    fill: "white",
+    "class": "mr-2",
+    height: "24",
+    width: "24",
+    name: "chart"
+  }), _hoisted_7], 8
+  /* PROPS */
+  , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.data.total > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.columns, function (col, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("th", {
       key: col.key,
       "class": "px-6 pt-4 pb-4",
@@ -24139,7 +24162,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       name: "arrow-down"
     })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
     /* PROPS */
-    , ["onClick"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(col.value), 1
+    , ["onClick"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(col.value), 1
     /* TEXT */
     ))], 8
     /* PROPS */
@@ -24182,12 +24205,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         name: "trash-alt"
       })], 8
       /* PROPS */
-      , ["onClick"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.resolve(col.key, row)), 1
+      , ["onClick"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.resolve(col.key, row)), 1
       /* TEXT */
       ))]);
     }), 128
     /* KEYED_FRAGMENT */
-    )), row.link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+    )), row.link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
       "class": "px-4 flex items-center",
       href: row.link,
       tabindex: "-1"
@@ -24208,18 +24231,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["href"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), $props.data.total === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+  )), $props.data.total === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
     "class": "border-t px-6 py-4",
     colspan: $props.columns.length
   }, "Keine Einträge gefunden", 8
   /* PROPS */
-  , ["colspan"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
+  , ["colspan"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
     fill: "#7e8491",
     "class": "mr-2",
     height: "24",
     width: "24",
     name: "meh"
-  }), _hoisted_16])]))]), $props.data.links ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Paginator, {
+  }), _hoisted_17])]))]), $props.data.links ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Paginator, {
     key: 0,
     "class": "mt-6",
     links: $props.data.links
@@ -27936,7 +27959,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         columns: $data.columns,
         defaultSort: $props.sort,
         filters: $props.filters,
-        currentRoute: $data.currentRoute
+        currentRoute: $data.currentRoute,
+        print: true
       }, null, 8
       /* PROPS */
       , ["title", "data", "columns", "defaultSort", "filters", "currentRoute"])])];
@@ -28173,7 +28197,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         columns: $data.columns,
         defaultSort: $props.sort,
         filters: $props.filters,
-        currentRoute: $data.currentRoute
+        currentRoute: $data.currentRoute,
+        print: true
       }, null, 8
       /* PROPS */
       , ["title", "data", "columns", "defaultSort", "filters", "currentRoute"])])];
@@ -28231,7 +28256,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         columns: $data.columns,
         defaultSort: $props.sort,
         filters: $props.filters,
-        currentRoute: $data.currentRoute
+        currentRoute: $data.currentRoute,
+        print: true
       }, null, 8
       /* PROPS */
       , ["title", "data", "columns", "defaultSort", "filters", "currentRoute"])])];

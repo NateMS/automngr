@@ -11,6 +11,10 @@
                     </div>
                     <button @click="reset" type="button" class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-blue-200">Reset</button>
                 </div>
+                <a v-if="print" :href="route(currentRoute + '.print', { search: form.search, sortBy: sort.by, direction: sort.direction })" class="justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition bg-green-800 hover:bg-green-700 active:bg-green-900 focus:border-green-900 focus:ring-green-300 py-3">
+                    <unicon fill="white" class="mr-2" height="24" width="24" name="chart"></unicon>
+                    Excel-Export
+                </a>
             </div>
             <div v-if="data.total > 0" class="bg-white rounded-md shadow overflow-x-auto">
                 <table class="w-full whitespace-nowrap">
@@ -63,11 +67,13 @@
 
 <script>
 import Paginator from "@/Components/Paginator"
+import StandardButton from "@/Components/Buttons/StandardButton.vue"
 import { pickBy, throttle, mapValues } from 'lodash'
 
 export default {
     components: {
         Paginator,
+        StandardButton,
     },
     props: {
         data: Object,
@@ -76,6 +82,7 @@ export default {
         currentRoute: String,
         defaultSort: Object,
         filters: Object,
+        print: Boolean,
     },
     data() {
         return {

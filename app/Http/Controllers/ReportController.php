@@ -16,17 +16,6 @@ class ReportController extends Controller
         return Inertia::render('Reports/Index', ['year' => (int)date('Y'), 'years' => array_reverse(range((int)date('Y') - 20, (int)date('Y')))]);
     }
 
-    private function getYearsArray($start)
-    {
-        $currentYear = (int)date('Y');
-        $years = [$currentYear];
-        if ($start < $currentYear) {
-            for ($y = $start; $y < $currentYear; $y++) {
-                $years[] = $y;
-            }
-        }
-    }
-
     public function print(Request $request)
     {
         $year = (int)$request->get('year');
