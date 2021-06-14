@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div v-if="contract.link" class="pt-3 mt-3 border-t">
-                    <inertia-link :href="contract.link" class="pt-1 pb-1 flex items-center">
+                    <inertia-link :href="contract.link" class="pt-1 pb-1 flex items-center hover:text-indigo-600">
                         <unicon class="mr-1" height="22" width="22" name="arrow-right"></unicon>
                         Zum Vertrag
                     </inertia-link>

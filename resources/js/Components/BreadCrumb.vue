@@ -1,5 +1,5 @@
 <template>
-    <inertia-link :href="href" class="text-indigo-400 hover:text-indigo-600" >
+    <inertia-link :href="href" class="text-indigo-400 hover:text-indigo-600 transition" >
         {{ text }} /
     </inertia-link>
 </template>
