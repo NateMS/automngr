@@ -12,6 +12,10 @@
                 <unicon class="mr-2" height="22" width="22" name="dashboard"></unicon>
                 Dashboard
             </jet-nav-link>
+            <jet-nav-link :href="route('reports')" :active="route().current('reports')">
+                <unicon class="mr-2" height="22" width="22" name="chart"></unicon>
+                Berichte
+            </jet-nav-link>
         </div>
 
         <div class="mb-4 px-4">

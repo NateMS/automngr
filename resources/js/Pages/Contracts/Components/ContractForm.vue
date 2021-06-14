@@ -26,7 +26,7 @@
                     <div v-if="form.is_sell_contract" class="col-span-6 sm:col-span-4">
                         <jet-label for="insurance_type" value="Versicherung" />
                         <select v-model="form.insurance_type" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                            <option v-for="(insurance, index) in insurance_types" :value="index" :selected="form.insurance_type == index">{{ insurance }}</option>
+                            <option v-for="(insurance, index) in insurance_types" :value="index"  v-bind:key="index" :selected="form.insurance_type == index">{{ insurance }}</option>
                         </select>
                         <jet-input-error :message="form.errors.insurance_type" class="mt-2" />
                     </div>

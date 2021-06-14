@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CarModelController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ContractController;
@@ -14,6 +15,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('reports', [ReportController::class, 'index'])->name('reports');
+    Route::get('reports/print', [ReportController::class, 'print'])->name('reports.print');
 
     Route::prefix('contacts')->group(function () {
         Route::get('/', [ContactController::class, 'index'])->name('contacts');
