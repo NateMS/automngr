@@ -5,12 +5,12 @@ Manage Cars, Contacts and Contracts
 - Export as Excel
 - Print Contracts as PDF
 
-Running on Laravel v8
+Running on Laravel 8
 
 ## Project Setup
 
 Prequisites: 
-- (Docker)[https://docker.com] installed and running
+- [Docker](https://docker.com) installed and running
 
 1. copy .env.example to .env
 2. start app by running `./vendor/bin/sail up` inside the main directory (or configure a bash alias: `alias sail='bash vendor/bin/sail'`) then you can use `sail up`
