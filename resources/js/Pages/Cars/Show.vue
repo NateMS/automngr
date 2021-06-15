@@ -18,7 +18,7 @@
             </div>
         </template>
         <template #more>
-            <div class="col-span-6 xs:col-span-12">
+            <div class="sm:col-span-6 col-span-12">
                 <div class="whitespace-nowrap">
                     <h1 class="font-bold text-3xl">{{ car.buy_contracts.total > 1 ? car.buy_contracts.total + ' Ankaufsverträge' : 'Ankaufsvertrag' }}</h1>
                 </div>
@@ -32,7 +32,7 @@
                     </inertia-link>
                 </div>
             </div>
-            <div class="col-span-6 xs:col-span-12">
+            <div class="sm:col-span-6 col-span-12">
                 <div class="whitespace-nowrap">
                     <h1 class="font-bold text-3xl">{{ car.sell_contracts.total > 1 ? car.sell_contracts.total + ' Verkaufsverträge' : 'Verkaufsvertrag' }}</h1>
                 </div>

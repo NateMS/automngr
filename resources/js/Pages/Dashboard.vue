@@ -9,15 +9,13 @@
             <dash-item title="Meine Autos" :number="my_cars" :link="route('cars.unsold')" />
             <dash-item :title="'Gekauft im ' + new Date().getFullYear()" :number="bought_this_year" />
             <dash-item :title="'Verkauft im ' + new Date().getFullYear()" :number="sold_this_year" />
-            <div class="col-span-6 xs:col-span-12">
-                    <p class="font-semibold p-4 pl-6 shadow bg-white rounded-md sm:rounded-lg text-xl font-medium mb-3 text-gray-800 leading-tight">Letzte Einkäufe</p>
-                    <simple-table class="shadow rounded-md sm:rounded-lg" :data="buy_contracts" :columns="buyContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
+            <div class="lg:col-span-6 col-span-12">
+                <p class="font-semibold text-xl font-medium mb-4 text-indigo-900 leading-tight">Neueste Einkäufe</p>
+                <simple-table class="shadow rounded-md sm:rounded-lg" :data="buy_contracts" :columns="buyContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
             </div>
-            <div class="col-span-6 xs:col-span-12">
-                <div class="pt-5 bg-white shadow rounded-md sm:rounded-lg">
-                    <p class="font-semibold text-xl font-medium ml-6 mb-2 text-gray-800 leading-tight">Letzte Verkäufe</p>
-                    <simple-table :data="sell_contracts" :columns="sellContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
-                </div>
+            <div class="lg:col-span-6 col-span-12">
+                <p class="font-semibold text-xl font-medium mb-4 text-indigo-900 leading-tight">Neueste Verkäufe</p>
+                <simple-table class="shadow rounded-md sm:rounded-lg" :data="sell_contracts" :columns="sellContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
             </div>
         </div>
     </layout>

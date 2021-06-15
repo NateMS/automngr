@@ -1,6 +1,6 @@
 <template>
     <h3 class="mb-3">Dokumente</h3>
-    <div class="grid grid-cols-8 xs:grid-cols-6 gap-3">
+    <div class="grid sm:grid-cols-8 grid-cols-6 gap-3">
         <template v-for="document in documents" :key="document.id">
             <document-item @delete="deleteDocument" :document="document" />
         </template>

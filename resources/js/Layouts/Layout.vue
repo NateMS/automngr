@@ -9,7 +9,7 @@
                   </h2>
                 </Navbar>
                 <jet-banner class="sticky top-20 z-40" />
-                <div class="pt-12 px-12 bg-gray-100 mb-20">
+                <div class="xl:pt-12 xl:px-12 md:pt-6 md:px-6 pt-3 px-3 bg-gray-100 mb-20">
                     <main>
                         <slot></slot>
                     </main>

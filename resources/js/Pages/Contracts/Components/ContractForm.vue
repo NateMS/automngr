@@ -13,19 +13,19 @@
                 <div class="col-span-3 grid grid-cols-6 gap-3">
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="date" value="Datum" />
-                        <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full" />
+                        <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
                         <jet-input-error :message="form.errors.date" class="mt-2" />
                     </div>
 
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="price" value="Betrag" />
-                        <currency-input v-model="form.price" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" ref="price"/>
+                        <currency-input v-model="form.price" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 rounded-md shadow-sm" ref="price"/>
                         <jet-input-error :message="form.errors.price" class="mt-2" />
                     </div>
 
                     <div v-if="form.is_sell_contract" class="col-span-6 sm:col-span-4">
                         <jet-label for="insurance_type" value="Versicherung" />
-                        <select v-model="form.insurance_type" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                        <select v-model="form.insurance_type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             <option v-for="(insurance, index) in insurance_types" :value="index"  v-bind:key="index" :selected="form.insurance_type == index">{{ insurance }}</option>
                         </select>
                         <jet-input-error :message="form.errors.insurance_type" class="mt-2" />

@@ -1,10 +1,10 @@
 <template>
     <div class="py-3 grid grid-cols-12 gap-3 w-full">
-        <div v-if="contract.contact" class="col-span-6 xs:col-span-12">
+        <div v-if="contract.contact" class="sm:col-span-6 col-span-12">
             <h3 class="mb-3">{{ meta.contact }}</h3>
             <contact-card :contact="contract.contact" />
         </div>
-        <div v-if="contract.car" class="col-span-8 xs:col-span-12">
+        <div v-if="contract.car" class="sm:col-span-8 col-span-12">
             <h3 class="mb-3">Auto</h3>
             <car-card hide-empty="true" :car="contract.car" />
         </div>
@@ -45,16 +45,11 @@
                 </div>
                 <div v-if="contract.link" class="pt-3 mt-3 border-t">
                     <inertia-link :href="contract.link" class="pt-1 pb-1 flex items-center hover:text-indigo-600">
-                        <unicon class="mr-1" height="22" width="22" name="arrow-right"></unicon>
+                        <unicon fill="currentColor" class="mr-1" height="22" width="22" name="arrow-right"></unicon>
                         Zum Vertrag
                     </inertia-link>
                 </div>
             </div>
-            <!-- <div class="absolute left-0 right-0 bottom-0">
-                <div class="w-full flex flex-col">
-                    <print-button class="mb-0" :href="route('contracts.print', contract.id)" />
-                </div>
-            </div> -->
         </div>
     </div>
 </template>
@@ -78,7 +73,7 @@ export default {
     },
     computed: {
         contractClasses() {
-            return "xs:col-span-12 h-full relative col-span-" + (this.contract.car ? '4' : '6');
+            return "col-span-12 h-full relative sm:col-span-" + (this.contract.car ? '4' : '6');
         },
     },
     data() {

@@ -8,19 +8,19 @@
                 <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="date" value="Datum" />
-                        <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full" />
+                        <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
                         <jet-input-error :message="form.errors.date" class="mt-2" />
                     </div>
 
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="amount" value="Betrag" />
-                        <currency-input v-model="form.amount" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" ref="amount"/>
+                        <currency-input v-model="form.amount" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 rounded-md shadow-sm" ref="amount"/>
                         <jet-input-error :message="form.errors.amount" class="mt-2" />
                     </div>
 
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="type" value="Einzahlungsart" />
-                        <select v-model="form.type" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                        <select v-model="form.type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             <option value="0" :selected="form.type == '0'">Banküberweisung</option>
                             <option value="1" :selected="form.type == '1'">Barzahlung</option>
                         </select>

@@ -30,7 +30,7 @@
                             </span>
                         </th>
                     </tr>
-                    <tr v-for="row in (this.data.data ? this.data.data : this.data)" :key="row.link" class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <tr v-for="row in (this.data.data ? this.data.data : this.data)" :key="row.link" class="hover:bg-indigo-100 focus-within:bg-indigo-100">
                         <td v-for="col in columns" :key="col.key" class="border-t">
                             <inertia-link v-if="row.link" class="px-6 py-4 flex items-center" :href="row.link">
                                 {{ resolve(col.key, row) }}

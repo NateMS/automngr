@@ -11,34 +11,34 @@
                     {{ contract.type_formatted }} vom {{ contract.date }}
                 </div>
                 <div class="grid grid-cols-4 gap-2 w-full">
-                    <div class="col-span-1 xs:col-span-2">
+                    <div class="lg:col-span-1 col-span-2">
                         Datum
                     </div>
-                    <div class="col-span-3 xs:col-span-2">
+                    <div class="lg:col-span-3 col-span-2">
                         {{ contract.date }}
                     </div>
-                    <div v-if="contract.is_sell_contract && contract.insurance_type" class="col-span-1 xs:col-span-2">
+                    <div v-if="contract.is_sell_contract && contract.insurance_type" class="lg:col-span-1 col-span-2">
                         Versicherung
                     </div>
-                    <div v-if="contract.is_sell_contract && contract.insurance_type" class="col-span-3 xs:col-span-2">
+                    <div v-if="contract.is_sell_contract && contract.insurance_type" class="lg:col-span-3 col-span-2">
                         {{ contract.insurance_type }}
                     </div>
-                    <div class="col-span-1 xs:col-span-2">
+                    <div class="lg:col-span-1 col-span-2">
                         Betrag
                     </div>
-                    <div class="col-span-3 xs:col-span-2 font-bold">
+                    <div class="lg:col-span-3 col-span-2 font-bold">
                         {{ contract.price }}
                     </div>
-                    <div class="col-span-1 xs:col-span-2">
+                    <div class="lg:col-span-1 col-span-2">
                         Bezahlt
                     </div>
-                    <div class="col-span-3 xs:col-span-2">
+                    <div class="lg:col-span-3 col-span-2">
                         {{ contract.paid }}
                     </div>
-                    <div class="col-span-1 xs:col-span-2">
+                    <div class="lg:col-span-1 col-span-2">
                         Offener Betrag
                     </div>
-                    <div class="col-span-3 xs:col-span-2">
+                    <div class="lg:col-span-3 col-span-2">
                         {{ contract.left_to_pay }}
                     </div>
                 </div>
@@ -54,18 +54,18 @@
             </div>
         </template>
         <template #more>
-            <div class="col-span-6 xs:col-span-12">
+            <div class="lg:col-span-7 col-span-12">
                 <h3 class="mb-3">Auto</h3>
                 <car-card :car="contract.car" />
             </div>
-            <div class="col-span-5 xs:col-span-12">
+            <div class="lg:col-span-5 col-span-12">
                 <h3 class="mb-3">{{ contactTitle }}</h3>
                 <contact-card :contact="contract.contact" />
             </div>
-            <div class="col-span-6 xs:col-span-12 mt-4">
+            <div class="xl:col-span-7 col-span-12 mt-4">
                 <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
             </div>
-            <div class="col-span-5 xs:col-span-12">
+            <div class="xl:col-span-5 col-span-12">
                 <payments-view :payments="contract.payments" :contract="contract" />
             </div>
         </template>

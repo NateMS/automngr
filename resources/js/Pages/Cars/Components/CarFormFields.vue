@@ -1,7 +1,7 @@
 <template>
     <div class="col-span-6 sm:col-span-4">
         <jet-label for="brand" value="Marke" />
-        <multiselect v-model="brandSelection" @SearchChange="updateBrandSearch" @select="updateBrand" label="name" track-by="id" :options="brands" class="mt-1 block w-full" placeholder="Marke auswählen">
+        <multiselect v-model="brandSelection" @SearchChange="updateBrandSearch" @select="updateBrand" label="name" track-by="id" :options="brands" class="mt-1 block w-full border-gray-300" placeholder="Marke auswählen">
             <template v-slot:noResult>
                 <span @click="addBrand">
                     <b>{{ brandSearch }}</b> als neue Marke speichern?
@@ -12,7 +12,7 @@
 
     <div v-if="brandSelection" class="col-span-6 sm:col-span-4">
         <jet-label for="model" value="Modell" />
-        <multiselect v-model="car_modelSelection" @SearchChange="updateCarModelSearch" @select="updateCarModel" label="name" track-by="id" :options="carModels" class="mt-1 block w-full" placeholder="Modell auswählen">
+        <multiselect v-model="car_modelSelection" @SearchChange="updateCarModelSearch" @select="updateCarModel" label="name" track-by="id" :options="carModels" class="mt-1 block w-full border-gray-300" placeholder="Modell auswählen">
             <template v-slot:noResult>
                 <span @click="addCarModel">
                     <b>{{ modelSearch }}</b> als neues {{ brand.name }}-Modell speichern?
@@ -41,13 +41,13 @@
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-6 sm:col-span-6">
                 <jet-label for="initial_date" value="Inverkehrssetzung" />
-                <datepicker id="initial_date" ref="initial_date" v-model="form.initial_date" inputFormat="dd.MM.yyyy" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full" />
+                <datepicker id="initial_date" ref="initial_date" v-model="form.initial_date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
                 <jet-input-error :message="form.errors.initial_date" class="mt-2" />
             </div>
 
             <div class="col-span-6 sm:col-span-6">
                 <jet-label for="last_check_date" value="Letzte Prüfung" />
-                <datepicker id="last_check_date" ref="last_check_date" v-model="form.last_check_date" inputFormat="dd.MM.yyyy" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full" />
+                <datepicker id="last_check_date" ref="last_check_date" v-model="form.last_check_date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
                 <jet-input-error :message="form.errors.last_check_date" class="mt-2" />
             </div>
         </div>
@@ -55,7 +55,7 @@
 
     <div class="col-span-6 sm:col-span-4">
         <jet-label for="kilometers" value="Kilometerstand" />
-        <currency-input v-model="form.kilometers" :options="currencyOptions" id="kilometers" class="w-full mt-1 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" ref="kilometers" />
+        <currency-input v-model="form.kilometers" :options="currencyOptions" id="kilometers" class="w-full mt-1 block border-gray-300 rounded-md shadow-sm" ref="kilometers" />
         <jet-input-error :message="form.errors.kilometers" class="mt-2" />
     </div>
 
@@ -67,14 +67,14 @@
 
     <div class="col-span-6 sm:col-span-4">
         <jet-label for="known_damage" value="Bekannter Schaden" />
-        <textarea class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.known_damage" ref="input">
+        <textarea class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" v-model="form.known_damage" ref="input">
         </textarea>
         <jet-input-error :message="form.errors.known_damage" class="mt-2" />
     </div>
 
     <div class="col-span-6 sm:col-span-4">
         <jet-label for="notes" value="Bemerkungen" />
-        <textarea class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.notes" ref="input">
+        <textarea class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" v-model="form.notes" ref="input">
         </textarea>
         <jet-input-error :message="form.errors.notes" class="mt-2" />
     </div>

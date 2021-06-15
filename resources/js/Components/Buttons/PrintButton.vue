@@ -13,7 +13,7 @@ export default {
     },
     data() {
         return {
-            colour: 'gray',
+            colour: 'indigo',
         }
     },
     computed: {

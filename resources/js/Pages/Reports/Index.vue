@@ -14,14 +14,14 @@
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
                     <jet-label for="year" value="Jahr" />
-                    <select v-model="year" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                    <select v-model="year" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                         <option v-for="year in years" :value="year" v-bind:key="year" :selected="this.year == year">{{ year }}</option>
                     </select>
                 </div>
             </template>
 
             <template #actions>
-                <a :href="link" class="justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition bg-gray-800 hover:bg-gray-700 active:bg-gray-900 focus:border-gray-900 focus:ring-gray-300">
+                <a :href="link" class="justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-900 focus:border-indigo-900 focus:ring-indigo-300">
                     Bericht drucken
                 </a>
             </template>

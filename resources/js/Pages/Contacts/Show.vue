@@ -21,12 +21,9 @@
         </template>
    
         <template #more>
-            <div class="col-span-10 xs:col-span-12">
+            <div class="sm:col-span-10 col-span-12">
                 <div class="whitespace-nowrap">
                     <h1 class="font-bold text-3xl">{{ contact.buy_contracts.total > 1 ? contact.buy_contracts.total + ' Ankaufsverträge' : 'Ankaufsvertrag' }}</h1>
-                </div>
-                <div v-for="contract in contact.buy_contracts.data" :key="contract.id">
-                    <buy-contract-card :contract="contract"/>
                 </div>
                 <div v-if="!contact.deleted_at">
                     <inertia-link :href="route('contracts.create_from_contact', [0, contact.id])" class="w-full py-6 mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
@@ -34,19 +31,22 @@
                         Neuer Ankaufsvertrag
                     </inertia-link>
                 </div>
+                <div v-for="contract in contact.buy_contracts.data" :key="contract.id">
+                    <buy-contract-card :contract="contract"/>
+                </div>
             </div>
-            <div class="col-span-10 xs:col-span-12">
+            <div class="sm:col-span-10 col-span-12">
                 <div class="whitespace-nowrap">
                     <h1 class="font-bold text-3xl">{{ contact.sell_contracts.total > 1 ? contact.sell_contracts.total + ' Verkaufsverträge' : 'Verkaufsvertrag' }}</h1>
-                </div>
-                <div v-for="contract in contact.sell_contracts.data" :key="contract.id">
-                    <sell-contract-card :contract="contract"/>
                 </div>
                 <div v-if="!contact.deleted_at">
                     <inertia-link :href="route('contracts.create_from_contact', [1, contact.id])" class="py-6 w-full mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
                         <unicon fill="white" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
                         Neuer Verkaufssvertrag
                     </inertia-link>
+                </div>
+                <div v-for="contract in contact.sell_contracts.data" :key="contract.id">
+                    <sell-contract-card :contract="contract"/>
                 </div>
             </div>
         </template>
