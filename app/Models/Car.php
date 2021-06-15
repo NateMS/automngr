@@ -95,11 +95,6 @@ class Car extends Model
         return $this->hasMany(Contract::class);
     }
 
-    // public function scopeSoldThisYear($query)
-    // {
-    //     return $query->whereDate('sold_at', '>=', Carbon::today()->format('Y'));
-    // }
-
     public function buyContracts()
     {
         return $this->hasMany(Contract::class)->buyContracts();

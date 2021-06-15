@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/', [ContractController::class, 'dashboard'])->name('dashboard');
 
     Route::get('reports', [ReportController::class, 'index'])->name('reports');
     Route::get('reports/print', [ReportController::class, 'print'])->name('reports.print');

@@ -17,6 +17,42 @@ use Illuminate\Support\Facades\Redirect;
 
 class ContractController extends Controller
 {
+
+    public function dashboard()
+    {
+        return Inertia::render('Dashboard', [
+            'bought_this_year' => Contract::boughtThisYear()->count(),
+            'sold_this_year' => Contract::soldThisYear()->count(),
+            'my_cars' => Car::unsoldOnly()->count(),
+            'buy_contracts' => Contract::buyContracts()
+                                ->orderBy('date', 'desc')
+                                ->limit(10)
+                                ->get()
+                                ->map(function ($contract) {
+                                    return [
+                                        'date' => $contract->date_formatted,
+                                        'price' => $contract->price->format(),
+                                        'car' => $contract->car->name,
+                                        'contact' => $contract->contact->title,
+                                        'link' => route('contracts.show', $contract),
+                                    ];
+                                }),
+            'sell_contracts' => Contract::sellContracts()
+                                ->orderBy('date', 'desc')
+                                ->limit(10)
+                                ->get()
+                                ->map(function ($contract) {
+                                    return [
+                                        'date' => $contract->date_formatted,
+                                        'price' => $contract->price->format(),
+                                        'car' => $contract->car->name,
+                                        'contact' => $contract->contact->title,
+                                        'link' => route('contracts.show', $contract),
+                                    ];
+                                }),
+        ]);
+    }
+
     public function create(Request $request, string $type, Car $car, Contact $contact)
     {
         return Inertia::render('Contracts/Create', [

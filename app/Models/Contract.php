@@ -109,17 +109,17 @@ class Contract extends Model
 
     public function scopeThisYear($query)
     {
-        $query->where('date', '>', date('Y'));
+        $query->whereYear('date', date('Y'));
     }
 
     public function scopeSoldThisYear($query)
     {
-        $query->buyContracts()->thisYear();
+        $query->sellContracts()->thisYear();
     }
 
     public function scopeBoughtThisYear($query)
     {
-        $query->sellContracts()->thisYear();
+        $query->buyContracts()->thisYear();
     }
 
     public function scopeBuyContracts($query)

@@ -11,7 +11,7 @@ class BuyContractsSheet extends ContractsSheet
 
     public function query()
     {
-        return Contract::where('type', ContractType::BuyContract)->whereYear('date', '=', $this->year)->orderBy('date', 'asc');
+        return Contract::buyContracts()->whereYear('date', '=', $this->year)->orderBy('date', 'asc');
     }
 
     public function headings(): array

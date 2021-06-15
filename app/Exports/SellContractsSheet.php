@@ -12,7 +12,7 @@ class SellContractsSheet extends ContractsSheet
 
     public function query()
     {
-        return Contract::where('type', ContractType::SellContract)->whereYear('date', '=', $this->year)->orderBy('date', 'asc');
+        return Contract::sellContracts()->whereYear('date', '=', $this->year)->orderBy('date', 'asc');
     }
 
     public function headings(): array

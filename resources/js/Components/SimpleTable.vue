@@ -16,7 +16,7 @@
                     Excel-Export
                 </a>
             </div>
-            <div v-if="data.total > 0" class="bg-white rounded-md shadow overflow-x-auto">
+            <div v-if="data.total === undefined || data.total > 0" class="bg-white rounded-md shadow overflow-x-auto">
                 <table class="w-full whitespace-nowrap">
                    <tr class="text-left font-bold">
                         <th v-for="(col, index) in columns" :key="col.key" class="px-6 pt-4 pb-4" :colspan="[index == (columns.length - 1) ? 2 : 1]">
@@ -30,7 +30,7 @@
                             </span>
                         </th>
                     </tr>
-                    <tr v-for="row in data.data" :key="row.link" class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <tr v-for="row in (this.data.data ? this.data.data : this.data)" :key="row.link" class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td v-for="col in columns" :key="col.key" class="border-t">
                             <inertia-link v-if="row.link" class="px-6 py-4 flex items-center" :href="row.link">
                                 {{ resolve(col.key, row) }}
@@ -42,7 +42,7 @@
                                 {{ resolve(col.key, row) }}
                             </span>
                         </td>
-                        <td v-if="row.link" class="border-t w-px">
+                        <td v-if="row.link && !hideArrow" class="border-t w-px">
                             <inertia-link class="px-4 flex items-center" :href="row.link" tabindex="-1">
                                 <unicon class="m-2" height="22" width="22" name="angle-right"></unicon>
                             </inertia-link>
@@ -83,6 +83,7 @@ export default {
         defaultSort: Object,
         filters: Object,
         print: Boolean,
+        hideArrow: Boolean,
     },
     data() {
         return {
