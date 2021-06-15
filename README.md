@@ -9,9 +9,10 @@ Running on Laravel 8
 
 ## Project Setup
 
-Prequisites: 
+Prerequisites: 
 - [Docker](https://docker.com) installed and running
 
+Steps:
 1. copy .env.example to .env
 2. start app by running `./vendor/bin/sail up` inside the main directory (or configure a bash alias: `alias sail='bash vendor/bin/sail'`) then you can use `sail up`
 3. Run migrations and seed db: `sail php artisan migrate:fresh --seed`
