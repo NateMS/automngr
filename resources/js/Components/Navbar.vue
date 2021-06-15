@@ -59,30 +59,31 @@
 </template>
 
 <script>
-import JetDropdown from '@/Jetstream/Dropdown'
-import JetDropdownLink from '@/Jetstream/DropdownLink'
-import { mapState } from 'vuex'
-export default {
-   components: {
-          JetDropdown,
-          JetDropdownLink,
-      },
+import JetDropdown from '@/Jetstream/Dropdown';
+import JetDropdownLink from '@/Jetstream/DropdownLink';
+import { mapState } from 'vuex';
 
-    computed: {
-        ...mapState(['sideBarOpen'])
+export default {
+  components: {
+    JetDropdown,
+    JetDropdownLink,
+  },
+
+  computed: {
+    ...mapState(['sideBarOpen']),
+  },
+  data() {
+    return {
+      dropDownOpen: false,
+    };
+  },
+  methods: {
+    toggleSidebar() {
+      this.$store.dispatch('toggleSidebar');
     },
-    data() {
-        return {
-            dropDownOpen: false
-        }
+    logout() {
+      this.$inertia.post(route('logout'));
     },
-    methods: {
-        toggleSidebar() {
-            this.$store.dispatch('toggleSidebar')
-        },
-        logout() {
-            this.$inertia.post(route('logout'));
-        },
-    }
-}
+  },
+};
 </script>

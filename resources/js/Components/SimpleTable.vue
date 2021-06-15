@@ -60,72 +60,70 @@
                 </span>
             </div>
         </div>
-        
+
         <Paginator v-if="data.links" class="mt-6" :links="data.links" />
     </div>
 </template>
 
 <script>
-import Paginator from "@/Components/Paginator"
-import StandardButton from "@/Components/Buttons/StandardButton.vue"
-import { pickBy, throttle, mapValues } from 'lodash'
+import Paginator from '@/Components/Paginator';
+import StandardButton from '@/Components/Buttons/StandardButton.vue';
+import { pickBy, throttle, mapValues } from 'lodash';
 
 export default {
-    components: {
-        Paginator,
-        StandardButton,
+  components: {
+    Paginator,
+    StandardButton,
+  },
+  props: {
+    data: Object,
+    columns: Array,
+    title: String,
+    currentRoute: String,
+    defaultSort: Object,
+    filters: Object,
+    print: Boolean,
+    hideArrow: Boolean,
+  },
+  data() {
+    return {
+      form: this.filters,
+      sort: this.defaultSort,
+    };
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler: throttle(function () {
+        this.refreshTable();
+      }, 300),
     },
-    props: {
-        data: Object,
-        columns: Array,
-        title: String,
-        currentRoute: String,
-        defaultSort: Object,
-        filters: Object,
-        print: Boolean,
-        hideArrow: Boolean,
+  },
+  methods: {
+    resolve(path, obj) {
+      return path.split('.').reduce((prev, curr) => (prev ? prev[curr] : null), obj || self);
     },
-    data() {
-        return {
-            form: this.filters,
-            sort: this.defaultSort,
-        }
+    sortTable(col) {
+      event.preventDefault();
+      if (this.sort.by == col) {
+        this.sort.direction = this.sort.direction == 'asc' ? 'desc' : 'asc';
+      } else {
+        this.sort.direction = 'asc';
+      }
+      this.sort.by = col;
+      this.$inertia.get(this.data.path, { sortby: this.sort.by, direction: this.sort.direction }, { preserveState: true });
     },
-    watch: {
-        form: {
-            deep: true,
-            handler: throttle(function() {
-                this.refreshTable();
-            }, 300),
-        },
+    reset() {
+      this.form = mapValues(this.form, () => null);
     },
-    methods: {
-        resolve(path, obj) {
-            return path.split('.').reduce(function(prev, curr) {
-                return prev ? prev[curr] : null
-            }, obj || self)
-        },
-        sortTable(col) {
-            event.preventDefault();
-            if (this.sort.by == col) {
-                this.sort.direction = this.sort.direction == 'asc' ? 'desc' : 'asc';
-            } else {
-                this.sort.direction = 'asc';
-            }
-            this.sort.by = col;
-            this.$inertia.get(this.data.path, {'sortby': this.sort.by, 'direction': this.sort.direction}, { preserveState: true })
-        },
-        reset() {
-            this.form = mapValues(this.form, () => null)
-        },
-        refreshTable() {
-            if (this.currentRoute) {
-                this.$inertia.get(this.route(this.currentRoute), pickBy(this.form), { preserveState: true })
-            }
-        },
-        isActiveSort(col, dir) {
-            return col == this.sort.by && dir == this.sort.direction;
-        },
+    refreshTable() {
+      if (this.currentRoute) {
+        this.$inertia.get(this.route(this.currentRoute), pickBy(this.form), { preserveState: true });
+      }
     },
-}
+    isActiveSort(col, dir) {
+      return col == this.sort.by && dir == this.sort.direction;
+    },
+  },
+};
 </script>

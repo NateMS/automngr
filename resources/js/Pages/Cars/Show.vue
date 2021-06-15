@@ -51,33 +51,33 @@
 </template>
 
 <script>
-import ShowPage from '@/Components/ShowPage.vue'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import CarCard from '@/Components/CarCard.vue'
-import BuyContractCard from '@/Components/BuyContractCard.vue'
-import SellContractCard from '@/Components/SellContractCard.vue'
-import EditButton from '@/Components/Buttons/EditButton.vue'
-import DeleteButton from '@/Components/Buttons/DeleteButton.vue'
-import RestoreButton from '@/Components/Buttons/RestoreButton.vue'
+import ShowPage from '@/Components/ShowPage.vue';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import CarCard from '@/Components/CarCard.vue';
+import BuyContractCard from '@/Components/BuyContractCard.vue';
+import SellContractCard from '@/Components/SellContractCard.vue';
+import EditButton from '@/Components/Buttons/EditButton.vue';
+import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
+import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
 
 export default {
-    components: {
-        ShowPage,
-        BreadCrumb,
-        CarCard,
-        BuyContractCard,
-        SellContractCard,
-        EditButton,
-        DeleteButton,
-        RestoreButton,
-    },
-    props: {
-        car: Object,
-    },
-    data() {
-        return {
-            currentRoute: 'cars.show',
-        }
-    },
-}
+  components: {
+    ShowPage,
+    BreadCrumb,
+    CarCard,
+    BuyContractCard,
+    SellContractCard,
+    EditButton,
+    DeleteButton,
+    RestoreButton,
+  },
+  props: {
+    car: Object,
+  },
+  data() {
+    return {
+      currentRoute: 'cars.show',
+    };
+  },
+};
 </script>

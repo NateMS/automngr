@@ -17913,9 +17913,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     allClasses: function allClasses() {
-      var classes = "justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition";
+      var classes = 'justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition';
       classes += " bg-".concat(this.colour, "-800 hover:bg-").concat(this.colour, "-700 active:bg-").concat(this.colour, "-900 focus:border-").concat(this.colour, "-900 focus:ring-").concat(this.colour, "-300");
-      return classes + " " + this["class"];
+      return "".concat(classes, " ").concat(this["class"]);
     }
   }
 });
@@ -17966,9 +17966,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     allClasses: function allClasses() {
-      var classes = "justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition";
+      var classes = 'justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition';
       classes += " bg-".concat(this.colour, "-800 hover:bg-").concat(this.colour, "-700 active:bg-").concat(this.colour, "-900 focus:border-").concat(this.colour, "-900 focus:ring-").concat(this.colour, "-300");
-      return classes + " " + this["class"];
+      return "".concat(classes, " ").concat(this["class"]);
     }
   }
 });
@@ -17998,7 +17998,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       meta: {
-        'contact': 'Verkäufer'
+        contact: 'Verkäufer'
       }
     };
   }
@@ -18077,7 +18077,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     contractClasses: function contractClasses() {
-      return "col-span-12 h-full relative sm:col-span-" + (this.contract.car ? '4' : '6');
+      return "col-span-12 h-full relative sm:col-span-".concat(this.contract.car ? '4' : '6');
     }
   },
   data: function data() {
@@ -18191,9 +18191,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var STATUS_INITIAL = 0,
-    STATUS_SAVING = 1,
-    STATUS_FAILED = 2;
+var STATUS_INITIAL = 0;
+var STATUS_SAVING = 1;
+var STATUS_FAILED = 2;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: Number,
@@ -18547,7 +18547,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       meta: {
-        'contact': 'Käufer'
+        contact: 'Käufer'
       }
     };
   }
@@ -18670,8 +18670,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.sort.by = col;
       this.$inertia.get(this.data.path, {
-        'sortby': this.sort.by,
-        'direction': this.sort.direction
+        sortby: this.sort.by,
+        direction: this.sort.direction
       }, {
         preserveState: true
       });
@@ -18817,7 +18817,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.checked;
       },
       set: function set(val) {
-        this.$emit("update:checked", val);
+        this.$emit('update:checked', val);
       }
     }
   }
@@ -19068,17 +19068,19 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     widthClass: function widthClass() {
       return {
-        '48': 'w-48'
+        48: 'w-48'
       }[this.width.toString()];
     },
     alignmentClasses: function alignmentClasses() {
       if (this.align === 'left') {
         return 'origin-top-left left-0';
-      } else if (this.align === 'right') {
-        return 'origin-top-right right-0';
-      } else {
-        return 'origin-top';
       }
+
+      if (this.align === 'right') {
+        return 'origin-top-right right-0';
+      }
+
+      return 'origin-top';
     }
   }
 });
@@ -19131,7 +19133,7 @@ __webpack_require__.r(__webpack_exports__);
       return !!this.$slots.actions;
     },
     classnames: function classnames() {
-      var classnames = !this.emptyBg ? 'px-4 py-5 bg-white sm:p-6 shadow ' : "";
+      var classnames = !this.emptyBg ? 'px-4 py-5 bg-white sm:p-6 shadow ' : '';
       classnames += this.hasActions ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md';
       return classnames;
     }
@@ -19263,10 +19265,10 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     maxWidthClass: function maxWidthClass() {
       return {
-        'sm': 'sm:max-w-sm',
-        'md': 'sm:max-w-md',
-        'lg': 'sm:max-w-lg',
-        'xl': 'sm:max-w-xl',
+        sm: 'sm:max-w-sm',
+        md: 'sm:max-w-md',
+        lg: 'sm:max-w-lg',
+        xl: 'sm:max-w-xl',
         '2xl': 'sm:max-w-2xl'
       }[this.maxWidth];
     }
@@ -19405,7 +19407,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     switchToTeam: function switchToTeam(team) {
       this.$inertia.put(route('current-team.update'), {
-        'team_id': team.id
+        team_id: team.id
       }, {
         preserveState: false
       });
@@ -19581,15 +19583,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ApiTokenManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ApiTokenManager */ "./resources/js/Pages/API/ApiTokenManager.vue");
-/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _ApiTokenManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ApiTokenManager */ "./resources/js/Pages/API/ApiTokenManager.vue");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['tokens', 'availablePermissions', 'defaultPermissions'],
   components: {
-    ApiTokenManager: _ApiTokenManager__WEBPACK_IMPORTED_MODULE_0__.default,
-    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__.default
+    ApiTokenManager: _ApiTokenManager__WEBPACK_IMPORTED_MODULE_1__.default,
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default
   }
 });
 
@@ -20211,8 +20213,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/Layout */ "./resources/js/Layouts/Layout.vue");
 /* harmony import */ var _Components_BreadCrumb_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/BreadCrumb.vue */ "./resources/js/Components/BreadCrumb.vue");
-/* harmony import */ var _Components_CarForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/CarForm.vue */ "./resources/js/Pages/Cars/Components/CarForm.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Components_CarForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/CarForm.vue */ "./resources/js/Pages/Cars/Components/CarForm.vue");
 
 
 
@@ -20221,7 +20223,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Layout: _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__.default,
     BreadCrumb: _Components_BreadCrumb_vue__WEBPACK_IMPORTED_MODULE_1__.default,
-    CarForm: _Components_CarForm_vue__WEBPACK_IMPORTED_MODULE_2__.default
+    CarForm: _Components_CarForm_vue__WEBPACK_IMPORTED_MODULE_3__.default
   },
   props: {
     brands: Array
@@ -20241,8 +20243,8 @@ __webpack_require__.r(__webpack_exports__);
         vin: null,
         colour: null,
         car_model_id: null,
-        initial_date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(new Date()),
-        last_check_date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(new Date()),
+        initial_date: (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(new Date()),
+        last_check_date: (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(new Date()),
         kilometers: null,
         known_damage: null,
         notes: null
@@ -20274,8 +20276,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/Layout */ "./resources/js/Layouts/Layout.vue");
 /* harmony import */ var _Components_BreadCrumb_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/BreadCrumb.vue */ "./resources/js/Components/BreadCrumb.vue");
-/* harmony import */ var _Components_CarForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/CarForm.vue */ "./resources/js/Pages/Cars/Components/CarForm.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Components_CarForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/CarForm.vue */ "./resources/js/Pages/Cars/Components/CarForm.vue");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -20286,7 +20288,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     BreadCrumb: _Components_BreadCrumb_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     Layout: _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__.default,
-    CarForm: _Components_CarForm_vue__WEBPACK_IMPORTED_MODULE_2__.default
+    CarForm: _Components_CarForm_vue__WEBPACK_IMPORTED_MODULE_3__.default
   },
   props: {
     car: Object,
@@ -20300,7 +20302,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         out += this.brand.name;
 
         if (this.car_model.name) {
-          out += ' ' + this.car_model.name;
+          out += " ".concat(this.car_model.name);
         }
       }
 
@@ -20311,7 +20313,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       currentRoute: 'cars.edit',
       meta: {
-        form_name: 'EditCar' + this.car.id,
+        form_name: "EditCar".concat(this.car.id),
         route: this.route('cars.update', this.car.id),
         method: 'put',
         button_text: 'Änderungen speichern',
@@ -20323,11 +20325,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: this.car.id,
         stammnummer: this.car.stammnummer,
         vin: this.car.vin,
-        initial_date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(new Date(this.car.initial_date)),
+        initial_date: (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(new Date(this.car.initial_date)),
         colour: this.car.colour,
         notes: this.car.notes,
         car_model_id: this.car.car_model.id,
-        last_check_date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(new Date(this.car.last_check_date)),
+        last_check_date: (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(new Date(this.car.last_check_date)),
         kilometers: this.car.kilometers,
         known_damage: this.car.known_damage
       }, "notes", this.car.notes)
@@ -20648,8 +20650,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
 /* harmony import */ var _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/ActionMessage */ "./resources/js/Jetstream/ActionMessage.vue");
 /* harmony import */ var _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/FormSection */ "./resources/js/Jetstream/FormSection.vue");
-/* harmony import */ var _ContactFormFields__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ContactFormFields */ "./resources/js/Pages/Contacts/Components/ContactFormFields.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _ContactFormFields__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ContactFormFields */ "./resources/js/Pages/Contacts/Components/ContactFormFields.vue");
 
 
 
@@ -20660,7 +20662,7 @@ __webpack_require__.r(__webpack_exports__);
     JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__.default,
     JetFormSection: _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_2__.default,
     JetActionMessage: _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_1__.default,
-    ContactFormFields: _ContactFormFields__WEBPACK_IMPORTED_MODULE_3__.default
+    ContactFormFields: _ContactFormFields__WEBPACK_IMPORTED_MODULE_4__.default
   },
   props: {
     data: Object,
@@ -20668,7 +20670,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.useForm)(this.meta.form_name, this.data)
+      form: (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__.useForm)(this.meta.form_name, this.data)
     };
   },
   methods: {
@@ -20790,7 +20792,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       meta: {
-        form_name: 'EditContact' + this.contact.id,
+        form_name: "EditContact".concat(this.contact.id),
         route: this.route('contacts.update', this.contact.id),
         method: 'put',
         button_text: 'Änderungen speichern',
@@ -21057,11 +21059,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/Layout */ "./resources/js/Layouts/Layout.vue");
 /* harmony import */ var _Components_BreadCrumb_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/BreadCrumb.vue */ "./resources/js/Components/BreadCrumb.vue");
-/* harmony import */ var _Components_ContractForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/ContractForm.vue */ "./resources/js/Pages/Contracts/Components/ContractForm.vue");
-/* harmony import */ var _Components_CarCard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/CarCard.vue */ "./resources/js/Components/CarCard.vue");
-/* harmony import */ var _Components_ContactCard_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/ContactCard.vue */ "./resources/js/Components/ContactCard.vue");
-/* harmony import */ var _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/FormSection */ "./resources/js/Jetstream/FormSection.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Components_CarCard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/CarCard.vue */ "./resources/js/Components/CarCard.vue");
+/* harmony import */ var _Components_ContactCard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/ContactCard.vue */ "./resources/js/Components/ContactCard.vue");
+/* harmony import */ var _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/FormSection */ "./resources/js/Jetstream/FormSection.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Components_ContractForm_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/ContractForm.vue */ "./resources/js/Pages/Contracts/Components/ContractForm.vue");
 
 
 
@@ -21073,10 +21075,10 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Layout: _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__.default,
     BreadCrumb: _Components_BreadCrumb_vue__WEBPACK_IMPORTED_MODULE_1__.default,
-    ContractForm: _Components_ContractForm_vue__WEBPACK_IMPORTED_MODULE_2__.default,
-    CarCard: _Components_CarCard_vue__WEBPACK_IMPORTED_MODULE_3__.default,
-    ContactCard: _Components_ContactCard_vue__WEBPACK_IMPORTED_MODULE_4__.default,
-    JetFormSection: _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_5__.default
+    ContractForm: _Components_ContractForm_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+    CarCard: _Components_CarCard_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+    ContactCard: _Components_ContactCard_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    JetFormSection: _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_4__.default
   },
   props: {
     car: Object,
@@ -21096,25 +21098,25 @@ __webpack_require__.r(__webpack_exports__);
       },
       data: {
         id: null,
-        date: (0,vue__WEBPACK_IMPORTED_MODULE_6__.ref)(new Date()),
+        date: (0,vue__WEBPACK_IMPORTED_MODULE_5__.ref)(new Date()),
         price: null,
         type: this.type,
         insurance_type: '0',
         car_id: this.car.id,
         contact_id: this.contact.id,
-        is_sell_contract: this.type == "SellContract"
+        is_sell_contract: this.type == 'SellContract'
       }
     };
   },
   computed: {
     contractType: function contractType() {
-      return this.isSellContract ? "Verkaufsvertrag" : "Ankaufsvertrag";
+      return this.isSellContract ? 'Verkaufsvertrag' : 'Ankaufsvertrag';
     },
     contactType: function contactType() {
-      return this.isSellContract ? "Käufer" : "Verkäufer";
+      return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
     isSellContract: function isSellContract() {
-      return this.type == "SellContract";
+      return this.type == 'SellContract';
     }
   }
 });
@@ -21192,13 +21194,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     contractType: function contractType() {
-      return this.isSellContract ? "Verkaufsvertrag" : "Ankaufsvertrag";
+      return this.isSellContract ? 'Verkaufsvertrag' : 'Ankaufsvertrag';
     },
     contactType: function contactType() {
-      return this.isSellContract ? "Käufer" : "Verkäufer";
+      return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
     isSellContract: function isSellContract() {
-      return this.type == "SellContract";
+      return this.type == 'SellContract';
     },
     emptyContact: function emptyContact() {
       return {
@@ -21335,13 +21337,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     contractType: function contractType() {
-      return this.isSellContract ? "Verkaufsvertrag" : "Ankaufsvertrag";
+      return this.isSellContract ? 'Verkaufsvertrag' : 'Ankaufsvertrag';
     },
     contactType: function contactType() {
-      return this.isSellContract ? "Käufer" : "Verkäufer";
+      return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
     isSellContract: function isSellContract() {
-      return this.type == "SellContract";
+      return this.type == 'SellContract';
     },
     emptyCar: function emptyCar() {
       return {
@@ -21410,8 +21412,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/Layout */ "./resources/js/Layouts/Layout.vue");
 /* harmony import */ var _Components_BreadCrumb_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/BreadCrumb.vue */ "./resources/js/Components/BreadCrumb.vue");
-/* harmony import */ var _Components_ContractForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/ContractForm.vue */ "./resources/js/Pages/Contracts/Components/ContractForm.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Components_ContractForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/ContractForm.vue */ "./resources/js/Pages/Contracts/Components/ContractForm.vue");
 
 
 
@@ -21420,7 +21422,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     BreadCrumb: _Components_BreadCrumb_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     Layout: _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__.default,
-    ContractForm: _Components_ContractForm_vue__WEBPACK_IMPORTED_MODULE_2__.default
+    ContractForm: _Components_ContractForm_vue__WEBPACK_IMPORTED_MODULE_3__.default
   },
   props: {
     contract: Object,
@@ -21430,14 +21432,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       currentRoute: 'contracts.edit',
       meta: {
-        form_name: 'EditContract' + this.contract.id,
+        form_name: "EditContract".concat(this.contract.id),
         route: this.route('contracts.update', this.contract.id),
         method: 'put',
         button_text: 'Änderungen speichern',
         on_success: 'Änderungen gespeichert'
       },
       data: {
-        date: (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(new Date(this.contract.date)),
+        date: (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(new Date(this.contract.date)),
         price: this.contract.price,
         insurance_type: this.contract.insurance_type,
         is_sell_contract: this.contract.is_sell_contract
@@ -21768,8 +21770,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/Layout */ "./resources/js/Layouts/Layout.vue");
-/* harmony import */ var _DeleteUserForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteUserForm */ "./resources/js/Pages/Profile/DeleteUserForm.vue");
-/* harmony import */ var _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/SectionBorder */ "./resources/js/Jetstream/SectionBorder.vue");
+/* harmony import */ var _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SectionBorder */ "./resources/js/Jetstream/SectionBorder.vue");
+/* harmony import */ var _DeleteUserForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteUserForm */ "./resources/js/Pages/Profile/DeleteUserForm.vue");
 /* harmony import */ var _LogoutOtherBrowserSessionsForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LogoutOtherBrowserSessionsForm */ "./resources/js/Pages/Profile/LogoutOtherBrowserSessionsForm.vue");
 /* harmony import */ var _TwoFactorAuthenticationForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TwoFactorAuthenticationForm */ "./resources/js/Pages/Profile/TwoFactorAuthenticationForm.vue");
 /* harmony import */ var _UpdatePasswordForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UpdatePasswordForm */ "./resources/js/Pages/Profile/UpdatePasswordForm.vue");
@@ -21785,8 +21787,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['sessions'],
   components: {
     Layout: _Layouts_Layout__WEBPACK_IMPORTED_MODULE_0__.default,
-    DeleteUserForm: _DeleteUserForm__WEBPACK_IMPORTED_MODULE_1__.default,
-    JetSectionBorder: _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_2__.default,
+    DeleteUserForm: _DeleteUserForm__WEBPACK_IMPORTED_MODULE_2__.default,
+    JetSectionBorder: _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_1__.default,
     LogoutOtherBrowserSessionsForm: _LogoutOtherBrowserSessionsForm__WEBPACK_IMPORTED_MODULE_3__.default,
     TwoFactorAuthenticationForm: _TwoFactorAuthenticationForm__WEBPACK_IMPORTED_MODULE_4__.default,
     UpdatePasswordForm: _UpdatePasswordForm__WEBPACK_IMPORTED_MODULE_5__.default,
@@ -22220,10 +22222,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _TeamMemberManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TeamMemberManager */ "./resources/js/Pages/Teams/TeamMemberManager.vue");
-/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var _DeleteTeamForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteTeamForm */ "./resources/js/Pages/Teams/DeleteTeamForm.vue");
-/* harmony import */ var _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/SectionBorder */ "./resources/js/Jetstream/SectionBorder.vue");
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SectionBorder */ "./resources/js/Jetstream/SectionBorder.vue");
+/* harmony import */ var _TeamMemberManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TeamMemberManager */ "./resources/js/Pages/Teams/TeamMemberManager.vue");
+/* harmony import */ var _DeleteTeamForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DeleteTeamForm */ "./resources/js/Pages/Teams/DeleteTeamForm.vue");
 /* harmony import */ var _UpdateTeamNameForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UpdateTeamNameForm */ "./resources/js/Pages/Teams/UpdateTeamNameForm.vue");
 
 
@@ -22233,10 +22235,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['team', 'availableRoles', 'permissions'],
   components: {
-    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__.default,
-    DeleteTeamForm: _DeleteTeamForm__WEBPACK_IMPORTED_MODULE_2__.default,
-    JetSectionBorder: _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_3__.default,
-    TeamMemberManager: _TeamMemberManager__WEBPACK_IMPORTED_MODULE_0__.default,
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default,
+    DeleteTeamForm: _DeleteTeamForm__WEBPACK_IMPORTED_MODULE_3__.default,
+    JetSectionBorder: _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_1__.default,
+    TeamMemberManager: _TeamMemberManager__WEBPACK_IMPORTED_MODULE_2__.default,
     UpdateTeamNameForm: _UpdateTeamNameForm__WEBPACK_IMPORTED_MODULE_4__.default
   }
 });
@@ -32572,7 +32574,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_unicons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-unicons */ "./node_modules/vue-unicons/dist/vue-unicons.es.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-unicons/dist/icons */ "./node_modules/vue-unicons/dist/icons.js");
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import modules...
+// Import modules...
 
 
 
@@ -32580,6 +32582,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Import
 
 
 
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue_unicons__WEBPACK_IMPORTED_MODULE_3__.default.add([vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniChart, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniFileAlt, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniPalette, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniCalendarAlt, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniPlusCircle, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniMeh, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniUsersAlt, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniCarSideview, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniDashboard, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniSearch, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniFilter, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniFilterSlash, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniTrashAlt, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniPen, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniExclamationTriangle, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniMapMarker, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniPhone, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniEnvelope, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniFileDownload, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniArrowDown, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniArrowUp, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniArrowRight, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniAngleRight, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniAngleUp, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniAngleDown, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniAngleLeft, vue_unicons_dist_icons__WEBPACK_IMPORTED_MODULE_4__.uniFileUploadAlt]); // Create a new store instance.
 

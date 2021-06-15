@@ -55,36 +55,36 @@
 </template>
 
 <script>
-import SimpleTable from '@/Components/SimpleTable.vue'
-import ContactCard from '@/Components/ContactCard.vue'
-import CarCard from '@/Components/CarCard.vue'
-import PrintButton from './Buttons/PrintButton.vue'
+import SimpleTable from '@/Components/SimpleTable.vue';
+import ContactCard from '@/Components/ContactCard.vue';
+import CarCard from '@/Components/CarCard.vue';
+import PrintButton from './Buttons/PrintButton.vue';
 
 export default {
-    components: {
-        SimpleTable,
-        ContactCard,
-        CarCard,
-        PrintButton,
+  components: {
+    SimpleTable,
+    ContactCard,
+    CarCard,
+    PrintButton,
+  },
+  props: {
+    contract: Object,
+    meta: Object,
+  },
+  computed: {
+    contractClasses() {
+      return `col-span-12 h-full relative sm:col-span-${this.contract.car ? '4' : '6'}`;
     },
-    props: {
-        contract: Object,
-        meta: Object,
-    },
-    computed: {
-        contractClasses() {
-            return "col-span-12 h-full relative sm:col-span-" + (this.contract.car ? '4' : '6');
-        },
-    },
-    data() {
-        return {
-            sellContractsColumns: [
-                {key: 'buyer', value: 'Käufer'},
-                {key: 'date', value: 'Verkaufsdatum'},
-                {key: 'price', value: 'Verkaufspreis'},
-                {key: 'insurance_type', value: 'Versicherungstyp'},
-            ],
-        }
-    },
-}
+  },
+  data() {
+    return {
+      sellContractsColumns: [
+        { key: 'buyer', value: 'Käufer' },
+        { key: 'date', value: 'Verkaufsdatum' },
+        { key: 'price', value: 'Verkaufspreis' },
+        { key: 'insurance_type', value: 'Versicherungstyp' },
+      ],
+    };
+  },
+};
 </script>

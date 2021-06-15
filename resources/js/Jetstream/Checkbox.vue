@@ -5,28 +5,28 @@
 
 <script>
 export default {
-    emits: ['update:checked'],
+  emits: ['update:checked'],
 
-    props: {
-        checked: {
-            type: [Array, Boolean],
-            default: false,
-        },
-        value: {
-            default: null,
-        },
+  props: {
+    checked: {
+      type: [Array, Boolean],
+      default: false,
     },
-
-    computed: {
-        proxyChecked: {
-            get() {
-                return this.checked;
-            },
-
-            set(val) {
-                this.$emit("update:checked", val);
-            },
-        },
+    value: {
+      default: null,
     },
-}
+  },
+
+  computed: {
+    proxyChecked: {
+      get() {
+        return this.checked;
+      },
+
+      set(val) {
+        this.$emit('update:checked', val);
+      },
+    },
+  },
+};
 </script>

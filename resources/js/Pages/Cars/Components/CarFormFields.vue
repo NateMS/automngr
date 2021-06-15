@@ -81,110 +81,110 @@
 </template>
 
 <script>
-import JetLabel from '@/Jetstream/Label.vue'
-import JetInput from '@/Jetstream/Input.vue'
-import JetActionMessage from '@/Jetstream/ActionMessage'
-import JetInputError from '@/Jetstream/InputError'
-import Multiselect from 'vue-multiselect'
-import Datepicker from 'vue3-datepicker'
-import CurrencyInput from '@/Components/CurrencyInput'
+import JetLabel from '@/Jetstream/Label.vue';
+import JetInput from '@/Jetstream/Input.vue';
+import JetActionMessage from '@/Jetstream/ActionMessage';
+import JetInputError from '@/Jetstream/InputError';
+import Multiselect from 'vue-multiselect';
+import Datepicker from 'vue3-datepicker';
+import CurrencyInput from '@/Components/CurrencyInput';
 
 export default {
-    components: {
-        JetLabel,
-        JetInput,
-        JetInputError,
-        JetActionMessage,
-        Multiselect,
-        Datepicker,
-        CurrencyInput,
+  components: {
+    JetLabel,
+    JetInput,
+    JetInputError,
+    JetActionMessage,
+    Multiselect,
+    Datepicker,
+    CurrencyInput,
+  },
+  props: {
+    form: Object,
+    brands: Array,
+    brand: Object,
+    car_model: Object,
+  },
+  data() {
+    return {
+      brandSearch: null,
+      modelSearch: null,
+      carModels: [],
+      brandSelection: this.brand,
+      car_modelSelection: this.car_model,
+      currencyOptions: {
+        currency: 'CHF',
+        locale: 'de-CH',
+        exportValueAsInteger: true,
+        hideGroupingSeparatorOnFocus: false,
+        precision: 0,
+        currencyDisplay: 'hidden',
+      },
+    };
+  },
+  methods: {
+    updateBrand(brand) {
+      if (brand) {
+        this.brand.id = brand.id;
+        this.brand.name = brand.name;
+        this.brand.models = brand.models;
+      } else {
+        this.brand.id = null;
+        this.brand.name = null;
+        this.brand.models = [];
+      }
+      this.updateCarModelsList(brand);
     },
-    props: {
-        form: Object,
-        brands: Array,
-        brand: Object,
-        car_model: Object,
+    updateCarModel(car_model) {
+      if (car_model) {
+        this.car_model.id = car_model.id;
+        this.car_model.name = car_model.name;
+        this.form.car_model_id = car_model.id;
+      } else {
+        this.car_model.id = null;
+        this.car_model.name = null;
+        this.form.car_model_id = null;
+      }
     },
-    data() {
-        return {
-            brandSearch: null,
-            modelSearch: null,
-            carModels: [],
-            brandSelection: this.brand,
-            car_modelSelection: this.car_model,
-            currencyOptions: {
-                currency: 'CHF',
-                locale: 'de-CH',
-                exportValueAsInteger: true,
-                hideGroupingSeparatorOnFocus: false,
-                precision: 0,
-                currencyDisplay: 'hidden',
-            },
-        }
+    updateCarModelsList(brand) {
+      this.carModels = brand.models ?? [];
+      this.car_modelSelection = null;
+      this.updateCarModel(null);
     },
-    methods: {
-        updateBrand(brand) {
-            if (brand) {
-                this.brand.id = brand.id;
-                this.brand.name = brand.name;
-                this.brand.models = brand.models;
-            } else {
-                this.brand.id = null;
-                this.brand.name = null;
-                this.brand.models = [];
-            }
-            this.updateCarModelsList(brand);
-        },
-        updateCarModel(car_model) {
-            if (car_model) {
-                this.car_model.id = car_model.id;
-                this.car_model.name = car_model.name;
-                this.form.car_model_id = car_model.id;
-            } else {
-                this.car_model.id = null;
-                this.car_model.name = null;
-                this.form.car_model_id = null;
-            }
-        },
-        updateCarModelsList(brand) {
-            this.carModels = brand.models ?? [];
-            this.car_modelSelection = null;
-            this.updateCarModel(null);
-        },
-        updateBrandSearch(searchQuery, id) {
-            this.brandSearch = searchQuery
-        },
-        addBrand() {
-            axios.post(this.route('brands.store'), {
-                name: this.brandSearch,
-            }).then((response) => {
-                this.brandSelection = response.data;
-                this.brands.push(this.brandSelection);
-                this.updateBrand(this.brandSelection);
-            });
-        },
-        updateCarModelSearch(searchQuery, id) {
-            this.modelSearch = searchQuery
-        },
-        addCarModel() {
-            axios.post(this.route('models.store'), {
-                name: this.modelSearch,
-                brand_id: this.brand.id,
-            }).then((response) => {
-                this.car_modelSelection = response.data;
-                this.carModels.push(this.car_modelSelection);
-                this.updateCarModel(this.car_modelSelection);
-            });
-        },
+    updateBrandSearch(searchQuery, id) {
+      this.brandSearch = searchQuery;
     },
-    mounted: function () {
-        this.$nextTick(function () {
-            this.brandSelection = this.brands.find(x => x.id === this.brand.id);
-            if (this.brandSelection) {
-                this.carModels =  this.brandSelection.models ?? [];
-            }
-        })
+    addBrand() {
+      axios.post(this.route('brands.store'), {
+        name: this.brandSearch,
+      }).then((response) => {
+        this.brandSelection = response.data;
+        this.brands.push(this.brandSelection);
+        this.updateBrand(this.brandSelection);
+      });
     },
-}
+    updateCarModelSearch(searchQuery, id) {
+      this.modelSearch = searchQuery;
+    },
+    addCarModel() {
+      axios.post(this.route('models.store'), {
+        name: this.modelSearch,
+        brand_id: this.brand.id,
+      }).then((response) => {
+        this.car_modelSelection = response.data;
+        this.carModels.push(this.car_modelSelection);
+        this.updateCarModel(this.car_modelSelection);
+      });
+    },
+  },
+  mounted() {
+    this.$nextTick(function () {
+      this.brandSelection = this.brands.find((x) => x.id === this.brand.id);
+      if (this.brandSelection) {
+        this.carModels = this.brandSelection.models ?? [];
+      }
+    });
+  },
+};
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>

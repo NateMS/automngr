@@ -27,35 +27,35 @@
 </template>
 
 <script>
-import JetButton from '@/Jetstream/Button'
-import JetActionMessage from '@/Jetstream/ActionMessage'
-import JetFormSection from '@/Jetstream/FormSection'
-import CarFormFields from '@/Pages/Cars/Components/CarFormFields.vue'
-import { useForm } from '@inertiajs/inertia-vue3'
+import JetButton from '@/Jetstream/Button';
+import JetActionMessage from '@/Jetstream/ActionMessage';
+import JetFormSection from '@/Jetstream/FormSection';
+import CarFormFields from '@/Pages/Cars/Components/CarFormFields.vue';
+import { useForm } from '@inertiajs/inertia-vue3';
 
 export default {
-    components: {
-        JetButton,
-        JetFormSection,
-        JetActionMessage,
-        CarFormFields,
+  components: {
+    JetButton,
+    JetFormSection,
+    JetActionMessage,
+    CarFormFields,
+  },
+  props: {
+    data: Object,
+    brands: Array,
+    meta: Object,
+    brand: Object,
+    car_model: Object,
+  },
+  data() {
+    return {
+      form: useForm(this.meta.form_name, this.data),
+    };
+  },
+  methods: {
+    submitForm() {
+      this.form.submit(this.meta.method, this.meta.route);
     },
-    props: {
-        data: Object,
-        brands: Array,
-        meta: Object,
-        brand: Object,
-        car_model: Object,
-    },
-    data() {
-        return {
-            form: useForm(this.meta.form_name, this.data),
-        }
-    },
-    methods: {
-        submitForm() {
-            this.form.submit(this.meta.method, this.meta.route);
-        },
-    }
-}
+  },
+};
 </script>

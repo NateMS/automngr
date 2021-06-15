@@ -7,7 +7,8 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "eslint": "./node_modules/.bin/eslint resources/js/ --ext .js,.vue --fix"
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.8.4",
@@ -17,13 +18,13 @@
         "@tailwindcss/typography": "^0.3.0",
         "@types/lodash": "^4.14.168",
         "@vue/compiler-sfc": "^3.0.5",
-        "axios": "^0.21",
+        "eslint": "^7.28.0",
+        "eslint-plugin-vue": "^7.11.1",
         "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.21",
         "postcss": "^8.1.14",
         "postcss-import": "^12.0.1",
         "tailwindcss": "^2.0.1",
-        "vue": "^3.0.5",
+       
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
@@ -31,6 +32,9 @@
         "vue-multiselect": "^3.0.0-alpha.2",
         "vue-unicons": "^3.2.1",
         "vue3-datepicker": "^0.2.4",
-        "vuex": "^4.0.0"
+        "vuex": "^4.0.0",
+        "axios": "^0.21",
+        "lodash": "^4.17.21",
+        "vue": "^3.0.5"
     }
 }

@@ -31,28 +31,28 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout'
-import JetLabel from '@/Jetstream/Label.vue'
-import JetFormSection from '@/Jetstream/FormSection'
+import Layout from '@/Layouts/Layout';
+import JetLabel from '@/Jetstream/Label.vue';
+import JetFormSection from '@/Jetstream/FormSection';
 
 export default {
-    components: {
-        Layout,
-        JetLabel,
-        JetFormSection,
+  components: {
+    Layout,
+    JetLabel,
+    JetFormSection,
+  },
+  props: {
+    year: Number,
+    years: Array,
+  },
+  data() {
+    return {
+    };
+  },
+  computed: {
+    link() {
+      return route('reports.print', { year: this.year });
     },
-    props: {
-        year: Number,
-        years: Array,
-    },
-    data() {
-        return {
-        }
-    },
-    computed: {
-        link() {
-            return route('reports.print', {year: this.year});
-        },
-    },
-}
+  },
+};
 </script>

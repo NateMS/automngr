@@ -26,25 +26,25 @@
 </template>
 
 <script>
-    import TeamMemberManager from './TeamMemberManager'
-    import AppLayout from '@/Layouts/AppLayout'
-    import DeleteTeamForm from './DeleteTeamForm'
-    import JetSectionBorder from '@/Jetstream/SectionBorder'
-    import UpdateTeamNameForm from './UpdateTeamNameForm'
+import AppLayout from '@/Layouts/AppLayout';
+import JetSectionBorder from '@/Jetstream/SectionBorder';
+import TeamMemberManager from './TeamMemberManager';
+import DeleteTeamForm from './DeleteTeamForm';
+import UpdateTeamNameForm from './UpdateTeamNameForm';
 
-    export default {
-        props: [
-            'team',
-            'availableRoles',
-            'permissions',
-        ],
+export default {
+  props: [
+    'team',
+    'availableRoles',
+    'permissions',
+  ],
 
-        components: {
-            AppLayout,
-            DeleteTeamForm,
-            JetSectionBorder,
-            TeamMemberManager,
-            UpdateTeamNameForm,
-        },
-    }
+  components: {
+    AppLayout,
+    DeleteTeamForm,
+    JetSectionBorder,
+    TeamMemberManager,
+    UpdateTeamNameForm,
+  },
+};
 </script>

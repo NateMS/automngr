@@ -47,47 +47,47 @@
 </template>
 
 <script>
-import JetButton from '@/Jetstream/Button'
-import JetLabel from '@/Jetstream/Label.vue'
-import JetInput from '@/Jetstream/Input.vue'
-import JetActionMessage from '@/Jetstream/ActionMessage'
-import JetInputError from '@/Jetstream/InputError'
-import JetFormSection from '@/Jetstream/FormSection'
-import Datepicker from 'vue3-datepicker'
-import { useForm } from '@inertiajs/inertia-vue3'
-import CurrencyInput from '@/Components/CurrencyInput'
+import JetButton from '@/Jetstream/Button';
+import JetLabel from '@/Jetstream/Label.vue';
+import JetInput from '@/Jetstream/Input.vue';
+import JetActionMessage from '@/Jetstream/ActionMessage';
+import JetInputError from '@/Jetstream/InputError';
+import JetFormSection from '@/Jetstream/FormSection';
+import Datepicker from 'vue3-datepicker';
+import { useForm } from '@inertiajs/inertia-vue3';
+import CurrencyInput from '@/Components/CurrencyInput';
 
 export default {
-    components: {
-        JetButton,
-        JetFormSection,
-        JetLabel,
-        JetInput,
-        JetInputError,
-        JetActionMessage,
-        Datepicker,
-        CurrencyInput,
+  components: {
+    JetButton,
+    JetFormSection,
+    JetLabel,
+    JetInput,
+    JetInputError,
+    JetActionMessage,
+    Datepicker,
+    CurrencyInput,
+  },
+  props: {
+    data: Object,
+    meta: Object,
+    insurance_types: Array,
+  },
+  data() {
+    return {
+      form: useForm(this.meta.form_name, this.data),
+      currencyOptions: {
+        currency: 'CHF',
+        locale: 'de-CH',
+        exportValueAsInteger: true,
+        hideGroupingSeparatorOnFocus: false,
+      },
+    };
+  },
+  methods: {
+    submitForm() {
+      this.form.submit(this.meta.method, this.meta.route);
     },
-    props: {
-        data: Object,
-        meta: Object,
-        insurance_types: Array,
-    },
-    data() {
-        return {
-            form: useForm(this.meta.form_name, this.data),
-            currencyOptions: {
-                currency: 'CHF',
-                locale: 'de-CH',
-                exportValueAsInteger: true,
-                hideGroupingSeparatorOnFocus: false,
-            },
-        }
-    },
-    methods: {
-        submitForm() {
-            this.form.submit(this.meta.method, this.meta.route);
-        },
-    },
-}
+  },
+};
 </script>

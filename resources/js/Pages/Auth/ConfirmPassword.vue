@@ -26,37 +26,37 @@
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
+import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo';
+import JetButton from '@/Jetstream/Button';
+import JetInput from '@/Jetstream/Input';
+import JetLabel from '@/Jetstream/Label';
+import JetValidationErrors from '@/Jetstream/ValidationErrors';
 
-    export default {
-        components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors
-        },
+export default {
+  components: {
+    JetAuthenticationCard,
+    JetAuthenticationCardLogo,
+    JetButton,
+    JetInput,
+    JetLabel,
+    JetValidationErrors,
+  },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    password: '',
-                })
-            }
-        },
+  data() {
+    return {
+      form: this.$inertia.form({
+        password: '',
+      }),
+    };
+  },
 
-        methods: {
-            submit() {
-                this.form.post(this.route('password.confirm'), {
-                    onFinish: () => this.form.reset(),
-                })
-            }
-        }
-    }
+  methods: {
+    submit() {
+      this.form.post(this.route('password.confirm'), {
+        onFinish: () => this.form.reset(),
+      });
+    },
+  },
+};
 </script>

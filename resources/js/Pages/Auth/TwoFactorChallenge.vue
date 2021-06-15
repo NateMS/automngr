@@ -47,51 +47,51 @@
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
+import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo';
+import JetButton from '@/Jetstream/Button';
+import JetInput from '@/Jetstream/Input';
+import JetLabel from '@/Jetstream/Label';
+import JetValidationErrors from '@/Jetstream/ValidationErrors';
 
-    export default {
-        components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors,
-        },
+export default {
+  components: {
+    JetAuthenticationCard,
+    JetAuthenticationCardLogo,
+    JetButton,
+    JetInput,
+    JetLabel,
+    JetValidationErrors,
+  },
 
-        data() {
-            return {
-                recovery: false,
-                form: this.$inertia.form({
-                    code: '',
-                    recovery_code: '',
-                })
-            }
-        },
+  data() {
+    return {
+      recovery: false,
+      form: this.$inertia.form({
+        code: '',
+        recovery_code: '',
+      }),
+    };
+  },
 
-        methods: {
-            toggleRecovery() {
-                this.recovery ^= true
+  methods: {
+    toggleRecovery() {
+      this.recovery ^= true;
 
-                this.$nextTick(() => {
-                    if (this.recovery) {
-                        this.$refs.recovery_code.focus()
-                        this.form.code = '';
-                    } else {
-                        this.$refs.code.focus()
-                        this.form.recovery_code = ''
-                    }
-                })
-            },
-
-            submit() {
-                this.form.post(this.route('two-factor.login'))
-            }
+      this.$nextTick(() => {
+        if (this.recovery) {
+          this.$refs.recovery_code.focus();
+          this.form.code = '';
+        } else {
+          this.$refs.code.focus();
+          this.form.recovery_code = '';
         }
-    }
+      });
+    },
+
+    submit() {
+      this.form.post(this.route('two-factor.login'));
+    },
+  },
+};
 </script>

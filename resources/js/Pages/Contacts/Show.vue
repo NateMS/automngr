@@ -19,7 +19,7 @@
                 gelöscht: {{ contact.deleted_at }}
             </div>
         </template>
-   
+
         <template #more>
             <div class="sm:col-span-10 col-span-12">
                 <div class="whitespace-nowrap">
@@ -54,34 +54,34 @@
 </template>
 
 <script>
-import ShowPage from '@/Components/ShowPage.vue'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import ContactCard from '@/Components/ContactCard.vue'
-import BuyContractCard from '@/Components/BuyContractCard.vue'
-import SellContractCard from '@/Components/SellContractCard.vue'
-import EditButton from '@/Components/Buttons/EditButton.vue'
-import DeleteButton from '@/Components/Buttons/DeleteButton.vue'
-import RestoreButton from '@/Components/Buttons/RestoreButton.vue'
+import ShowPage from '@/Components/ShowPage.vue';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import ContactCard from '@/Components/ContactCard.vue';
+import BuyContractCard from '@/Components/BuyContractCard.vue';
+import SellContractCard from '@/Components/SellContractCard.vue';
+import EditButton from '@/Components/Buttons/EditButton.vue';
+import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
+import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
 
 export default {
-    components: {
-        ShowPage,
-        BreadCrumb,
-        ContactCard,
-        BuyContractCard,
-        SellContractCard,
-        EditButton,
-        DeleteButton,
-        RestoreButton,
-    },
+  components: {
+    ShowPage,
+    BreadCrumb,
+    ContactCard,
+    BuyContractCard,
+    SellContractCard,
+    EditButton,
+    DeleteButton,
+    RestoreButton,
+  },
 
-    props: {
-        contact: Object,
-    },
-    data() {
-        return {
-            currentRoute: 'contacts.show',
-        }
-    },
-}
+  props: {
+    contact: Object,
+  },
+  data() {
+    return {
+      currentRoute: 'contacts.show',
+    };
+  },
+};
 </script>

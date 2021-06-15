@@ -1,6 +1,6 @@
 <template>
     <div class="leading-normal tracking-normal" id="main-body">
-        <div class="flex flex-wrap">   
+        <div class="flex flex-wrap">
             <Sidebar />
             <div class="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen" :class="sideBarOpen ? 'overlay' : ''" id="main-content">
                 <Navbar>
@@ -20,19 +20,19 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import Sidebar from "@/Components/Sidebar"
-import Navbar from "@/Components/Navbar"
-import JetBanner from '@/Jetstream/Banner'
+import { mapState } from 'vuex';
+import Sidebar from '@/Components/Sidebar';
+import Navbar from '@/Components/Navbar';
+import JetBanner from '@/Jetstream/Banner';
 
 export default {
   computed: {
-    ...mapState(['sideBarOpen'])
+    ...mapState(['sideBarOpen']),
   },
   components: {
     Sidebar,
     Navbar,
     JetBanner,
-  }
-}
+  },
+};
 </script>

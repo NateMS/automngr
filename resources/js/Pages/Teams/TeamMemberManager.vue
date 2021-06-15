@@ -247,114 +247,114 @@
 </template>
 
 <script>
-    import JetActionMessage from '@/Jetstream/ActionMessage'
-    import JetActionSection from '@/Jetstream/ActionSection'
-    import JetButton from '@/Jetstream/Button'
-    import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
-    import JetDangerButton from '@/Jetstream/DangerButton'
-    import JetDialogModal from '@/Jetstream/DialogModal'
-    import JetFormSection from '@/Jetstream/FormSection'
-    import JetInput from '@/Jetstream/Input'
-    import JetInputError from '@/Jetstream/InputError'
-    import JetLabel from '@/Jetstream/Label'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
-    import JetSectionBorder from '@/Jetstream/SectionBorder'
+import JetActionMessage from '@/Jetstream/ActionMessage';
+import JetActionSection from '@/Jetstream/ActionSection';
+import JetButton from '@/Jetstream/Button';
+import JetConfirmationModal from '@/Jetstream/ConfirmationModal';
+import JetDangerButton from '@/Jetstream/DangerButton';
+import JetDialogModal from '@/Jetstream/DialogModal';
+import JetFormSection from '@/Jetstream/FormSection';
+import JetInput from '@/Jetstream/Input';
+import JetInputError from '@/Jetstream/InputError';
+import JetLabel from '@/Jetstream/Label';
+import JetSecondaryButton from '@/Jetstream/SecondaryButton';
+import JetSectionBorder from '@/Jetstream/SectionBorder';
 
-    export default {
-        components: {
-            JetActionMessage,
-            JetActionSection,
-            JetButton,
-            JetConfirmationModal,
-            JetDangerButton,
-            JetDialogModal,
-            JetFormSection,
-            JetInput,
-            JetInputError,
-            JetLabel,
-            JetSecondaryButton,
-            JetSectionBorder,
-        },
+export default {
+  components: {
+    JetActionMessage,
+    JetActionSection,
+    JetButton,
+    JetConfirmationModal,
+    JetDangerButton,
+    JetDialogModal,
+    JetFormSection,
+    JetInput,
+    JetInputError,
+    JetLabel,
+    JetSecondaryButton,
+    JetSectionBorder,
+  },
 
-        props: [
-            'team',
-            'availableRoles',
-            'userPermissions'
-        ],
+  props: [
+    'team',
+    'availableRoles',
+    'userPermissions',
+  ],
 
-        data() {
-            return {
-                addTeamMemberForm: this.$inertia.form({
-                    email: '',
-                    role: null,
-                }),
+  data() {
+    return {
+      addTeamMemberForm: this.$inertia.form({
+        email: '',
+        role: null,
+      }),
 
-                updateRoleForm: this.$inertia.form({
-                    role: null,
-                }),
+      updateRoleForm: this.$inertia.form({
+        role: null,
+      }),
 
-                leaveTeamForm: this.$inertia.form(),
-                removeTeamMemberForm: this.$inertia.form(),
+      leaveTeamForm: this.$inertia.form(),
+      removeTeamMemberForm: this.$inertia.form(),
 
-                currentlyManagingRole: false,
-                managingRoleFor: null,
-                confirmingLeavingTeam: false,
-                teamMemberBeingRemoved: null,
-            }
-        },
+      currentlyManagingRole: false,
+      managingRoleFor: null,
+      confirmingLeavingTeam: false,
+      teamMemberBeingRemoved: null,
+    };
+  },
 
-        methods: {
-            addTeamMember() {
-                this.addTeamMemberForm.post(route('team-members.store', this.team), {
-                    errorBag: 'addTeamMember',
-                    preserveScroll: true,
-                    onSuccess: () => this.addTeamMemberForm.reset(),
-                });
-            },
+  methods: {
+    addTeamMember() {
+      this.addTeamMemberForm.post(route('team-members.store', this.team), {
+        errorBag: 'addTeamMember',
+        preserveScroll: true,
+        onSuccess: () => this.addTeamMemberForm.reset(),
+      });
+    },
 
-            cancelTeamInvitation(invitation) {
-                this.$inertia.delete(route('team-invitations.destroy', invitation), {
-                    preserveScroll: true
-                });
-            },
+    cancelTeamInvitation(invitation) {
+      this.$inertia.delete(route('team-invitations.destroy', invitation), {
+        preserveScroll: true,
+      });
+    },
 
-            manageRole(teamMember) {
-                this.managingRoleFor = teamMember
-                this.updateRoleForm.role = teamMember.membership.role
-                this.currentlyManagingRole = true
-            },
+    manageRole(teamMember) {
+      this.managingRoleFor = teamMember;
+      this.updateRoleForm.role = teamMember.membership.role;
+      this.currentlyManagingRole = true;
+    },
 
-            updateRole() {
-                this.updateRoleForm.put(route('team-members.update', [this.team, this.managingRoleFor]), {
-                    preserveScroll: true,
-                    onSuccess: () => (this.currentlyManagingRole = false),
-                })
-            },
+    updateRole() {
+      this.updateRoleForm.put(route('team-members.update', [this.team, this.managingRoleFor]), {
+        preserveScroll: true,
+        onSuccess: () => (this.currentlyManagingRole = false),
+      });
+    },
 
-            confirmLeavingTeam() {
-                this.confirmingLeavingTeam = true
-            },
+    confirmLeavingTeam() {
+      this.confirmingLeavingTeam = true;
+    },
 
-            leaveTeam() {
-                this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.props.user]))
-            },
+    leaveTeam() {
+      this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.props.user]));
+    },
 
-            confirmTeamMemberRemoval(teamMember) {
-                this.teamMemberBeingRemoved = teamMember
-            },
+    confirmTeamMemberRemoval(teamMember) {
+      this.teamMemberBeingRemoved = teamMember;
+    },
 
-            removeTeamMember() {
-                this.removeTeamMemberForm.delete(route('team-members.destroy', [this.team, this.teamMemberBeingRemoved]), {
-                    errorBag: 'removeTeamMember',
-                    preserveScroll: true,
-                    preserveState: true,
-                    onSuccess: () => (this.teamMemberBeingRemoved = null),
-                })
-            },
+    removeTeamMember() {
+      this.removeTeamMemberForm.delete(route('team-members.destroy', [this.team, this.teamMemberBeingRemoved]), {
+        errorBag: 'removeTeamMember',
+        preserveScroll: true,
+        preserveState: true,
+        onSuccess: () => (this.teamMemberBeingRemoved = null),
+      });
+    },
 
-            displayableRole(role) {
-                return this.availableRoles.find(r => r.key === role).name
-            },
-        },
-    }
+    displayableRole(role) {
+      return this.availableRoles.find((r) => r.key === role).name;
+    },
+  },
+};
 </script>

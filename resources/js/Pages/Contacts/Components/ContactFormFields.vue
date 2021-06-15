@@ -70,18 +70,18 @@
 </template>
 
 <script>
-import JetLabel from '@/Jetstream/Label.vue'
-import JetInput from '@/Jetstream/Input.vue'
-import JetInputError from '@/Jetstream/InputError'
+import JetLabel from '@/Jetstream/Label.vue';
+import JetInput from '@/Jetstream/Input.vue';
+import JetInputError from '@/Jetstream/InputError';
 
 export default {
-    components: {
-        JetLabel,
-        JetInput,
-        JetInputError,
-    },
-    props: {
-        form: Object,
-    },
-}
+  components: {
+    JetLabel,
+    JetInput,
+    JetInputError,
+  },
+  props: {
+    form: Object,
+  },
+};
 </script>

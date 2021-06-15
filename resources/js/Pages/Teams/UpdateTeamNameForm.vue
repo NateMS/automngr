@@ -50,40 +50,40 @@
 </template>
 
 <script>
-    import JetActionMessage from '@/Jetstream/ActionMessage'
-    import JetButton from '@/Jetstream/Button'
-    import JetFormSection from '@/Jetstream/FormSection'
-    import JetInput from '@/Jetstream/Input'
-    import JetInputError from '@/Jetstream/InputError'
-    import JetLabel from '@/Jetstream/Label'
+import JetActionMessage from '@/Jetstream/ActionMessage';
+import JetButton from '@/Jetstream/Button';
+import JetFormSection from '@/Jetstream/FormSection';
+import JetInput from '@/Jetstream/Input';
+import JetInputError from '@/Jetstream/InputError';
+import JetLabel from '@/Jetstream/Label';
 
-    export default {
-        components: {
-            JetActionMessage,
-            JetButton,
-            JetFormSection,
-            JetInput,
-            JetInputError,
-            JetLabel,
-        },
+export default {
+  components: {
+    JetActionMessage,
+    JetButton,
+    JetFormSection,
+    JetInput,
+    JetInputError,
+    JetLabel,
+  },
 
-        props: ['team', 'permissions'],
+  props: ['team', 'permissions'],
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    name: this.team.name,
-                })
-            }
-        },
+  data() {
+    return {
+      form: this.$inertia.form({
+        name: this.team.name,
+      }),
+    };
+  },
 
-        methods: {
-            updateTeamName() {
-                this.form.put(route('teams.update', this.team), {
-                    errorBag: 'updateTeamName',
-                    preserveScroll: true
-                });
-            },
-        },
-    }
+  methods: {
+    updateTeamName() {
+      this.form.put(route('teams.update', this.team), {
+        errorBag: 'updateTeamName',
+        preserveScroll: true,
+      });
+    },
+  },
+};
 </script>

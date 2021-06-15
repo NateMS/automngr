@@ -15,14 +15,14 @@
 <script>
 
 export default {
-    props: {
-        document: Object,
+  props: {
+    document: Object,
+  },
+  methods: {
+    deleteDocument(e) {
+      e.preventDefault();
+      this.$emit('delete', this.document.id);
     },
-    methods: {
-        deleteDocument(e) {
-            e.preventDefault();
-            this.$emit('delete', this.document.id);
-        },
-    },
-}
+  },
+};
 </script>

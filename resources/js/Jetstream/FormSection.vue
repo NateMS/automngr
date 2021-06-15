@@ -22,31 +22,31 @@
 </template>
 
 <script>
-    import JetSectionTitle from './SectionTitle'
+import JetSectionTitle from './SectionTitle';
 
-    export default {
-        emits: ['submitted'],
+export default {
+  emits: ['submitted'],
 
-        props: {
-            emptyBg: {
-                type: Boolean,
-                default: false,
-            },
-        },
+  props: {
+    emptyBg: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
-        components: {
-            JetSectionTitle,
-        },
+  components: {
+    JetSectionTitle,
+  },
 
-        computed: {
-            hasActions() {
-                return !! this.$slots.actions
-            },
-            classnames() {
-                let classnames = !this.emptyBg ? 'px-4 py-5 bg-white sm:p-6 shadow ' :"";
-                classnames += this.hasActions ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md';
-                return classnames;
-            },
-        }
-    }
+  computed: {
+    hasActions() {
+      return !!this.$slots.actions;
+    },
+    classnames() {
+      let classnames = !this.emptyBg ? 'px-4 py-5 bg-white sm:p-6 shadow ' : '';
+      classnames += this.hasActions ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md';
+      return classnames;
+    },
+  },
+};
 </script>

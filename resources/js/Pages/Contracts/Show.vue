@@ -73,57 +73,56 @@
 </template>
 
 <script>
-import ShowPage from '@/Components/ShowPage.vue'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import SimpleTable from '@/Components/SimpleTable.vue'
-import DeleteButton from '@/Components/Buttons/DeleteButton.vue'
-import RestoreButton from '@/Components/Buttons/RestoreButton.vue'
-import CarCard from '@/Components/CarCard.vue'
-import PrintButton from '@/Components/Buttons/PrintButton.vue'
-import ContactCard from '@/Components/ContactCard.vue'
-import EditButton from '@/Components/Buttons/EditButton.vue'
-import DocumentsView from '@/Components/Documents/View.vue'
-import PaymentsView from '@/Components/Payments/View.vue'
-
+import ShowPage from '@/Components/ShowPage.vue';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import SimpleTable from '@/Components/SimpleTable.vue';
+import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
+import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
+import CarCard from '@/Components/CarCard.vue';
+import PrintButton from '@/Components/Buttons/PrintButton.vue';
+import ContactCard from '@/Components/ContactCard.vue';
+import EditButton from '@/Components/Buttons/EditButton.vue';
+import DocumentsView from '@/Components/Documents/View.vue';
+import PaymentsView from '@/Components/Payments/View.vue';
 
 export default {
-    components: {
-        BreadCrumb,
-        ShowPage,
-        SimpleTable,
-        CarCard,
-        DeleteButton,
-        RestoreButton,
-        PrintButton,
-        ContactCard,
-        EditButton,
-        CarCard,
-        DocumentsView,
-        PaymentsView,
+  components: {
+    BreadCrumb,
+    ShowPage,
+    SimpleTable,
+    CarCard,
+    DeleteButton,
+    RestoreButton,
+    PrintButton,
+    ContactCard,
+    EditButton,
+    CarCard,
+    DocumentsView,
+    PaymentsView,
+  },
+  props: {
+    contract: Object,
+  },
+  computed: {
+    contactTitle() {
+      return this.contract.is_sell_contract ? 'Käufer' : 'Verkäufer';
     },
-    props: {
-        contract: Object,
-    },
-    computed: {
-        contactTitle: function() {
-            return this.contract.is_sell_contract ? 'Käufer' : 'Verkäufer';
-        }
-    },
-    data() {
-        return {
-            currentRoute: 'contracts.show', 
-            buyContractsColumns: [
-                {key: 'contact', value: 'Verkäufer'},
-                {key: 'date', value: 'Kaufdatum'},
-                {key: 'price', value: 'Kaufpreis'},
-            ],
-            sellContractsColumns: [
-                {key: 'contact', value: 'Käufer'},
-                {key: 'date', value: 'Verkaufsdatum'},
-                {key: 'price', value: 'Verkaufspreis'},
-                {key: 'insurance_type', value: 'Versicherungstyp'},
-            ],
-        }
-    },
-}
+  },
+  data() {
+    return {
+      currentRoute: 'contracts.show',
+      buyContractsColumns: [
+        { key: 'contact', value: 'Verkäufer' },
+        { key: 'date', value: 'Kaufdatum' },
+        { key: 'price', value: 'Kaufpreis' },
+      ],
+      sellContractsColumns: [
+        { key: 'contact', value: 'Käufer' },
+        { key: 'date', value: 'Verkaufsdatum' },
+        { key: 'price', value: 'Verkaufspreis' },
+        { key: 'insurance_type', value: 'Versicherungstyp' },
+      ],
+    };
+  },
+};
 </script>

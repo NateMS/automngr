@@ -10,9 +10,9 @@ import StandardButton from './StandardButton.vue';
 
 export default {
   components: { StandardButton },
-    props: {
-        class: String,
-        href: String,
-    },
-}
+  props: {
+    class: String,
+    href: String,
+  },
+};
 </script>

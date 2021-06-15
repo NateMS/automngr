@@ -61,9 +61,9 @@
 <script>
 
 export default ({
-    props: {
-        car: Object,
-        hideEmpty: String,
-    },
-})
+  props: {
+    car: Object,
+    hideEmpty: String,
+  },
+});
 </script>

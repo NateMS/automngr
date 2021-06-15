@@ -10,5 +10,5 @@ export default {
     href: String,
     text: String,
   },
-}
+};
 </script>

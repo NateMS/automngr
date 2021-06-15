@@ -39,25 +39,25 @@
 </template>
 
 <script>
-    import Layout from '@/Layouts/Layout'
-    import DeleteUserForm from './DeleteUserForm'
-    import JetSectionBorder from '@/Jetstream/SectionBorder'
-    import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
-    import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
-    import UpdatePasswordForm from './UpdatePasswordForm'
-    import UpdateProfileInformationForm from './UpdateProfileInformationForm'
+import Layout from '@/Layouts/Layout';
+import JetSectionBorder from '@/Jetstream/SectionBorder';
+import DeleteUserForm from './DeleteUserForm';
+import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm';
+import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm';
+import UpdatePasswordForm from './UpdatePasswordForm';
+import UpdateProfileInformationForm from './UpdateProfileInformationForm';
 
-    export default {
-        props: ['sessions'],
+export default {
+  props: ['sessions'],
 
-        components: {
-            Layout,
-            DeleteUserForm,
-            JetSectionBorder,
-            LogoutOtherBrowserSessionsForm,
-            TwoFactorAuthenticationForm,
-            UpdatePasswordForm,
-            UpdateProfileInformationForm,
-        },
-    }
+  components: {
+    Layout,
+    DeleteUserForm,
+    JetSectionBorder,
+    LogoutOtherBrowserSessionsForm,
+    TwoFactorAuthenticationForm,
+    UpdatePasswordForm,
+    UpdateProfileInformationForm,
+  },
+};
 </script>

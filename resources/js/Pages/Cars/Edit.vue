@@ -19,59 +19,59 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import CarForm from './Components/CarForm.vue'
-import { ref } from 'vue'
+import Layout from '@/Layouts/Layout';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import { ref } from 'vue';
+import CarForm from './Components/CarForm.vue';
 
 export default {
-    components: {
-        BreadCrumb,
-        Layout,
-        CarForm,
-    },
-    props: {
-        car: Object,
-        brands: Array,
-    },
-    computed: {
-        name: function () {
-            let out = '';
-            if (this.brand.name) {
-                out += this.brand.name;
-                if (this.car_model.name) {
-                    out += ' ' + this.car_model.name;
-                }
-            }
-            return out;
-        },
-    },
-    data() {
-        return {
-            currentRoute: 'cars.edit',
-            meta: {
-                form_name: 'EditCar' + this.car.id,
-                route: this.route('cars.update', this.car.id),
-                method: 'put',
-                button_text: 'Änderungen speichern',
-                on_success: 'Änderungen gespeichert',
-            },
-            brand: this.car.brand,
-            car_model: this.car.car_model,
-            data: {
-                id: this.car.id,
-                stammnummer: this.car.stammnummer,
-                vin: this.car.vin,
-                initial_date: ref(new Date(this.car.initial_date)),
-                colour: this.car.colour,
-                notes: this.car.notes,
-                car_model_id: this.car.car_model.id,
-                last_check_date: ref(new Date(this.car.last_check_date)),
-                kilometers: this.car.kilometers,
-                known_damage: this.car.known_damage,
-                notes: this.car.notes,
-            },
+  components: {
+    BreadCrumb,
+    Layout,
+    CarForm,
+  },
+  props: {
+    car: Object,
+    brands: Array,
+  },
+  computed: {
+    name() {
+      let out = '';
+      if (this.brand.name) {
+        out += this.brand.name;
+        if (this.car_model.name) {
+          out += ` ${this.car_model.name}`;
         }
+      }
+      return out;
     },
-}
+  },
+  data() {
+    return {
+      currentRoute: 'cars.edit',
+      meta: {
+        form_name: `EditCar${this.car.id}`,
+        route: this.route('cars.update', this.car.id),
+        method: 'put',
+        button_text: 'Änderungen speichern',
+        on_success: 'Änderungen gespeichert',
+      },
+      brand: this.car.brand,
+      car_model: this.car.car_model,
+      data: {
+        id: this.car.id,
+        stammnummer: this.car.stammnummer,
+        vin: this.car.vin,
+        initial_date: ref(new Date(this.car.initial_date)),
+        colour: this.car.colour,
+        notes: this.car.notes,
+        car_model_id: this.car.car_model.id,
+        last_check_date: ref(new Date(this.car.last_check_date)),
+        kilometers: this.car.kilometers,
+        known_damage: this.car.known_damage,
+        notes: this.car.notes,
+      },
+    };
+  },
+};
 </script>

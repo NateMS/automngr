@@ -29,7 +29,7 @@
                 Alle Autos
             </jet-nav-link>
             <jet-nav-link :href="route('cars.unsold')" :active="route().current('cars.unsold')">
-                <unicon fill="currentColor" class="mr-2 ml-3" height="22" width="22" name="angle-right"></unicon> 
+                <unicon fill="currentColor" class="mr-2 ml-3" height="22" width="22" name="angle-right"></unicon>
                 Meine Autos
             </jet-nav-link>
             <jet-nav-link :href="route('cars.sold')" :active="route().current('cars.sold')">
@@ -63,15 +63,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import JetNavLink from '@/Jetstream/NavLink'
+import { mapState } from 'vuex';
+import JetNavLink from '@/Jetstream/NavLink';
 
 export default {
-    components: {
-        JetNavLink,
-    },
-    computed: {
-        ...mapState(['sideBarOpen'])
-    }
-}
+  components: {
+    JetNavLink,
+  },
+  computed: {
+    ...mapState(['sideBarOpen']),
+  },
+};
 </script>

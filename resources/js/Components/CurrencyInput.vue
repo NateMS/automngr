@@ -3,18 +3,18 @@
 </template>
 
 <script>
-import useCurrencyInput from 'vue-currency-input'
+import useCurrencyInput from 'vue-currency-input';
 
 export default {
   name: 'CurrencyInput',
   props: {
     modelValue: Number,
-    options: Object
+    options: Object,
   },
-  setup (props) {
-    const { formattedValue, inputRef } = useCurrencyInput(props.options)
+  setup(props) {
+    const { formattedValue, inputRef } = useCurrencyInput(props.options);
 
-    return { inputRef, formattedValue }
-  }
-}
+    return { inputRef, formattedValue };
+  },
+};
 </script>

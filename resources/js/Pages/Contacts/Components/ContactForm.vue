@@ -27,32 +27,32 @@
 </template>
 
 <script>
-import JetButton from '@/Jetstream/Button'
-import JetActionMessage from '@/Jetstream/ActionMessage'
-import JetFormSection from '@/Jetstream/FormSection'
-import ContactFormFields from './ContactFormFields'
-import { useForm } from '@inertiajs/inertia-vue3'
+import JetButton from '@/Jetstream/Button';
+import JetActionMessage from '@/Jetstream/ActionMessage';
+import JetFormSection from '@/Jetstream/FormSection';
+import { useForm } from '@inertiajs/inertia-vue3';
+import ContactFormFields from './ContactFormFields';
 
 export default {
-    components: {
-        JetButton,
-        JetFormSection,
-        JetActionMessage,
-        ContactFormFields,
+  components: {
+    JetButton,
+    JetFormSection,
+    JetActionMessage,
+    ContactFormFields,
+  },
+  props: {
+    data: Object,
+    meta: Object,
+  },
+  data() {
+    return {
+      form: useForm(this.meta.form_name, this.data),
+    };
+  },
+  methods: {
+    submitForm() {
+      this.form.submit(this.meta.method, this.meta.route);
     },
-    props: {
-        data: Object,
-        meta: Object,
-    },
-    data() {
-        return {
-            form: useForm(this.meta.form_name, this.data),
-        }
-    },
-    methods: {
-        submitForm() {
-            this.form.submit(this.meta.method, this.meta.route);
-        },
-    },
-}
+  },
+};
 </script>

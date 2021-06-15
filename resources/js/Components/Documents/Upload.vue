@@ -18,69 +18,70 @@
 
 <script>
 
-const STATUS_INITIAL = 0, STATUS_SAVING = 1, STATUS_FAILED = 2;
+const STATUS_INITIAL = 0; const STATUS_SAVING = 1; const
+  STATUS_FAILED = 2;
 
 export default {
-    props: {
-        id: Number,
-        documents: Object,
+  props: {
+    id: Number,
+    documents: Object,
+  },
+  data() {
+    return {
+      uploadError: null,
+      currentStatus: null,
+      uploadFieldName: 'document',
+    };
+  },
+  computed: {
+    isInitial() {
+      return this.currentStatus === STATUS_INITIAL;
     },
-    data() {
-        return {
-            uploadError: null,
-            currentStatus: null,
-            uploadFieldName: 'document',
-        }
+    isSaving() {
+      return this.currentStatus === STATUS_SAVING;
     },
-    computed: {
-        isInitial() {
-            return this.currentStatus === STATUS_INITIAL;
-        },
-        isSaving() {
-            return this.currentStatus === STATUS_SAVING;
-        },
-        isFailed() {
-            return this.currentStatus === STATUS_FAILED;
-        },
+    isFailed() {
+      return this.currentStatus === STATUS_FAILED;
     },
-    methods: {
-        reset() {
-            // reset form to initial state
-            this.currentStatus = STATUS_INITIAL;
-            this.uploadError = null;
-        },
-        save(formData) {
-            // upload data to the server
-            this.currentStatus = STATUS_SAVING;
-            axios.post(this.route('documents.store', this.id), formData)
-                .then(response => {
-                    this.documents.push(response.data);
-                    this.reset();
-                })
-                .catch(err => {
-                    this.uploadError = err.response;
-                    this.currentStatus = STATUS_FAILED;
-                });
-        },
-        filesChange(fieldName, fileList) {
-            // handle file changes
-            const formData = new FormData();
+  },
+  methods: {
+    reset() {
+      // reset form to initial state
+      this.currentStatus = STATUS_INITIAL;
+      this.uploadError = null;
+    },
+    save(formData) {
+      // upload data to the server
+      this.currentStatus = STATUS_SAVING;
+      axios.post(this.route('documents.store', this.id), formData)
+        .then((response) => {
+          this.documents.push(response.data);
+          this.reset();
+        })
+        .catch((err) => {
+          this.uploadError = err.response;
+          this.currentStatus = STATUS_FAILED;
+        });
+    },
+    filesChange(fieldName, fileList) {
+      // handle file changes
+      const formData = new FormData();
 
-            if (!fileList.length) return;
+      if (!fileList.length) return;
 
-            // append the files to FormData
-            Array
-                .from(Array(fileList.length).keys())
-                .map(x => {
-                    formData.append(fieldName, fileList[x], fileList[x].name);
-                });
+      // append the files to FormData
+      Array
+        .from(Array(fileList.length).keys())
+        .map((x) => {
+          formData.append(fieldName, fileList[x], fileList[x].name);
+        });
 
-            // save it
-            this.save(formData);
-        },
+      // save it
+      this.save(formData);
     },
-    mounted() {
-        this.reset();
-    },
-}
+  },
+  mounted() {
+    this.reset();
+  },
+};
 </script>

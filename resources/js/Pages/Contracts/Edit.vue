@@ -20,38 +20,38 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import ContractForm from './Components/ContractForm.vue'
-import { ref } from 'vue'
+import Layout from '@/Layouts/Layout';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import { ref } from 'vue';
+import ContractForm from './Components/ContractForm.vue';
 
 export default {
-    components: {
-        BreadCrumb,
-        Layout,
-        ContractForm,
-    },
-    props: {
-        contract: Object,
-        insurance_types: Array,
-    },
-    data() {
-        return {
-            currentRoute: 'contracts.edit',
-            meta: {
-                form_name: 'EditContract' + this.contract.id,
-                route: this.route('contracts.update', this.contract.id),
-                method: 'put',
-                button_text: 'Änderungen speichern',
-                on_success: 'Änderungen gespeichert',
-            },
-            data: {
-                date: ref(new Date(this.contract.date)),
-                price: this.contract.price,
-                insurance_type: this.contract.insurance_type,
-                is_sell_contract: this.contract.is_sell_contract,
-            }
-        }
-    },
-}
+  components: {
+    BreadCrumb,
+    Layout,
+    ContractForm,
+  },
+  props: {
+    contract: Object,
+    insurance_types: Array,
+  },
+  data() {
+    return {
+      currentRoute: 'contracts.edit',
+      meta: {
+        form_name: `EditContract${this.contract.id}`,
+        route: this.route('contracts.update', this.contract.id),
+        method: 'put',
+        button_text: 'Änderungen speichern',
+        on_success: 'Änderungen gespeichert',
+      },
+      data: {
+        date: ref(new Date(this.contract.date)),
+        price: this.contract.price,
+        insurance_type: this.contract.insurance_type,
+        is_sell_contract: this.contract.is_sell_contract,
+      },
+    };
+  },
+};
 </script>

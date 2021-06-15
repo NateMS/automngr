@@ -38,36 +38,36 @@
 </template>
 
 <script>
-    import JetButton from '@/Jetstream/Button'
-    import JetFormSection from '@/Jetstream/FormSection'
-    import JetInput from '@/Jetstream/Input'
-    import JetInputError from '@/Jetstream/InputError'
-    import JetLabel from '@/Jetstream/Label'
+import JetButton from '@/Jetstream/Button';
+import JetFormSection from '@/Jetstream/FormSection';
+import JetInput from '@/Jetstream/Input';
+import JetInputError from '@/Jetstream/InputError';
+import JetLabel from '@/Jetstream/Label';
 
-    export default {
-        components: {
-            JetButton,
-            JetFormSection,
-            JetInput,
-            JetInputError,
-            JetLabel,
-        },
+export default {
+  components: {
+    JetButton,
+    JetFormSection,
+    JetInput,
+    JetInputError,
+    JetLabel,
+  },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    name: '',
-                })
-            }
-        },
+  data() {
+    return {
+      form: this.$inertia.form({
+        name: '',
+      }),
+    };
+  },
 
-        methods: {
-            createTeam() {
-                this.form.post(route('teams.store'), {
-                    errorBag: 'createTeam',
-                    preserveScroll: true
-                });
-            },
-        },
-    }
+  methods: {
+    createTeam() {
+      this.form.post(route('teams.store'), {
+        errorBag: 'createTeam',
+        preserveScroll: true,
+      });
+    },
+  },
+};
 </script>

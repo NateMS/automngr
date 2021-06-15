@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import SimpleTable from '@/Components/SimpleTable.vue'
+import Layout from '@/Layouts/Layout';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import SimpleTable from '@/Components/SimpleTable.vue';
 
 export default {
   components: {
@@ -32,13 +32,13 @@ export default {
     return {
       currentRoute: 'contacts.sellers',
       columns: [
-        {key: 'name', value: 'Name', sortable: true},
-        {key: 'company', value: 'Firma', sortable: true},
-        {key: 'address', value: 'Adresse', sortable: true},
-        {key: 'fullCity', value: 'Ort', sortable: true},
-        {key: 'phone', value: 'Telefon'},
+        { key: 'name', value: 'Name', sortable: true },
+        { key: 'company', value: 'Firma', sortable: true },
+        { key: 'address', value: 'Adresse', sortable: true },
+        { key: 'fullCity', value: 'Ort', sortable: true },
+        { key: 'phone', value: 'Telefon' },
       ],
-    }
+    };
   },
-}
+};
 </script>

@@ -53,54 +53,54 @@
 </template>
 
 <script>
-    import JetActionSection from '@/Jetstream/ActionSection'
-    import JetDialogModal from '@/Jetstream/DialogModal'
-    import JetDangerButton from '@/Jetstream/DangerButton'
-    import JetInput from '@/Jetstream/Input'
-    import JetInputError from '@/Jetstream/InputError'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+import JetActionSection from '@/Jetstream/ActionSection';
+import JetDialogModal from '@/Jetstream/DialogModal';
+import JetDangerButton from '@/Jetstream/DangerButton';
+import JetInput from '@/Jetstream/Input';
+import JetInputError from '@/Jetstream/InputError';
+import JetSecondaryButton from '@/Jetstream/SecondaryButton';
 
-    export default {
-        components: {
-            JetActionSection,
-            JetDangerButton,
-            JetDialogModal,
-            JetInput,
-            JetInputError,
-            JetSecondaryButton,
-        },
+export default {
+  components: {
+    JetActionSection,
+    JetDangerButton,
+    JetDialogModal,
+    JetInput,
+    JetInputError,
+    JetSecondaryButton,
+  },
 
-        data() {
-            return {
-                confirmingUserDeletion: false,
+  data() {
+    return {
+      confirmingUserDeletion: false,
 
-                form: this.$inertia.form({
-                    password: '',
-                })
-            }
-        },
+      form: this.$inertia.form({
+        password: '',
+      }),
+    };
+  },
 
-        methods: {
-            confirmUserDeletion() {
-                this.confirmingUserDeletion = true;
+  methods: {
+    confirmUserDeletion() {
+      this.confirmingUserDeletion = true;
 
-                setTimeout(() => this.$refs.password.focus(), 250)
-            },
+      setTimeout(() => this.$refs.password.focus(), 250);
+    },
 
-            deleteUser() {
-                this.form.delete(route('current-user.destroy'), {
-                    preserveScroll: true,
-                    onSuccess: () => this.closeModal(),
-                    onError: () => this.$refs.password.focus(),
-                    onFinish: () => this.form.reset(),
-                })
-            },
+    deleteUser() {
+      this.form.delete(route('current-user.destroy'), {
+        preserveScroll: true,
+        onSuccess: () => this.closeModal(),
+        onError: () => this.$refs.password.focus(),
+        onFinish: () => this.form.reset(),
+      });
+    },
 
-            closeModal() {
-                this.confirmingUserDeletion = false
+    closeModal() {
+      this.confirmingUserDeletion = false;
 
-                this.form.reset()
-            },
-        },
-    }
+      this.form.reset();
+    },
+  },
+};
 </script>

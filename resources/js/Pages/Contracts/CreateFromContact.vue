@@ -67,115 +67,114 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import CarFormFields from '@/Pages/Cars/Components/CarFormFields.vue'
-import CarCard from '@/Components/CarCard.vue'
-import ContactCard from '@/Components/ContactCard.vue'
-import JetFormSection from '@/Jetstream/FormSection'
-import Multiselect from 'vue-multiselect'
-import JetLabel from '@/Jetstream/Label.vue'
-import JetButton from '@/Jetstream/Button'
-import JetActionMessage from '@/Jetstream/ActionMessage'
+import Layout from '@/Layouts/Layout';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import CarFormFields from '@/Pages/Cars/Components/CarFormFields.vue';
+import CarCard from '@/Components/CarCard.vue';
+import ContactCard from '@/Components/ContactCard.vue';
+import JetFormSection from '@/Jetstream/FormSection';
+import Multiselect from 'vue-multiselect';
+import JetLabel from '@/Jetstream/Label.vue';
+import JetButton from '@/Jetstream/Button';
+import JetActionMessage from '@/Jetstream/ActionMessage';
 
 export default {
-    components: {
-        Layout,
-        BreadCrumb,
-        CarCard,
-        ContactCard,
-        CarFormFields,
-        JetFormSection,
-        Multiselect,
-        JetLabel,
-        JetButton,
-        JetActionMessage,
+  components: {
+    Layout,
+    BreadCrumb,
+    CarCard,
+    ContactCard,
+    CarFormFields,
+    JetFormSection,
+    Multiselect,
+    JetLabel,
+    JetButton,
+    JetActionMessage,
+  },
+  props: {
+    contact: Object,
+    cars: Object,
+    brands: Object,
+    type: String,
+  },
+  data() {
+    return {
+      carsChoice: this.cars,
+      car: {
+        id: null,
+        stammnummer: null,
+        vin: null,
+        colour: null,
+        car_model_id: null,
+        initial_date: null,
+        last_check_date: null,
+        kilometers: null,
+        known_damage: null,
+        notes: null,
+        errors: {},
+      },
+      brand: { id: null, name: null },
+      car_model: { id: null, name: null },
+      createCar: false,
+    };
+  },
+  computed: {
+    contractType() {
+      return this.isSellContract ? 'Verkaufsvertrag' : 'Ankaufsvertrag';
     },
-    props: {
-        contact: Object,
-        cars: Object,
-        brands: Object,
-        type: String,
+    contactType() {
+      return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
-    data() {
-        return {
-            carsChoice: this.cars,
-            car: {
-                id: null,
-                stammnummer: null,
-                vin: null,
-                colour: null,
-                car_model_id: null,
-                initial_date: null,
-                last_check_date: null,
-                kilometers: null,
-                known_damage: null,
-                notes: null,
-                errors: {},
-            },
-            brand: {id: null, name: null},
-            car_model: {id: null, name: null},
-            createCar: false,
-        }
+    isSellContract() {
+      return this.type == 'SellContract';
     },
-    computed: {
-        contractType: function () {
-           return this.isSellContract ? "Verkaufsvertrag" : "Ankaufsvertrag";
-        },
-        contactType: function () {
-           return this.isSellContract ? "Käufer" : "Verkäufer";
-        },
-        isSellContract: function () {
-            return this.type == "SellContract";
-        },
-        emptyCar: function() {
-            return {
-                id: null,
-                stammnummer: null,
-                vin: null,
-                colour: null,
-                car_model_id: null,
-                initial_date: null,
-                last_check_date: null,
-                kilometers: null,
-                known_damage: null,
-                notes: null,
-                errors: {},
-            };
-        },
+    emptyCar() {
+      return {
+        id: null,
+        stammnummer: null,
+        vin: null,
+        colour: null,
+        car_model_id: null,
+        initial_date: null,
+        last_check_date: null,
+        kilometers: null,
+        known_damage: null,
+        notes: null,
+        errors: {},
+      };
     },
-    methods: {
-        nextPage() {
-            this.$inertia.get(route('contracts.create', {
-                type: this.isSellContract ? 1 : 0,
-                car: this.car.id,
-                contact: this.contact.id,
-            }), { preserveScroll: true });
-        },
-        openCarForm() {
-            this.createCar = true;
-            this.car = this.emptyCar;
-        },
-        submitCreateCarForm(e) {
-            e.preventDefault();
-            axios.post(this.route('cars.store_for_contract'), this.car)
-                .then(res => {
-                    this.carsChoice.push(res.data);
-                    this.car = res.data;
-                    this.createCar = false;
-                }).catch(err => {
-                    if (err.response) {
-                        let errors = err.response.data.errors;
+  },
+  methods: {
+    nextPage() {
+      this.$inertia.get(route('contracts.create', {
+        type: this.isSellContract ? 1 : 0,
+        car: this.car.id,
+        contact: this.contact.id,
+      }), { preserveScroll: true });
+    },
+    openCarForm() {
+      this.createCar = true;
+      this.car = this.emptyCar;
+    },
+    submitCreateCarForm(e) {
+      e.preventDefault();
+      axios.post(this.route('cars.store_for_contract'), this.car)
+        .then((res) => {
+          this.carsChoice.push(res.data);
+          this.car = res.data;
+          this.createCar = false;
+        }).catch((err) => {
+          if (err.response) {
+            const { errors } = err.response.data;
 
-                        Object.keys(errors).map(function(key, index) {
-                            errors[key] = errors[key].join(' ');
-                        });
-                        this.car.errors = errors;
-                    }
-                   
-                });
-        },
+            Object.keys(errors).map((key, index) => {
+              errors[key] = errors[key].join(' ');
+            });
+            this.car.errors = errors;
+          }
+        });
     },
-}
+  },
+};
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>

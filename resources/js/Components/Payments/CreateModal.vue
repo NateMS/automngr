@@ -38,57 +38,57 @@
 </template>
 
 <script>
-import JetButton from '@/Jetstream/Button'
-import JetLabel from '@/Jetstream/Label.vue'
-import JetInput from '@/Jetstream/Input.vue'
-import JetInputError from '@/Jetstream/InputError'
-import Datepicker from 'vue3-datepicker'
-import { useForm } from '@inertiajs/inertia-vue3'
-import { ref } from 'vue'
-import DialogModal from '@/Jetstream/DialogModal.vue'
-import CurrencyInput from '@/Components/CurrencyInput'
+import JetButton from '@/Jetstream/Button';
+import JetLabel from '@/Jetstream/Label.vue';
+import JetInput from '@/Jetstream/Input.vue';
+import JetInputError from '@/Jetstream/InputError';
+import Datepicker from 'vue3-datepicker';
+import { useForm } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
+import DialogModal from '@/Jetstream/DialogModal.vue';
+import CurrencyInput from '@/Components/CurrencyInput';
 
 export default {
-    components: {
-        JetButton,
-        JetLabel,
-        JetInput,
-        JetInputError,
-        DialogModal,
-        Datepicker,
-        CurrencyInput,
-    },
-    props: {
-        id: Number,
-        showModal: Boolean,
-    },
-    data() {
-        return {
-            form: useForm('CreatePayment', {
-                id: null,
-                date: ref(new Date()),
-                amount: null,
-                type: '1',
-                contract_id: this.id,
-            }),
-            currencyOptions: {
-                currency: 'CHF',
-                locale: 'de-CH',
-                exportValueAsInteger: true,
-                hideGroupingSeparatorOnFocus: false,
-            },
-        }
-    },
-    methods: {
-        submitForm() {
-            this.form.post(this.route('payments.store', this.id), {
-                preserveScroll: true,
-                onSuccess: () => {
-                    this.$emit('close');
-                    form.reset();
-                },
-            });
+  components: {
+    JetButton,
+    JetLabel,
+    JetInput,
+    JetInputError,
+    DialogModal,
+    Datepicker,
+    CurrencyInput,
+  },
+  props: {
+    id: Number,
+    showModal: Boolean,
+  },
+  data() {
+    return {
+      form: useForm('CreatePayment', {
+        id: null,
+        date: ref(new Date()),
+        amount: null,
+        type: '1',
+        contract_id: this.id,
+      }),
+      currencyOptions: {
+        currency: 'CHF',
+        locale: 'de-CH',
+        exportValueAsInteger: true,
+        hideGroupingSeparatorOnFocus: false,
+      },
+    };
+  },
+  methods: {
+    submitForm() {
+      this.form.post(this.route('payments.store', this.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+          this.$emit('close');
+          form.reset();
         },
+      });
     },
-}
+  },
+};
 </script>

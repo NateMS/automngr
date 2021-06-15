@@ -14,13 +14,13 @@
         </div>
         <div v-if="contact.email" class="mt-3">
             <a :href="'mailto:' + contact.email" class="pt-1 pb-1 flex items-center hover:text-indigo-600">
-                <unicon fill="currentColor" class="mr-1" height="22" width="22" name="envelope"></unicon>  
+                <unicon fill="currentColor" class="mr-1" height="22" width="22" name="envelope"></unicon>
                 {{ contact.email }}
             </a>
         </div>
         <div v-if="contact.phone" class="mt-1">
             <a :href="'phone:' + contact.phone" class="pt-1 pb-1 flex items-center hover:text-indigo-600">
-                <unicon fill="currentColor" class="mr-1" height="22" width="22" name="phone"></unicon>  
+                <unicon fill="currentColor" class="mr-1" height="22" width="22" name="phone"></unicon>
                 {{ contact.phone }}
             </a>
         </div>
@@ -40,8 +40,8 @@
 <script>
 
 export default ({
-    props: {
-        contact: Object,
-    },
-})
+  props: {
+    contact: Object,
+  },
+});
 </script>

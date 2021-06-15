@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       show: false,
-    }
+    };
   },
   watch: {
     show(show) {
@@ -43,19 +43,19 @@ export default {
             modifiers: {
               preventOverflow: { boundariesElement: this.boundary },
             },
-          })
-        })
+          });
+        });
       } else if (this.popper) {
-        setTimeout(() => this.popper.destroy(), 100)
+        setTimeout(() => this.popper.destroy(), 100);
       }
     },
   },
   mounted() {
-    document.addEventListener('keydown', e => {
+    document.addEventListener('keydown', (e) => {
       if (e.keyCode === 27) {
-        this.show = false
+        this.show = false;
       }
-    })
+    });
   },
-}
+};
 </script>

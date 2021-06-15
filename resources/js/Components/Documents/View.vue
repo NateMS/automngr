@@ -9,36 +9,36 @@
 </template>
 
 <script>
-import { useForm } from '@inertiajs/inertia-vue3'
-import DocumentItem from '@/Components/Documents/Item.vue'
-import DocumentUpload from '@/Components/Documents/Upload.vue'
+import { useForm } from '@inertiajs/inertia-vue3';
+import DocumentItem from '@/Components/Documents/Item.vue';
+import DocumentUpload from '@/Components/Documents/Upload.vue';
 
 export default {
-    components: {
-        DocumentItem,
-        DocumentUpload,
-    },
-    props: {
-        initial_documents: Object,
-        id: Number,
-        show_upload: Boolean,
-    },
-    data() {
-        return {
-            documents: this.initial_documents,
-        }
-    },
-    methods: {
-        deleteDocument(documentId) {
-            let form = useForm(`deleteDocument${documentId}`, {id: documentId});
-            form.delete(route('documents.destroy', this.id), {
-                preserveScroll: true,
-                onSuccess: () => {
-                    form.reset();
-                    this.documents = this.initial_documents;
-                }
-            });
+  components: {
+    DocumentItem,
+    DocumentUpload,
+  },
+  props: {
+    initial_documents: Object,
+    id: Number,
+    show_upload: Boolean,
+  },
+  data() {
+    return {
+      documents: this.initial_documents,
+    };
+  },
+  methods: {
+    deleteDocument(documentId) {
+      const form = useForm(`deleteDocument${documentId}`, { id: documentId });
+      form.delete(route('documents.destroy', this.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+          form.reset();
+          this.documents = this.initial_documents;
         },
-    }
-}
+      });
+    },
+  },
+};
 </script>

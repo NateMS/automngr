@@ -7,7 +7,7 @@
                 bearbeiten
             </h2>
         </template>
-   
+
         <div>
             <contact-form :data="data" :meta="meta">
                 <template #title>Kontaktinformationen</template>
@@ -20,43 +20,43 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import ContactForm from './Components/ContactForm.vue'
+import Layout from '@/Layouts/Layout';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import ContactForm from './Components/ContactForm.vue';
 
 export default {
-    components: {
-        Layout,
-        BreadCrumb,
-        ContactForm,
-    },
+  components: {
+    Layout,
+    BreadCrumb,
+    ContactForm,
+  },
 
-    props: {
-        contact: Object,
-    },
-    data() {
-        return {
-            meta: {
-                form_name: 'EditContact' + this.contact.id,
-                route: this.route('contacts.update', this.contact.id),
-                method: 'put',
-                button_text: 'Änderungen speichern',
-                on_success: 'Änderungen gespeichert',
-            },
-            data: {
-                id: this.contact.id,
-                firstname: this.contact.firstname,
-                lastname: this.contact.lastname,
-                company: this.contact.company,
-                email: this.contact.email,
-                phone: this.contact.phone,
-                address: this.contact.address,
-                zip: this.contact.zip,
-                city: this.contact.city,
-                country: this.contact.country,
-                notes: this.contact.notes,
-            },
-        }
-    },
-}
+  props: {
+    contact: Object,
+  },
+  data() {
+    return {
+      meta: {
+        form_name: `EditContact${this.contact.id}`,
+        route: this.route('contacts.update', this.contact.id),
+        method: 'put',
+        button_text: 'Änderungen speichern',
+        on_success: 'Änderungen gespeichert',
+      },
+      data: {
+        id: this.contact.id,
+        firstname: this.contact.firstname,
+        lastname: this.contact.lastname,
+        company: this.contact.company,
+        email: this.contact.email,
+        phone: this.contact.phone,
+        address: this.contact.address,
+        zip: this.contact.zip,
+        city: this.contact.city,
+        country: this.contact.country,
+        notes: this.contact.notes,
+      },
+    };
+  },
+};
 </script>

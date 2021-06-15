@@ -10,7 +10,7 @@
                 Neuen {{ contractType }} erstellen
             </h2>
         </template>
-   
+
         <div>
             <jet-form-section v-if="!car_first" :emptyBg="true" class="max-w-7xl mb-5">
                 <template #title>
@@ -54,61 +54,61 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import ContractForm from './Components/ContractForm.vue'
-import CarCard from '@/Components/CarCard.vue'
-import ContactCard from '@/Components/ContactCard.vue'
-import JetFormSection from '@/Jetstream/FormSection'
-import { ref } from 'vue'
+import Layout from '@/Layouts/Layout';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import CarCard from '@/Components/CarCard.vue';
+import ContactCard from '@/Components/ContactCard.vue';
+import JetFormSection from '@/Jetstream/FormSection';
+import { ref } from 'vue';
+import ContractForm from './Components/ContractForm.vue';
 
 export default {
-    components: {
-        Layout,
-        BreadCrumb,
-        ContractForm,
-        CarCard,
-        ContactCard,
-        JetFormSection,
+  components: {
+    Layout,
+    BreadCrumb,
+    ContractForm,
+    CarCard,
+    ContactCard,
+    JetFormSection,
+  },
+  props: {
+    car: Object,
+    contact: Object,
+    type: String,
+    car_first: Boolean,
+    insurance_types: Array,
+  },
+  data() {
+    return {
+      meta: {
+        form_name: 'CreateContract',
+        route: this.route('contracts.store'),
+        method: 'post',
+        button_text: 'Vertrag speichern',
+        on_success: 'Vertrag gespeichert',
+      },
+      data: {
+        id: null,
+        date: ref(new Date()),
+        price: null,
+        type: this.type,
+        insurance_type: '0',
+        car_id: this.car.id,
+        contact_id: this.contact.id,
+        is_sell_contract: this.type == 'SellContract',
+      },
+    };
+  },
+  computed: {
+    contractType() {
+      return this.isSellContract ? 'Verkaufsvertrag' : 'Ankaufsvertrag';
     },
-    props: {
-        car: Object,
-        contact: Object,
-        type: String,
-        car_first: Boolean,
-        insurance_types: Array,
+    contactType() {
+      return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
-    data() {
-        return {
-            meta: {
-                form_name: 'CreateContract',
-                route: this.route('contracts.store'),
-                method: 'post',
-                button_text: 'Vertrag speichern',
-                on_success: 'Vertrag gespeichert',
-            },
-            data: {
-                id: null,
-                date: ref(new Date()),
-                price: null,
-                type: this.type,
-                insurance_type: '0',
-                car_id: this.car.id,
-                contact_id: this.contact.id,
-                is_sell_contract: this.type == "SellContract",
-            },
-        }
+    isSellContract() {
+      return this.type == 'SellContract';
     },
-    computed: {
-        contractType: function () {
-           return this.isSellContract ? "Verkaufsvertrag" : "Ankaufsvertrag";
-        },
-        contactType: function () {
-           return this.isSellContract ? "Käufer" : "Verkäufer";
-        },
-        isSellContract: function () {
-            return this.type == "SellContract";
-        },
-    }
-}
+  },
+};
 </script>

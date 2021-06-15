@@ -22,39 +22,39 @@
 </template>
 
 <script>
-    import Layout from '@/Layouts/Layout'
-    import SimpleTable from '@/Components/SimpleTable.vue'
-    import DashItem from '@/Components/Dashboard/DashItem.vue'
+import Layout from '@/Layouts/Layout';
+import SimpleTable from '@/Components/SimpleTable.vue';
+import DashItem from '@/Components/Dashboard/DashItem.vue';
 
-    export default {
-        components: {
-            Layout,
-            SimpleTable,
-            DashItem,
-        },
-        props: {
-            buy_contracts: Object,
-            sell_contracts: Object,
-            sold_this_year: Number,
-            bought_this_year: Number,
-            my_cars: Number,
-        },
-        data() {
-            return {
-                currentRoute: 'cars',
-                buyContractColumns: [
-                    {key: 'date', value: 'Datum', sortable: false},
-                    // {key: 'car', value: 'Auto', sortable: false},
-                    {key: 'contact', value: 'Verkäufer', sortable: false},
-                    {key: 'price', value: 'Einkaufspreis', sortable: false},
-                ],
-                sellContractColumns: [
-                    {key: 'date', value: 'Datum', sortable: false},
-                    // {key: 'car', value: 'Auto', sortable: false},
-                    {key: 'contact', value: 'Käufer', sortable: false},
-                    {key: 'price', value: 'Verkaufspreis', sortable: false},
-                ],
-            }
-        },
-    }
+export default {
+  components: {
+    Layout,
+    SimpleTable,
+    DashItem,
+  },
+  props: {
+    buy_contracts: Object,
+    sell_contracts: Object,
+    sold_this_year: Number,
+    bought_this_year: Number,
+    my_cars: Number,
+  },
+  data() {
+    return {
+      currentRoute: 'cars',
+      buyContractColumns: [
+        { key: 'date', value: 'Datum', sortable: false },
+        // {key: 'car', value: 'Auto', sortable: false},
+        { key: 'contact', value: 'Verkäufer', sortable: false },
+        { key: 'price', value: 'Einkaufspreis', sortable: false },
+      ],
+      sellContractColumns: [
+        { key: 'date', value: 'Datum', sortable: false },
+        // {key: 'car', value: 'Auto', sortable: false},
+        { key: 'contact', value: 'Käufer', sortable: false },
+        { key: 'price', value: 'Verkaufspreis', sortable: false },
+      ],
+    };
+  },
+};
 </script>

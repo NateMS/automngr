@@ -67,114 +67,113 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout'
-import BreadCrumb from '@/Components/BreadCrumb.vue'
-import ContactFormFields from '@/Pages/Contacts/Components/ContactFormFields.vue'
-import CarCard from '@/Components/CarCard.vue'
-import ContactCard from '@/Components/ContactCard.vue'
-import JetFormSection from '@/Jetstream/FormSection'
-import Multiselect from 'vue-multiselect'
-import JetLabel from '@/Jetstream/Label.vue'
-import JetButton from '@/Jetstream/Button'
-import JetActionMessage from '@/Jetstream/ActionMessage'
+import Layout from '@/Layouts/Layout';
+import BreadCrumb from '@/Components/BreadCrumb.vue';
+import ContactFormFields from '@/Pages/Contacts/Components/ContactFormFields.vue';
+import CarCard from '@/Components/CarCard.vue';
+import ContactCard from '@/Components/ContactCard.vue';
+import JetFormSection from '@/Jetstream/FormSection';
+import Multiselect from 'vue-multiselect';
+import JetLabel from '@/Jetstream/Label.vue';
+import JetButton from '@/Jetstream/Button';
+import JetActionMessage from '@/Jetstream/ActionMessage';
 
 export default {
-    components: {
-        Layout,
-        BreadCrumb,
-        CarCard,
-        ContactCard,
-        JetFormSection,
-        ContactFormFields,
-        Multiselect,
-        JetLabel,
-        JetButton,
-        JetActionMessage,
+  components: {
+    Layout,
+    BreadCrumb,
+    CarCard,
+    ContactCard,
+    JetFormSection,
+    ContactFormFields,
+    Multiselect,
+    JetLabel,
+    JetButton,
+    JetActionMessage,
+  },
+  props: {
+    car: Object,
+    contacts: Object,
+    type: String,
+  },
+  data() {
+    return {
+      contactsChoice: this.contacts,
+      contact: {
+        id: null,
+        firstname: null,
+        lastname: null,
+        company: null,
+        email: null,
+        phone: null,
+        address: null,
+        zip: null,
+        city: null,
+        country: null,
+        notes: null,
+        errors: {},
+      },
+      createContact: false,
+    };
+  },
+  computed: {
+    contractType() {
+      return this.isSellContract ? 'Verkaufsvertrag' : 'Ankaufsvertrag';
     },
-    props: {
-        car: Object,
-        contacts: Object,
-        type: String,
+    contactType() {
+      return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
-    data() {
-        return {
-            contactsChoice: this.contacts,
-            contact: {
-                id: null,
-                firstname: null,
-                lastname: null,
-                company: null,
-                email: null,
-                phone: null,
-                address: null,
-                zip: null,
-                city: null,
-                country: null,
-                notes: null,
-                errors: {},
-            },
-            createContact: false,
-        }
+    isSellContract() {
+      return this.type == 'SellContract';
     },
-    computed: {
-        contractType: function () {
-           return this.isSellContract ? "Verkaufsvertrag" : "Ankaufsvertrag";
-        },
-        contactType: function () {
-           return this.isSellContract ? "Käufer" : "Verkäufer";
-        },
-        isSellContract: function () {
-            return this.type == "SellContract";
-        },
-        emptyContact: function() {
-            return {
-                id: null,
-                firstname: null,
-                lastname: null,
-                company: null,
-                email: null,
-                phone: null,
-                address: null,
-                zip: null,
-                city: null,
-                country: null,
-                notes: null,
-                errors: {},
-            };
-        },
+    emptyContact() {
+      return {
+        id: null,
+        firstname: null,
+        lastname: null,
+        company: null,
+        email: null,
+        phone: null,
+        address: null,
+        zip: null,
+        city: null,
+        country: null,
+        notes: null,
+        errors: {},
+      };
     },
-    methods: {
-        nextPage() {
-            this.$inertia.get(route('contracts.create', {
-                type: this.isSellContract ? 1 : 0,
-                car: this.car.id,
-                contact: this.contact.id,
-            }), { preserveScroll: true, carFirst: true, });
-        },
-        openContactForm() {
-            this.createContact = true;
-            this.contact = this.emptyContact;
-        },
-        submitCreateContactForm(e) {
-            e.preventDefault();
-            axios.post(this.route('contacts.store_for_contract'), this.contact)
-                .then(res => {
-                    this.contactsChoice.push(res.data);
-                    this.contact = res.data;
-                    this.createContact = false;
-                }).catch(err => {
-                    if (err.response) {
-                        let errors = err.response.data.errors;
+  },
+  methods: {
+    nextPage() {
+      this.$inertia.get(route('contracts.create', {
+        type: this.isSellContract ? 1 : 0,
+        car: this.car.id,
+        contact: this.contact.id,
+      }), { preserveScroll: true, carFirst: true });
+    },
+    openContactForm() {
+      this.createContact = true;
+      this.contact = this.emptyContact;
+    },
+    submitCreateContactForm(e) {
+      e.preventDefault();
+      axios.post(this.route('contacts.store_for_contract'), this.contact)
+        .then((res) => {
+          this.contactsChoice.push(res.data);
+          this.contact = res.data;
+          this.createContact = false;
+        }).catch((err) => {
+          if (err.response) {
+            const { errors } = err.response.data;
 
-                        Object.keys(errors).map(function(key, index) {
-                            errors[key] = errors[key].join(' ');
-                        });
-                        this.contact.errors = errors;
-                    }
-                   
-                });
-        },
+            Object.keys(errors).map((key, index) => {
+              errors[key] = errors[key].join(' ');
+            });
+            this.contact.errors = errors;
+          }
+        });
     },
-}
+  },
+};
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>

@@ -25,37 +25,37 @@
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
+import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
+import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo';
+import JetButton from '@/Jetstream/Button';
 
-    export default {
-        components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-        },
+export default {
+  components: {
+    JetAuthenticationCard,
+    JetAuthenticationCardLogo,
+    JetButton,
+  },
 
-        props: {
-            status: String
-        },
+  props: {
+    status: String,
+  },
 
-        data() {
-            return {
-                form: this.$inertia.form()
-            }
-        },
+  data() {
+    return {
+      form: this.$inertia.form(),
+    };
+  },
 
-        methods: {
-            submit() {
-                this.form.post(this.route('verification.send'))
-            },
-        },
+  methods: {
+    submit() {
+      this.form.post(this.route('verification.send'));
+    },
+  },
 
-        computed: {
-            verificationLinkSent() {
-                return this.status === 'verification-link-sent';
-            }
-        }
-    }
+  computed: {
+    verificationLinkSent() {
+      return this.status === 'verification-link-sent';
+    },
+  },
+};
 </script>
