@@ -124,7 +124,7 @@ class Car extends Model
 
     public function scopeSoldOnly($query)
     {
-        return $query->withContractCount()->having('sell_contracts_count', '>', 0)->havingRaw('buy_contracts_count <= sell_contracts_count');
+        return $query->withContractCount()->having('sell_contracts_count', '>', 0)->havingRaw('buy_contracts_count = sell_contracts_count');
     }
 
     public function scopeFilter($query, array $filters)
@@ -150,6 +150,12 @@ class Car extends Model
             } elseif ($trashed === 'only') {
                 $query->onlyTrashed();
             }
+        })->when($filters['brand'] ?? null, function ($query, $brand) {
+            $query->whereHas('carModel', function($q) use ($brand)
+            {
+                $q->where('brand_id', '=', $brand);
+            
+            })->get();
         });
     }
 }

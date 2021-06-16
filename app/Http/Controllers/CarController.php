@@ -191,12 +191,12 @@ class CarController extends Controller
         $cars = $this->getWithCustomSort($cars, $sortBy, $direction);
 
         return Inertia::render($renderPage, [
-            'filters' => $request->all('search', 'trashed'),
+            'filters' => $request->all('search', 'trashed', 'brand'),
             'sort' => [
                 'by' => $sortBy,
                 'direction' => $direction,
             ],
-            'cars' => $cars->filter($request->only('search', 'trashed'))
+            'cars' => $cars->filter($request->only('search', 'trashed', 'brand'))
                 ->paginate(50)
                 ->withQueryString()
                 ->through(fn ($car) => [
