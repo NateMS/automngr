@@ -10,8 +10,8 @@
 
 <script>
 import { useForm } from '@inertiajs/inertia-vue3';
-import DocumentItem from '@/Components/Documents/Item.vue';
-import DocumentUpload from '@/Components/Documents/Upload.vue';
+import DocumentItem from './Item.vue';
+import DocumentUpload from './Upload.vue';
 
 export default {
   components: {

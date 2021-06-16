@@ -10,12 +10,10 @@
             <dash-item :title="'Gekauft im ' + new Date().getFullYear()" :number="bought_this_year" />
             <dash-item :title="'Verkauft im ' + new Date().getFullYear()" :number="sold_this_year" />
             <div class="lg:col-span-6 col-span-12">
-                <p class="font-semibold text-xl font-medium mb-4 text-indigo-900 leading-tight">Neueste Einkäufe</p>
-                <simple-table class="shadow rounded-md sm:rounded-lg" :data="buy_contracts" :columns="buyContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
+                <simple-table title="Neueste Einkäufe" :data="buy_contracts" :columns="buyContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
             </div>
             <div class="lg:col-span-6 col-span-12">
-                <p class="font-semibold text-xl font-medium mb-4 text-indigo-900 leading-tight">Neueste Verkäufe</p>
-                <simple-table class="shadow rounded-md sm:rounded-lg" :data="sell_contracts" :columns="sellContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
+                <simple-table title="Neueste Verkäufe" :data="sell_contracts" :columns="sellContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
             </div>
         </div>
     </layout>

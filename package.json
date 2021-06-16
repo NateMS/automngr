@@ -12,7 +12,6 @@
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.8.4",
-        "@inertiajs/inertia-vue3": "^0.3.5",
         "@inertiajs/progress": "^0.2.4",
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/typography": "^0.3.0",
@@ -24,10 +23,10 @@
         "postcss": "^8.1.14",
         "postcss-import": "^12.0.1",
         "tailwindcss": "^2.0.1",
-       
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "@inertiajs/inertia-vue3": "^0.3.5",
         "vue-currency-input": "^2.0.0",
         "vue-multiselect": "^3.0.0-alpha.2",
         "vue-unicons": "^3.2.1",
