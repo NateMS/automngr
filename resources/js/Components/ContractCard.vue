@@ -18,6 +18,12 @@
                     <div class="col-span-2">
                         {{ contract.date }}
                     </div>
+                    <div class="col-span-2">
+                        Lieferdatum
+                    </div>
+                    <div class="col-span-2">
+                        {{ contract.delivery_date }}
+                    </div>
                     <div class="col-span-2" v-if="contract.is_sell_contract && contract.insurance_type">
                         Versicherung
                     </div>
@@ -41,6 +47,12 @@
                     </div>
                     <div class="col-span-2">
                         {{ contract.left_to_pay }}
+                    </div>
+                    <div v-if="contract.notes" class="col-span-2">
+                        Bemerkung
+                    </div>
+                    <div v-if="contract.notes" class="col-span-2">
+                        {{ contract.notes }}
                     </div>
                 </div>
                 <div v-if="contract.link" class="pt-3 mt-3 border-t">

@@ -16,16 +16,23 @@ class Contract extends Model
 
     protected $fillable = [
         'date',
+        'delivery_date',
         'price',
         'contact_id',
         'car_id',
         'type',
+        'notes',
         'insurance_type',
     ];
 
     public function getDateFormattedAttribute()
     {
         return Carbon::parse($this->date)->format('d.m.Y');
+    }
+
+    public function getDeliveryDateFormattedAttribute()
+    {
+        return Carbon::parse($this->delivery_date)->format('d.m.Y');
     }
 
     public function getPriceAttribute($price)

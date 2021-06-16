@@ -16,6 +16,11 @@
                         <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
                         <jet-input-error :message="form.errors.date" class="mt-2" />
                     </div>
+                    <div class="col-span-6 sm:col-span-4">
+                        <jet-label for="delivery_date" value="Lieferdatum" />
+                        <datepicker id="delivery_date" ref="delivery_date" v-model="form.delivery_date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
+                        <jet-input-error :message="form.errors.delivery_date" class="mt-2" />
+                    </div>
 
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="price" value="Betrag" />
@@ -29,6 +34,12 @@
                             <option v-for="(insurance, index) in insurance_types" :value="index"  v-bind:key="index" :selected="form.insurance_type == index">{{ insurance }}</option>
                         </select>
                         <jet-input-error :message="form.errors.insurance_type" class="mt-2" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4">
+                        <jet-label for="notes" value="Bemerkungen" />
+                        <textarea class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" v-model="form.notes" ref="input">
+                        </textarea>
+                        <jet-input-error :message="form.errors.notes" class="mt-2" />
                     </div>
                 </div>
             </template>
@@ -49,7 +60,6 @@
 <script>
 import JetButton from '@/Jetstream/Button';
 import JetLabel from '@/Jetstream/Label.vue';
-import JetInput from '@/Jetstream/Input.vue';
 import JetActionMessage from '@/Jetstream/ActionMessage';
 import JetInputError from '@/Jetstream/InputError';
 import JetFormSection from '@/Jetstream/FormSection';
@@ -62,7 +72,6 @@ export default {
     JetButton,
     JetFormSection,
     JetLabel,
-    JetInput,
     JetInputError,
     JetActionMessage,
     Datepicker,

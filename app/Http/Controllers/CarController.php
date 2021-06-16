@@ -169,10 +169,12 @@ class CarController extends Controller
         return [
             'id' => $contract->id,
             'date' => $contract->date_formatted,
+            'delivery_date' => $contract->delivery_date_formatted,
             'price' => $contract->price->format(),
             'paid' => $contract->paid->format(),
             'left_to_pay' => $contract->left_to_pay->format(),
             'type' => $contract->type,
+            'notes' => $contract->notes,
             'is_sell_contract' => $contract->isSellContract(),
             'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue($contract->insurance_type)->key : null,
             'contact' => [

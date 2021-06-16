@@ -90,7 +90,9 @@ export default {
       data: {
         id: null,
         date: ref(new Date()),
+        delivery_date: ref(new Date()),
         price: null,
+        notes: null,
         type: this.type,
         insurance_type: '0',
         car_id: this.car.id,

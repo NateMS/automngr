@@ -76,7 +76,6 @@ import JetFormSection from '@/Jetstream/FormSection';
 import Multiselect from 'vue-multiselect';
 import JetLabel from '@/Jetstream/Label.vue';
 import JetButton from '@/Jetstream/Button';
-import JetActionMessage from '@/Jetstream/ActionMessage';
 
 export default {
   components: {
@@ -89,7 +88,6 @@ export default {
     Multiselect,
     JetLabel,
     JetButton,
-    JetActionMessage,
   },
   props: {
     car: Object,

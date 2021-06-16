@@ -17,6 +17,12 @@
                     <div class="lg:col-span-3 col-span-2">
                         {{ contract.date }}
                     </div>
+                    <div class="lg:col-span-1 col-span-2">
+                        Lieferdatum
+                    </div>
+                    <div class="lg:col-span-3 col-span-2">
+                        {{ contract.delivery_date }}
+                    </div>
                     <div v-if="contract.is_sell_contract && contract.insurance_type" class="lg:col-span-1 col-span-2">
                         Versicherung
                     </div>
@@ -40,6 +46,10 @@
                     </div>
                     <div class="lg:col-span-3 col-span-2">
                         {{ contract.left_to_pay }}
+                    </div>
+                    <div v-if="contract.notes" class="mt-3 col-span-4">
+                        <p class="font-bold">Bemerkungen</p>
+                        {{ contract.notes }}
                     </div>
                 </div>
             </div>
@@ -66,7 +76,7 @@
                 <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
             </div>
             <div class="xl:col-span-5 col-span-12">
-                <payments-view :payments="contract.payments" :contract="contract" />
+                <payments-view :show_upload="!contract.deleted_at" :payments="contract.payments" :contract="contract" />
             </div>
         </template>
     </show-page>
@@ -75,7 +85,6 @@
 <script>
 import ShowPage from '@/Components/ShowPage.vue';
 import BreadCrumb from '@/Components/BreadCrumb.vue';
-import SimpleTable from '@/Components/SimpleTable.vue';
 import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
 import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
 import CarCard from '@/Components/CarCard.vue';
@@ -89,14 +98,12 @@ export default {
   components: {
     BreadCrumb,
     ShowPage,
-    SimpleTable,
     CarCard,
     DeleteButton,
     RestoreButton,
     PrintButton,
     ContactCard,
     EditButton,
-    CarCard,
     DocumentsView,
     PaymentsView,
   },

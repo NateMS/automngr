@@ -19,6 +19,8 @@ class CreateContractsTable extends Migration
             $table->id();
             $table->date('date');
             $table->integer('price');
+            $table->date('delivery_date');
+            $table->text('notes')->nullable();
             $table->foreignId('contact_id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade')

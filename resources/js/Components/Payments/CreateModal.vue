@@ -40,7 +40,6 @@
 <script>
 import JetButton from '@/Jetstream/Button';
 import JetLabel from '@/Jetstream/Label.vue';
-import JetInput from '@/Jetstream/Input.vue';
 import JetInputError from '@/Jetstream/InputError';
 import Datepicker from 'vue3-datepicker';
 import { useForm } from '@inertiajs/inertia-vue3';
@@ -52,7 +51,6 @@ export default {
   components: {
     JetButton,
     JetLabel,
-    JetInput,
     JetInputError,
     DialogModal,
     Datepicker,
@@ -60,6 +58,7 @@ export default {
   },
   props: {
     id: Number,
+    left_to_pay: Number,
     showModal: Boolean,
   },
   data() {
@@ -67,7 +66,7 @@ export default {
       form: useForm('CreatePayment', {
         id: null,
         date: ref(new Date()),
-        amount: null,
+        amount: this.left_to_pay,
         type: '1',
         contract_id: this.id,
       }),
@@ -85,7 +84,7 @@ export default {
         preserveScroll: true,
         onSuccess: () => {
           this.$emit('close');
-          form.reset();
+          this.form.reset();
         },
       });
     },

@@ -1,7 +1,7 @@
 <template>
     <span class="w-full inline-flex items-end justify-between mb-3">
         <h3>Einzahlungen</h3>
-        <standard-button class="" colour="green" @click="openModal" :href="route('payments.create', contract.id)">
+        <standard-button v-if="show_upload" colour="green" @click="openModal" :href="route('payments.create', contract.id)">
             <unicon fill="white" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
             Neue Einzahlung
         </standard-button>
@@ -10,7 +10,7 @@
         <simple-table :data="payments" :columns="columns" @delete="deletePayment" />
         <p class="py-5 text-xl">Total <span class="font-bold ml-5">{{ contract.paid }}</span> / {{ contract.price }}</p>
     </div>
-    <payment-create-modal :id="contract.id" :show="showModal" @close="showModal = false" />
+    <payment-create-modal v-if="show_upload" :id="contract.id" :left_to_pay="contract.left_to_pay_raw" :show="showModal" @close="showModal = false" />
 </template>
 
 <script>
@@ -48,7 +48,7 @@ export default {
     },
     deletePayment(id) {
       const form = useForm(`deletePayment${id}`, { id });
-      form.delete(route('payments.destroy', this.contract.id), {
+      form.delete(this.route('payments.destroy', this.contract.id), {
         preserveScroll: true,
         onSuccess: () => form.reset(),
       });

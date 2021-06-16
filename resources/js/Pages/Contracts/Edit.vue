@@ -47,7 +47,9 @@ export default {
       },
       data: {
         date: ref(new Date(this.contract.date)),
+        delivery_date: ref(new Date(this.contract.delivery_date)),
         price: this.contract.price,
+        notes: this.contract.notes,
         insurance_type: this.contract.insurance_type,
         is_sell_contract: this.contract.is_sell_contract,
       },
