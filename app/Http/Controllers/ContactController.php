@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Inertia\Inertia;
+use App\Exports\Export;
 use App\Models\Contact;
 use App\Models\Contract;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
 
 class ContactController extends Controller
@@ -54,6 +56,59 @@ class ContactController extends Controller
                     'deleted_at' => $contact->deleted_at,
                 ]),
         ]);
+    }
+
+    public function print(Request $request)
+    {
+       return $this->printList($request, Contact::query(), date('Y-m-d') . '-Alle-Kontakte.xlsx');
+    }
+
+    public function buyersPrint(Request $request)
+    {
+       return $this->printList($request, Contact::has('buyContracts'), date('Y-m-d') . '-Verkäufer.xlsx');
+    }
+
+    public function sellersPrint(Request $request)
+    {
+       return $this->printList($request, Contact::has('sellContracts'), date('Y-m-d') . '-Käufer.xlsx');
+    }
+
+    private function printList(Request $request, $contacts, $title)
+    {
+        $headings = [
+            'Nachname',
+            'Vorname',
+            'Firma',
+            'Adresse',
+            'PLZ',
+            'Ort',
+            'Land',
+            'Email',
+            'Telefon',
+            'Bemerkungen',
+        ];
+
+        $direction = $this->getDirection($request);
+        $sortBy = $this->getSortBy($request);
+        $contacts = $this->getWithCustomSort($contacts, $sortBy, $direction)
+                    ->filter($request->only('search', 'trashed'))
+                    ->get()
+                    ->map(function ($contact) {
+                        return [
+                            'lastname' => $contact->lastname,
+                            'firstname' => $contact->firstname,
+                            'company' => $contact->company,
+                            'address' => $contact->address,
+                            'zip' => $contact->zip,
+                            'city' => $contact->city,
+                            'country' => $contact->country,
+                            'email' => $contact->email,
+                            'phone' => $contact->phone,
+                            'notes' => $contact->notes,
+                        ];
+                    });
+
+        return Excel::download(new Export($contacts, $headings), $title);
     }
 
     private function getWithCustomSort($contacts, string $sortBy, string $direction)

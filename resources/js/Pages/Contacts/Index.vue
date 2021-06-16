@@ -7,7 +7,7 @@
         </h2>
     </template>
     <div class="w-full mx-auto">
-        <simple-table :title="contacts.total + ' ' + (contacts.total === 1 ? 'Kontakt' : 'Kontakte')" :data="contacts" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute" />
+        <simple-table :title="contacts.total + ' ' + (contacts.total === 1 ? 'Kontakt' : 'Kontakte')" :data="contacts" :columns="columns" :defaultSort="sort" :filters="filters" :currentRoute="currentRoute" :print="true" />
     </div>
   </layout>
 </template>

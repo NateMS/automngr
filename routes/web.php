@@ -19,8 +19,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::prefix('contacts')->group(function () {
         Route::get('/', [ContactController::class, 'index'])->name('contacts');
+        Route::get('/print', [ContactController::class, 'print'])->name('contacts.print');
         Route::get('buyers', [ContactController::class, 'buyers'])->name('contacts.buyers');
+        Route::get('buyers/print', [ContactController::class, 'buyersPrint'])->name('contacts.buyers.print');
         Route::get('sellers', [ContactController::class, 'sellers'])->name('contacts.sellers');
+        Route::get('sellers/print', [ContactController::class, 'sellersPrint'])->name('contacts.sellers.print');
         Route::get('create', [ContactController::class, 'create'])->name('contacts.create');
         Route::post('/', [ContactController::class, 'store'])->name('contacts.store');
         Route::post('store_for_contract', [ContactController::class, 'storeForContract'])->name('contacts.store_for_contract');

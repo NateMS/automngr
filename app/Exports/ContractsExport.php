@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\Contract;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 class ContractsExport implements WithMultipleSheets

@@ -28495,7 +28495,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         columns: $data.columns,
         defaultSort: $props.sort,
         filters: $props.filters,
-        currentRoute: $data.currentRoute
+        currentRoute: $data.currentRoute,
+        print: true
       }, null, 8
       /* PROPS */
       , ["title", "data", "columns", "defaultSort", "filters", "currentRoute"])])];
@@ -29043,7 +29044,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         columns: $data.columns,
         defaultSort: $props.sort,
         filters: $props.filters,
-        currentRoute: $data.currentRoute
+        currentRoute: $data.currentRoute,
+        print: true
       }, null, 8
       /* PROPS */
       , ["title", "data", "columns", "defaultSort", "filters", "currentRoute"])])];
@@ -29101,7 +29103,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         columns: $data.columns,
         defaultSort: $props.sort,
         filters: $props.filters,
-        currentRoute: $data.currentRoute
+        currentRoute: $data.currentRoute,
+        print: true
       }, null, 8
       /* PROPS */
       , ["title", "data", "columns", "defaultSort", "filters", "currentRoute"])])];

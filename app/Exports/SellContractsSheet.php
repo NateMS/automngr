@@ -3,9 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Contract;
-use App\Enums\ContractType;
 use Maatwebsite\Excel\Events\AfterSheet;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class SellContractsSheet extends ContractsSheet
 {

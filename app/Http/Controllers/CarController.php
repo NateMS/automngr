@@ -6,12 +6,10 @@ use Carbon\Carbon;
 use App\Models\Car;
 use Inertia\Inertia;
 use App\Models\Brand;
+use App\Exports\Export;
 use App\Models\Contract;
-use App\Enums\ContractType;
-use App\Exports\CarsExport;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
@@ -37,10 +35,20 @@ class CarController extends Controller
     public function print(Request $request)
     {
         $headings = [
-            'Name',
+            'Marke',
+            'Modell',
             'Stammnummer',
+            'Chassisnummer',
+            'Farbe',
+            'Inverkehrssetzung',
+            'Letzte Überprüfung',
+            'Kilometerstand',
+            'Bemerkungen',
+            'Bekannter Schaden',
+            'Verkäufer',
             'Einkaufsdatum',
             'Einkaufspreis',
+            'Käufer',
             'Verkaufsdatum',
             'Verkaufspreis',
             'Profit',
@@ -55,25 +63,43 @@ class CarController extends Controller
                 $bcontract = $car->latestBuyContract();
                 $scontract = $car->latestSellContract();
                 return [
-                    'name' => $car->name,
+                    'brand' => $car->brand->name,
+                    'model' => $car->carModel->name,
                     'stammnummer' => $car->stammnummer,
+                    'vin' => $car->vin,
+                    'colour' => $car->colour,
+                    'initial_date' => $car->initial_date_formatted,
+                    'last_check_date' => $car->last_check_date_formatted,
+                    'kilometers' => $car->kilometers_formatted,
+                    'notes' => $car->notes,
+                    'known_damage' => $car->known_damage,
+                    'seller' =>  $bcontract ? $bcontract->contact->full_title : null,
                     'buy_date' =>  $bcontract ? $bcontract->date_formatted : null,
-                    'buy_price' => $bcontract ? $bcontract->price : null,
+                    'price' => $bcontract ? $bcontract->price : null,
+                    'buyer' =>  $scontract ? $scontract->contact->full_title : null,
                     'sell_date' =>  $scontract ? $scontract->date_formatted : null,
                     'sell_price' => $scontract ? $scontract->price : null,
                     'profit' => $car->latestProfit(),
                 ];
             });
     
-        return Excel::download(new CarsExport($cars, $headings), date('Y-m-d') . '-Alle-Autos.xlsx');
+        return Excel::download(new Export($cars, $headings), date('Y-m-d') . '-Alle-Autos.xlsx');
     }
 
     public function unsoldPrint(Request $request)
     {
         $headings = [
-            'Name',
+            'Marke',
+            'Modell',
             'Stammnummer',
+            'Chassisnummer',
+            'Farbe',
             'Inverkehrssetzung',
+            'Letzte Überprüfung',
+            'Kilometerstand',
+            'Bemerkungen',
+            'Bekannter Schaden',
+            'Verkäufer',
             'Einkaufsdatum',
             'Einkaufspreis',
         ];
@@ -86,24 +112,42 @@ class CarController extends Controller
             ->map(function ($car) {
                 $contract = $car->latestBuyContract();
                 return [
-                    'name' => $car->name,
+                    'brand' => $car->brand->name,
+                    'model' => $car->carModel->name,
                     'stammnummer' => $car->stammnummer,
+                    'vin' => $car->vin,
+                    'colour' => $car->colour,
                     'initial_date' => $car->initial_date_formatted,
+                    'last_check_date' => $car->last_check_date_formatted,
+                    'kilometers' => $car->kilometers_formatted,
+                    'notes' => $car->notes,
+                    'known_damage' => $car->known_damage,
+                    'seller' =>  $contract ? $contract->contact->full_title : null,
                     'buy_date' =>  $contract ? $contract->date_formatted : null,
                     'price' => $contract ? $contract->price : null,
                 ];
             });
     
-        return Excel::download(new CarsExport($cars, $headings), date('Y-m-d') . '-Meine-Autos.xlsx');
+        return Excel::download(new Export($cars, $headings), date('Y-m-d') . '-Meine-Autos.xlsx');
     }
 
     public function soldPrint(Request $request)
     {
         $headings = [
-            'Name',
+            'Marke',
+            'Modell',
             'Stammnummer',
+            'Chassisnummer',
+            'Farbe',
+            'Inverkehrssetzung',
+            'Letzte Überprüfung',
+            'Kilometerstand',
+            'Bemerkungen',
+            'Bekannter Schaden',
+            'Verkäufer',
             'Einkaufsdatum',
             'Einkaufspreis',
+            'Käufer',
             'Verkaufsdatum',
             'Verkaufspreis',
             'Profit',
@@ -118,17 +162,27 @@ class CarController extends Controller
                 $bcontract = $car->latestBuyContract();
                 $scontract = $car->latestSellContract();
                 return [
-                    'name' => $car->name,
+                    'brand' => $car->brand->name,
+                    'model' => $car->carModel->name,
                     'stammnummer' => $car->stammnummer,
+                    'vin' => $car->vin,
+                    'colour' => $car->colour,
+                    'initial_date' => $car->initial_date_formatted,
+                    'last_check_date' => $car->last_check_date_formatted,
+                    'kilometers' => $car->kilometers_formatted,
+                    'notes' => $car->notes,
+                    'known_damage' => $car->known_damage,
+                    'seller' =>  $bcontract ? $bcontract->contact->full_title : null,
                     'buy_date' =>  $bcontract ? $bcontract->date_formatted : null,
-                    'buy_price' => $bcontract ? $bcontract->price : null,
+                    'price' => $bcontract ? $bcontract->price : null,
+                    'buyer' =>  $scontract ? $scontract->contact->full_title : null,
                     'sell_date' =>  $scontract ? $scontract->date_formatted : null,
                     'sell_price' => $scontract ? $scontract->price : null,
                     'profit' => $car->latestProfit(),
                 ];
             });
     
-        return Excel::download(new CarsExport($cars, $headings), date('Y-m-d') . '-Verkaufte-Autos.xlsx');
+        return Excel::download(new Export($cars, $headings), date('Y-m-d') . '-Verkaufte-Autos.xlsx');
     }
 
     private function renderCarsList(Request $request, $cars, string $renderPage, string $defaultSort = 'buy_contract.date') {

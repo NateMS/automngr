@@ -28,7 +28,7 @@ class ContractFactory extends Factory
         return [
             'date' => $this->faker->date(),
             'delivery_date' => $this->faker->date(),
-            'notes' => $this->faker->paragraph(),
+            'notes' => $this->faker->word(),
             'price' => $this->faker->numberBetween(150000, 3500000),
             'contact_id' => $this->faker->numberBetween(1, Contact::count()),
             'car_id' => $this->faker->numberBetween(1, Car::count()),

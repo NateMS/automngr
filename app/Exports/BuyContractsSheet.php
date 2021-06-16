@@ -3,8 +3,6 @@
 namespace App\Exports;
 
 use App\Models\Contract;
-use App\Enums\ContractType;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class BuyContractsSheet extends ContractsSheet
 {
