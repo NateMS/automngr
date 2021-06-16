@@ -130,17 +130,20 @@ class Car extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where(function ($query) use ($search) {
-                $query->orWhere('colour', 'like', $search . '%')
-                    ->orWhere('stammnummer', 'like', $search . '%')
-                    ->orWhere('vin', 'like', $search . '%')
-                    ->orWhereHas('carModel', function ($query) use ($search) {
-                        $query->where('name', 'like', $search.'%')
-                        ->orWhereHas('brand', function ($query) use ($search) {
-                            $query->where('name', 'like', $search.'%');
+            $parts = explode(' ', $search);
+            foreach ($parts as $part) {
+                $query->where(function ($query) use ($part) {
+                    $query->orWhere('colour', 'like', $part . '%')
+                        ->orWhere('stammnummer', 'like', $part . '%')
+                        ->orWhere('vin', 'like', $part . '%')
+                        ->orWhereHas('carModel', function ($query) use ($part) {
+                            $query->where('name', 'like', $part.'%')
+                            ->orWhereHas('brand', function ($query) use ($part) {
+                                $query->where('name', 'like', $part.'%');
+                            });
                         });
-                    });
-            });
+                });
+            }
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'with') {
                 $query->withTrashed();

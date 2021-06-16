@@ -81,16 +81,20 @@ class Contact extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where(function ($query) use ($search) {
-                $query->where('firstname', 'like', '%' . $search . '%')
-                    ->orWhere('lastname', 'like', '%' . $search . '%')
-                    ->orWhere('company', 'like', '%' . $search . '%')
-                    ->orWhere('email', 'like', '%' . $search . '%')
-                    ->orWhere('zip', 'like',  $search . '%')
-                    ->orWhere('city', 'like', '%' . $search . '%')
-                    ->orWhere('address', 'like', '%' . $search . '%')
-                    ->orWhere('phone', 'like', '%' . $search . '%');
-            });
+            $parts = explode(' ', $search);
+            foreach ($parts as $part) {
+                $query->where(function ($query) use ($part) {
+                    $query->where('firstname', 'like', '%' . $part . '%')
+                        ->orWhere('lastname', 'like', '%' . $part . '%')
+                        ->orWhere('company', 'like', '%' . $part . '%')
+                        ->orWhere('email', 'like', '%' . $part . '%')
+                        ->orWhere('zip', 'like',  $part . '%')
+                        ->orWhere('city', 'like', '%' . $part . '%')
+                        ->orWhere('address', 'like', '%' . $part . '%')
+                        ->orWhere('phone', 'like', '%' . $part . '%');
+                });
+            }
+           
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'with') {
                 $query->withTrashed();
