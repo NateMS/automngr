@@ -73,6 +73,8 @@
 import JetLabel from '@/Jetstream/Label.vue';
 import JetInput from '@/Jetstream/Input.vue';
 import JetInputError from '@/Jetstream/InputError';
+import { isNull } from 'lodash';
+// import { throttle } from 'lodash';
 
 export default {
   components: {
@@ -82,6 +84,27 @@ export default {
   },
   props: {
     form: Object,
+  },
+  watch: {
+    'form.zip': function(newVal, oldVal) {
+      this.fetchCity(newVal, oldVal);
+    },
+  },
+  methods: {
+    fetchCity(newVal, oldVal) {
+      if (newVal !== oldVal && newVal.length === 4 && this.form.country === 'CH') {
+        axios.get(`https://swisspost.opendatasoft.com/api/records/1.0/search/?dataset=plz_verzeichnis_v2&q=&facet=ortbez18&refine.postleitzahl=${newVal}`)
+          .then((response) => {
+            let records = response.data.records;
+            if (records.length > 1) {
+              records = records.filter(rec => rec.geometry);
+            }
+            if (records[0]) {
+              this.form.city = records[0].fields.ortbez18;
+            }
+          });
+      }
+    },
   },
 };
 </script>
