@@ -73,8 +73,6 @@
 import JetLabel from '@/Jetstream/Label.vue';
 import JetInput from '@/Jetstream/Input.vue';
 import JetInputError from '@/Jetstream/InputError';
-import { isNull } from 'lodash';
-// import { throttle } from 'lodash';
 
 export default {
   components: {
