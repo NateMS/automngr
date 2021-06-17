@@ -21127,7 +21127,7 @@ __webpack_require__.r(__webpack_exports__);
         insurance_type: '0',
         car_id: this.car.id,
         contact_id: this.contact.id,
-        is_sell_contract: this.type == 'SellContract'
+        is_sell_contract: this.type == '0'
       }
     };
   },
@@ -21139,7 +21139,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
     isSellContract: function isSellContract() {
-      return this.type == 'SellContract';
+      return this.type === '1';
     }
   }
 });
@@ -21205,7 +21205,7 @@ __webpack_require__.r(__webpack_exports__);
         address: null,
         zip: null,
         city: null,
-        country: null,
+        country: 'CH',
         notes: null,
         errors: {}
       },
@@ -21220,7 +21220,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
     isSellContract: function isSellContract() {
-      return this.type == 'SellContract';
+      return this.type == '1';
     },
     emptyContact: function emptyContact() {
       return {
@@ -21232,7 +21232,7 @@ __webpack_require__.r(__webpack_exports__);
         phone: null,
         address: null,
         zip: null,
-        city: null,
+        city: 'CH',
         country: null,
         notes: null,
         errors: {}
@@ -21360,7 +21360,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
     isSellContract: function isSellContract() {
-      return this.type == 'SellContract';
+      return this.type == '1';
     },
     emptyCar: function emptyCar() {
       return {

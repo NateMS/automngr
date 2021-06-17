@@ -97,7 +97,7 @@ export default {
         insurance_type: '0',
         car_id: this.car.id,
         contact_id: this.contact.id,
-        is_sell_contract: this.type == 'SellContract',
+        is_sell_contract: this.type == '0',
       },
     };
   },
@@ -109,7 +109,7 @@ export default {
       return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
     isSellContract() {
-      return this.type == 'SellContract';
+      return this.type === '1';
     },
   },
 };

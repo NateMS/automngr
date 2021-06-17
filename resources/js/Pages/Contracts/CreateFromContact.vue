@@ -125,7 +125,7 @@ export default {
       return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
     isSellContract() {
-      return this.type == 'SellContract';
+      return this.type == '1';
     },
     emptyCar() {
       return {

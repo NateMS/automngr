@@ -107,7 +107,7 @@ export default {
         address: null,
         zip: null,
         city: null,
-        country: null,
+        country: 'CH',
         notes: null,
         errors: {},
       },
@@ -122,7 +122,7 @@ export default {
       return this.isSellContract ? 'Käufer' : 'Verkäufer';
     },
     isSellContract() {
-      return this.type == 'SellContract';
+      return this.type == '1';
     },
     emptyContact() {
       return {
@@ -134,7 +134,7 @@ export default {
         phone: null,
         address: null,
         zip: null,
-        city: null,
+        city: 'CH',
         country: null,
         notes: null,
         errors: {},
