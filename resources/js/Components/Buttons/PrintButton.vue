@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     allClasses() {
-      let classes = 'justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition';
+      let classes = 'mb-3 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition';
       classes += ` bg-${this.colour}-800 hover:bg-${this.colour}-700 active:bg-${this.colour}-900 focus:border-${this.colour}-900 focus:ring-${this.colour}-300`;
       return `${classes} ${this.class}`;
     },

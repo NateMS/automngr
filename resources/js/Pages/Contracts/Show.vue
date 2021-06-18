@@ -1,8 +1,6 @@
 <template>
     <show-page>
         <template #header>
-            <bread-crumb text="Autos" :href="route('cars')" />
-            <bread-crumb :text="contract.car.name" :href="route('cars.show', contract.car.id)" />
             {{ contract.type_formatted }} vom {{ contract.date }}
         </template>
         <template #info>
@@ -56,7 +54,8 @@
         </template>
         <template #actions>
             <edit-button v-if="!contract.deleted_at" :href="route('contracts.edit', contract.id)" />
-            <print-button class="mb-3" :href="route('contracts.print', contract.id)" />
+            <print-button :href="route('contracts.print', contract.id)" />
+            <payments-upload v-if="!contract.deleted_at" :show_upload="!contract.deleted_at" :contract="contract" />
             <delete-button v-if="!contract.deleted_at" :href="route('contracts.destroy', contract.id)" />
             <restore-button v-if="contract.deleted_at" :href="route('contracts.restore', contract.id)" />
             <div v-if="contract.deleted_at">
@@ -66,7 +65,7 @@
         <template #more>
             <div class="lg:col-span-7 col-span-12">
                 <h3 class="mb-3">Auto</h3>
-                <car-card :car="contract.car" />
+                <car-card :car="contract.car" hideEmpty="true" />
             </div>
             <div class="lg:col-span-5 col-span-12">
                 <h3 class="mb-3">{{ contactTitle }}</h3>
@@ -76,7 +75,7 @@
                 <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
             </div>
             <div class="xl:col-span-5 col-span-12">
-                <payments-view :show_upload="!contract.deleted_at" :payments="contract.payments" :contract="contract" />
+                <payments-view :payments="contract.payments" :contract="contract" />
             </div>
         </template>
     </show-page>
@@ -93,6 +92,7 @@ import ContactCard from '@/Components/ContactCard.vue';
 import EditButton from '@/Components/Buttons/EditButton.vue';
 import DocumentsView from '@/Components/Documents/View.vue';
 import PaymentsView from '@/Components/Payments/View.vue';
+import PaymentsUpload from '@/Components/Payments/Upload.vue';
 
 export default {
   components: {
@@ -106,6 +106,7 @@ export default {
     EditButton,
     DocumentsView,
     PaymentsView,
+    PaymentsUpload,
   },
   props: {
     contract: Object,

@@ -48,6 +48,11 @@ class Contact extends Model
         return null;
     }
 
+    public function getCountryAttribute($country)
+    {
+        return $country ?? '';
+    }
+
     public function getFullTitleAttribute()
     {
         return implode(', ', array_filter([$this->company, $this->name]));

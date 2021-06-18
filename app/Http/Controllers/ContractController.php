@@ -115,8 +115,6 @@ class ContractController extends Controller
             'vin' => $car->vin,
             'name' => $car->name,
             'colour' => $car->colour,
-            'last_check_date' => $car->last_check_date_formatted,
-            'kilometers' => $car->kilometers_formatted,
             'initial_date' => $car->initial_date_formatted,
         ];
     }
@@ -273,10 +271,6 @@ class ContractController extends Controller
                 'name' => $contract->car->name,
                 'initial_date' => $contract->car->initial_date_formatted,
                 'colour' => $contract->car->colour,
-                'last_check_date' => $contract->car->last_check_date_formatted,
-                'kilometers' => $contract->car->kilometers_formatted,
-                'known_damage' => $contract->car->known_damage,
-                'notes' => $contract->car->notes,
                 'deleted_at' => $contract->car->deleted_at,
                 'link' => route('cars.show', $contract->car),
             ],
