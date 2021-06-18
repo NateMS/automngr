@@ -19,24 +19,22 @@
         </template>
         <template #more>
             <div class="xl:col-span-6 col-span-12">
-                <simple-table :title="car.buy_contracts.total > 1 ? car.buy_contracts.total + ' Ankaufsverträge' : 'Ankaufsvertrag'" :data="car.buy_contracts" :columns="buyContractColumns" :currentRoute="currentRoute" :hideArrow="true">
-                    <template #actions>
-                        <standard-button v-if="!car.deleted_at" colour="green" :href="route('contracts.create_from_car', [0, car.id])">
-                        <unicon fill="currentColor" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
-                        Ankaufsvertrag
-                    </standard-button>
-                    </template>
-                </simple-table>
+                <contract-table
+                    :contracts="car.buy_contracts"
+                    :type="0"
+                    :carId="car.id"
+                    :show_upload="!car.deleted_at"
+                    :title="car.buy_contracts.length > 1 ? car.buy_contracts.length + ' Ankaufsverträge' : 'Ankaufsvertrag'"
+                />
             </div>
             <div class="xl:col-span-6 col-span-12">
-                <simple-table :title="car.sell_contracts.total > 1 ? car.sell_contracts.total + ' Verkaufsverträge' : 'Verkaufsvertrag'" :data="car.sell_contracts" :columns="sellContractColumns" :currentRoute="currentRoute" :hideArrow="true">
-                    <template #actions>
-                        <standard-button v-if="!car.deleted_at" colour="green" :href="route('contracts.create_from_car', [1, car.id])">
-                            <unicon fill="currentColor" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
-                            Verkaufssvertrag
-                        </standard-button>
-                    </template>
-                </simple-table>
+                <contract-table
+                    :contracts="car.sell_contracts"
+                    :type="1"
+                    :carId="car.id"
+                    :show_upload="!car.deleted_at"
+                    :title="car.sell_contracts.length > 1 ? car.sell_contracts.length + ' Verkaufsverträge' : 'Verkaufsvertrag'"
+                />
             </div>
         </template>
     </show-page>
@@ -51,8 +49,7 @@ import SellContractCard from '@/Components/SellContractCard.vue';
 import EditButton from '@/Components/Buttons/EditButton.vue';
 import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
 import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
-import StandardButton from '@/Components/Buttons/StandardButton.vue';
-import SimpleTable from '@/Components/SimpleTable.vue';
+import ContractTable from '../../Components/Contracts/ContractTable.vue';
 
 export default {
   components: {
@@ -64,26 +61,10 @@ export default {
     EditButton,
     DeleteButton,
     RestoreButton,
-    StandardButton,
-    SimpleTable,
+    ContractTable,
   },
   props: {
     car: Object,
-  },
-  data() {
-    return {
-      currentRoute: 'cars.show',
-      buyContractColumns: [
-        { key: 'date', value: 'Datum', sortable: false },
-        { key: 'contact', value: 'Verkäufer', sortable: false },
-        { key: 'price', value: 'Einkaufspreis', sortable: false },
-      ],
-      sellContractColumns: [
-        { key: 'date', value: 'Datum', sortable: false },
-        { key: 'contact', value: 'Käufer', sortable: false },
-        { key: 'price', value: 'Verkaufspreis', sortable: false },
-      ],
-    };
   },
 };
 </script>

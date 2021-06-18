@@ -10,10 +10,20 @@
             <dash-item :title="'Gekauft im ' + new Date().getFullYear()" :number="bought_this_year" />
             <dash-item :title="'Verkauft im ' + new Date().getFullYear()" :number="sold_this_year" />
             <div class="lg:col-span-6 col-span-12">
-                <simple-table title="Neueste Einkäufe" :data="buy_contracts" :columns="buyContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
+                <contract-table
+                    :contracts="buy_contracts"
+                    :show_upload="false"
+                    :type="0"
+                    title="Neueste Einkäufe"
+                />
             </div>
             <div class="lg:col-span-6 col-span-12">
-                <simple-table title="Neueste Verkäufe" :data="sell_contracts" :columns="sellContractColumns" :currentRoute="currentRoute" :hideArrow="true" />
+                <contract-table
+                    :contracts="sell_contracts"
+                    :show_upload="false"
+                    :type="1"
+                    title="Neueste Verkäufe"
+                />
             </div>
         </div>
     </layout>
@@ -21,13 +31,13 @@
 
 <script>
 import Layout from '@/Layouts/Layout';
-import SimpleTable from '@/Components/SimpleTable.vue';
 import DashItem from '@/Components/Dashboard/DashItem.vue';
+import ContractTable from '@/Components/Contracts/ContractTable.vue';
 
 export default {
   components: {
     Layout,
-    SimpleTable,
+    ContractTable,
     DashItem,
   },
   props: {
@@ -36,23 +46,6 @@ export default {
     sold_this_year: Number,
     bought_this_year: Number,
     my_cars: Number,
-  },
-  data() {
-    return {
-      currentRoute: 'cars',
-      buyContractColumns: [
-        { key: 'date', value: 'Datum', sortable: false },
-        // {key: 'car', value: 'Auto', sortable: false},
-        { key: 'contact', value: 'Verkäufer', sortable: false },
-        { key: 'price', value: 'Einkaufspreis', sortable: false },
-      ],
-      sellContractColumns: [
-        { key: 'date', value: 'Datum', sortable: false },
-        // {key: 'car', value: 'Auto', sortable: false},
-        { key: 'contact', value: 'Käufer', sortable: false },
-        { key: 'price', value: 'Verkaufspreis', sortable: false },
-      ],
-    };
   },
 };
 </script>
