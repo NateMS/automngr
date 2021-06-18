@@ -32,8 +32,8 @@ export default {
     return {
       currentRoute: 'cars',
       columns: [
-        { key: 'name', value: 'Name', sortable: true },
-        { key: 'stammnummer', value: 'Stammummer', sortable: true },
+        { key: 'name', value: 'Marke & Modell', sortable: true },
+        { key: 'stammnummer', value: 'Stammnummer', sortable: true },
         { key: 'buy_contract.date', value: 'Einkaufsdatum', sortable: true },
         { key: 'buy_contract.price', value: 'Einkaufspreis', sortable: true },
         { key: 'sell_contract.date', value: 'Verkaufssdatum', sortable: true },

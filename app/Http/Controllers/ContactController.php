@@ -213,13 +213,15 @@ class ContactController extends Controller
                 'country' => $contact->country,
                 'deleted_at' => $contact->deleted_at,
                 'buy_contracts' => $contact->buyContracts()
+                    ->orderBy('date', 'desc')
                     ->with('car')
-                    ->paginate(50)
-                    ->through(fn ($contract) => $this->getContractFields($contract)),
+                    ->get()
+                    ->map(function ($contract) { return $this->getContractFields($contract); }),
                 'sell_contracts' => $contact->sellContracts()
+                    ->orderBy('date', 'desc')
                     ->with('car')
-                    ->paginate(50)
-                    ->through(fn ($contract) => $this->getContractFields($contract)),
+                    ->get()
+                    ->map(function ($contract) { return $this->getContractFields($contract); }),
             ]
         ]);
     }
@@ -232,27 +234,8 @@ class ContactController extends Controller
         return [
             'id' => $contract->id,
             'date' => $contract->date_formatted,
-            'delivery_date' => $contract->delivery_date_formatted,
             'price' => $contract->price->format(),
-            'paid' => $contract->paid->format(),
-            'left_to_pay' => $contract->left_to_pay->format(),
-            'type' => $contract->type,
-            'notes' => $contract->notes,
-            'is_sell_contract' => $contract->isSellContract(),
-            'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue($contract->insurance_type)->key : null,
-            'car' => [
-                 'id' => $car->id,
-                    'stammnummer' => $car->stammnummer,
-                    'vin' => $car->vin,
-                    'name' => $car->name,
-                    'initial_date' => $car->initial_date_formatted,
-                    'colour' => $car->colour,
-                    'last_check_date' => $car->last_check_date_formatted,
-                    'kilometers' => $car->kilometers_formatted,
-                    'known_damage' => $car->known_damage,
-                    'notes' => $car->notes,
-                    'link' => route('cars.show', $car),
-            ],
+            'car' => $car->name_with_year,
             'link' => route('contracts.show', $contract),
         ];
     }

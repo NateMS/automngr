@@ -21,33 +21,25 @@
         </template>
 
         <template #more>
-            <div class="sm:col-span-10 col-span-12">
-                <div class="whitespace-nowrap">
-                    <h1 class="font-bold text-3xl">{{ contact.buy_contracts.total > 1 ? contact.buy_contracts.total + ' Ankaufsverträge' : 'Ankaufsvertrag' }}</h1>
-                </div>
-                <div v-if="!contact.deleted_at">
-                    <inertia-link :href="route('contracts.create_from_contact', [0, contact.id])" class="w-full py-6 mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
-                        <unicon fill="white" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
-                        Neuer Ankaufsvertrag
-                    </inertia-link>
-                </div>
-                <div v-for="contract in contact.buy_contracts.data" :key="contract.id">
-                    <buy-contract-card :contract="contract"/>
-                </div>
+            <div class="xl:col-span-6 col-span-12">
+                <simple-table :title="contact.buy_contracts.total > 1 ? contact.buy_contracts.total + ' Ankaufsverträge' : 'Ankaufsvertrag'" :data="contact.buy_contracts" :columns="buyContractColumns" :currentRoute="currentRoute" :hideArrow="true">
+                    <template #actions>
+                        <standard-button v-if="!contact.deleted_at" colour="green" :href="route('contracts.create_from_contact', [0, contact.id])">
+                        <unicon fill="currentColor" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
+                        Ankaufsvertrag
+                    </standard-button>
+                    </template>
+                </simple-table>
             </div>
-            <div class="sm:col-span-10 col-span-12">
-                <div class="whitespace-nowrap">
-                    <h1 class="font-bold text-3xl">{{ contact.sell_contracts.total > 1 ? contact.sell_contracts.total + ' Verkaufsverträge' : 'Verkaufsvertrag' }}</h1>
-                </div>
-                <div v-if="!contact.deleted_at">
-                    <inertia-link :href="route('contracts.create_from_contact', [1, contact.id])" class="py-6 w-full mt-12 inline-flex items-center px-4 bg-green-800 border border-transparent rounded-md font-semibold justify-center text-md text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:border-green-900 focus:ring focus:ring-green-300 disabled:opacity-25 transition" >
-                        <unicon fill="white" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
-                        Neuer Verkaufssvertrag
-                    </inertia-link>
-                </div>
-                <div v-for="contract in contact.sell_contracts.data" :key="contract.id">
-                    <sell-contract-card :contract="contract"/>
-                </div>
+            <div class="xl:col-span-6 col-span-12">
+                <simple-table :title="contact.sell_contracts.total > 1 ? contact.sell_contracts.total + ' Verkaufsverträge' : 'Verkaufsvertrag'" :data="contact.sell_contracts" :columns="sellContractColumns" :currentRoute="currentRoute" :hideArrow="true">
+                    <template #actions>
+                        <standard-button v-if="!contact.deleted_at" colour="green" :href="route('contracts.create_from_contact', [1, contact.id])">
+                            <unicon fill="currentColor" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
+                            Verkaufssvertrag
+                        </standard-button>
+                    </template>
+                </simple-table>
             </div>
         </template>
     </show-page>
@@ -62,6 +54,8 @@ import SellContractCard from '@/Components/SellContractCard.vue';
 import EditButton from '@/Components/Buttons/EditButton.vue';
 import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
 import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
+import SimpleTable from '@/Components/SimpleTable.vue';
+import StandardButton from '@/Components/Buttons/StandardButton.vue';
 
 export default {
   components: {
@@ -73,6 +67,8 @@ export default {
     EditButton,
     DeleteButton,
     RestoreButton,
+    SimpleTable,
+    StandardButton,
   },
 
   props: {
@@ -81,6 +77,16 @@ export default {
   data() {
     return {
       currentRoute: 'contacts.show',
+      buyContractColumns: [
+        { key: 'date', value: 'Datum', sortable: false },
+        { key: 'car', value: 'Auto', sortable: false},
+        { key: 'price', value: 'Einkaufspreis', sortable: false },
+      ],
+      sellContractColumns: [
+        { key: 'date', value: 'Datum', sortable: false },
+        { key: 'car', value: 'Auto', sortable: false},
+        { key: 'price', value: 'Verkaufspreis', sortable: false },
+      ],
     };
   },
 };

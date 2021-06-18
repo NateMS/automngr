@@ -63,6 +63,11 @@ class Contact extends Model
         return $this->zip . ' ' . $this->city;
     }
 
+    public function getLinkAttribute()
+    {
+        return route('contacts.show', $this);
+    }
+
     public function scopeOrderByName($query, $direction)
     {
         $query->orderBy('lastname', $direction)->orderBy('firstname', $direction);

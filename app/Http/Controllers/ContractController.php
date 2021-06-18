@@ -238,42 +238,20 @@ class ContractController extends Controller
                         'created_at' => $document->created_at,
                     ];
                 }),
-            'payments' => $contract->payments()->orderBy('date', 'asc')->paginate(50)
-                ->through(fn ($payment) => [
+            'payments' => $contract->payments()->orderBy('date', 'asc')->get()
+                ->map(function ($payment) {
+                return [
                         'id' => $payment->id,
                         'date' => $payment->date,
                         'amount' => $payment->amount->format(),
                         'type' => $payment->type,
                         'delete_link' => $payment->delete_link,
-                ]),
+                ];
+            }),
             'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue($contract->insurance_type)->key : null,
             'deleted_at' => $contract->deleted_at,
-            'contact' => [
-                'id' => $contract->contact->id,
-                'name' => $contract->contact->name,
-                'firstname' => $contract->contact->firstname,
-                'lastname' => $contract->contact->lastname,
-                'phone' => $contract->contact->phone,
-                'address' => $contract->contact->address,
-                'zip' => $contract->contact->zip,
-                'city' => $contract->contact->city,
-                'country' => $contract->contact->country,
-                'company' => $contract->contact->company,
-                'email' => $contract->contact->email,
-                'link' => route('contacts.show', $contract->contact),
-            ],
-            'car' => [
-                'id' => $contract->car->id,
-                'stammnummer' => $contract->car->stammnummer,
-                'vin' => $contract->car->vin,
-                'car_model' => $contract->car->carModel->only('id', 'name'),
-                'brand' => $contract->car->brand,
-                'name' => $contract->car->name,
-                'initial_date' => $contract->car->initial_date_formatted,
-                'colour' => $contract->car->colour,
-                'deleted_at' => $contract->car->deleted_at,
-                'link' => route('cars.show', $contract->car),
-            ],
+            'contact' => $contract->contact->only(['id', 'full_title', 'link']),
+            'car' => $contract->car->only(['id', 'name_with_year', 'link']),
         ],
     ]);
     }

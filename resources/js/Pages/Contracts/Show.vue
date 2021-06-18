@@ -4,58 +4,71 @@
             {{ contract.type_formatted }} vom {{ contract.date }}
         </template>
         <template #info>
-            <div class="p-5 bg-white shadow rounded-md font-medium">
-                <div class="font-bold pb-1 mb-1 text-2xl border-b">
-                    {{ contract.type_formatted }} vom {{ contract.date }}
-                </div>
-                <div class="grid grid-cols-4 gap-2 w-full">
-                    <div class="lg:col-span-1 col-span-2">
-                        Datum
+                    <small-title title="Vertragsinformationen" class="mb-3" />
+                    <div class="grid  grid-cols-12 gap-2 p-5 bg-white shadow rounded-md font-medium">
+                        <div class="col-span-4">
+                            Datum
+                        </div>
+                        <div class="col-span-8">
+                            {{ contract.date }}
+                        </div>
+                        <div class="col-span-12 sm:col-span-4 pt-3 sm:pt-0">
+                            {{ contactTitle }}
+                        </div>
+                        <div class="col-span-12 sm:col-span-8">
+                            <inertia-link :href="contract.contact.link" class="font-bold flex items-center hover:text-indigo-600">
+                                <unicon fill="currentColor" class="mr-1" height="22" width="22" name="arrow-right"></unicon>
+                                {{ contract.contact.full_title }}
+                            </inertia-link>
+                        </div>
+                        <div class="col-span-12 sm:col-span-4 pt-3 sm:pt-0">
+                           Auto
+                        </div>
+                        <div class="col-span-12 sm:col-span-8 pb-3 sm:pb-0">
+                            <inertia-link :href="contract.car.link" class="font-bold flex items-center hover:text-indigo-600">
+                                <unicon fill="currentColor" class="mr-1" height="22" width="22" name="arrow-right"></unicon>
+                                {{ contract.car.name_with_year }}
+                            </inertia-link>
+                        </div>
+                        <div class="col-span-4">
+                            Lieferdatum
+                        </div>
+                        <div class="col-span-8">
+                            {{ contract.delivery_date }}
+                        </div>
+                        <div v-if="contract.is_sell_contract && contract.insurance_type" class="col-span-4">
+                            Versicherung
+                        </div>
+                        <div v-if="contract.is_sell_contract && contract.insurance_type" class="col-span-8">
+                            {{ contract.insurance_type }}
+                        </div>
+                        <div class="col-span-4">
+                            Betrag
+                        </div>
+                        <div class="col-span-8 font-bold">
+                            {{ contract.price }}
+                        </div>
+                        <div class="col-span-4">
+                            Bezahlt
+                        </div>
+                        <div class="col-span-8">
+                            {{ contract.paid }}
+                        </div>
+                        <div class="col-span-4">
+                            Offener Betrag
+                        </div>
+                        <div class="col-span-8">
+                            {{ contract.left_to_pay }}
+                        </div>
+                        <div v-if="contract.notes" class="mt-3 col-span-12">
+                            <p class="font-bold">Bemerkungen</p>
+                            {{ contract.notes }}
+                        </div>
                     </div>
-                    <div class="lg:col-span-3 col-span-2">
-                        {{ contract.date }}
-                    </div>
-                    <div class="lg:col-span-1 col-span-2">
-                        Lieferdatum
-                    </div>
-                    <div class="lg:col-span-3 col-span-2">
-                        {{ contract.delivery_date }}
-                    </div>
-                    <div v-if="contract.is_sell_contract && contract.insurance_type" class="lg:col-span-1 col-span-2">
-                        Versicherung
-                    </div>
-                    <div v-if="contract.is_sell_contract && contract.insurance_type" class="lg:col-span-3 col-span-2">
-                        {{ contract.insurance_type }}
-                    </div>
-                    <div class="lg:col-span-1 col-span-2">
-                        Betrag
-                    </div>
-                    <div class="lg:col-span-3 col-span-2 font-bold">
-                        {{ contract.price }}
-                    </div>
-                    <div class="lg:col-span-1 col-span-2">
-                        Bezahlt
-                    </div>
-                    <div class="lg:col-span-3 col-span-2">
-                        {{ contract.paid }}
-                    </div>
-                    <div class="lg:col-span-1 col-span-2">
-                        Offener Betrag
-                    </div>
-                    <div class="lg:col-span-3 col-span-2">
-                        {{ contract.left_to_pay }}
-                    </div>
-                    <div v-if="contract.notes" class="mt-3 col-span-4">
-                        <p class="font-bold">Bemerkungen</p>
-                        {{ contract.notes }}
-                    </div>
-                </div>
-            </div>
         </template>
         <template #actions>
             <edit-button v-if="!contract.deleted_at" :href="route('contracts.edit', contract.id)" />
             <print-button :href="route('contracts.print', contract.id)" />
-            <payments-upload v-if="!contract.deleted_at" :show_upload="!contract.deleted_at" :contract="contract" />
             <delete-button v-if="!contract.deleted_at" :href="route('contracts.destroy', contract.id)" />
             <restore-button v-if="contract.deleted_at" :href="route('contracts.restore', contract.id)" />
             <div v-if="contract.deleted_at">
@@ -63,19 +76,15 @@
             </div>
         </template>
         <template #more>
-            <div class="lg:col-span-7 col-span-12">
-                <h3 class="mb-3">Auto</h3>
-                <car-card :car="contract.car" hideEmpty="true" />
-            </div>
-            <div class="lg:col-span-5 col-span-12">
-                <h3 class="mb-3">{{ contactTitle }}</h3>
-                <contact-card :contact="contract.contact" />
-            </div>
-            <div class="xl:col-span-7 col-span-12 mt-4">
-                <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
-            </div>
-            <div class="xl:col-span-5 col-span-12">
+            <div class="xl:col-span-6 col-span-12">
+                <span class="w-full inline-flex items-end justify-between mb-3">
+                    <small-title title="Einzahlungen" />
+                    <payments-upload v-if="!contract.deleted_at" :show_upload="!contract.deleted_at" :contract="contract" />
+                </span>
                 <payments-view :payments="contract.payments" :contract="contract" />
+            </div>
+            <div class="xl:col-span-6 col-span-12 mt-4">
+                <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
             </div>
         </template>
     </show-page>
@@ -93,6 +102,7 @@ import EditButton from '@/Components/Buttons/EditButton.vue';
 import DocumentsView from '@/Components/Documents/View.vue';
 import PaymentsView from '@/Components/Payments/View.vue';
 import PaymentsUpload from '@/Components/Payments/Upload.vue';
+import SmallTitle from '../../Components/SmallTitle.vue';
 
 export default {
   components: {
@@ -107,6 +117,7 @@ export default {
     DocumentsView,
     PaymentsView,
     PaymentsUpload,
+    SmallTitle,
   },
   props: {
     contract: Object,

@@ -4,11 +4,12 @@
             <slot name="header"></slot>
         </template>
         <div class="grid grid-cols-12 gap-12 mb-8">
-            <div class="xl:col-span-6 sm:col-span-8 col-span-12">
+            <div class="xl:col-span-6 col-span-12">
                 <slot name="info"></slot>
             </div>
-            <div class="xl:col-span-3 sm:col-span-4 col-span-12">
+            <div class="xl:col-span-3 xl:col-end-13 col-span-12">
                 <div class="w-full flex flex-col">
+                    <small-title title="Aktionen" class="mb-3" />
                     <slot name="actions"></slot>
                 </div>
             </div>
@@ -21,10 +22,12 @@
 
 <script>
 import Layout from '@/Layouts/Layout';
+import SmallTitle from './SmallTitle.vue';
 
 export default {
   components: {
     Layout,
+    SmallTitle,
   },
 };
 </script>

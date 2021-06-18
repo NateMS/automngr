@@ -1,7 +1,4 @@
 <template>
-    <span class="w-full inline-flex items-end justify-between mb-3">
-        <h3>Einzahlungen</h3>
-    </span>
     <div class="w-full mx-auto">
         <simple-table :data="payments" :columns="columns" @delete="deletePayment" />
         <p class="py-5 text-xl">Total <span class="font-bold ml-5">{{ contract.paid }}</span> / {{ contract.price }}</p>

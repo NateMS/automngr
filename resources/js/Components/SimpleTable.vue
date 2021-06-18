@@ -1,8 +1,11 @@
 <template>
     <div>
-        <p v-if="title" class="font-semibold text-2xl font-medium mb-4 text-indigo-900 leading-tight">{{ title }}</p>
-        <div v-if="form" class="my-6 flex justify-between items-center">
-            <div class="flex items-center w-full max-w-md mr-4">
+        <span v-if="title" class="flex justify-between items-end mb-4">
+          <p v-if="title" class="font-semibold text-2xl font-medium text-indigo-900 leading-tight">{{ title }}</p>
+          <slot name="actions" class=""></slot>
+        </span>
+        <div v-if="form || print" class="my-4 flex justify-between items-center">
+            <div v-if="form" class="flex items-center w-full max-w-md mr-4">
                 <div class="flex w-full bg-white shadow rounded">
                     <input type="text" ref="search" v-model="form.search" autofocus="true" name="search" placeholder="Suchen..." class="relative border-gray-200 w-full px-6 py-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded" autocomplete="off">
                 </div>
@@ -13,7 +16,7 @@
                 Excel-Export
             </a>
         </div>
-        <div v-if="data.total === undefined || data.total > 0" class="bg-white shadow rounded-md sm:rounded-lg overflow-x-auto">
+        <div v-if="(data.total === undefined && data.length > 0) || data.total > 0" class="bg-white shadow rounded-md sm:rounded-lg overflow-x-auto">
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
                     <th v-for="(col, index) in columns" :key="col.key" class="px-6 pt-4 pb-4" :colspan="[index == (columns.length - 1) ? 2 : 1]">
@@ -29,18 +32,18 @@
                 </tr>
                 <tr v-for="row in (this.data.data ? this.data.data : this.data)" :key="row.link" class="hover:bg-indigo-100 focus-within:bg-indigo-100">
                     <td v-for="col in columns" :key="col.key" class="border-t">
-                        <inertia-link v-if="row.link" class="px-6 py-4 flex items-center" :href="row.link">
+                        <inertia-link v-if="row.link" class="px-6 xl:py-4 py-2 flex items-center" :href="row.link">
                             {{ resolve(col.key, row) }}
                         </inertia-link>
                         <span v-else-if="col.key == 'delete'" class="p-3 cursor-pointer" @click="this.$emit('delete', row.id)">
-                            <unicon fill="red" height="24" width="24" name="trash-alt"></unicon>
+                            <unicon fill="#f04040" hover-fill="red" height="24" width="24" name="trash-alt"></unicon>
                         </span>
-                        <span v-else class="px-6 py-4 flex items-center">
+                        <span v-else class="px-6 xl:py-4 py-2 flex items-center">
                             {{ resolve(col.key, row) }}
                         </span>
                     </td>
                     <td v-if="row.link && !hideArrow" class="border-t w-px">
-                        <inertia-link class="px-4 flex items-center" :href="row.link" tabindex="-1">
+                        <inertia-link class="xl:py-4 py-2 flex items-center" :href="row.link" tabindex="-1">
                             <unicon class="m-2" height="22" width="22" name="angle-right"></unicon>
                         </inertia-link>
                     </td>

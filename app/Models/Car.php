@@ -32,6 +32,16 @@ class Car extends Model
         return $out;
     }
 
+    public function getNameWithYearAttribute()
+    {
+        return $this->name . ' (' . $this->year . ')';
+    }
+
+    public function getYearAttribute()
+    {
+        return Carbon::parse($this->initial_date)->format('Y');
+    }
+
     public function getKilometersFormattedAttribute()
     {
         return number_format($this->kilometers, 0, '.', '\'');
@@ -54,6 +64,11 @@ class Car extends Model
         }
         
         return null;
+    }
+
+    public function getLinkAttribute()
+    {
+        return route('cars.show', $this);
     }
 
     public function brand()

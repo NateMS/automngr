@@ -1,5 +1,5 @@
 <template>
-    <standard-button class="mb-3" colour="green" @click="openModal" :href="route('payments.create', contract.id)">
+    <standard-button colour="green" @click="openModal" :href="route('payments.create', contract.id)">
         <unicon fill="white" class="mr-1" height="22" width="22" name="plus-circle"></unicon>
         Neue Einzahlung
     </standard-button>

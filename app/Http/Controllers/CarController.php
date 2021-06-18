@@ -218,28 +218,8 @@ class CarController extends Controller
         return [
             'id' => $contract->id,
             'date' => $contract->date_formatted,
-            'delivery_date' => $contract->delivery_date_formatted,
             'price' => $contract->price->format(),
-            'paid' => $contract->paid->format(),
-            'left_to_pay' => $contract->left_to_pay->format(),
-            'type' => $contract->type,
-            'notes' => $contract->notes,
-            'is_sell_contract' => $contract->isSellContract(),
-            'insurance_type' => $contract->insurance_type ? InsuranceType::fromValue($contract->insurance_type)->key : null,
-            'contact' => [
-                'id' => $contact->id,
-                'name' => $contact->name,
-                'firstname' => $contact->firstname,
-                'lastname' => $contact->lastname,
-                'phone' => $contact->phone,
-                'address' => $contact->address,
-                'zip' => $contact->zip,
-                'city' => $contact->city,
-                'country' => $contact->country,
-                'company' => $contact->company,
-                'email' => $contact->email,
-                'link' => route('contacts.show', $contact),
-            ],
+            'contact' => $contact->full_title,
             'link' => route('contracts.show', $contract),
         ];
     }
@@ -389,13 +369,15 @@ class CarController extends Controller
                 'notes' => $car->notes,
                 'deleted_at' => $car->deleted_at,
                 'buy_contracts' => $car->buyContracts()
-                    ->orderBy('date', 'asc')
-                    ->paginate(50)
-                    ->through(fn ($contract) => $this->getContractFields($contract)),
+                    ->orderBy('date', 'desc')
+                    ->with('contact')
+                    ->get()
+                    ->map(function ($contract) { return $this->getContractFields($contract); }),
                 'sell_contracts' => $car->sellContracts()
-                    ->orderBy('date', 'asc')
-                    ->paginate(50)
-                    ->through(fn ($contract) => $this->getContractFields($contract)),
+                    ->orderBy('date', 'desc')
+                    ->with('contact')
+                    ->get()
+                    ->map(function ($contract) { return $this->getContractFields($contract); }),
             ],
         ]);
     }
