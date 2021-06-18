@@ -51,7 +51,6 @@ class CarController extends Controller
             'Käufer',
             'Verkaufsdatum',
             'Verkaufspreis',
-            'Profit',
         ];
 
         $direction = $this->getDirection($request, 'desc');
@@ -79,7 +78,6 @@ class CarController extends Controller
                     'buyer' =>  $scontract ? $scontract->contact->full_title : null,
                     'sell_date' =>  $scontract ? $scontract->date_formatted : null,
                     'sell_price' => $scontract ? $scontract->price : null,
-                    'profit' => $car->latestProfit(),
                 ];
             });
     
@@ -150,7 +148,6 @@ class CarController extends Controller
             'Käufer',
             'Verkaufsdatum',
             'Verkaufspreis',
-            'Profit',
         ];
 
         $direction = $this->getDirection($request, 'desc');
@@ -178,7 +175,6 @@ class CarController extends Controller
                     'buyer' =>  $scontract ? $scontract->contact->full_title : null,
                     'sell_date' =>  $scontract ? $scontract->date_formatted : null,
                     'sell_price' => $scontract ? $scontract->price : null,
-                    'profit' => $car->latestProfit(),
                 ];
             });
     
@@ -205,7 +201,6 @@ class CarController extends Controller
                     'vin' => $car->vin,
                     'buy_contract' => $this->getContractFields($car->latestBuyContract()),
                     'sell_contract' => $car->isSold() ? $this->getContractFields($car->latestSellContract()) : null,
-                    'profit' => $car->latestProfit(),
                     'car_model' => $car->carModel->only('name'),
                     'name' => $car->name,
                     'initial_date' => $car->initial_date_formatted,
@@ -290,17 +285,6 @@ class CarController extends Controller
                             ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '1' order by date desc limit 1)")); 
                         })
                     ->orderBy('contracts.price', $direction);
-            case 'profit':
-                return $cars
-                    ->leftJoin('contracts as buy_contracts', function($join) { 
-                        $join->on('buy_contracts.car_id', '=', 'cars.id')
-                            ->on('buy_contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '0' order by date desc limit 1)")); 
-                        })
-                    ->leftJoin('contracts as sell_contracts', function($join) { 
-                        $join->on('sell_contracts.car_id', '=', 'cars.id')
-                            ->on('sell_contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '1' order by date desc limit 1)")); 
-                        })
-                    ->orderByRaw('(sell_contracts.price - buy_contracts.price) ' . $direction);
             default:
                 return $cars->orderBy('initial_date', $direction);
         }

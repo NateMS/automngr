@@ -20392,10 +20392,6 @@ __webpack_require__.r(__webpack_exports__);
         key: 'sell_contract.price',
         value: 'Verkaufspreis',
         sortable: true
-      }, {
-        key: 'profit',
-        value: 'Profit',
-        sortable: true
       }]
     };
   }
@@ -20507,10 +20503,6 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         key: 'sell_contract.price',
         value: 'Verkaufspreis',
-        sortable: true
-      }, {
-        key: 'profit',
-        value: 'Profit',
         sortable: true
       }]
     };

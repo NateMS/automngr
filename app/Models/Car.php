@@ -81,15 +81,6 @@ class Car extends Model
         return $this->buyContracts()->count() >= 1 && $this->buyContracts()->count() <= $this->sellContracts()->count();
     }
 
-    public function latestProfit()
-    {
-        if (!$this->isSold()) {
-            return null;
-        }
-
-        return $this->latestSellContract()->price->subtract($this->latestBuyContract()->price)->format();
-    }
-
     public function contracts()
     {
         return $this->hasMany(Contract::class);
