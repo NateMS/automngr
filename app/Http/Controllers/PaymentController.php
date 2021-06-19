@@ -25,7 +25,7 @@ class PaymentController extends Controller
             'date' => Carbon::parse($request->get('date'))->format('Y-m-d'),
         ]);
 
-        $Payment = Payment::create(
+        $payment = Payment::create(
             $request->validate([
                 'date' => ['required', 'date'],
                 'amount' => ['required', 'integer'],
@@ -35,7 +35,7 @@ class PaymentController extends Controller
         );
 
         session()->flash('flash.banner', 'Einzahlung gespeichert.');
-        return Redirect::route('contracts.show', $Payment->contract);
+        return Redirect::route('contracts.show', $payment->contract);
     }
 
     public function destroy(Request $request, Contract $contract)

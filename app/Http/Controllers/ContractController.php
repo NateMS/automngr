@@ -7,7 +7,9 @@ use App\Models\Car;
 use Inertia\Inertia;
 use App\Models\Brand;
 use App\Models\Contact;
+use App\Models\Payment;
 use App\Models\Contract;
+use App\Enums\PaymentType;
 use App\Enums\ContractType;
 use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
@@ -55,7 +57,7 @@ class ContractController extends Controller
 
     public function create(Request $request)
     {
-        $type = (string)($request->get('type') ?: '1');
+        $type = (string)($request->get('type') ?? '1');
         $car = Car::find($request->get('car'));
         $contact = Contact::find($request->get('contact'));
 
@@ -140,6 +142,7 @@ class ContractController extends Controller
     {
         $request->merge([
             'type' => (string)$request->get('type'),
+            'payment_type' => (string)$request->get('payment_type'),
             'insurance_type' => (string)$request->get('insurance_type'),
             'date' => Carbon::parse($request->get('date'))->format('Y-m-d'),
             'delivery_date' => Carbon::parse($request->get('delivery_date'))->format('Y-m-d'),
@@ -155,6 +158,20 @@ class ContractController extends Controller
                 'contact_id' => ['required', 'exists:App\Models\Contact,id'],
                 'insurance_type' => ['nullable', 'string', Rule::in(InsuranceType::getValues())],
                 'notes' => ['nullable'],
+            ])
+        );
+
+        $request->merge([
+            'type' => (string)$request->get('payment_type'),
+            'contract_id' => $contract->id,
+        ]);
+
+        Payment::create(
+            $request->validate([
+                'date' => ['required', 'date'],
+                'amount' => ['required', 'integer'],
+                'type' => ['required', 'string', Rule::in(PaymentType::getValues())],
+                'contract_id' => ['required', 'exists:App\Models\Contract,id'],
             ])
         );
 

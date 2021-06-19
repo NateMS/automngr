@@ -91,7 +91,7 @@ class Contract extends Model
 
     public function getTypeFormattedAttribute()
     {
-        return $this->isSellContract() ? 'Kaufsvertrag' : 'Ankaufsvertrag';
+        return $this->isSellContract() ? 'Kaufvertrag' : 'Ankaufsvertrag';
     }
 
     public function documents()

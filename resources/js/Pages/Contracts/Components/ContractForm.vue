@@ -22,9 +22,24 @@
                 </div>
 
                 <div class="col-span-6 sm:col-span-4">
-                    <jet-label for="price" value="Betrag" />
+                    <jet-label for="price" :value="form.type === '0' ? 'Einkaufspreis' : 'Verkaufspreis'" />
                     <currency-input v-model="form.price" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 rounded-md shadow-sm" ref="price"/>
                     <jet-input-error :message="form.errors.price" class="mt-2" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-4">
+                    <jet-label for="amount" value="Anzahlung" />
+                    <currency-input v-model="form.amount" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 rounded-md shadow-sm" ref="amount"/>
+                    <jet-input-error :message="form.errors.amount" class="mt-2" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-4">
+                    <jet-label for="payment_type" value="Einzahlungsart" />
+                    <select v-model="form.payment_type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <option value="0" :selected="form.payment_type == '0'">Banküberweisung</option>
+                        <option value="1" :selected="form.payment_type == '1'">Barzahlung</option>
+                    </select>
+                    <jet-input-error :message="form.errors.type" class="mt-2" />
                 </div>
 
                 <div v-if="form.is_sell_contract" class="col-span-6 sm:col-span-4">
@@ -48,7 +63,7 @@
                 {{ meta.on_success }}
             </jet-action-message>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing || !data.contact_id || !data.car_id">
                 {{ meta.button_text }}
             </jet-button>
         </template>

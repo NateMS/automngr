@@ -76,16 +76,12 @@
             </div>
         </template>
         <template #more>
-            <div class="xl:col-span-6 col-span-12">
-                <span class="w-full inline-flex items-end justify-between mb-3">
-                    <small-title title="Einzahlungen" />
-                    <payments-upload v-if="!contract.deleted_at" :show_upload="!contract.deleted_at" :contract="contract" />
-                </span>
-                <payments-view :payments="contract.payments" :contract="contract" />
-            </div>
-            <div class="xl:col-span-6 col-span-12 mt-4">
-                <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
-            </div>
+            <span class="inline-flex items-end w-full justify-between mb-3">
+                <small-title title="Einzahlungen" />
+                <payments-upload v-if="!contract.deleted_at" :show_upload="!contract.deleted_at" :contract="contract" />
+            </span>
+            <payments-view :payments="contract.payments" :contract="contract" />
+            <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
         </template>
     </show-page>
 </template>

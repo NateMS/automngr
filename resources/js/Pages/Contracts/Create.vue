@@ -68,6 +68,8 @@ export default {
         car_id: this.car?.id ?? null,
         contact_id: this.contact?.id ?? null,
         is_sell_contract: this.type === '0',
+        amount: null,
+        payment_type: '0',
       },
     };
   },

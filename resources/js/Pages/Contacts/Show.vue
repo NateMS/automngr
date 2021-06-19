@@ -8,6 +8,7 @@
         </template>
 
         <template #info>
+            <small-title title="Kontakt" class="mb-3" />
             <contact-card :contact="contact" />
         </template>
 
@@ -21,24 +22,21 @@
         </template>
 
         <template #more>
-            <div class="xl:col-span-6 col-span-12">
-                <contract-table
-                    :contracts="contact.buy_contracts"
-                    :type="0"
-                    :contactId="contact.id"
-                    :show_upload="!contact.deleted_at"
-                    :title="contact.buy_contracts.length > 1 ? contact.buy_contracts.length + ' Ankaufsverträge' : 'Ankaufsvertrag'"
-                />
-            </div>
-            <div class="xl:col-span-6 col-span-12">
-                <contract-table
-                    :contracts="contact.sell_contracts"
-                    :type="1"
-                    :contactId="contact.id"
-                    :show_upload="!contact.deleted_at"
-                    :title="contact.sell_contracts.length > 1 ? contact.sell_contracts.length + ' Verkaufsverträge' : 'Verkaufsvertrag'"
-                />
-            </div>
+            <contract-table
+                :contracts="contact.buy_contracts"
+                :type="0"
+                :contactId="contact.id"
+                :show_upload="!contact.deleted_at"
+                :title="contact.buy_contracts.length > 1 ? contact.buy_contracts.length + ' Ankaufsverträge' : 'Ankaufsvertrag'"
+            />
+            <contract-table
+                :contracts="contact.sell_contracts"
+                :type="1"
+                class="mt-10"
+                :contactId="contact.id"
+                :show_upload="!contact.deleted_at"
+                :title="contact.sell_contracts.length > 1 ? contact.sell_contracts.length + ' Verkaufsverträge' : 'Verkaufsvertrag'"
+            />
         </template>
     </show-page>
 </template>
@@ -51,6 +49,7 @@ import EditButton from '@/Components/Buttons/EditButton.vue';
 import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
 import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
 import ContractTable from '../../Components/Contracts/ContractTable.vue';
+import SmallTitle from '../../Components/SmallTitle.vue';
 
 export default {
   components: {
@@ -61,6 +60,7 @@ export default {
     DeleteButton,
     RestoreButton,
     ContractTable,
+    SmallTitle,
   },
 
   props: {

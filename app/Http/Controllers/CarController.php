@@ -200,10 +200,9 @@ class CarController extends Controller
                     'stammnummer' => $car->stammnummer,
                     'vin' => $car->vin,
                     'buy_contract' => $this->getContractFields($car->latestBuyContract()),
-                    'sell_contract' => $car->isSold() ? $this->getContractFields($car->latestSellContract()) : null,
+                    'sell_contract' => $this->getContractFields($car->latestSellContract()),
                     'car_model' => $car->carModel->only('name'),
-                    'name' => $car->name,
-                    'initial_date' => $car->initial_date_formatted,
+                    'name' => $car->name_with_year,
                     'deleted_at' => $car->deleted_at,
                     'link' => route('cars.show', $car),
                 ]),
@@ -340,7 +339,7 @@ class CarController extends Controller
     {
         return [
             'stammnummer' => ['required', 'unique:cars', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
-            'vin' => ['required', 'unique:cars', 'string', 'size:17', 'min:17', 'max:17'],
+            'vin' => ['required', 'unique:cars', 'string', 'size:17'],
             'initial_date' => ['required', 'date'],
             'last_check_date' => ['required', 'date'],
             'colour' => ['nullable', 'max:75'],
@@ -426,7 +425,7 @@ class CarController extends Controller
         $car->update(
             $request->validate([
                 'stammnummer' => ['required', 'unique:cars,stammnummer,' . $car->id, 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
-                'vin' => ['required', 'unique:cars,vin,' . $car->id, 'string', 'size:17', 'min:17', 'max:17'],
+                'vin' => ['required', 'unique:cars,vin,' . $car->id, 'string', 'size:17'],
                 'initial_date' => ['required', 'date'],
                 'last_check_date' => ['required', 'date'],
                 'colour' => ['nullable', 'max:75'],

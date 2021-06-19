@@ -15,7 +15,7 @@ class BuyContractsSheet extends ContractsSheet
     public function headings(): array
     {
         return  [
-            ['Kaufverträge ' . $this->year],
+            ['Ankaufsverträge ' . $this->year],
             [
                 'Datum',
                 'Auto',
@@ -39,6 +39,6 @@ class BuyContractsSheet extends ContractsSheet
 
     public function title(): string
     {
-        return 'Ankaufverträge';
+        return 'Ankaufsverträge';
     }
 }

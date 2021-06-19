@@ -16,7 +16,7 @@ class SellContractsSheet extends ContractsSheet
     public function headings(): array
     {
         return [
-            ['Verkaufverträge ' . $this->year],
+            ['Verkaufsverträge ' . $this->year],
             [
                 'Datum',
                 'Auto',
@@ -46,13 +46,6 @@ class SellContractsSheet extends ContractsSheet
 
     public function title(): string
     {
-        return 'Verkaufverträge';
-    }
-
-    public static function afterSheet(AfterSheet $event)
-    {
-        $event->sheet->appendRows([
-            [null, null, null, null, 'Total', 1112, 100, 1002],
-        ], $event);
+        return 'Verkaufsverträge';
     }
 }

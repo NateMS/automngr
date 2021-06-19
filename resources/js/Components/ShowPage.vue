@@ -3,8 +3,8 @@
         <template #header>
             <slot name="header"></slot>
         </template>
-        <div class="grid grid-cols-12 gap-12 mb-8">
-            <div class="xl:col-span-6 col-span-12">
+        <div class="grid grid-cols-12 gap-12 mb-8 max-w-5xl mx-auto">
+            <div class="xl:col-span-9 col-span-12">
                 <slot name="info"></slot>
             </div>
             <div class="xl:col-span-3 xl:col-end-13 col-span-12">
@@ -13,9 +13,9 @@
                     <slot name="actions"></slot>
                 </div>
             </div>
-        </div>
-        <div class="grid grid-cols-12 gap-12">
-            <slot name="more"></slot>
+            <div class="xl:col-span-9 col-span-12">
+                <slot name="more"></slot>
+            </div>
         </div>
     </layout>
 </template>

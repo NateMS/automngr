@@ -1,7 +1,7 @@
 <template>
     <div class="col-span-6 sm:col-span-4">
         <jet-label for="brand" value="Marke" />
-        <multiselect v-model="brandSelection" @SearchChange="updateBrandSearch" @select="updateBrand" label="name" track-by="id" :options="brands" class="mt-1 block w-full border-gray-300" placeholder="Marke auswählen">
+        <multiselect :allow-empty="false" v-model="brandSelection" @SearchChange="updateBrandSearch" @select="updateBrand" label="name" track-by="id" :options="brands" class="mt-1 block w-full border-gray-300" placeholder="Marke auswählen">
             <template v-slot:noResult>
                 <span @click="addBrand">
                     <b>{{ brandSearch }}</b> als neue Marke speichern?
@@ -12,7 +12,7 @@
 
     <div v-if="brandSelection" class="col-span-6 sm:col-span-4">
         <jet-label for="model" value="Modell" />
-        <multiselect v-model="car_modelSelection" @SearchChange="updateCarModelSearch" @select="updateCarModel" label="name" track-by="id" :options="carModels" class="mt-1 block w-full border-gray-300" placeholder="Modell auswählen">
+        <multiselect :allow-empty="false" v-model="car_modelSelection" @SearchChange="updateCarModelSearch" @select="updateCarModel" label="name" track-by="id" :options="carModels" class="mt-1 block w-full border-gray-300" placeholder="Modell auswählen">
             <template v-slot:noResult>
                 <span @click="addCarModel">
                     <b>{{ modelSearch }}</b> als neues {{ brand.name }}-Modell speichern?
@@ -31,7 +31,7 @@
             </div>
             <div class="col-span-12 sm:col-span-7">
                 <jet-label for="vin" value="Chassisnummer" />
-                <jet-input id="vin" type="text" class="mt-1 block w-full" v-model="form.vin" ref="vin" autocomplete="vin" />
+                <jet-input id="vin" type="text" class="mt-1 block w-full" minlength="17" maxlength="17" v-model="form.vin" ref="vin" autocomplete="vin" />
                 <jet-input-error :message="form.errors.vin" class="mt-2" />
             </div>
         </div>

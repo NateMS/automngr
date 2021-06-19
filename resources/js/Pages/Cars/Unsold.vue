@@ -34,7 +34,6 @@ export default {
       columns: [
         { key: 'name', value: 'Marke & Modell', sortable: true },
         { key: 'stammnummer', value: 'Stammnummer', sortable: true },
-        { key: 'initial_date', value: 'Inverkehrssetzung', sortable: true },
         { key: 'buy_contract.date', value: 'Einkaufsdatum', sortable: true },
         { key: 'buy_contract.price', value: 'Einkaufspreis', sortable: true },
       ],
@@ -42,3 +41,4 @@ export default {
   },
 };
 </script>
+§

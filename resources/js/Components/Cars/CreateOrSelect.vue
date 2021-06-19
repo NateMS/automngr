@@ -12,7 +12,7 @@
       <template v-else #form>
           <div class="col-span-3">
               <jet-label for="car" value="Auto" />
-              <multiselect @select="onCarChange" :disabled="createCar" v-model="car" label="name" track-by="id" :options="carsChoice" class="mt-1 block w-full" placeholder="Auto auswählen" />
+              <multiselect :allow-empty="false" @select="onCarChange" :disabled="createCar" v-model="car" label="name" track-by="id" :options="carsChoice" class="mt-1 block w-full" placeholder="Auto auswählen" />
           </div>
           <div class="col-span-6">
               <car-card v-if="car.id" class="mt-3 col-span-3" :car="car" hideEmpty="true" />
