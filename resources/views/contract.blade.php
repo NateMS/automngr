@@ -208,18 +208,20 @@ Mündliche Vereinbarungen sind ungültig.
         </tr>
     </table>
     <br><br><br><br>
-    <table width="100%" style="padding-top: 5px; border-top: 1px solid black;">
-        <tr>
-            <td width="20%"><b>Quittung</b></td>
-            <td width="30%">Den Betrag von</td>
-            <td>in bar erhalten</td>
-        </tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr>
-            <td>Datum: </td>
-            <td>&nbsp;</td>
-        </tr>
-    </table>
+    @if ($contract->deposit())
+        <table width="100%" style="padding-top: 5px; border-top: 1px solid black;">
+            <tr>
+                <td width="20%"><b>Quittung</b></td>
+                <td width="30%">Den Betrag von {{ $contract->deposit()->amount->format() }}</td>
+                <td>{{ $contract->deposit()->type_text }}</td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>Datum: </td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    @endif
 </body>
 </html>

@@ -104,6 +104,11 @@ class Contract extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function deposit()
+    {
+        return $this->payments()->oldest('date')->first();
+    }
+
     public function contact()
     {
         return $this->belongsTo(Contact::class)->withTrashed();

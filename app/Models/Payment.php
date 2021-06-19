@@ -45,6 +45,11 @@ class Payment extends Model
         return $type == PaymentType::Transaction() ? 'Überweisung' : 'Barzahlung';
     }
 
+    public function getTypeTextAttribute()
+    {
+        return $this->type == PaymentType::Transaction() ? 'Als Überweisung erhalten' : 'in bar erhalten';
+    }
+
     public function getDeleteLinkAttribute()
     {
         return route('payments.destroy', [$this->contract->id, $this->id]);
