@@ -340,7 +340,7 @@ class CarController extends Controller
     {
         return [
             'stammnummer' => ['required', 'unique:cars', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
-            'vin' => ['required', 'unique:cars', 'string', 'size:17'],
+            'vin' => ['required', 'unique:cars', 'string', 'size:17', 'min:17', 'max:17'],
             'initial_date' => ['required', 'date'],
             'last_check_date' => ['required', 'date'],
             'colour' => ['nullable', 'max:75'],
@@ -426,7 +426,7 @@ class CarController extends Controller
         $car->update(
             $request->validate([
                 'stammnummer' => ['required', 'unique:cars,stammnummer,' . $car->id, 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
-                'vin' => ['required', 'unique:cars,vin,' . $car->id, 'string', 'size:17'],
+                'vin' => ['required', 'unique:cars,vin,' . $car->id, 'string', 'size:17', 'min:17', 'max:17'],
                 'initial_date' => ['required', 'date'],
                 'last_check_date' => ['required', 'date'],
                 'colour' => ['nullable', 'max:75'],

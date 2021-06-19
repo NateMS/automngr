@@ -27,6 +27,10 @@ class Car extends Model
 
     public function getNameAttribute()
     {
+        if (!$this->carModel) {
+            return '';
+        }
+
         $out = $this->brand->name . ' ' . $this->carModel->name;
 
         return $out;

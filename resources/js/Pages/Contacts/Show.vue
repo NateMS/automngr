@@ -47,8 +47,6 @@
 import ShowPage from '@/Components/ShowPage.vue';
 import BreadCrumb from '@/Components/BreadCrumb.vue';
 import ContactCard from '@/Components/ContactCard.vue';
-import BuyContractCard from '@/Components/BuyContractCard.vue';
-import SellContractCard from '@/Components/SellContractCard.vue';
 import EditButton from '@/Components/Buttons/EditButton.vue';
 import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
 import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
@@ -59,8 +57,6 @@ export default {
     ShowPage,
     BreadCrumb,
     ContactCard,
-    BuyContractCard,
-    SellContractCard,
     EditButton,
     DeleteButton,
     RestoreButton,

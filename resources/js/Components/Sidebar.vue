@@ -18,6 +18,20 @@
 
         <div class="mb-4 px-4">
             <p class="text-sm font-semibold mb-1 text-indigo-100 flex items-center">
+                Verträge
+            </p>
+            <jet-nav-link :href="route('contracts.create', {type: 0})" :active="onBasicContractCreate && type == '0'">
+                <unicon fill="currentColor" class="mr-2" height="22" width="22" name="plus-circle"></unicon>
+                Neuer Einkauf
+            </jet-nav-link>
+            <jet-nav-link :href="route('contracts.create', {type: 1})" :active="onBasicContractCreate && type == '1'">
+                <unicon fill="currentColor" class="mr-2" height="22" width="22" name="plus-circle"></unicon>
+                Neuer Verkauf
+            </jet-nav-link>
+        </div>
+
+        <div class="mb-4 px-4">
+            <p class="text-sm font-semibold mb-1 text-indigo-100 flex items-center">
                 Autos
             </p>
             <jet-nav-link :href="route('cars.create')" :active="route().current('cars.create')">
@@ -72,6 +86,18 @@ export default {
   },
   computed: {
     ...mapState(['sideBarOpen']),
+    type() {
+        let params = new URLSearchParams(window.location.search);
+        return params.get('type');
+    },
+    onBasicContractCreate() {
+        if (!route().current('contracts.create')) {
+            return false;
+        }
+
+        let params = new URLSearchParams(window.location.search);
+        return !(params.get('car') || params.get('contact'));
+    },
   },
 };
 </script>

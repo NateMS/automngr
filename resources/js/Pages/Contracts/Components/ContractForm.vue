@@ -1,60 +1,58 @@
 <template>
-    <div class="max-w-7xl">
-        <jet-form-section @submitted="submitForm">
-            <template #title>
-                <slot name="title"></slot>
-            </template>
+    <jet-form-section @submitted="submitForm">
+        <template #title>
+            <slot name="title"></slot>
+        </template>
 
-            <template #description>
-                <slot name="description"></slot>
-            </template>
+        <template #description>
+            <slot name="description"></slot>
+        </template>
 
-            <template #form>
-                <div class="col-span-3 grid grid-cols-6 gap-3">
-                    <div class="col-span-6 sm:col-span-4">
-                        <jet-label for="date" value="Datum" />
-                        <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
-                        <jet-input-error :message="form.errors.date" class="mt-2" />
-                    </div>
-                    <div class="col-span-6 sm:col-span-4">
-                        <jet-label for="delivery_date" value="Lieferdatum" />
-                        <datepicker id="delivery_date" ref="delivery_date" v-model="form.delivery_date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
-                        <jet-input-error :message="form.errors.delivery_date" class="mt-2" />
-                    </div>
-
-                    <div class="col-span-6 sm:col-span-4">
-                        <jet-label for="price" value="Betrag" />
-                        <currency-input v-model="form.price" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 rounded-md shadow-sm" ref="price"/>
-                        <jet-input-error :message="form.errors.price" class="mt-2" />
-                    </div>
-
-                    <div v-if="form.is_sell_contract" class="col-span-6 sm:col-span-4">
-                        <jet-label for="insurance_type" value="Versicherung" />
-                        <select v-model="form.insurance_type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            <option v-for="(insurance, index) in insurance_types" :value="index"  v-bind:key="index" :selected="form.insurance_type == index">{{ insurance }}</option>
-                        </select>
-                        <jet-input-error :message="form.errors.insurance_type" class="mt-2" />
-                    </div>
-                    <div class="col-span-6 sm:col-span-4">
-                        <jet-label for="notes" value="Bemerkungen" />
-                        <textarea class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" v-model="form.notes" ref="input">
-                        </textarea>
-                        <jet-input-error :message="form.errors.notes" class="mt-2" />
-                    </div>
+        <template #form>
+            <div class="col-span-3 grid grid-cols-6 gap-3">
+                <div class="col-span-6 sm:col-span-4">
+                    <jet-label for="date" value="Datum" />
+                    <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
+                    <jet-input-error :message="form.errors.date" class="mt-2" />
                 </div>
-            </template>
+                <div class="col-span-6 sm:col-span-4">
+                    <jet-label for="delivery_date" value="Lieferdatum" />
+                    <datepicker id="delivery_date" ref="delivery_date" v-model="form.delivery_date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
+                    <jet-input-error :message="form.errors.delivery_date" class="mt-2" />
+                </div>
 
-            <template #actions>
-                <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                    {{ meta.on_success }}
-                </jet-action-message>
+                <div class="col-span-6 sm:col-span-4">
+                    <jet-label for="price" value="Betrag" />
+                    <currency-input v-model="form.price" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 rounded-md shadow-sm" ref="price"/>
+                    <jet-input-error :message="form.errors.price" class="mt-2" />
+                </div>
 
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    {{ meta.button_text }}
-                </jet-button>
-            </template>
-        </jet-form-section>
-    </div>
+                <div v-if="form.is_sell_contract" class="col-span-6 sm:col-span-4">
+                    <jet-label for="insurance_type" value="Versicherung" />
+                    <select v-model="form.insurance_type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <option v-for="(insurance, index) in insurance_types" :value="index"  v-bind:key="index" :selected="form.insurance_type == index">{{ insurance }}</option>
+                    </select>
+                    <jet-input-error :message="form.errors.insurance_type" class="mt-2" />
+                </div>
+                <div class="col-span-6 sm:col-span-4">
+                    <jet-label for="notes" value="Bemerkungen" />
+                    <textarea class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" v-model="form.notes" ref="input">
+                    </textarea>
+                    <jet-input-error :message="form.errors.notes" class="mt-2" />
+                </div>
+            </div>
+        </template>
+
+        <template #actions>
+            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
+                {{ meta.on_success }}
+            </jet-action-message>
+
+            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                {{ meta.button_text }}
+            </jet-button>
+        </template>
+    </jet-form-section>
 </template>
 
 <script>
@@ -95,6 +93,8 @@ export default {
   },
   methods: {
     submitForm() {
+      this.form.car_id = this.data.car_id;
+      this.form.contact_id = this.data.contact_id;
       this.form.submit(this.meta.method, this.meta.route);
     },
   },

@@ -53,53 +53,28 @@ class ContractController extends Controller
         ]);
     }
 
-    public function create(Request $request, string $type, Car $car, Contact $contact)
+    public function create(Request $request)
     {
+        $type = (string)($request->get('type') ?: '1');
+        $car = Car::find($request->get('car'));
+        $contact = Contact::find($request->get('contact'));
+
         return Inertia::render('Contracts/Create', [
             'car' => $this->getCarFields($car),
             'contact' => $this->getContactFields($contact),
-            'is_sell_contract' => ContractType::coerce($type) == ContractType::SellContract,
             'type' => $type,
-            'car_first' => (bool)$request->query('carFirst'),
             'insurance_types' => InsuranceType::asSelectArray(),
-        ]);
-    }
-
-    public function createFromCar(Request $request, string $type, Car $car)
-    {
-        return Inertia::render('Contracts/CreateFromCar', [
-            'car' => $this->getCarFields($car),
-            'is_sell_contract' => ContractType::coerce($type) == ContractType::SellContract,
-            'type' => $type,
             'contacts' => Contact::all()->map(function ($contact) {
                 return $this->getContactFields($contact);
             }),
-        ]);
-    }
-
-    public function createFromContact(Request $request, string $type, Contact $contact)
-    {
-        $contractType = ContractType::coerce($type);
-        $cars = $contractType->value == ContractType::SellContract ? Car::unsoldOnly() : Car::soldOnly();
-
-        return Inertia::render('Contracts/CreateFromContact', [
-            'contact' => $this->getContactFields($contact),
-            'is_sell_contract' => $contractType == ContractType::SellContract,
-            'type' => $type,
-            'cars' => $cars->get()->map(function ($car) {
+            'cars' => Car::all()->map(function ($car) {
                 return $this->getCarFields($car);
             }),
             'brands' => Brand::all()->map(function ($brand) {
                 return [
                     'id' => $brand->id,
                     'name' => $brand->name,
-                    'models' => $brand->carModels()->get()
-                        ->map(function ($carModel) {
-                            return [
-                                'id' => $carModel->id,
-                                'name' => $carModel->name,
-                            ];
-                        }),
+                    'models' => $brand->carModels()->get(['id', 'name']),
                 ];
             }),
         ]);
@@ -107,11 +82,20 @@ class ContractController extends Controller
 
     private function getCarFields(?Car $car) {
         if (!$car) {
-            return null;
+            return [
+                'name' => null,
+                'id' => null,
+                'stammnummer' => null,
+                'vin' => null,
+                'name' => null,
+                'colour' => null,
+                'initial_date' => null,
+            ];
         }
         return [
+            'name' => $car->name,
             'id' => $car->id,
-            'stammnummer' => $car->stammnummer,
+            'stammnummer' => $car->stammnummer, 
             'vin' => $car->vin,
             'name' => $car->name,
             'colour' => $car->colour,
@@ -121,7 +105,20 @@ class ContractController extends Controller
 
     private function getContactFields(?Contact $contact) {
         if (!$contact) {
-            return null;
+            return [
+                'id' => null,
+                'title' => null,
+                'name' => null,
+                'firstname' => null,
+                'lastname' => null,
+                'phone' => null,
+                'address' => null,
+                'zip' => null,
+                'city' => null,
+                'country' => null,
+                'company' => null,
+                'email' => null,
+            ];
         }
         return [
             'id' => $contact->id,

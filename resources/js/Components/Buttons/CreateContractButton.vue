@@ -22,13 +22,14 @@ export default {
             return this.type === 1 ? 'Verkaufsvertrag' : 'Ankaufsvertrag';
         },
         link() {
+            // return route('contracts.create') + '?carId=1&contactId=1&type=' + String(this.type);
             if (this.contactId && this.carId) {
-                return route('contracts.create', [this.type, this.carId, this.contactId]);
+                return route('contracts.create', {type: this.type, car: this.carId, contact: this.contactId});
             }
             if (this.contactId) {
-                return route('contracts.create_from_contact', [this.type, this.contactId]);
+                return route('contracts.create', {type: this.type, contact: this.contactId});
             }
-            return route('contracts.create_from_car', [this.type, this.carId]);
+            return route('contracts.create',  {type: this.type, car: this.carId, contact: this.contactId});
         },
     },
 };
