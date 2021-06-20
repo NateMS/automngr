@@ -3,7 +3,7 @@
         <div v-if="!hideEmpty || car.name" class="font-bold">
                 {{ car.name ? car.name : '-' }}
             </div>
-        <div class="grid grid-cols-2 xl:grid-cols-4 gap-0 w-full">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-0 w-full">
             <div v-if="!hideEmpty || car.stammnummer" class="col-span-2">
                 Stammnummer
             </div>

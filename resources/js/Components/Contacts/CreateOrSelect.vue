@@ -7,25 +7,25 @@
           {{ contactType }} auswählen oder neu erfassen
       </template>
       <template v-if="existing_contact.id" #form>
-          <contact-card v-if="existing_contact.id" class="col-span-3" :contact="contact" />
+          <contact-card v-if="existing_contact.id" class="xl:col-span-3 md:col-span-4 col-span-6" :contact="contact" />
       </template>
       <template v-else #form>
-          <div class="col-span-3">
-              <jet-label for="contact" :value="contactType" />
-              <multiselect @select="onContactChange" @remove="contact = emptyContact" :disabled="createContact" v-model="contact" label="title" track-by="id" :options="contactsChoice" class="mt-1 block w-full" placeholder="Vertragspartner auswählen" />
-          </div>
           <div class="col-span-6">
-              <contact-card v-if="contact.id" class="mt-3 col-span-3" :contact="contact" />
+              <jet-label for="contact" :value="contactType + ' auswählen'" />
+              <div class="grid grid-cols-12 gap-3 gap-y-6 mt-1">
+                <multiselect :allow-empty="false" @select="onContactChange" :disabled="createContact" v-model="contact" label="name" track-by="id" :options="contactsChoice" class="2xl:col-span-4 sm:col-span-6 col-span-12" :placeholder="contactType + 'wählen'" />
+                <div v-if="!createContact" class="sm:col-span-6 col-span-12">
+                  <span class="mr-2">oder</span>
+                  <button @click="openContactForm" class="bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-900 focus:border-indigo-900 focus:ring-indigo-300 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition">
+                      Neu erfassen
+                  </button>
+                </div>
+            </div>
           </div>
-          <div class="col-span-6">
-              oder
+          <div v-if="contact.id" class="col-span-6">
+              <contact-card class="mt-3 xl:col-span-3 md:col-span-4 col-span-6" :contact="contact" hideEmpty="true" />
           </div>
-          <div v-if="!createContact" class="col-span-6">
-              <button @click="openContactForm" class="bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-900 focus:border-indigo-900 focus:ring-indigo-300 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition">
-                  Neu erfassen
-              </button>
-          </div>
-          <div v-else class="col-span-6">
+          <div v-if="createContact" class="col-span-6">
               <p class="w-full mb-1 font-bold">Neuen Kontakt erfassen:</p>
               <form @submit="submitCreateContactForm">
                   <div class="grid grid-cols-6 gap-6">

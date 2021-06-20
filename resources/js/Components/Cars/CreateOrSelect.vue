@@ -7,25 +7,25 @@
           {{ existing_car.id ? 'Ausgewähltes Auto' : 'Auto auswählen oder neu erfassen' }} 
       </template>
       <template v-if="existing_car.id" #form>
-          <car-card v-if="car.id" class="col-span-3" :car="car" hideEmpty="true" />
+          <car-card v-if="car.id" class="xl:col-span-3 md:col-span-4 col-span-6" :car="car" hideEmpty="true" />
       </template>
       <template v-else #form>
-          <div class="col-span-3">
-              <jet-label for="car" value="Auto" />
-              <multiselect :allow-empty="false" @select="onCarChange" :disabled="createCar" v-model="car" label="name" track-by="id" :options="carsChoice" class="mt-1 block w-full" placeholder="Auto auswählen" />
-          </div>
           <div class="col-span-6">
-              <car-card v-if="car.id" class="mt-3 col-span-3" :car="car" hideEmpty="true" />
+              <jet-label for="car" value="Auto auswählen" />
+              <div class="grid grid-cols-12 gap-3 gap-y-6 mt-1">
+                <multiselect :allow-empty="false" @select="onCarChange" :disabled="createCar" v-model="car" label="name" track-by="id" :options="carsChoice" class="2xl:col-span-4 sm:col-span-6 col-span-12" placeholder="Auto auswählen" />
+                <div v-if="!createCar" class="sm:col-span-6 col-span-12">
+                  <span class="mr-2">oder</span>
+                  <button @click="openCarForm" class="bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-900 focus:border-indigo-900 focus:ring-indigo-300 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition">
+                      Neu erfassen
+                  </button>
+                </div>
+            </div>
           </div>
-          <div class="col-span-6">
-              oder
+          <div v-if="car.id" class="col-span-6">
+              <car-card class="mt-3 xl:col-span-3 md:col-span-4 col-span-6" :car="car" hideEmpty="true" />
           </div>
-          <div v-if="!createCar" class="col-span-6">
-              <button @click="openCarForm" class="bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-900 focus:border-indigo-900 focus:ring-indigo-300 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition">
-                  Neu erfassen
-              </button>
-          </div>
-          <div v-else class="col-span-6">
+          <div v-if="createCar" class="col-span-6">
               <p class="w-full mb-1 font-bold">Neues Auto erfassen:</p>
               <form @submit="submitCreateCarForm">
                   <div class="grid grid-cols-6 gap-6">

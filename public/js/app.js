@@ -18020,7 +18020,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     allClasses: function allClasses() {
-      var classes = 'justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition';
+      var classes = 'justify-center inline-flex items-center sm:px-4 sm:py-2 px-2 py-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition';
       classes += " bg-".concat(this.colour, "-800 hover:bg-").concat(this.colour, "-700 active:bg-").concat(this.colour, "-900 focus:border-").concat(this.colour, "-900 focus:ring-").concat(this.colour, "-300");
       return "".concat(classes, " ").concat(this["class"]);
     }
@@ -19610,6 +19610,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['href', 'active'],
+  methods: {
+    toggleSidebar: function toggleSidebar() {
+      this.$store.dispatch('toggleSidebar');
+    }
+  },
   computed: {
     classes: function classes() {
       return this.active ? 'w-full flex items-center text-indigo-100 h-10 pl-4 rounded-lg cursor-pointer transition' : 'w-full flex items-center hover:text-indigo-100 text-indigo-300 h-10 pl-4 rounded-lg cursor-pointer transition';
@@ -21427,12 +21432,11 @@ __webpack_require__.r(__webpack_exports__);
         price: null,
         notes: null,
         type: this.type,
-        insurance_type: '0',
+        insurance_type: '1',
         car_id: (_this$car$id = (_this$car = this.car) === null || _this$car === void 0 ? void 0 : _this$car.id) !== null && _this$car$id !== void 0 ? _this$car$id : null,
         contact_id: (_this$contact$id = (_this$contact = this.contact) === null || _this$contact === void 0 ? void 0 : _this$contact.id) !== null && _this$contact$id !== void 0 ? _this$contact$id : null,
-        is_sell_contract: this.type === '0',
         amount: null,
-        payment_type: '0'
+        payment_type: '1'
       }
     };
   },
@@ -21497,8 +21501,7 @@ __webpack_require__.r(__webpack_exports__);
         delivery_date: (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(new Date(this.contract.delivery_date)),
         price: this.contract.price,
         notes: this.contract.notes,
-        insurance_type: this.contract.insurance_type,
-        is_sell_contract: this.contract.is_sell_contract
+        insurance_type: this.contract.insurance_type
       }
     };
   }
@@ -22754,7 +22757,7 @@ var _hoisted_2 = {
   "class": "font-bold"
 };
 var _hoisted_3 = {
-  "class": "grid grid-cols-2 xl:grid-cols-4 gap-0 w-full"
+  "class": "grid grid-cols-2 sm:grid-cols-4 gap-0 w-full"
 };
 var _hoisted_4 = {
   key: 0,
@@ -22927,7 +22930,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     fn: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$data.car.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_car_card, {
         key: 0,
-        "class": "col-span-3",
+        "class": "xl:col-span-3 md:col-span-4 col-span-6",
         car: $data.car,
         hideEmpty: "true"
       }, null, 8
@@ -22938,11 +22941,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "form",
     fn: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": "col-span-3"
+        "class": "col-span-6"
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "car",
-        value: "Auto"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_multiselect, {
+        value: "Auto auswählen"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+        "class": "grid grid-cols-12 gap-3 gap-y-6 mt-1"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_multiselect, {
         "allow-empty": false,
         onSelect: $options.onCarChange,
         disabled: $data.createCar,
@@ -22953,30 +22958,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         label: "name",
         "track-by": "id",
         options: $data.carsChoice,
-        "class": "mt-1 block w-full",
+        "class": "2xl:col-span-4 sm:col-span-6 col-span-12",
         placeholder: "Auto auswählen"
       }, null, 8
       /* PROPS */
-      , ["onSelect", "disabled", "modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": "col-span-6"
-      }, [$data.car.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_car_card, {
+      , ["onSelect", "disabled", "modelValue", "options"]), !$data.createCar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
         key: 0,
-        "class": "mt-3 col-span-3",
-        car: $data.car,
-        hideEmpty: "true"
-      }, null, 8
-      /* PROPS */
-      , ["car"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": "col-span-6"
-      }, " oder "), !$data.createCar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-        key: 0,
-        "class": "col-span-6"
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "sm:col-span-6 col-span-12"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+        "class": "mr-2"
+      }, "oder"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         onClick: _cache[2] || (_cache[2] = function () {
           return $options.openCarForm && $options.openCarForm.apply($options, arguments);
         }),
         "class": "bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-900 focus:border-indigo-900 focus:ring-indigo-300 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition"
-      }, " Neu erfassen ")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      }, " Neu erfassen ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), $data.car.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+        key: 0,
+        "class": "col-span-6"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_car_card, {
+        "class": "mt-3 xl:col-span-3 md:col-span-4 col-span-6",
+        car: $data.car,
+        hideEmpty: "true"
+      }, null, 8
+      /* PROPS */
+      , ["car"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.createCar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
         key: 1,
         "class": "col-span-6"
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
@@ -23005,7 +23010,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       })])])], 32
       /* HYDRATE_EVENTS */
-      )]))];
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     })
   }]), 1032
   /* PROPS, DYNAMIC_SLOTS */
@@ -23180,7 +23185,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     fn: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$props.existing_contact.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_contact_card, {
         key: 0,
-        "class": "col-span-3",
+        "class": "xl:col-span-3 md:col-span-4 col-span-6",
         contact: $data.contact
       }, null, 8
       /* PROPS */
@@ -23190,54 +23195,55 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "form",
     fn: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": "col-span-3"
+        "class": "col-span-6"
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "contact",
-        value: $options.contactType
+        value: $options.contactType + ' auswählen'
       }, null, 8
       /* PROPS */
-      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_multiselect, {
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+        "class": "grid grid-cols-12 gap-3 gap-y-6 mt-1"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_multiselect, {
+        "allow-empty": false,
         onSelect: $options.onContactChange,
-        onRemove: _cache[1] || (_cache[1] = function ($event) {
-          return $data.contact = $options.emptyContact;
-        }),
         disabled: $data.createContact,
         modelValue: $data.contact,
-        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $data.contact = $event;
         }),
-        label: "title",
+        label: "name",
         "track-by": "id",
         options: $data.contactsChoice,
-        "class": "mt-1 block w-full",
-        placeholder: "Vertragspartner auswählen"
+        "class": "2xl:col-span-4 sm:col-span-6 col-span-12",
+        placeholder: $options.contactType + 'wählen'
       }, null, 8
       /* PROPS */
-      , ["onSelect", "disabled", "modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": "col-span-6"
-      }, [$data.contact.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_contact_card, {
+      , ["onSelect", "disabled", "modelValue", "options", "placeholder"]), !$data.createContact ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
         key: 0,
-        "class": "mt-3 col-span-3",
-        contact: $data.contact
-      }, null, 8
-      /* PROPS */
-      , ["contact"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-        "class": "col-span-6"
-      }, " oder "), !$data.createContact ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-        key: 0,
-        "class": "col-span-6"
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-        onClick: _cache[3] || (_cache[3] = function () {
+        "class": "sm:col-span-6 col-span-12"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+        "class": "mr-2"
+      }, "oder"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        onClick: _cache[2] || (_cache[2] = function () {
           return $options.openContactForm && $options.openContactForm.apply($options, arguments);
         }),
         "class": "bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-900 focus:border-indigo-900 focus:ring-indigo-300 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition"
-      }, " Neu erfassen ")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      }, " Neu erfassen ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), $data.contact.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+        key: 0,
+        "class": "col-span-6"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_contact_card, {
+        "class": "mt-3 xl:col-span-3 md:col-span-4 col-span-6",
+        contact: $data.contact,
+        hideEmpty: "true"
+      }, null, 8
+      /* PROPS */
+      , ["contact"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.createContact ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
         key: 1,
         "class": "col-span-6"
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
         "class": "w-full mb-1 font-bold"
       }, "Neuen Kontakt erfassen:"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-        onSubmit: _cache[4] || (_cache[4] = function () {
+        onSubmit: _cache[3] || (_cache[3] = function () {
           return $options.submitCreateContactForm && $options.submitCreateContactForm.apply($options, arguments);
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
@@ -23257,7 +23263,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       })])])], 32
       /* HYDRATE_EVENTS */
-      )]))];
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     })
   }]), 1032
   /* PROPS, DYNAMIC_SLOTS */
@@ -24042,13 +24048,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "grid grid-cols-12 gap-12 mb-8 max-w-5xl mx-auto"
+  "class": "grid grid-cols-12 xl:gap-12 md:gap-6 sm:gap-4 gap-3 xl:mb-8 mb-3 max-w-5xl mx-auto"
 };
 var _hoisted_2 = {
-  "class": "xl:col-span-9 col-span-12"
+  "class": "xl:col-span-6 sm:col-span-8 col-span-12"
 };
 var _hoisted_3 = {
-  "class": "xl:col-span-3 xl:col-end-13 col-span-12"
+  "class": "xl:col-span-3 xl:col-end-13 sm:col-span-4 xs:col-span-4 col-span-12"
 };
 var _hoisted_4 = {
   "class": "w-full flex flex-col"
@@ -24421,7 +24427,7 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = {
   key: 0,
-  "class": "font-semibold text-2xl font-medium text-indigo-900 leading-tight"
+  "class": "font-semibold md:text-2xl sm:text-xl text-base font-medium text-indigo-900 leading-tight"
 };
 var _hoisted_3 = {
   key: 1,
@@ -24453,7 +24459,7 @@ var _hoisted_10 = {
 };
 var _hoisted_11 = {
   key: 2,
-  "class": "2xl:px-5 lg:px-3 md:px-2 px-1 2xl:py-4 lg:py-3 md:py-2 py-1 flex items-center"
+  "class": "2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2 flex items-center"
 };
 var _hoisted_12 = {
   key: 0,
@@ -24522,7 +24528,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.data.total === undefined && $props.data.length > 0 || $props.data.total > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.columns, function (col, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("th", {
       key: col.key,
-      "class": "2xl:px-5 lg:px-3 md:px-2 px-1 pt-4 pb-4",
+      "class": "2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2",
       colspan: [index == $props.columns.length - 1 ? 2 : 1]
     }, [col.sortable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
       key: 0,
@@ -24564,7 +24570,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "border-t xl:text-base lg:text-sm text-base"
       }, [row.link ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_inertia_link, {
         key: 0,
-        "class": "2xl:px-5 lg:px-3 md:px-2 px-1 2xl:py-4 lg:py-3 md:py-2 py-1 flex items-center",
+        "class": "2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2 flex items-center",
         href: row.link
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -24603,7 +24609,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
-          "class": "m-2",
           height: "22",
           width: "22",
           name: "angle-right"
@@ -25607,6 +25612,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_inertia_link, {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.toggleSidebar();
+    }),
     href: $props.href,
     "class": $options.classes
   }, {
@@ -29396,29 +29404,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "col-span-3 grid grid-cols-6 gap-3"
+  "class": "xl:col-span-2 md:col-span-3 sm:col-span-4 col-span-6 grid grid-cols-6 gap-3"
 };
 var _hoisted_2 = {
-  "class": "col-span-6 sm:col-span-4"
+  "class": "col-span-6"
 };
 var _hoisted_3 = {
-  "class": "col-span-6 sm:col-span-4"
+  "class": "col-span-6"
 };
 var _hoisted_4 = {
-  "class": "col-span-6 sm:col-span-4"
+  key: 0,
+  "class": "col-span-6"
 };
 var _hoisted_5 = {
-  "class": "col-span-6 sm:col-span-4"
+  "class": "col-span-6"
 };
 var _hoisted_6 = {
-  "class": "col-span-6 sm:col-span-4"
+  "class": "col-span-6"
 };
 var _hoisted_7 = {
-  key: 0,
-  "class": "col-span-6 sm:col-span-4"
+  "class": "col-span-6"
 };
 var _hoisted_8 = {
-  "class": "col-span-6 sm:col-span-4"
+  "class": "col-span-6"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_label = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-label");
@@ -29483,76 +29491,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-        "for": "price",
-        value: $data.form.type === '0' ? 'Einkaufspreis' : 'Verkaufspreis'
-      }, null, 8
-      /* PROPS */
-      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
-        modelValue: $data.form.price,
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-          return $data.form.price = $event;
-        }),
-        options: $data.currencyOptions,
-        id: "price",
-        "class": "w-full mt-1 block border-gray-300 rounded-md shadow-sm",
-        ref: "price"
-      }, null, 8
-      /* PROPS */
-      , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $data.form.errors.price,
-        "class": "mt-2"
-      }, null, 8
-      /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-        "for": "amount",
-        value: "Anzahlung"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
-        modelValue: $data.form.amount,
-        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-          return $data.form.amount = $event;
-        }),
-        options: $data.currencyOptions,
-        id: "price",
-        "class": "w-full mt-1 block border-gray-300 rounded-md shadow-sm",
-        ref: "amount"
-      }, null, 8
-      /* PROPS */
-      , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $data.form.errors.amount,
-        "class": "mt-2"
-      }, null, 8
-      /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-        "for": "payment_type",
-        value: "Einzahlungsart"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
-        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-          return $data.form.payment_type = $event;
-        }),
-        "class": "mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
-        value: "0",
-        selected: $data.form.payment_type == '0'
-      }, "Banküberweisung", 8
-      /* PROPS */
-      , ["selected"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
-        value: "1",
-        selected: $data.form.payment_type == '1'
-      }, "Barzahlung", 8
-      /* PROPS */
-      , ["selected"])], 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.form.payment_type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: $data.form.errors.type,
-        "class": "mt-2"
-      }, null, 8
-      /* PROPS */
-      , ["message"])]), $data.form.is_sell_contract ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])]), $props.data.type === '1' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "insurance_type",
         value: "Versicherung"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
-        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $data.form.insurance_type = $event;
         }),
         "class": "mt-1 block w-full border-gray-300 rounded-md shadow-sm"
@@ -29573,7 +29516,72 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+        "for": "price",
+        value: $data.form.type === '0' ? 'Einkaufspreis' : 'Verkaufspreis'
+      }, null, 8
+      /* PROPS */
+      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
+        modelValue: $data.form.price,
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $data.form.price = $event;
+        }),
+        options: $data.currencyOptions,
+        id: "price",
+        "class": "w-full mt-1 block border-gray-300 rounded-md shadow-sm",
+        ref: "price"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+        message: $data.form.errors.price,
+        "class": "mt-2"
+      }, null, 8
+      /* PROPS */
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+        "for": "amount",
+        value: "Anzahlung"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
+        modelValue: $data.form.amount,
+        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+          return $data.form.amount = $event;
+        }),
+        options: $data.currencyOptions,
+        id: "price",
+        "class": "w-full mt-1 block border-gray-300 rounded-md shadow-sm",
+        ref: "amount"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+        message: $data.form.errors.amount,
+        "class": "mt-2"
+      }, null, 8
+      /* PROPS */
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+        "for": "payment_type",
+        value: "Einzahlungsart"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+          return $data.form.payment_type = $event;
+        }),
+        "class": "mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+        value: "0",
+        selected: $data.form.payment_type == '0'
+      }, "Banküberweisung", 8
+      /* PROPS */
+      , ["selected"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+        value: "1",
+        selected: $data.form.payment_type == '1'
+      }, "Barzahlung", 8
+      /* PROPS */
+      , ["selected"])], 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.form.payment_type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+        message: $data.form.errors.type,
+        "class": "mt-2"
+      }, null, 8
+      /* PROPS */
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "notes",
         value: "Bemerkungen"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {

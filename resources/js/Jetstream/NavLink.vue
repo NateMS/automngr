@@ -1,5 +1,5 @@
 <template>
-    <inertia-link :href="href" :class="classes">
+    <inertia-link @click="toggleSidebar()" :href="href" :class="classes">
         <slot></slot>
     </inertia-link>
 </template>
@@ -8,6 +8,11 @@
 export default {
   props: ['href', 'active'],
 
+methods: {
+    toggleSidebar() {
+      this.$store.dispatch('toggleSidebar');
+    },
+  },
   computed: {
     classes() {
       return this.active

@@ -166,14 +166,16 @@ class ContractController extends Controller
             'contract_id' => $contract->id,
         ]);
 
-        Payment::create(
-            $request->validate([
-                'date' => ['required', 'date'],
-                'amount' => ['required', 'integer'],
-                'type' => ['required', 'string', Rule::in(PaymentType::getValues())],
-                'contract_id' => ['required', 'exists:App\Models\Contract,id'],
-            ])
-        );
+        if ($request->get('amount') && $request->get('type')) {
+            Payment::create(
+                $request->validate([
+                    'date' => ['required', 'date'],
+                    'amount' => ['required', 'integer'],
+                    'type' => ['required', 'string', Rule::in(PaymentType::getValues())],
+                    'contract_id' => ['required', 'exists:App\Models\Contract,id'],
+                ])
+            );
+        }
 
         session()->flash('flash.banner', 'Vertrag erstellt.');
         return Redirect::route('contracts.show', $contract);

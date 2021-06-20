@@ -1,7 +1,7 @@
 <template>
     <div>
         <span v-if="title" class="flex justify-between items-end mb-4">
-          <p v-if="title" class="font-semibold text-2xl font-medium text-indigo-900 leading-tight">{{ title }}</p>
+          <p v-if="title" class="font-semibold md:text-2xl sm:text-xl text-base font-medium text-indigo-900 leading-tight">{{ title }}</p>
           <slot name="actions" class=""></slot>
         </span>
         <div v-if="form || print" class="my-4 flex justify-between items-center">
@@ -19,7 +19,7 @@
         <div v-if="(data.total === undefined && data.length > 0) || data.total > 0" class="bg-white shadow rounded-md sm:rounded-lg overflow-x-auto">
             <table class="w-full whitespace-nowrap">
                 <tr class="text-left font-bold">
-                    <th v-for="(col, index) in columns" :key="col.key" class="2xl:px-5 lg:px-3 md:px-2 px-1 pt-4 pb-4" :colspan="[index == (columns.length - 1) ? 2 : 1]">
+                    <th v-for="(col, index) in columns" :key="col.key" class="2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2" :colspan="[index == (columns.length - 1) ? 2 : 1]">
                         <a v-if="col.sortable" href="#" @click="sortTable(col.key)" class="flex place-items-center">
                             {{ col.value }}
                             <unicon v-if="isActiveSort(col.key, 'asc')" fill="#4B5563" height="22" width="22" name="arrow-up"></unicon>
@@ -32,19 +32,19 @@
                 </tr>
                 <tr v-for="row in (this.data.data ? this.data.data : this.data)" :key="row.link" class="hover:bg-indigo-100 focus-within:bg-indigo-100">
                     <td v-for="col in columns" :key="col.key" class="border-t xl:text-base lg:text-sm text-base">
-                        <inertia-link v-if="row.link" class="2xl:px-5 lg:px-3 md:px-2 px-1 2xl:py-4 lg:py-3 md:py-2 py-1 flex items-center" :href="row.link">
+                        <inertia-link v-if="row.link" class="2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2 flex items-center" :href="row.link">
                             {{ resolve(col.key, row) }}
                         </inertia-link>
                         <span v-else-if="col.key == 'delete'" class="p-3 cursor-pointer" @click="this.$emit('delete', row.id)">
                             <unicon fill="#f04040" hover-fill="red" height="24" width="24" name="trash-alt"></unicon>
                         </span>
-                        <span v-else class="2xl:px-5 lg:px-3 md:px-2 px-1 2xl:py-4 lg:py-3 md:py-2 py-1 flex items-center">
+                        <span v-else class="2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2 flex items-center">
                             {{ resolve(col.key, row) }}
                         </span>
                     </td>
                     <td v-if="row.link && !hideArrow" class="border-t w-px">
                         <inertia-link class="xl:py-4 py-2 flex items-center" :href="row.link" tabindex="-1">
-                            <unicon class="m-2" height="22" width="22" name="angle-right"></unicon>
+                            <unicon height="22" width="22" name="angle-right"></unicon>
                         </inertia-link>
                     </td>
                 </tr>
