@@ -41,13 +41,13 @@
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-6 sm:col-span-6">
                 <jet-label for="initial_date" value="Inverkehrssetzung" />
-                <datepicker id="initial_date" ref="initial_date" v-model="form.initial_date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
+                <jet-input id="initial_date" ref="initial_date" type="text" class="mt-1 block w-full" v-model="form.initial_date" />
                 <jet-input-error :message="form.errors.initial_date" class="mt-2" />
             </div>
 
             <div class="col-span-6 sm:col-span-6">
                 <jet-label for="last_check_date" value="Letzte Prüfung" />
-                <datepicker id="last_check_date" ref="last_check_date" v-model="form.last_check_date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
+                <jet-input id="last_check_date" ref="last_check_date" type="text" class="mt-1 block w-full" v-model="form.last_check_date" />
                 <jet-input-error :message="form.errors.last_check_date" class="mt-2" />
             </div>
         </div>
@@ -86,7 +86,6 @@ import JetInput from '@/Jetstream/Input.vue';
 import JetActionMessage from '@/Jetstream/ActionMessage';
 import JetInputError from '@/Jetstream/InputError';
 import Multiselect from 'vue-multiselect';
-import Datepicker from 'vue3-datepicker';
 import CurrencyInput from '@/Components/CurrencyInput';
 
 export default {
@@ -96,7 +95,6 @@ export default {
     JetInputError,
     JetActionMessage,
     Multiselect,
-    Datepicker,
     CurrencyInput,
   },
   props: {

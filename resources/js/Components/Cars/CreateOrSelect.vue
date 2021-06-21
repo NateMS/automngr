@@ -13,7 +13,7 @@
           <div class="col-span-6">
               <jet-label for="car" value="Auto auswählen" />
               <div class="grid grid-cols-12 gap-3 gap-y-6 mt-1">
-                <multiselect :allow-empty="false" @select="onCarChange" :disabled="createCar" v-model="car" label="name" track-by="id" :options="carsChoice" class="2xl:col-span-4 sm:col-span-6 col-span-12" placeholder="Auto auswählen" />
+                <multiselect :allow-empty="false" @select="onCarChange" :disabled="createCar" v-model="car" label="label" track-by="id" :options="carsChoice" class="2xl:col-span-4 sm:col-span-6 col-span-12" placeholder="Auto auswählen" />
                 <div v-if="!createCar" class="sm:col-span-6 col-span-12">
                   <span class="mr-2">oder</span>
                   <button @click="openCarForm" class="bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-900 focus:border-indigo-900 focus:ring-indigo-300 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition">
@@ -22,8 +22,8 @@
                 </div>
             </div>
           </div>
-          <div v-if="car.id" class="col-span-6">
-              <car-card class="mt-3 xl:col-span-3 md:col-span-4 col-span-6" :car="car" hideEmpty="true" />
+          <div v-if="car.id" class="xl:col-span-3 md:col-span-4 col-span-6">
+              <car-card :car="car" hideEmpty="true" />
           </div>
           <div v-if="createCar" class="col-span-6">
               <p class="w-full mb-1 font-bold">Neues Auto erfassen:</p>
@@ -72,6 +72,7 @@ export default {
       car: {
         id: this.existing_car?.id ?? null,
         name: this.existing_car?.name ?? null,
+        label: this.existing_car?.label ?? null,
         stammnummer: this.existing_car?.stammnummer ?? null,
         vin: this.existing_car?.vin ?? null,
         colour: this.existing_car?.colour ?? null,

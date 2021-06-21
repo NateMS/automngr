@@ -86,6 +86,7 @@ class ContractController extends Controller
         if (!$car) {
             return [
                 'name' => null,
+                'label' => null,
                 'id' => null,
                 'stammnummer' => null,
                 'vin' => null,
@@ -96,6 +97,7 @@ class ContractController extends Controller
         }
         return [
             'name' => $car->name,
+            'label' => $car->name . ' (' . $car->stammnummer . ')',
             'id' => $car->id,
             'stammnummer' => $car->stammnummer, 
             'vin' => $car->vin,
@@ -144,22 +146,25 @@ class ContractController extends Controller
             'type' => (string)$request->get('type'),
             'payment_type' => (string)$request->get('payment_type'),
             'insurance_type' => (string)$request->get('insurance_type'),
+        ]);
+
+        $request->validate([
+            'type' => ['required', 'string', Rule::in(ContractType::getValues())],
+            'date' => ['required', 'date_format:"d.m.Y"'],
+            'delivery_date' => ['required', 'date_format:"d.m.Y"'],
+            'price' => ['required', 'integer'],
+            'car_id' => ['required', 'exists:App\Models\Car,id'],
+            'contact_id' => ['required', 'exists:App\Models\Contact,id'],
+            'insurance_type' => ['nullable', 'string', Rule::in(InsuranceType::getValues())],
+            'notes' => ['nullable'],
+        ]);
+
+        $request->merge([
             'date' => Carbon::parse($request->get('date'))->format('Y-m-d'),
             'delivery_date' => Carbon::parse($request->get('delivery_date'))->format('Y-m-d'),
         ]);
 
-        $contract = Contract::create(
-            $request->validate([
-                'type' => ['required', 'string', Rule::in(ContractType::getValues())],
-                'date' => ['required', 'date'],
-                'delivery_date' => ['required', 'date'],
-                'price' => ['required', 'integer'],
-                'car_id' => ['required', 'exists:App\Models\Car,id'],
-                'contact_id' => ['required', 'exists:App\Models\Contact,id'],
-                'insurance_type' => ['nullable', 'string', Rule::in(InsuranceType::getValues())],
-                'notes' => ['nullable'],
-            ])
-        );
+        $contract = Contract::create($request->all());
 
         $request->merge([
             'type' => (string)$request->get('payment_type'),
@@ -209,19 +214,22 @@ class ContractController extends Controller
     {
         $request->merge([
             'insurance_type' => (string)$request->get('insurance_type'),
+        ]);
+
+        $request->validate([
+            'date' => ['required', 'date_format:"d.m.Y"'],
+            'delivery_date' => ['required', 'date_format:"d.m.Y"'],
+            'price' => ['required', 'integer'],
+            'insurance_type' => ['nullable', 'string', Rule::in(InsuranceType::getValues())],
+            'notes' => ['nullable'],
+        ]);
+
+        $request->merge([
             'date' => Carbon::parse($request->get('date'))->format('Y-m-d'),
             'delivery_date' => Carbon::parse($request->get('delivery_date'))->format('Y-m-d'),
         ]);
 
-        $contract->update(
-            $request->validate([
-                'date' => ['required', 'date'],
-                'delivery_date' => ['required', 'date'],
-                'price' => ['required', 'integer'],
-                'insurance_type' => ['nullable', 'string', Rule::in(InsuranceType::getValues())],
-                'notes' => ['nullable'],
-            ])
-        );
+        $contract->update($request->all());
 
         session()->flash('flash.banner', 'Vertrag geändert.');
         return Redirect::route('contracts.show', $contract);

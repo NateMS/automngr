@@ -28,7 +28,6 @@ import Layout from '@/Layouts/Layout';
 import BreadCrumb from '@/Components/BreadCrumb.vue';
 import ContactCreateOrSelect from '@/Components/Contacts/CreateOrSelect.vue';
 import CarCreateOrSelect from '@/Components/Cars/CreateOrSelect.vue';
-import { ref } from 'vue';
 import ContractForm from './Components/ContractForm.vue';
 
 export default {
@@ -59,8 +58,8 @@ export default {
       },
       data: {
         id: null,
-        date: ref(new Date()),
-        delivery_date: ref(new Date()),
+        date: new Date().toJSON().slice(0,10).split('-').reverse().join('.'),
+        delivery_date: new Date().toJSON().slice(0,10).split('-').reverse().join('.'),
         price: null,
         notes: null,
         type: this.type,

@@ -19,7 +19,6 @@
 <script>
 import Layout from '@/Layouts/Layout';
 import BreadCrumb from '@/Components/BreadCrumb.vue';
-import { ref } from 'vue';
 import CarForm from './Components/CarForm.vue';
 
 export default {
@@ -46,8 +45,8 @@ export default {
         vin: null,
         colour: null,
         car_model_id: null,
-        initial_date: ref(new Date()),
-        last_check_date: ref(new Date()),
+        initial_date: new Date().toJSON().slice(0,10).split('-').reverse().join('.'),
+        last_check_date: new Date().toJSON().slice(0,10).split('-').reverse().join('.'),
         kilometers: null,
         known_damage: null,
         notes: null,

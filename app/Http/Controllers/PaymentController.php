@@ -22,17 +22,20 @@ class PaymentController extends Controller
     {
         $request->merge([
             'type' => (string)$request->get('type'),
+        ]);
+
+        $request->validate([
+            'date' => ['required', 'date_format:"d.m.Y"'],
+            'amount' => ['required', 'integer'],
+            'type' => ['required', 'string', Rule::in(PaymentType::getValues())],
+            'contract_id' => ['required', 'exists:App\Models\Contract,id'],
+        ]);
+
+        $request->merge([
             'date' => Carbon::parse($request->get('date'))->format('Y-m-d'),
         ]);
 
-        $payment = Payment::create(
-            $request->validate([
-                'date' => ['required', 'date'],
-                'amount' => ['required', 'integer'],
-                'type' => ['required', 'string', Rule::in(PaymentType::getValues())],
-                'contract_id' => ['required', 'exists:App\Models\Contract,id'],
-            ])
-        );
+        $payment = Payment::create($request->all());
 
         session()->flash('flash.banner', 'Einzahlung gespeichert.');
         return Redirect::route('contracts.show', $payment->contract);

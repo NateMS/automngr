@@ -22,8 +22,8 @@
                 </div>
             </div>
           </div>
-          <div v-if="contact.id" class="col-span-6">
-              <contact-card class="mt-3 xl:col-span-3 md:col-span-4 col-span-6" :contact="contact" hideEmpty="true" />
+          <div v-if="contact.id" class="xl:col-span-3 md:col-span-4 col-span-6">
+              <contact-card :contact="contact" hideEmpty="true" />
           </div>
           <div v-if="createContact" class="col-span-6">
               <p class="w-full mb-1 font-bold">Neuen Kontakt erfassen:</p>

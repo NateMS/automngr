@@ -1,7 +1,7 @@
 <template>
-    <span v-if="!isFailed" class="col-span-2 grid grid-flow-rows relative cursor-pointer auto-rows-max py-3 inline-flex items-center px-4 bg-gray-100 border-dashed border-4 font-semibold justify-center text-md text-gray-500 uppercase tracking-widest hover:bg-gray-200 focus:outline-none focus:border-gray-500 focus:ring focus:ring-gray-300 disabled:opacity-25 transition" >
+    <span v-if="!isFailed" class="col-span-2 grid grid-flow-rows relative cursor-pointer auto-rows-max md:py-3 py-2 inline-flex items-center md:px-4 px-2 bg-gray-100 border-dashed border-4 font-semibold justify-center text-md text-gray-500 uppercase tracking-widest hover:bg-gray-200 focus:outline-none focus:border-gray-500 focus:ring focus:ring-gray-300 disabled:opacity-25 transition" >
         <input type="file" :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files);" class="opacity-0 absolute top-0 left-0 w-full h-full cursor-pointer">
-        <unicon fill="currentColor" class="p-2 my-5 mx-auto" height="45%" width="45%" name="file-upload-alt"></unicon>
+        <unicon fill="currentColor" class="md:p-2 p-1 md:my-5 my-1 mx-auto" height="45%" width="45%" name="file-upload-alt"></unicon>
         <span v-if="isInitial" class="text-center">Dokument hochladen</span>
         <span v-if="isSaving">Lade Dokument hoch...</span>    </span>
     <span v-else class="col-span-2">

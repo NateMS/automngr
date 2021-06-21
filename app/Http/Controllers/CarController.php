@@ -304,14 +304,14 @@ class CarController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate($this->getValidationRules());
+ 
         $request->merge([
             'initial_date' => Carbon::parse($request->get('initial_date'))->format('Y-m-d'),
             'last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d'),
         ]);
 
-        $car = Car::create(
-            $request->validate($this->getValidationRules())
-        );
+        $car = Car::create($request->all());
 
         session()->flash('flash.banner', 'Auto erstellt.');
         return Redirect::route('cars.show', $car);
@@ -319,15 +319,21 @@ class CarController extends Controller
 
     public function storeForContract(Request $request)
     {
-        $car = Car::create(
-            $request->validate($this->getValidationRules())
-        );
+        $request->validate($this->getValidationRules());
+
+        $request->merge([
+            'initial_date' => Carbon::parse($request->get('initial_date'))->format('Y-m-d'),
+            'last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d'),
+        ]);
+
+        $car = Car::create($request->all());
 
         return response()->json([
             'id' => $car->id,
             'stammnummer' => $car->stammnummer,
             'vin' => $car->vin,
             'name' => $car->name,
+            'label' => $car->name . ' (' . $car->stammnummer . ')',
             'colour' => $car->colour,
             'last_check_date' => $car->last_check_date_formatted,
             'kilometers' => $car->kilometers,
@@ -340,8 +346,8 @@ class CarController extends Controller
         return [
             'stammnummer' => ['required', 'unique:cars', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
             'vin' => ['required', 'unique:cars', 'string', 'size:17'],
-            'initial_date' => ['required', 'date'],
-            'last_check_date' => ['required', 'date'],
+            'initial_date' => ['required', 'date_format:"d.m.Y"'],
+            'last_check_date' => ['required', 'date_format:"d.m.Y"'],
             'colour' => ['nullable', 'max:75'],
             'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
             'kilometers' => ['required', 'max:75'],
@@ -417,24 +423,24 @@ class CarController extends Controller
 
     public function update(Request $request, Car $car)
     {
+        $request->validate([
+            'stammnummer' => ['required', 'unique:cars,stammnummer,' . $car->id, 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
+            'vin' => ['required', 'unique:cars,vin,' . $car->id, 'string', 'size:17'],
+            'initial_date' => ['required', 'date_format:"d.m.Y"'],
+            'last_check_date' => ['required', 'date_format:"d.m.Y"'],
+            'colour' => ['nullable', 'max:75'],
+            'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
+            'kilometers' => ['required', 'max:75'],
+            'known_damage' => ['nullable'],
+            'notes' => ['nullable'],
+        ]);
+        
         $request->merge([
             'initial_date' => Carbon::parse($request->get('initial_date'))->format('Y-m-d'),
             'last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d'),
         ]);
 
-        $car->update(
-            $request->validate([
-                'stammnummer' => ['required', 'unique:cars,stammnummer,' . $car->id, 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
-                'vin' => ['required', 'unique:cars,vin,' . $car->id, 'string', 'size:17'],
-                'initial_date' => ['required', 'date'],
-                'last_check_date' => ['required', 'date'],
-                'colour' => ['nullable', 'max:75'],
-                'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
-                'kilometers' => ['required', 'max:75'],
-                'known_damage' => ['nullable'],
-                'notes' => ['nullable'],
-            ])
-        );
+        $car->update($request->all());
 
         session()->flash('flash.banner', 'Auto geändert.');
         return Redirect::route('cars.show', $car);

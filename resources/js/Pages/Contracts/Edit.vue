@@ -22,7 +22,6 @@
 <script>
 import Layout from '@/Layouts/Layout';
 import BreadCrumb from '@/Components/BreadCrumb.vue';
-import { ref } from 'vue';
 import ContractForm from './Components/ContractForm.vue';
 
 export default {
@@ -46,8 +45,8 @@ export default {
         on_success: 'Änderungen gespeichert',
       },
       data: {
-        date: ref(new Date(this.contract.date)),
-        delivery_date: ref(new Date(this.contract.delivery_date)),
+        date: new Date(this.contract.date).toJSON().slice(0,10).split('-').reverse().join('.'),
+        delivery_date: new Date(this.contract.delivery_date).toJSON().slice(0,10).split('-').reverse().join('.'),
         price: this.contract.price,
         notes: this.contract.notes,
         insurance_type: this.contract.insurance_type,

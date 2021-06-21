@@ -8,7 +8,7 @@
                 <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="date" value="Datum" />
-                        <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
+                        <jet-input id="date" ref="date" type="text" class="mt-1 block w-full" v-model="form.date" />
                         <jet-input-error :message="form.errors.date" class="mt-2" />
                     </div>
 
@@ -41,9 +41,8 @@
 import JetButton from '@/Jetstream/Button';
 import JetLabel from '@/Jetstream/Label.vue';
 import JetInputError from '@/Jetstream/InputError';
-import Datepicker from 'vue3-datepicker';
+import JetInput from '@/Jetstream/Input';
 import { useForm } from '@inertiajs/inertia-vue3';
-import { ref } from 'vue';
 import DialogModal from '@/Jetstream/DialogModal.vue';
 import CurrencyInput from '@/Components/CurrencyInput';
 
@@ -53,8 +52,8 @@ export default {
     JetLabel,
     JetInputError,
     DialogModal,
-    Datepicker,
     CurrencyInput,
+    JetInput,
   },
   props: {
     id: Number,
@@ -65,7 +64,7 @@ export default {
     return {
       form: useForm('CreatePayment', {
         id: null,
-        date: ref(new Date()),
+        date: new Date().toJSON().slice(0,10).split('-').reverse().join('.'),
         amount: this.left_to_pay,
         type: '1',
         contract_id: this.id,

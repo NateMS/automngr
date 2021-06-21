@@ -12,12 +12,12 @@
             <div class="xl:col-span-2 md:col-span-3 sm:col-span-4 col-span-6 grid grid-cols-6 gap-3">
                 <div class="col-span-6">
                     <jet-label for="date" value="Datum" />
-                    <datepicker id="date" ref="date" v-model="form.date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
+                    <jet-input id="date" ref="date" type="text" class="mt-1 block w-full" v-model="form.date" />
                     <jet-input-error :message="form.errors.date" class="mt-2" />
                 </div>
                 <div class="col-span-6">
                     <jet-label for="delivery_date" value="Lieferdatum" />
-                    <datepicker id="delivery_date" ref="delivery_date" v-model="form.delivery_date" inputFormat="dd.MM.yyyy" class="border-gray-300 rounded-md shadow-sm mt-1 block w-full" />
+                    <jet-input id="delivery_date" ref="delivery_date" type="text" class="mt-1 block w-full" v-model="form.delivery_date" />
                     <jet-input-error :message="form.errors.delivery_date" class="mt-2" />
                 </div>
 
@@ -76,8 +76,8 @@ import JetButton from '@/Jetstream/Button';
 import JetLabel from '@/Jetstream/Label.vue';
 import JetActionMessage from '@/Jetstream/ActionMessage';
 import JetInputError from '@/Jetstream/InputError';
+import JetInput from '@/Jetstream/Input';
 import JetFormSection from '@/Jetstream/FormSection';
-import Datepicker from 'vue3-datepicker';
 import { useForm } from '@inertiajs/inertia-vue3';
 import CurrencyInput from '@/Components/CurrencyInput';
 
@@ -88,7 +88,7 @@ export default {
     JetLabel,
     JetInputError,
     JetActionMessage,
-    Datepicker,
+    JetInput,
     CurrencyInput,
   },
   props: {

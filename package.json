@@ -33,7 +33,6 @@
         "vue-currency-input": "^2.0.0",
         "vue-multiselect": "^3.0.0-alpha.2",
         "vue-unicons": "^3.2.1",
-        "vue3-datepicker": "^0.2.4",
         "vuex": "^4.0.0"
     }
 }

@@ -1,17 +1,17 @@
 <template>
     <div>
-        <span v-if="title" class="flex justify-between items-end mb-4">
+        <span v-if="title" class="flex justify-between items-end md:mb-4 mb-2">
           <p v-if="title" class="font-semibold md:text-2xl sm:text-xl text-base font-medium text-indigo-900 leading-tight">{{ title }}</p>
           <slot name="actions" class=""></slot>
         </span>
-        <div v-if="form || print" class="my-4 flex justify-between items-center">
-            <div v-if="form" class="flex items-center w-full max-w-md mr-4">
+        <div v-if="form || print" class="md:my-4 my-2 flex justify-between items-center">
+            <div v-if="form" class="flex items-center w-full max-w-md md:mr-4 mr-2">
                 <div class="flex w-full bg-white shadow rounded">
-                    <input type="text" ref="search" v-model="form.search" autofocus="true" name="search" placeholder="Suchen..." class="relative border-gray-200 w-full px-6 py-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded" autocomplete="off">
+                    <input type="text" ref="search" v-model="form.search" autofocus="true" name="search" placeholder="Suchen..." class="relative border-gray-200 w-full sm:px-6 px-3 py-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded" autocomplete="off">
                 </div>
                 <button @click="reset" type="button" class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-blue-200">Reset</button>
             </div>
-            <a v-if="print" :href="route(currentRoute + '.print', { search: form.search, sortBy: sort.by, direction: sort.direction })" class="justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition bg-green-800 hover:bg-green-700 active:bg-green-900 focus:border-green-900 focus:ring-green-300 py-3">
+            <a v-if="print" :href="route(currentRoute + '.print', { search: form.search, sortBy: sort.by, direction: sort.direction })" class="justify-center inline-flex items-center sm:px-4 sm:py-2 px-2 py-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition bg-green-800 hover:bg-green-700 active:bg-green-900 focus:border-green-900 focus:ring-green-300 py-3">
                 <unicon fill="white" class="mr-2" height="24" width="24" name="chart"></unicon>
                 Excel-Export
             </a>
@@ -43,7 +43,7 @@
                         </span>
                     </td>
                     <td v-if="row.link && !hideArrow" class="border-t w-px">
-                        <inertia-link class="xl:py-4 py-2 flex items-center" :href="row.link" tabindex="-1">
+                        <inertia-link class="xl:pr-4 pr-2 xl:py-4 py-2 flex items-center" :href="row.link" tabindex="-1">
                             <unicon height="22" width="22" name="angle-right"></unicon>
                         </inertia-link>
                     </td>
