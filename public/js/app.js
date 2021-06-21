@@ -24034,19 +24034,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "grid grid-cols-12 xl:gap-12 md:gap-6 sm:gap-4 gap-3 xl:mb-8 mb-3 max-w-5xl mx-auto"
+  "class": "max-w-5xl mx-auto"
 };
 var _hoisted_2 = {
-  "class": "xl:col-span-6 sm:col-span-8 col-span-12"
+  "class": "grid grid-cols-12 xl:gap-12 md:gap-6 sm:gap-4 gap-3 xl:mb-8 mb-3"
 };
 var _hoisted_3 = {
-  "class": "xl:col-span-3 xl:col-end-13 sm:col-span-4 xs:col-span-4 col-span-12"
+  "class": "xl:col-span-7 sm:col-span-8 col-span-12"
 };
 var _hoisted_4 = {
-  "class": "w-full flex flex-col"
+  "class": "xl:col-span-3 xl:col-end-13 sm:col-span-4 xs:col-span-4 col-span-12"
 };
 var _hoisted_5 = {
-  "class": "xl:col-span-9 col-span-12"
+  "class": "w-full flex flex-col"
+};
+var _hoisted_6 = {
+  "class": "col-span-12"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_small_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("small-title");
@@ -24058,10 +24061,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "header")];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "info")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_small_title, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "info")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_small_title, {
         title: "Aktionen",
         "class": "mb-3"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "actions")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "more")])])];
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "actions")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "more")])])])];
     }),
     _: 3
     /* FORWARDED */
