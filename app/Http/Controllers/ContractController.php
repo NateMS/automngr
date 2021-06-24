@@ -171,7 +171,7 @@ class ContractController extends Controller
             'contract_id' => $contract->id,
         ]);
 
-        if ($request->get('amount') && $request->get('type')) {
+        if ($request->get('amount') !== null && $request->get('type') !== null) {
             Payment::create(
                 $request->validate([
                     'date' => ['required', 'date'],

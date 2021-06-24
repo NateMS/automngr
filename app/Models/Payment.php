@@ -42,12 +42,12 @@ class Payment extends Model
 
     public function getTypeAttribute($type)
     {
-        return $type == PaymentType::Transaction() ? 'Überweisung' : 'Barzahlung';
+        return $type == PaymentType::Transaction() ? 'Banküberweisung' : 'Barzahlung';
     }
 
     public function getTypeTextAttribute()
     {
-        return $this->type == PaymentType::Transaction() ? 'Als Überweisung erhalten' : 'in bar erhalten';
+        return $this->type == PaymentType::Transaction() ? 'Als Banküberweisung erhalten' : 'in bar erhalten';
     }
 
     public function getDeleteLinkAttribute()

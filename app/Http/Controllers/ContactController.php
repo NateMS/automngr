@@ -256,7 +256,7 @@ class ContactController extends Controller
             'firstname' => ['max:75'],
             'lastname' => ['max:75'],
             'email' => ['nullable', 'max:75', 'email'],
-            'phone' => ['required', 'max:75'],
+            'phone' => ['nullable', 'max:75'],
             'address' => ['nullable', 'max:150'],
             'zip' => ['nullable', 'max:6'],
             'city' => ['nullable', 'max:75'],

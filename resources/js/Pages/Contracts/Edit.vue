@@ -43,6 +43,7 @@ export default {
         method: 'put',
         button_text: 'Änderungen speichern',
         on_success: 'Änderungen gespeichert',
+        is_edit: true,
       },
       data: {
         date: new Date(this.contract.date).toJSON().slice(0,10).split('-').reverse().join('.'),

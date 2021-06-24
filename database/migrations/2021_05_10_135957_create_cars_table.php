@@ -20,9 +20,9 @@ class CreateCarsTable extends Migration
             $table->string('colour')->nullable();
             $table->text('notes')->nullable();
             $table->text('known_damage')->nullable();
-            $table->date('initial_date');
-            $table->date('last_check_date');
-            $table->integer('kilometers');
+            $table->date('initial_date')->nullable();
+            $table->date('last_check_date')->nullable();
+            $table->integer('kilometers')->nullable();
             $table->foreignId('car_model_id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade')

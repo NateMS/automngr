@@ -35,13 +35,13 @@
                     <jet-input-error :message="form.errors.price" class="mt-2" />
                 </div>
 
-                <div class="col-span-6">
+                <div v-if="!meta.is_edit" class="col-span-6">
                     <jet-label for="amount" value="Anzahlung" />
                     <currency-input v-model="form.amount" :options="currencyOptions" id="price" class="w-full mt-1 block border-gray-300 rounded-md shadow-sm" ref="amount"/>
                     <jet-input-error :message="form.errors.amount" class="mt-2" />
                 </div>
 
-                <div class="col-span-6">
+                <div v-if="!meta.is_edit" class="col-span-6">
                     <jet-label for="payment_type" value="Einzahlungsart" />
                     <select v-model="form.payment_type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                         <option value="0" :selected="form.payment_type == '0'">Banküberweisung</option>
@@ -64,7 +64,7 @@
                 {{ meta.on_success }}
             </jet-action-message>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing || !data.contact_id || !data.car_id">
+            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing || ((!data.contact_id || !data.car_id) && !meta.is_edit)">
                 {{ meta.button_text }}
             </jet-button>
         </template>

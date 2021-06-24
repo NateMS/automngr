@@ -16,7 +16,7 @@ class DocumentController extends Controller
             header('Content-Disposition: filename="' . $document->name . '"');
             return response()->file($document->path);
         }
-        
+
         abort(404);
     }
 
