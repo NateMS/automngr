@@ -24,6 +24,7 @@ const STATUS_INITIAL = 0; const STATUS_SAVING = 1; const
 export default {
   props: {
     id: Number,
+    documentable_type: String,
     documents: Object,
   },
   data() {
@@ -53,7 +54,8 @@ export default {
     save(formData) {
       // upload data to the server
       this.currentStatus = STATUS_SAVING;
-      axios.post(this.route('documents.store', this.id), formData)
+      console.log(this.route('documents.store'));
+      axios.post(this.route('documents.store'), formData)
         .then((response) => {
           this.documents.push(response.data);
           this.reset();
@@ -68,6 +70,9 @@ export default {
       const formData = new FormData();
 
       if (!fileList.length) return;
+
+      formData.append('documentable_type', this.documentable_type);
+      formData.append('documentable_id', this.id);
 
       // append the files to FormData
       Array

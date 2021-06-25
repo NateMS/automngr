@@ -73,10 +73,6 @@ class DatabaseSeeder extends Seeder
         $payments = Payment::factory()
             ->count(60)
             ->create();
-
-        $documents = Document::factory()
-            ->count(40)
-            ->create();
     }
 
     public function getBrands(): array

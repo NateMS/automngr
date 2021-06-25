@@ -373,6 +373,17 @@ class CarController extends Controller
                 'known_damage' => $car->known_damage,
                 'notes' => $car->notes,
                 'deleted_at' => $car->deleted_at,
+                'documents' => $car->documents()->orderBy('created_at', 'asc')->get()
+                    ->map(function ($document) {
+                        return [
+                            'id' => $document->id,
+                            'name' => $document->name,
+                            'size' => $document->size,
+                            'extension' => $document->extension,
+                            'link' => $document->link,
+                            'created_at' => $document->created_at,
+                        ];
+                    }),
                 'buy_contracts' => $car->buyContracts()
                     ->orderBy('date', 'desc')
                     ->with('contact')

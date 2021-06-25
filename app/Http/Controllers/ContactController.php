@@ -212,6 +212,17 @@ class ContactController extends Controller
                 'city' => $contact->city,
                 'country' => $contact->country,
                 'deleted_at' => $contact->deleted_at,
+                'documents' => $contact->documents()->orderBy('created_at', 'asc')->get()
+                    ->map(function ($document) {
+                        return [
+                            'id' => $document->id,
+                            'name' => $document->name,
+                            'size' => $document->size,
+                            'extension' => $document->extension,
+                            'link' => $document->link,
+                            'created_at' => $document->created_at,
+                        ];
+                    }),
                 'buy_contracts' => $contact->buyContracts()
                     ->orderBy('date', 'desc')
                     ->with('car')

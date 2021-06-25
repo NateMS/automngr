@@ -15,8 +15,14 @@ class Document extends Model
         'internal_name',
         'extension',
         'size',
-        'contract_id',
+        'documentable_type',
+        'documentable_id',
     ];
+
+    public function documentable()
+    {
+        return $this->morphTo();
+    }
 
     public function getCreatedAtAttribute($created_at)
     {
@@ -43,16 +49,11 @@ class Document extends Model
 
     public function getLinkAttribute()
     {
-        return route('documents.show', [$this->contract->id, $this->id]);
+        return route('documents.show', $this->id);
     }
 
     public function getPathAttribute()
     {
-        return public_path("documents/contracts/{$this->contract->id}/{$this->internal_name}");
-    }
-
-    public function contract()
-    {
-        return $this->belongsTo(Contract::class)->withTrashed();
+        return public_path("documents/{$this->documentable_type}/{$this->documentable->id}/{$this->internal_name}");
     }
 }

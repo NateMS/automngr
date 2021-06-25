@@ -7,10 +7,11 @@ use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class DocumentController extends Controller
 {
-    public function show(Contract $contract, Document $document)
+    public function show(Document $document)
     {
         if (file_exists($document->path)) {
             header('Content-Disposition: filename="' . $document->name . '"');
@@ -20,8 +21,14 @@ class DocumentController extends Controller
         abort(404);
     }
 
-    public function store(Request $request, Contract $contract)
+    public function store(Request $request)
     {
+        $class = $request->get('documentable_type');
+        $id = $request->get('documentable_id');
+        if (!in_array($class, ['contracts', 'cars', 'contacts'])) {
+            return [];
+        }
+
         $file = $request->file()['document'];
         $internalName = date('Y-m-d-H-i-s') . '.' . $file->extension();
         $document = Document::create([
@@ -29,9 +36,10 @@ class DocumentController extends Controller
             'internal_name' => $internalName,
             'size' => $file->getSize(),
             'extension' => $file->extension() ?? '',
-            'contract_id' => $contract->id,
+            'documentable_type' => $class,
+            'documentable_id' => $id,
         ]);
-        $file->move(public_path("documents/contracts/{$contract->id}/"), $internalName);
+        $file->move(public_path("documents/{$class}/{$id}/"), $internalName);
 
         return [
             'id' => $document->id,
@@ -43,7 +51,7 @@ class DocumentController extends Controller
         ];
     }
 
-    public function destroy(Request $request, Contract $contract)
+    public function destroy(Request $request)
     {
         $document = Document::find((int)$request->get('id'));
         

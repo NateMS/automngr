@@ -19,10 +19,7 @@ class CreateDocumentsTable extends Migration
             $table->string('internal_name');
             $table->integer('size');
             $table->string('extension');
-            $table->foreignId('contract_id')
-                ->onUpdate('cascade')
-                ->onDelete('cascade')
-                ->constrained('contracts');
+            $table->morphs('documentable');
             $table->timestamps();
         });
     }

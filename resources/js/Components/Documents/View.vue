@@ -1,11 +1,13 @@
 <template>
-    <small-title title="Dokumente" class="mb-3" />
-    <div class="grid md:grid-cols-6 sm:grid-cols-4 grid-cols-2 gap-3">
-        <template v-for="document in documents" :key="document.id">
-            <document-item @delete="deleteDocument" :document="document" />
-        </template>
-        <document-upload v-if="show_upload" :id="id" :documents="documents" />
-    </div>
+  <div>  
+      <small-title title="Dokumente" class="mb-3" />
+      <div class="grid md:grid-cols-6 sm:grid-cols-4 grid-cols-2 gap-3">
+          <template v-for="document in documents" :key="document.id">
+              <document-item @delete="deleteDocument" :document="document" />
+          </template>
+          <document-upload v-if="show_upload" :id="id" :documentable_type="documentable_type" :documents="documents" />
+      </div>
+  </div>
 </template>
 
 <script>
@@ -23,6 +25,7 @@ export default {
   props: {
     initial_documents: Object,
     id: Number,
+    documentable_type: String,
     show_upload: Boolean,
   },
   data() {

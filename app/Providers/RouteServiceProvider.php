@@ -41,15 +41,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
-
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
-            
             Route::bind('car', function ($value) {
                 if (in_array(Route::currentRouteName(), ['cars.show', 'cars.restore'])) {
                     return Car::withTrashed()->find($value);
@@ -70,6 +61,15 @@ class RouteServiceProvider extends ServiceProvider
                 }
                 return Contract::find($value);
             });
+
+            Route::prefix('api')
+                ->middleware('api')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/api.php'));
+
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/web.php'));
         });
     }
 

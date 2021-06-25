@@ -37,6 +37,7 @@
                 :show_upload="!contact.deleted_at"
                 :title="contact.sell_contracts.length > 1 ? contact.sell_contracts.length + ' Verkaufsverträge' : 'Verkaufsvertrag'"
             />
+            <documents-view class="mt-5" :initial_documents="contact.documents" :id="contact.id" documentable_type="contacts" :show_upload="!contact.deleted_at" />
         </template>
     </show-page>
 </template>
@@ -50,6 +51,7 @@ import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
 import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
 import ContractTable from '../../Components/Contracts/ContractTable.vue';
 import SmallTitle from '../../Components/SmallTitle.vue';
+import DocumentsView from '@/Components/Documents/View.vue';
 
 export default {
   components: {
@@ -61,6 +63,7 @@ export default {
     RestoreButton,
     ContractTable,
     SmallTitle,
+    DocumentsView,
   },
 
   props: {

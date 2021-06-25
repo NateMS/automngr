@@ -9,7 +9,6 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [ContractController::class, 'dashboard'])->name('dashboard');
@@ -75,13 +74,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                 Route::post('/', [PaymentController::class, 'store'])->name('payments.store');
             });
 
-            Route::prefix('documents')->group(function () { 
-                Route::get('{document}', [DocumentController::class, 'show'])->name('documents.show');
-                Route::delete('delete', [DocumentController::class, 'destroy'])->name('documents.destroy');
-                Route::post('/', [DocumentController::class, 'store'])->name('documents.store');
-            });
         });
-        
+    });
+
+    Route::prefix('documents')->group(function () { 
+        Route::get('{document}', [DocumentController::class, 'show'])->name('documents.show');
+        Route::delete('delete', [DocumentController::class, 'destroy'])->name('documents.destroy');
+        Route::post('upload', [DocumentController::class, 'store'])->name('documents.store');
     });
 
     Route::post('brands', [BrandController::class, 'store'])->name('brands.store');

@@ -26,7 +26,8 @@ class DocumentFactory extends Factory
         return [
             'name' => 'Vertrag.pdf',
             'internal_name' => '2021-06-11-13:11:12.pdf',
-            'contract_id' => $this->faker->numberBetween(1, Contract::count()),
+            'documentable_id' => $this->faker->numberBetween(1, Contract::count()),
+            'documentable_type' => 'contracts',
             'size' => $this->faker->numberBetween(1, 30000),
             'extension' => 'pdf',
         ];

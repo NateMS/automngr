@@ -81,7 +81,7 @@
                 <payments-upload v-if="!contract.deleted_at" :show_upload="!contract.deleted_at" :contract="contract" />
             </span>
             <payments-view :payments="contract.payments" :contract="contract" />
-            <documents-view :initial_documents="contract.documents" :id="contract.id" :show_upload="!contract.deleted_at" />
+            <documents-view :initial_documents="contract.documents" :id="contract.id" documentable_type="contracts" :show_upload="!contract.deleted_at" />
         </template>
     </show-page>
 </template>

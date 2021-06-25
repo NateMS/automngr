@@ -18486,6 +18486,7 @@ var STATUS_FAILED = 2;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: Number,
+    documentable_type: String,
     documents: Object
   },
   data: function data() {
@@ -18517,7 +18518,8 @@ var STATUS_FAILED = 2;
 
       // upload data to the server
       this.currentStatus = STATUS_SAVING;
-      axios.post(this.route('documents.store', this.id), formData).then(function (response) {
+      console.log(this.route('documents.store'));
+      axios.post(this.route('documents.store'), formData).then(function (response) {
         _this.documents.push(response.data);
 
         _this.reset();
@@ -18529,7 +18531,9 @@ var STATUS_FAILED = 2;
     filesChange: function filesChange(fieldName, fileList) {
       // handle file changes
       var formData = new FormData();
-      if (!fileList.length) return; // append the files to FormData
+      if (!fileList.length) return;
+      formData.append('documentable_type', this.documentable_type);
+      formData.append('documentable_id', this.id); // append the files to FormData
 
       Array.from(Array(fileList.length).keys()).map(function (x) {
         formData.append(fieldName, fileList[x], fileList[x].name);
@@ -18573,6 +18577,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     initial_documents: Object,
     id: Number,
+    documentable_type: String,
     show_upload: Boolean
   },
   data: function data() {
@@ -20737,6 +20742,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Buttons_RestoreButton_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Components/Buttons/RestoreButton.vue */ "./resources/js/Components/Buttons/RestoreButton.vue");
 /* harmony import */ var _Components_Contracts_ContractTable_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Components/Contracts/ContractTable.vue */ "./resources/js/Components/Contracts/ContractTable.vue");
 /* harmony import */ var _Components_SmallTitle_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Components/SmallTitle.vue */ "./resources/js/Components/SmallTitle.vue");
+/* harmony import */ var _Components_Documents_View_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/Documents/View.vue */ "./resources/js/Components/Documents/View.vue");
+
 
 
 
@@ -20754,7 +20761,8 @@ __webpack_require__.r(__webpack_exports__);
     DeleteButton: _Components_Buttons_DeleteButton_vue__WEBPACK_IMPORTED_MODULE_4__.default,
     RestoreButton: _Components_Buttons_RestoreButton_vue__WEBPACK_IMPORTED_MODULE_5__.default,
     ContractTable: _Components_Contracts_ContractTable_vue__WEBPACK_IMPORTED_MODULE_6__.default,
-    SmallTitle: _Components_SmallTitle_vue__WEBPACK_IMPORTED_MODULE_7__.default
+    SmallTitle: _Components_SmallTitle_vue__WEBPACK_IMPORTED_MODULE_7__.default,
+    DocumentsView: _Components_Documents_View_vue__WEBPACK_IMPORTED_MODULE_8__.default
   },
   props: {
     car: Object
@@ -21276,6 +21284,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Buttons_RestoreButton_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Components/Buttons/RestoreButton.vue */ "./resources/js/Components/Buttons/RestoreButton.vue");
 /* harmony import */ var _Components_Contracts_ContractTable_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Components/Contracts/ContractTable.vue */ "./resources/js/Components/Contracts/ContractTable.vue");
 /* harmony import */ var _Components_SmallTitle_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Components/SmallTitle.vue */ "./resources/js/Components/SmallTitle.vue");
+/* harmony import */ var _Components_Documents_View_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/Documents/View.vue */ "./resources/js/Components/Documents/View.vue");
+
 
 
 
@@ -21293,7 +21303,8 @@ __webpack_require__.r(__webpack_exports__);
     DeleteButton: _Components_Buttons_DeleteButton_vue__WEBPACK_IMPORTED_MODULE_4__.default,
     RestoreButton: _Components_Buttons_RestoreButton_vue__WEBPACK_IMPORTED_MODULE_5__.default,
     ContractTable: _Components_Contracts_ContractTable_vue__WEBPACK_IMPORTED_MODULE_6__.default,
-    SmallTitle: _Components_SmallTitle_vue__WEBPACK_IMPORTED_MODULE_7__.default
+    SmallTitle: _Components_SmallTitle_vue__WEBPACK_IMPORTED_MODULE_7__.default,
+    DocumentsView: _Components_Documents_View_vue__WEBPACK_IMPORTED_MODULE_8__.default
   },
   props: {
     contact: Object
@@ -23546,7 +23557,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_document_upload = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("document-upload");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_small_title, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_small_title, {
     title: "Dokumente",
     "class": "mb-3"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.documents, function (document) {
@@ -23562,12 +23573,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), $props.show_upload ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_document_upload, {
     key: 0,
     id: $props.id,
+    documentable_type: $props.documentable_type,
     documents: $data.documents
   }, null, 8
   /* PROPS */
-  , ["id", "documents"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64
-  /* STABLE_FRAGMENT */
-  );
+  , ["id", "documentable_type", "documents"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
 }
 
 /***/ }),
@@ -28417,6 +28427,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_contract_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("contract-table");
 
+  var _component_documents_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("documents-view");
+
   var _component_show_page = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("show-page");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_show_page, null, {
@@ -28478,7 +28490,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         title: $props.car.sell_contracts.length > 1 ? $props.car.sell_contracts.length + ' Verkaufsverträge' : 'Verkaufsvertrag'
       }, null, 8
       /* PROPS */
-      , ["contracts", "carId", "show_upload", "title"])];
+      , ["contracts", "carId", "show_upload", "title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_documents_view, {
+        "class": "mt-5",
+        initial_documents: $props.car.documents,
+        id: $props.car.id,
+        documentable_type: "cars",
+        show_upload: !$props.car.deleted_at
+      }, null, 8
+      /* PROPS */
+      , ["initial_documents", "id", "show_upload"])];
     }),
     _: 1
     /* STABLE */
@@ -29307,6 +29327,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_contract_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("contract-table");
 
+  var _component_documents_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("documents-view");
+
   var _component_show_page = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("show-page");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_show_page, null, {
@@ -29368,7 +29390,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         title: $props.contact.sell_contracts.length > 1 ? $props.contact.sell_contracts.length + ' Verkaufsverträge' : 'Verkaufsvertrag'
       }, null, 8
       /* PROPS */
-      , ["contracts", "contactId", "show_upload", "title"])];
+      , ["contracts", "contactId", "show_upload", "title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_documents_view, {
+        "class": "mt-5",
+        initial_documents: $props.contact.documents,
+        id: $props.contact.id,
+        documentable_type: "contacts",
+        show_upload: !$props.contact.deleted_at
+      }, null, 8
+      /* PROPS */
+      , ["initial_documents", "id", "show_upload"])];
     }),
     _: 1
     /* STABLE */
@@ -30069,6 +30099,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["payments", "contract"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_documents_view, {
         initial_documents: $props.contract.documents,
         id: $props.contract.id,
+        documentable_type: "contracts",
         show_upload: !$props.contract.deleted_at
       }, null, 8
       /* PROPS */

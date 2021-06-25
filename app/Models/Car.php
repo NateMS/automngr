@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Enums\ContractType;
 use Carbon\Carbon;
-use Cknow\Money\Money;
+use App\Enums\ContractType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,6 +23,11 @@ class Car extends Model
         'kilometers',
         'car_model_id',
     ];
+
+    public function documents()
+    {
+        return $this->morphMany(Document::class, 'documentable');
+    }
 
     public function getNameAttribute()
     {

@@ -25,6 +25,11 @@ class Contact extends Model
         'notes',
     ];
 
+    public function documents()
+    {
+        return $this->morphMany(Document::class, 'documentable');
+    }
+
     public function getNameAttribute()
     {
         return implode(' ', array_filter([$this->lastname, $this->firstname]));
