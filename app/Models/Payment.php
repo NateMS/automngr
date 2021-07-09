@@ -47,11 +47,21 @@ class Payment extends Model
 
     public function getTypeTextAttribute()
     {
-        return $this->type == PaymentType::Transaction() ? 'Als Banküberweisung erhalten' : 'in bar erhalten';
+        return $this->type == 'Banküberweisung' ? 'via Banküberweisung erhalten' : 'in bar erhalten';
     }
 
     public function getDeleteLinkAttribute()
     {
         return route('payments.destroy', [$this->contract->id, $this->id]);
+    }
+
+    public function scopeCashOnly($query)
+    {
+        $query->where('type', PaymentType::Cash());
+    }
+
+    public function scopeTransactionOnly($query)
+    {
+        $query->where('type', PaymentType::Transaction());
     }
 }

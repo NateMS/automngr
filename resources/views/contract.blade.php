@@ -118,10 +118,8 @@ MwSt-Nr: CHE-226.272.050
         @endif
         <tr><td>&nbsp;</td></tr>
     </table>
+    <h3>Fahrzeug</h3>
     <table width="100%">
-        <tr>
-            <td><h3>Fahrzeug</h3></td>
-        </tr>
         <tr>
             <td width="20%">Marke & Modell</td>
             <td width="30%">{{ $contract->car->name }}</td>
@@ -151,10 +149,16 @@ MwSt-Nr: CHE-226.272.050
             <td>Kaufpreis</td>
             <td><b>{{ $contract->price }}</b></td>
         </tr>
-        <tr>
-            <td>Anzahlung</td>
-            <td>{{ $contract->paid }}</td>
-        </tr>
+            <tr>
+                <td valign="top">Anzahlung</td>
+                @if ($contract->paid_in_cash->getAmount() && $contract->paid_in_transaction->getAmount())
+                    <td>{{ $contract->paid_in_cash }} in bar<br>{{ $contract->paid_in_transaction }} via Überweisung</td>
+                @elseif ($contract->paid_in_cash->getAmount())
+                    <td>{{ $contract->paid_in_cash }} in bar</td>
+                @elseif ($contract->paid_in_transaction->getAmount())
+                    <td>{{ $contract->paid_in_transaction }} via Überweisung</td>
+                @endif
+            </tr>
         <tr>
             <td>Restbetrag</td>
             <td>{{ $contract->left_to_pay }}</td>
@@ -208,19 +212,16 @@ Mündliche Vereinbarungen sind ungültig.
         </tr>
     </table>
     <br><br><br><br>
-    @if ($contract->deposit())
+    @if ($contract->payments())
+        <h3>Quittung</h3>
         <table width="100%" style="padding-top: 5px; border-top: 1px solid black;">
-            <tr>
-                <td width="20%"><b>Quittung</b></td>
-                <td width="30%">Den Betrag von {{ $contract->deposit()->amount->format() }}</td>
-                <td>{{ $contract->deposit()->type_text }}</td>
-            </tr>
-            <tr><td>&nbsp;</td></tr>
-            <tr><td>&nbsp;</td></tr>
-            <tr>
-                <td>Datum: </td>
-                <td>&nbsp;</td>
-            </tr>
+            @foreach($contract->payments as $payment)
+                <tr>
+                    <td width="20%">Am {{ $payment->date }}</td>
+                    <td width="30%">den Betrag von {{ $payment->amount->format() }}</td>
+                    <td>{{ $payment->type_text }}</td>
+                </tr>
+            @endforeach
         </table>
     @endif
 </body>

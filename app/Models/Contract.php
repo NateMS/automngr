@@ -51,6 +51,18 @@ class Contract extends Model
         return Money::CHF($this->payments()->sum('amount'));
     }
 
+    public function getPaidInCashAttribute()
+    {
+        
+        return Money::CHF($this->payments()->cashOnly()->sum('amount'));
+    }
+
+    public function getPaidInTransactionAttribute()
+    {
+        
+        return Money::CHF($this->payments()->transactionOnly()->sum('amount'));
+    }
+
     public function getLeftToPayAttribute()
     {
         
