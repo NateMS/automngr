@@ -157,6 +157,8 @@ MwSt-Nr: CHE-226.272.050
                     <td>{{ $contract->paid_in_cash }} in bar</td>
                 @elseif ($contract->paid_in_transaction->getAmount())
                     <td>{{ $contract->paid_in_transaction }} via Überweisung</td>
+                @else
+                    <td>{{ $contract->paid }}</td>
                 @endif
             </tr>
         <tr>
