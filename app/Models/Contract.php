@@ -40,6 +40,11 @@ class Contract extends Model
         return Money::CHF($price);
     }
 
+    public function getPriceForExcelAttribute()
+    {
+        return $this->price->format(null, null, 0);
+    }
+
     public function getPaidAttribute()
     {
         
@@ -127,6 +132,11 @@ class Contract extends Model
     public function scopeSoldThisYear($query)
     {
         $query->sellContracts()->thisYear();
+    }
+
+    public function scopeSoldByYear($query, $year)
+    {
+        $query->sellContracts()->whereYear('date', $year);
     }
 
     public function scopeBoughtThisYear($query)

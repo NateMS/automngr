@@ -63,6 +63,12 @@ class Contact extends Model
         return implode(', ', array_filter([$this->company, $this->name]));
     }
 
+
+    public function getFullTitleWithAddressAttribute()
+    {
+        return implode(', ', array_filter([$this->full_title, $this->address, $this->full_city]));
+    }
+
     public function getFullCityAttribute()
     {
         return $this->zip . ' ' . $this->city;

@@ -54,7 +54,6 @@ export default {
     save(formData) {
       // upload data to the server
       this.currentStatus = STATUS_SAVING;
-      console.log(this.route('documents.store'));
       axios.post(this.route('documents.store'), formData)
         .then((response) => {
           this.documents.push(response.data);

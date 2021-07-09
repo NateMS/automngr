@@ -101,7 +101,7 @@ class Car extends Model
 
     public function isSold()
     {
-        return $this->buyContracts()->count() >= 1 && $this->buyContracts()->count() <= $this->sellContracts()->count();
+        return $this->buyContracts()->count() <= $this->sellContracts()->count();
     }
 
     public function contracts()

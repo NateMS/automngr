@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Models\Contract;
 use Illuminate\Http\Request;
-use App\Exports\ContractsExport;
-use Illuminate\Support\Facades\Redirect;
+use App\Exports\Report;
 use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class ReportController extends Controller
@@ -19,6 +17,6 @@ class ReportController extends Controller
     public function print(Request $request)
     {
         $year = (int)$request->get('year');
-        return Excel::download(new ContractsExport($year), 'Jahresbericht-' . $year .'.xlsx');
+        return Excel::download(new Report($year), 'Wagenhandelbuch-' . $year .'.xlsx');
     }
 }
