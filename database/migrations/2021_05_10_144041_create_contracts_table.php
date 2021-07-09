@@ -45,6 +45,6 @@ class CreateContractsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sell_contracts');
+        Schema::dropIfExists('contracts');
     }
 }

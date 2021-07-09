@@ -118,7 +118,7 @@ MwSt-Nr: CHE-226.272.050
         @endif
         <tr><td>&nbsp;</td></tr>
     </table>
-    <h3>Fahrzeug</h3>
+    <h4>Fahrzeug</h4>
     <table width="100%">
         <tr>
             <td width="20%">Marke & Modell</td>
@@ -213,9 +213,9 @@ Mündliche Vereinbarungen sind ungültig.
             <td>Käufer:</td>
         </tr>
     </table>
-    <br><br><br><br>
-    @if ($contract->payments())
-        <h3>Quittung</h3>
+    <br><br>
+    @if (count($contract->payments))
+        <h4>Quittung</h4>
         <table width="100%" style="padding-top: 5px; border-top: 1px solid black;">
             @foreach($contract->payments as $payment)
                 <tr>

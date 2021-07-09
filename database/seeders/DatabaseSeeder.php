@@ -34,16 +34,22 @@ class DatabaseSeeder extends Seeder
         Brand::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $user = User::factory()->create([
+        User::factory()->create([
             'name' => 'Nadim Salloum',
-            'email' => 'hello@salloum.ch',
-            'password' => bcrypt('abc123'),
+            'email' => env('USER_1_EMAIL'),
+            'password' => bcrypt(env('USER_1_PW')),
         ]);
 
-        $team = Team::factory()->create([
-            'name' => 'Your SwissCar GmbH',
-            'user_id' => $user->id,
-            'personal_team' => false,
+        User::factory()->create([
+          'name' => 'Mohamad Salloum',
+          'email' => env('USER_2_EMAIL'),
+          'password' => bcrypt(env('USER_2_PW')),
+        ]);
+
+        User::factory()->create([
+          'name' => 'Nadim Salloum',
+          'email' => env('USER_3_EMAIL'),
+          'password' => bcrypt(env('USER_3_PW')),
         ]);
 
         foreach ($this->getBrands() as $brandItem) {
