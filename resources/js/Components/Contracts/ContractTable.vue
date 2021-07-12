@@ -36,7 +36,6 @@ export default {
             if (this.contracts[0].contact) {
                 columns.push({ key: 'contact', value: this.type == '1' ? 'Käufer' : 'Verkäufer', sortable: false})
             }
-            columns.push({ key: 'price', value: this.type == '1' ? 'Verkaufspreis' : 'Einkaufspreis', sortable: false})
             
             return columns;
         },

@@ -18496,11 +18496,6 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
-      columns.push({
-        key: 'price',
-        value: this.type == '1' ? 'Verkaufspreis' : 'Einkaufspreis',
-        sortable: false
-      });
       return columns;
     }
   }
