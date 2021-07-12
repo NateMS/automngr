@@ -33,7 +33,6 @@ class ContractController extends Controller
                                 ->map(function ($contract) {
                                     return [
                                         'date' => $contract->date_formatted,
-                                        'price' => $contract->price->format(),
                                         'car' => $contract->car->name_with_year,
                                         'contact' => $contract->contact->title,
                                         'link' => route('contracts.show', $contract),
@@ -46,7 +45,6 @@ class ContractController extends Controller
                                 ->map(function ($contract) {
                                     return [
                                         'date' => $contract->date_formatted,
-                                        'price' => $contract->price->format(),
                                         'car' => $contract->car->name_with_year,
                                         'contact' => $contract->contact->title,
                                         'link' => route('contracts.show', $contract),

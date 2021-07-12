@@ -101,7 +101,7 @@ class Car extends Model
 
     public function isSold()
     {
-        return $this->buyContracts()->count() <= $this->sellContracts()->count();
+        return $this->buyContracts()->count() <= $this->sellContracts()->count() && $this->sellContracts()->count() > 0;
     }
 
     public function contracts()
@@ -133,12 +133,12 @@ class Car extends Model
 
     public function scopeUnsoldOnly($query)
     {
-        return $query->withContractCount()->havingRaw('buy_contracts_count > sell_contracts_count');
+        return $query->withContractCount()->havingRaw('buy_contracts_count > sell_contracts_count OR sell_contracts_count = 0');
     }
 
     public function scopeSoldOnly($query)
     {
-        return $query->withContractCount()->having('sell_contracts_count', '>', 0)->havingRaw('buy_contracts_count = sell_contracts_count');
+        return $query->withContractCount()->having('sell_contracts_count', '>', 0)->havingRaw('buy_contracts_count <= sell_contracts_count');
     }
 
     public function scopeFilter($query, array $filters)

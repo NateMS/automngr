@@ -30,7 +30,7 @@ class CreateContractsTable extends Migration
                 ->onDelete('cascade')
                 ->constrained('cars');
             $table->enum('insurance_type', InsuranceType::getValues())
-            ->default(InsuranceType::None);
+            ->default(InsuranceType::Keine);
             $table->enum('type', ContractType::getValues())
             ->default(ContractType::SellContract);
             $table->timestamps();

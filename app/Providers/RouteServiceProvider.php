@@ -56,7 +56,7 @@ class RouteServiceProvider extends ServiceProvider
             });
 
             Route::bind('contract', function ($value) {
-                if (in_array(Route::currentRouteName(), ['contracts.show', 'contracts.restore'])) {
+                if (in_array(Route::currentRouteName(), ['contracts.show', 'contracts.restore', 'payments.destroy'])) {
                     return Contract::withTrashed()->find($value);
                 }
                 return Contract::find($value);

@@ -13,7 +13,7 @@ use BenSampo\Enum\Enum;
  */
 final class InsuranceType extends Enum
 {
-    const None = '0';
+    const Keine = '0';
     const QBase = '1';
     const OneStar = '2';
     const ThreeStar = '3';

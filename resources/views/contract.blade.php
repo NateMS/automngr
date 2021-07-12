@@ -3,7 +3,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    <title>
+        {{ $contract->type_formatted }} - {{ $contract->car->name }} - {{ $contract->contact->full_title }}
+    </title>
     <style type="text/css">
         * {
             font-family: Verdana, Arial, sans-serif;

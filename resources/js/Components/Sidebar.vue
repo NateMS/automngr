@@ -20,11 +20,11 @@
             <p class="text-sm font-semibold mb-1 text-indigo-100 flex items-center">
                 Verträge
             </p>
-            <jet-nav-link :href="route('contracts.create', {type: 0})" :active="onBasicContractCreate && type == '0'">
+            <jet-nav-link class="text-xl" :href="route('contracts.create', {type: 0})" :active="onBasicContractCreate && type == '0'">
                 <unicon fill="currentColor" class="mr-2" height="22" width="22" name="plus-circle"></unicon>
                 Neuer Einkauf
             </jet-nav-link>
-            <jet-nav-link :href="route('contracts.create', {type: 1})" :active="onBasicContractCreate && type == '1'">
+            <jet-nav-link class="text-xl" :href="route('contracts.create', {type: 1})" :active="onBasicContractCreate && type == '1'">
                 <unicon fill="currentColor" class="mr-2" height="22" width="22" name="plus-circle"></unicon>
                 Neuer Verkauf
             </jet-nav-link>
@@ -44,7 +44,7 @@
             </jet-nav-link>
             <jet-nav-link :href="route('cars.unsold')" :active="route().current('cars.unsold')">
                 <unicon fill="currentColor" class="mr-2 ml-3" height="22" width="22" name="angle-right"></unicon>
-                Meine Autos
+                Autos im Lager
             </jet-nav-link>
             <jet-nav-link :href="route('cars.sold')" :active="route().current('cars.sold')">
                 <unicon fill="currentColor" class="mr-2 ml-3" height="22" width="22" name="angle-right"></unicon>

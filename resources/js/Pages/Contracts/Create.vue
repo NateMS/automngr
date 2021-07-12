@@ -63,7 +63,7 @@ export default {
         price: null,
         notes: null,
         type: this.type,
-        insurance_type: '1',
+        insurance_type: '0',
         car_id: this.car?.id ?? null,
         contact_id: this.contact?.id ?? null,
         amount: null,

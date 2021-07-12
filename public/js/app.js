@@ -21550,7 +21550,7 @@ __webpack_require__.r(__webpack_exports__);
         price: null,
         notes: null,
         type: this.type,
-        insurance_type: '1',
+        insurance_type: '0',
         car_id: (_this$car$id = (_this$car = this.car) === null || _this$car === void 0 ? void 0 : _this$car.id) !== null && _this$car$id !== void 0 ? _this$car$id : null,
         contact_id: (_this$contact$id = (_this$contact = this.contact) === null || _this$contact === void 0 ? void 0 : _this$contact.id) !== null && _this$contact$id !== void 0 ? _this$contact$id : null,
         amount: null,
@@ -23327,7 +23327,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $data.contact = $event;
         }),
-        label: "name",
+        label: "title",
         "track-by": "id",
         options: $data.contactsChoice,
         "class": "2xl:col-span-4 sm:col-span-6 col-span-12",
@@ -24254,7 +24254,7 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Alle Autos ");
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Meine Autos ");
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Autos im Lager ");
 
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Verkaufte Autos ");
 
@@ -24335,6 +24335,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["href", "active"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_nav_link, {
+    "class": "text-xl",
     href: _ctx.route('contracts.create', {
       type: 0
     }),
@@ -24355,6 +24356,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["href", "active"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_nav_link, {
+    "class": "text-xl",
     href: _ctx.route('contracts.create', {
       type: 1
     }),
