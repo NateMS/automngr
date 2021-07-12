@@ -23070,7 +23070,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         label: "label",
         "track-by": "id",
         options: $data.carsChoice,
-        "class": "2xl:col-span-4 sm:col-span-6 col-span-12",
+        "class": "sm:col-span-6 col-span-12",
         placeholder: "Auto auswählen"
       }, null, 8
       /* PROPS */
@@ -23325,7 +23325,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         label: "title",
         "track-by": "id",
         options: $data.contactsChoice,
-        "class": "2xl:col-span-4 sm:col-span-6 col-span-12",
+        "class": "sm:col-span-6 col-span-12",
         placeholder: $options.contactType + 'wählen'
       }, null, 8
       /* PROPS */

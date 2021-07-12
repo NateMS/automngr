@@ -13,7 +13,7 @@
           <div class="col-span-6">
               <jet-label for="car" value="Auto auswählen" />
               <div class="grid grid-cols-12 gap-3 gap-y-6 mt-1">
-                <multiselect :allow-empty="false" @select="onCarChange" :disabled="createCar" v-model="car" label="label" track-by="id" :options="carsChoice" class="2xl:col-span-4 sm:col-span-6 col-span-12" placeholder="Auto auswählen" />
+                <multiselect :allow-empty="false" @select="onCarChange" :disabled="createCar" v-model="car" label="label" track-by="id" :options="carsChoice" class="sm:col-span-6 col-span-12" placeholder="Auto auswählen" />
                 <div v-if="!createCar" class="sm:col-span-6 col-span-12">
                   <span class="mr-2">oder</span>
                   <button @click="openCarForm" class="bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-900 focus:border-indigo-900 focus:ring-indigo-300 justify-center inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition">
