@@ -1,5 +1,5 @@
 <template>
-    <div class="w-1/2 md:w-1/3 lg:w-64 fixed md:top-0 md:left-0 h-screen lg:block bg-indigo-800 z-30" :class="sideBarOpen ? '' : 'hidden'" id="main-nav">
+    <div class="w-3/4 md:w-1/3 lg:w-64 fixed md:top-0 md:left-0 h-screen lg:block bg-indigo-800 z-30" :class="sideBarOpen ? '' : 'hidden'" id="main-nav">
 
         <inertia-link :href="route('dashboard')" class="w-full h-20 bg-indigo-900 flex justify-center items-center mb-8 text-indigo-100 font-semibold text-2xl hover:text-indigo-300 transition">
             Your SwissCar

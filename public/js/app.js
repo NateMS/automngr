@@ -24279,7 +24279,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_nav_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-nav-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-    "class": ["w-1/2 md:w-1/3 lg:w-64 fixed md:top-0 md:left-0 h-screen lg:block bg-indigo-800 z-30", _ctx.sideBarOpen ? '' : 'hidden'],
+    "class": ["w-3/4 md:w-1/3 lg:w-64 fixed md:top-0 md:left-0 h-screen lg:block bg-indigo-800 z-30", _ctx.sideBarOpen ? '' : 'hidden'],
     id: "main-nav"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     href: _ctx.route('dashboard'),
