@@ -30269,7 +30269,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_dash_item, {
-        title: "Meine Autos",
+        title: "Autos im Lager",
         number: $props.my_cars,
         link: _ctx.route('cars.unsold')
       }, null, 8

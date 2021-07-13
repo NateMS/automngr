@@ -6,7 +6,7 @@
             </h2>
         </template>
         <div class="grid grid-cols-12 gap-x-8 gap-y-12">
-            <dash-item title="Meine Autos" :number="my_cars" :link="route('cars.unsold')" />
+            <dash-item title="Autos im Lager" :number="my_cars" :link="route('cars.unsold')" />
             <dash-item :title="'Gekauft im ' + new Date().getFullYear()" :number="bought_this_year" />
             <dash-item :title="'Verkauft im ' + new Date().getFullYear()" :number="sold_this_year" />
             <div class="lg:col-span-6 col-span-12">
