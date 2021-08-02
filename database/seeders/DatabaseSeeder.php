@@ -282,7 +282,7 @@ class DatabaseSeeder extends Seeder
               ],
             ],
             7 => [
-              'brand' => 'Škoda',
+              'brand' => 'Skoda',
               'models' => [
                 0 => 'Favorit',
                 1 => 'Felicia',

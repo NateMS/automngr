@@ -162,7 +162,9 @@ return [
         'vin'                   => 'Chassisnummer',
         'initial_date'          => 'Inverkehrssetzung',
         'last_check_date'       => 'Letzte Prüfung',
+        'car_model_id'          => 'Automodell',
         'kilometers'            => 'Kilometerstand',
         'price'                 => 'Preis',
+        'delivery_date'         => 'Lieferdatum',
     ],
 ];

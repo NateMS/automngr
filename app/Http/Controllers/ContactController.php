@@ -271,7 +271,7 @@ class ContactController extends Controller
             'address' => ['nullable', 'max:150'],
             'zip' => ['nullable', 'max:6'],
             'city' => ['nullable', 'max:75'],
-            'country' => ['nullable', 'max:2'],
+            'country' => ['nullable', 'max:3'],
             'company' => ['nullable', 'max:75'],
             'notes' => ['nullable'],
         ];

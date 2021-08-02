@@ -304,6 +304,18 @@ class CarController extends Controller
 
     public function store(Request $request)
     {
+        $car = $this->createCar($request);
+       
+        session()->flash('flash.banner', 'Auto erstellt.');
+        return Redirect::route('cars.show', $car);
+    }
+
+    private function createCar($request): Car
+    {
+        $request->merge([
+            'vin' => mb_strtoupper($request->get('vin')),
+        ]);
+
         $request->validate($this->getValidationRules());
  
         $request->merge([
@@ -311,22 +323,12 @@ class CarController extends Controller
             'last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d'),
         ]);
 
-        $car = Car::create($request->all());
-
-        session()->flash('flash.banner', 'Auto erstellt.');
-        return Redirect::route('cars.show', $car);
+        return Car::create($request->all());
     }
 
     public function storeForContract(Request $request)
     {
-        $request->validate($this->getValidationRules());
-
-        $request->merge([
-            'initial_date' => Carbon::parse($request->get('initial_date'))->format('Y-m-d'),
-            'last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d'),
-        ]);
-
-        $car = Car::create($request->all());
+        $car = $this->createCar($request);
 
         return response()->json([
             'id' => $car->id,
@@ -344,10 +346,10 @@ class CarController extends Controller
     private function getValidationRules()
     {
         return [
-            'stammnummer' => ['required', 'unique:cars', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
-            'vin' => ['required', 'unique:cars', 'string', 'size:17'],
+            'stammnummer' => ['required', 'unique:cars,stammnummer,NULL,id,deleted_at,NULL', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
+            'vin' => ['required', 'unique:cars,vin,NULL,id,deleted_at,NULL', 'string', 'size:17'],
             'initial_date' => ['required', 'date_format:"d.m.Y"'],
-            'last_check_date' => ['date_format:"d.m.Y"'],
+            'last_check_date' => ['nullable', 'date_format:"d.m.Y"'],
             'colour' => ['nullable', 'max:75'],
             'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
             'kilometers' => ['required', 'max:75'],
@@ -434,11 +436,22 @@ class CarController extends Controller
 
     public function update(Request $request, Car $car)
     {
+        $this->updateCar($request, $car);
+        session()->flash('flash.banner', 'Auto geändert.');
+        return Redirect::route('cars.show', $car);
+    }
+
+    private function updateCar(Request $request, Car $car): bool
+    {
+        $request->merge([
+            'vin' => mb_strtoupper($request->get('vin')),
+        ]);
+
         $request->validate([
-            'stammnummer' => ['required', 'unique:cars,stammnummer,' . $car->id, 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
-            'vin' => ['required', 'unique:cars,vin,' . $car->id, 'string', 'size:17'],
+            'stammnummer' => ['required', 'unique:cars,stammnummer,' . $car->id . ',id,deleted_at,NULL', 'string', 'size:11', 'regex:/[0-9]{3}[.][0-9]{3}[.][0-9]{3}/i'],
+            'vin' => ['required', 'unique:cars,vin,' . $car->id . ',id,deleted_at,NULL', 'string', 'size:17'],
             'initial_date' => ['required', 'date_format:"d.m.Y"'],
-            'last_check_date' => ['date_format:"d.m.Y"'],
+            'last_check_date' => ['nullable', 'date_format:"d.m.Y"'],
             'colour' => ['nullable', 'max:75'],
             'car_model_id' => ['required', 'exists:App\Models\CarModel,id'],
             'kilometers' => ['required', 'max:75'],
@@ -451,10 +464,7 @@ class CarController extends Controller
             'last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d'),
         ]);
 
-        $car->update($request->all());
-
-        session()->flash('flash.banner', 'Auto geändert.');
-        return Redirect::route('cars.show', $car);
+        return $car->update($request->all());
     }
 
     public function destroy(Car $car)
