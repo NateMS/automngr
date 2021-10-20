@@ -183,23 +183,21 @@ MwSt-Nr: CHE-226.272.050
     <pre class="footnote" width="100%">
 @if ($contract->isSellContract())
 Serviceheft + alle Dokumente sind vorhanden. Mit Kratze Lackschaden.
-Mit der Anzahlung/Teilzahlung des Kaufpreises durch den Käufer anerkennt
-er den gesamten Kaufpreis gekauft wie gesehen und probiert.
-Ohne Gewährleistung 
-Garantie für Occasionen entfallen die gesetzlichen Gewährleistungsansprüche, 
-eine gänzliche oder teilweise Rückerstattung des Kaufpreises
-(Wandelung und Minderung) sind ausgeschlossen, ebenso der Ersatz eines aus der
-mangelhaften Lieferung irgendwie entstandenen Schadens.
-Gerichtsstand: Für die Beurteilung aller aus dieser Rechnung entstehenden
-Streitigkeiten gilt das Domizil der Verkaufsfirma.
-Eigentumsvorbehalt: Das Fahrzeug bleibt bis zur vollständigen
-Bezahlung des Kaufpreises unser Eigentum
+Mit der Anzahlung, bzw. Teilzahlung des Kaufpreises durch den Käufer anerkennt dieser den gesamten Kaufpreis für das Fahrzeug,
+wie dies gesehen und probiert wurde.
+Ohne Gewährleistung .
+Bei Garantie für Occasionen entfallen die gesetzlichen Gewährleistungsansprüche.
+Eine gänzliche oder teilweise Rückerstattung des Kaufpreises (Wandelung und Minderung),
+sowie der Ersatz eines aus der mangelhaften Lieferung irgendwie entstandenen Schadens sind ausgeschlossen.
+Für Produktionsfehler und Rückrufe des Autoherstellers übernimmt die Verkaufsfirma keinerlei Haftung.
+Gerichtsstand: Für die Beurteilung aller aus dieser Rechnung entstehenden Streitigkeiten gilt das Domizil der Verkaufsfirma.
+Eigentumsvorbehalt: Das Fahrzeug bleibt bis zur vollständigen Bezahlung des Kaufpreises Eigentum des Verkäufers.
 @else
 Der Verkäufer erklärt hiermit ausdrücklich, dass er alleinger und legitimer Eigentümer des
 Fahrzeug ist.
-Ebenso bestätigt er ,dass es sich nicht um ein Leasing-, oder Mietauto handelt, sowie weder eine Restfinanzierung 
-noch ein Eigentumsvorbehalt und/oder eine Pfändung / Beschlagnahmung auf das Fahrzeug besteht.
-Der Verkäufer garantiert auch, dass das Fahrzeug unfallfrei (gemäss Bemerkung) ist und der Kilometerstand der Realität entspricht.
+Ebenso bestätigt er, dass es sich nicht um ein Leasing-, oder Mietauto handelt, sowie weder eine Restfinanzierung 
+noch ein Eigentumsvorbehalt und / oder eine Pfändung oder Beschlagnahmung auf das Fahrzeug besteht.
+Der Verkäufer garantiert, dass das Fahrzeug unfallfrei (gemäss Bemerkung) ist und der Kilometerstand der Realität entspricht.
 Mündliche Vereinbarungen sind ungültig.
 @endif
 </pre>
