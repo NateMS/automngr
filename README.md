@@ -18,4 +18,4 @@ Steps:
 3. Run migrations and seed db: `sail php artisan migrate:fresh --seed`
 4. `sail npm run watch`
 5. Access the web application at `0.0.0.0`
-6. The default credentials are `hello@salloum.ch` and `abc123`
+6. The default credentials can be seen/set in the .env

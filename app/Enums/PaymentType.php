@@ -12,4 +12,5 @@ final class PaymentType extends Enum
 {
     const Transaction = '0';
     const Cash = '1';
+    const Cembra = '2';
 }

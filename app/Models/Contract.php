@@ -63,6 +63,12 @@ class Contract extends Model
         return Money::CHF($this->payments()->transactionOnly()->sum('amount'));
     }
 
+    public function getPaidInCembraAttribute()
+    {
+        
+        return Money::CHF($this->payments()->cembraOnly()->sum('amount'));
+    }
+
     public function getLeftToPayAttribute()
     {
         

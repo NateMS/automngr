@@ -42,12 +42,27 @@ class Payment extends Model
 
     public function getTypeAttribute($type)
     {
-        return $type == PaymentType::Transaction() ? 'Banküberweisung' : 'Barzahlung';
+         
+        switch ($type) {
+            case PaymentType::Transaction():
+                return 'Banküberweisung';
+            case PaymentType::Cash():
+                return 'Barzahlung';
+            default:
+                return 'Überweisung via Cembra';
+        };  
     }
 
     public function getTypeTextAttribute()
     {
-        return $this->type == 'Banküberweisung' ? 'via Banküberweisung erhalten' : 'in bar erhalten';
+        switch ($this->type) {
+            case 'Banküberweisung':
+                return 'via Banküberweisung erhalten';
+            case 'Barzahlung':
+                return 'in bar erhalten';
+            default:
+                return 'via Cembra-Überweisung erhalten';
+        };  
     }
 
     public function getDeleteLinkAttribute()
@@ -63,5 +78,10 @@ class Payment extends Model
     public function scopeTransactionOnly($query)
     {
         $query->where('type', PaymentType::Transaction());
+    }
+
+    public function scopeCembraOnly($query)
+    {
+        $query->where('type', PaymentType::Cembra());
     }
 }

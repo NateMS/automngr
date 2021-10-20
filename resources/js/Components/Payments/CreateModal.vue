@@ -23,6 +23,7 @@
                         <select v-model="form.type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             <option value="0" :selected="form.type == '0'">Banküberweisung</option>
                             <option value="1" :selected="form.type == '1'">Barzahlung</option>
+                            <option value="2" :selected="form.type == '2'">Cembra-Überweisung</option>
                         </select>
                         <jet-input-error :message="form.errors.type" class="mt-2" />
                     </div>

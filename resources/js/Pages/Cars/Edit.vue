@@ -65,7 +65,7 @@ export default {
         colour: this.car.colour,
         notes: this.car.notes,
         car_model_id: this.car.car_model.id,
-        last_check_date: new Date(this.car.last_check_date).toJSON().slice(0,10).split('-').reverse().join('.'),
+        last_check_date: this.car.last_check_date ? new Date(this.car.last_check_date).toJSON().slice(0,10).split('-').reverse().join('.') : '',
         kilometers: this.car.kilometers,
         known_damage: this.car.known_damage,
         notes: this.car.notes,

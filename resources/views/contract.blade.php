@@ -153,21 +153,35 @@ MwSt-Nr: CHE-226.272.050
             <td>{{ $contract->insurance_type_formatted }}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
+    </table>
+    <table width="100%">
         <tr>
-            <td>Kaufpreis</td>
-            <td><b>{{ $contract->price }}</b></td>
+            <td width="20%">Kaufpreis</td>
+            <td width="80%"><b>{{ $contract->price }}</b></td>
         </tr>
             <tr>
                 <td valign="top">Anzahlung</td>
-                @if ($contract->paid_in_cash->getAmount() && $contract->paid_in_transaction->getAmount())
-                    <td>{{ $contract->paid_in_cash }} in bar<br>{{ $contract->paid_in_transaction }} via Überweisung</td>
-                @elseif ($contract->paid_in_cash->getAmount())
-                    <td>{{ $contract->paid_in_cash }} in bar</td>
-                @elseif ($contract->paid_in_transaction->getAmount())
-                    <td>{{ $contract->paid_in_transaction }} via Überweisung</td>
+                <td>
+                @if ($contract->paid_in_cash->getAmount() || $contract->paid_in_transaction->getAmount() || $contract->paid_in_cembra->getAmount())
+                    @if ($contract->paid_in_cash->getAmount())
+                        {{ $contract->paid_in_cash }} in bar
+                        @if ($contract->paid_in_transaction->getAmount() || $contract->paid_in_cembra->getAmount())
+                            <br>
+                        @endif
+                    @endif
+                    @if ($contract->paid_in_transaction->getAmount())
+                        {{ $contract->paid_in_transaction }} via Überweisung
+                        @if ($contract->paid_in_cembra->getAmount())
+                            <br>
+                        @endif
+                    @endif
+                    @if ($contract->paid_in_cembra->getAmount())
+                        {{ $contract->paid_in_cembra }} via Cembra-Überweisung
+                    @endif
                 @else
-                    <td>{{ $contract->paid }}</td>
+                    {{ $contract->paid }}
                 @endif
+                </td>
             </tr>
         <tr>
             <td>Restbetrag</td>

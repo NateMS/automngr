@@ -22324,7 +22324,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         colour: this.car.colour,
         notes: this.car.notes,
         car_model_id: this.car.car_model.id,
-        last_check_date: new Date(this.car.last_check_date).toJSON().slice(0, 10).split('-').reverse().join('.'),
+        last_check_date: this.car.last_check_date ? new Date(this.car.last_check_date).toJSON().slice(0, 10).split('-').reverse().join('.') : '',
         kilometers: this.car.kilometers,
         known_damage: this.car.known_damage
       }, "notes", this.car.notes)
@@ -25488,8 +25488,9 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = ["selected"];
 var _hoisted_7 = ["selected"];
+var _hoisted_8 = ["selected"];
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Einzahlung speichern ");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Einzahlung speichern ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_label = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-label");
@@ -25574,7 +25575,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         selected: $data.form.type == '1'
       }, "Barzahlung", 8
       /* PROPS */
-      , _hoisted_7)], 512
+      , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+        value: "2",
+        selected: $data.form.type == '2'
+      }, "Cembra-Überweisung", 8
+      /* PROPS */
+      , _hoisted_8)], 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.form.type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
         message: $data.form.errors.type,
@@ -25594,7 +25600,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_8];
+          return [_hoisted_9];
         }),
         _: 1
         /* STABLE */
@@ -31162,7 +31168,8 @@ var _hoisted_8 = {
 };
 var _hoisted_9 = ["selected"];
 var _hoisted_10 = ["selected"];
-var _hoisted_11 = {
+var _hoisted_11 = ["selected"];
+var _hoisted_12 = {
   "class": "col-span-6"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -31311,14 +31318,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         selected: $data.form.payment_type == '1'
       }, "Barzahlung", 8
       /* PROPS */
-      , _hoisted_10)], 512
+      , _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+        value: "2",
+        selected: $data.form.payment_type == '2'
+      }, "Cembra-Überweisung", 8
+      /* PROPS */
+      , _hoisted_11)], 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.form.payment_type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
         message: $data.form.errors.type,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "notes",
         value: "Bemerkungen"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
