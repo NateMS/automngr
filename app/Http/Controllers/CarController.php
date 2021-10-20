@@ -461,11 +461,14 @@ class CarController extends Controller
             'known_damage' => ['nullable'],
             'notes' => ['nullable'],
         ]);
-        
-        $request->merge([
-            'initial_date' => Carbon::parse($request->get('initial_date'))->format('Y-m-d'),
-            'last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d'),
-        ]);
+
+        if ($request->get('initial_date')) {
+            $request->merge(['initial_date' => Carbon::parse($request->get('initial_date'))->format('Y-m-d')]);
+        }
+
+        if ($request->get('last_check_date')) {
+            $request->merge(['last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d')]);
+        }
 
         return $car->update($request->all());
     }
