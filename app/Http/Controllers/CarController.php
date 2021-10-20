@@ -8,7 +8,6 @@ use Inertia\Inertia;
 use App\Models\Brand;
 use App\Exports\Export;
 use App\Models\Contract;
-use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;

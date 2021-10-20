@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Car;
 use Inertia\Inertia;
 use App\Exports\Export;
 use App\Models\Contact;
 use App\Models\Contract;
-use App\Enums\InsuranceType;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
 

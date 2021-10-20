@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contract;
 use App\Models\Document;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 class DocumentController extends Controller
 {
