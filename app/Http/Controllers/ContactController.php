@@ -58,6 +58,26 @@ class ContactController extends Controller
         ]);
     }
 
+    public function letter(Contact $contact)
+    { 
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(resource_path() . '/docx/letter.docx');
+        $templateProcessor->setValue('date', date("d.m.Y"));
+        $templateProcessor->setValue('company', $contact->company);
+        $templateProcessor->setValue('name', $contact->name);
+        $templateProcessor->setValue('address', $contact->address);
+        $templateProcessor->setValue('city', $contact->full_city);
+        $templateProcessor->setValue('country', $contact->country !== 'CH' ? $contact->country : '');
+
+        ob_start();
+        $templateProcessor->saveAs("php://output");
+        $contents = ob_get_contents();
+        ob_end_clean();
+
+        return response()->streamDownload(function () use ($contents) {
+            echo $contents;
+        }, 'Briefvorlage ' . $contact->title . '.docx');
+    }
+
     public function print(Request $request)
     {
        return $this->printList($request, Contact::query(), date('Y-m-d') . '-Alle-Kontakte.xlsx');

@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::prefix('{contact}')->group(function () {
             Route::get('/', [ContactController::class, 'show'])->name('contacts.show');
             Route::get('edit', [ContactController::class, 'edit'])->name('contacts.edit');
+            Route::get('letter', [ContactController::class, 'letter'])->name('contacts.letter');
             Route::put('/', [ContactController::class, 'update'])->name('contacts.update');
             Route::get('delete', [ContactController::class, 'destroy'])->name('contacts.destroy');
             Route::get('restore', [ContactController::class, 'restore'])->name('contacts.restore');

@@ -14,6 +14,7 @@
 
         <template #actions>
             <edit-button v-if="!contact.deleted_at" :href="route('contacts.edit', contact.id)" />
+            <letter-button v-if="!contact.deleted_at" :href="route('contacts.letter', contact.id)" />
             <delete-button v-if="!contact.deleted_at" :href="route('contacts.destroy', contact.id)" />
             <restore-button v-if="contact.deleted_at" :href="route('contacts.restore', contact.id)" />
             <div v-if="contact.deleted_at">
@@ -47,6 +48,7 @@ import ShowPage from '@/Components/ShowPage.vue';
 import BreadCrumb from '@/Components/BreadCrumb.vue';
 import ContactCard from '@/Components/ContactCard.vue';
 import EditButton from '@/Components/Buttons/EditButton.vue';
+import LetterButton from '@/Components/Buttons/LetterButton.vue';
 import DeleteButton from '@/Components/Buttons/DeleteButton.vue';
 import RestoreButton from '@/Components/Buttons/RestoreButton.vue';
 import ContractTable from '../../Components/Contracts/ContractTable.vue';
@@ -59,6 +61,7 @@ export default {
     BreadCrumb,
     ContactCard,
     EditButton,
+    LetterButton,
     DeleteButton,
     RestoreButton,
     ContractTable,
