@@ -117,6 +117,12 @@ MwSt-Nr: CHE-226.272.050
                 <td>Telefon</td>
                 <td>{{ $contract->contact->phone }}</td>
             </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>E-Mail</td>
+                <td>{{ $contract->contact->email }}</td>
+            </tr>
         @endif
         <tr><td>&nbsp;</td></tr>
     </table>
