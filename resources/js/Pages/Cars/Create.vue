@@ -46,7 +46,7 @@ export default {
         colour: null,
         car_model_id: null,
         initial_date: new Date().toJSON().slice(0,10).split('-').reverse().join('.'),
-        last_check_date: new Date().toJSON().slice(0,10).split('-').reverse().join('.'),
+        last_check_date: null,
         kilometers: null,
         known_damage: null,
         notes: null,

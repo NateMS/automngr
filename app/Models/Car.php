@@ -62,7 +62,11 @@ class Car extends Model
 
     public function getLastCheckDateFormattedAttribute()
     {
-        return Carbon::parse($this->last_check_date)->format('d.m.Y');
+        if ($this->last_check_date) {
+            return Carbon::parse($this->last_check_date)->format('d.m.Y');
+        }
+
+        return null;
     }
 
     public function getDeletedAtAttribute($deleted_at)
