@@ -267,6 +267,7 @@ class ContractController extends Controller
                         'date' => $payment->date,
                         'amount' => $payment->amount->format(),
                         'type' => $payment->type,
+                        'print_link' => $payment->print_link,
                         'delete_link' => $payment->delete_link,
                 ];
             }),

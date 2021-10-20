@@ -20494,6 +20494,10 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Bezahlart',
         sortable: false
       }, {
+        key: 'print',
+        value: 'Quittung',
+        sortable: false
+      }, {
         key: 'delete',
         value: '',
         sortable: false
@@ -26153,26 +26157,27 @@ var _hoisted_13 = {
   "class": "flex items-center"
 };
 var _hoisted_14 = ["onClick"];
-var _hoisted_15 = {
-  key: 2,
+var _hoisted_15 = ["href"];
+var _hoisted_16 = {
+  key: 3,
   "class": "2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2 flex items-center"
 };
-var _hoisted_16 = {
+var _hoisted_17 = {
   key: 0,
   "class": "border-t w-px"
 };
-var _hoisted_17 = {
+var _hoisted_18 = {
   key: 0
 };
-var _hoisted_18 = ["colspan"];
-var _hoisted_19 = {
+var _hoisted_19 = ["colspan"];
+var _hoisted_20 = {
   key: 3
 };
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "inline-flex font-medium text-gray-500 ml-3"
 };
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Keine Einträge gefunden ");
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Keine Einträge gefunden ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
@@ -26294,12 +26299,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         name: "trash-alt"
       })], 8
       /* PROPS */
-      , _hoisted_14)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.resolve(col.key, row)), 1
+      , _hoisted_14)) : col.key == 'print' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+        key: 2,
+        "class": "2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2 flex items-center",
+        target: "_blank",
+        href: row.print_link
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
+        fill: "#b2b7ff",
+        "hover-fill": "indigo",
+        height: "24",
+        width: "24",
+        name: "file-download"
+      })], 8
+      /* PROPS */
+      , _hoisted_15)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.resolve(col.key, row)), 1
       /* TEXT */
       ))]);
     }), 128
     /* KEYED_FRAGMENT */
-    )), row.link && !$props.hideArrow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("td", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+    )), row.link && !$props.hideArrow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("td", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
       "class": "xl:pr-4 pr-2 xl:py-4 py-2 flex items-center",
       href: row.link,
       tabindex: "-1"
@@ -26319,18 +26337,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["href"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), $props.data.total === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+  )), $props.data.total === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
     "class": "border-t px-6 py-4",
     colspan: $props.columns.length
   }, "Keine Einträge gefunden", 8
   /* PROPS */
-  , _hoisted_18)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
+  , _hoisted_19)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_unicon, {
     fill: "#7e8491",
     "class": "mr-2",
     height: "24",
     width: "24",
     name: "meh"
-  }), _hoisted_21])])), $props.data.links ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Paginator, {
+  }), _hoisted_22])])), $props.data.links ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Paginator, {
     key: 4,
     "class": "mt-6",
     links: $props.data.links

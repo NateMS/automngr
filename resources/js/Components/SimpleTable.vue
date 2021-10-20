@@ -38,6 +38,9 @@
                         <span v-else-if="col.key == 'delete'" class="p-3 cursor-pointer" @click="this.$emit('delete', row.id)">
                             <unicon fill="#f04040" hover-fill="red" height="24" width="24" name="trash-alt"></unicon>
                         </span>
+                        <a v-else-if="col.key == 'print'" class="2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2 flex items-center" target="_blank" :href="row.print_link">
+                           <unicon fill="#b2b7ff" hover-fill="indigo" height="24" width="24" name="file-download"></unicon>
+                        </a>
                         <span v-else class="2xl:px-5 lg:px-3 px-2 2xl:py-4 lg:py-3 py-2 flex items-center">
                             {{ resolve(col.key, row) }}
                         </span>

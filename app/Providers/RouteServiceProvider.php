@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Car;
 use App\Models\Contact;
+use App\Models\Payment;
 use App\Models\Contract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -56,10 +57,14 @@ class RouteServiceProvider extends ServiceProvider
             });
 
             Route::bind('contract', function ($value) {
-                if (in_array(Route::currentRouteName(), ['contracts.show', 'contracts.restore', 'payments.destroy'])) {
+                if (in_array(Route::currentRouteName(), ['contracts.show', 'contracts.restore', 'payments.destroy', 'payments.print'])) {
                     return Contract::withTrashed()->find($value);
                 }
                 return Contract::find($value);
+            });
+
+            Route::bind('payment', function ($value) {
+                return \App\Models\Payment::find($value);
             });
 
             Route::prefix('api')

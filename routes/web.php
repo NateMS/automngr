@@ -72,6 +72,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                 Route::get('create', [PaymentController::class, 'create'])->name('payments.create');
                 Route::delete('delete', [PaymentController::class, 'destroy'])->name('payments.destroy');
                 Route::post('/', [PaymentController::class, 'store'])->name('payments.store');
+                Route::get('{payment}/print', [PaymentController::class, 'print'])->name('payments.print');
             });
 
         });

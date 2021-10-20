@@ -65,6 +65,11 @@ class Payment extends Model
         };  
     }
 
+    public function getPrintLinkAttribute()
+    {
+        return route('payments.print', [$this->contract->id, $this->id]);
+    }
+
     public function getDeleteLinkAttribute()
     {
         return route('payments.destroy', [$this->contract->id, $this->id]);

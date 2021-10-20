@@ -24,6 +24,7 @@ export default {
         { key: 'date', value: 'Datum', sortable: false },
         { key: 'amount', value: 'Betrag', sortable: false },
         { key: 'type', value: 'Bezahlart', sortable: false },
+        { key: 'print', value: 'Quittung', sortable: false },
         { key: 'delete', value: '', sortable: false },
       ],
     };
