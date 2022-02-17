@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
@@ -37,14 +37,14 @@ class Document extends Model
     public function getSizeAttribute($size)
     {
         if ($size / 1024 < 1) {
-            return $size . " B";
+            return $size.' B';
         }
 
         if ($size / 1024 / 1024 < 1) {
-            return floor($size / 1024) . " KB";
+            return floor($size / 1024).' KB';
         }
 
-        return floor($size / 1024 / 1024) . " MB";
+        return floor($size / 1024 / 1024).' MB';
     }
 
     public function getLinkAttribute()

@@ -11,7 +11,8 @@ class DocumentController extends Controller
     public function show(Document $document)
     {
         if (file_exists($document->path)) {
-            header('Content-Disposition: filename="' . $document->name . '"');
+            header('Content-Disposition: filename="'.$document->name.'"');
+
             return response()->file($document->path);
         }
 
@@ -22,12 +23,12 @@ class DocumentController extends Controller
     {
         $class = $request->get('documentable_type');
         $id = $request->get('documentable_id');
-        if (!in_array($class, ['contracts', 'cars', 'contacts'])) {
+        if (! in_array($class, ['contracts', 'cars', 'contacts'])) {
             return [];
         }
 
         $file = $request->file()['document'];
-        $internalName = date('Y-m-d-H-i-s') . '.' . $file->extension();
+        $internalName = date('Y-m-d-H-i-s').'.'.$file->extension();
         $document = Document::create([
             'name' => $file->getClientOriginalName(),
             'internal_name' => $internalName,
@@ -50,10 +51,11 @@ class DocumentController extends Controller
 
     public function destroy(Request $request)
     {
-        $document = Document::find((int)$request->get('id'));
-        
-        if (!$document) {
+        $document = Document::find((int) $request->get('id'));
+
+        if (! $document) {
             session()->flash('flash.banner', 'Fehler beim Löschen, Dokument nicht gefunden.');
+
             return Redirect::back();
         }
 
@@ -63,6 +65,7 @@ class DocumentController extends Controller
 
         $document->delete();
         session()->flash('flash.banner', 'Dokument gelöscht.');
+
         return Redirect::back();
     }
 }

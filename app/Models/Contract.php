@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use Cknow\Money\Money;
 use App\Enums\ContractType;
 use App\Enums\InsuranceType;
+use Carbon\Carbon;
+use Cknow\Money\Money;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Contract extends Model
 {
@@ -47,31 +47,26 @@ class Contract extends Model
 
     public function getPaidAttribute()
     {
-        
         return Money::CHF($this->payments()->sum('amount'));
     }
 
     public function getPaidInCashAttribute()
     {
-        
         return Money::CHF($this->payments()->cashOnly()->sum('amount'));
     }
 
     public function getPaidInTransactionAttribute()
     {
-        
         return Money::CHF($this->payments()->transactionOnly()->sum('amount'));
     }
 
     public function getPaidInCembraAttribute()
     {
-        
         return Money::CHF($this->payments()->cembraOnly()->sum('amount'));
     }
 
     public function getLeftToPayAttribute()
     {
-        
         return $this->price->subtract($this->paid);
     }
 
@@ -92,18 +87,18 @@ class Contract extends Model
         if ($deleted_at) {
             return Carbon::parse($deleted_at)->format('d.m.Y');
         }
-        
+
         return null;
     }
 
     public function isBuyContract()
     {
-        return $this->type === (string)ContractType::BuyContract;
+        return $this->type === (string) ContractType::BuyContract;
     }
 
     public function isSellContract()
     {
-        return $this->type === (string)ContractType::SellContract;
+        return $this->type === (string) ContractType::SellContract;
     }
 
     public function getTypeFormattedAttribute()
@@ -158,11 +153,11 @@ class Contract extends Model
 
     public function scopeBuyContracts($query)
     {
-        $query->where('type', (string)ContractType::BuyContract);
+        $query->where('type', (string) ContractType::BuyContract);
     }
 
     public function scopeSellContracts($query)
     {
-        $query->where('type', (string)ContractType::SellContract);
+        $query->where('type', (string) ContractType::SellContract);
     }
 }

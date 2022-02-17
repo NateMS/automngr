@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Inertia\Inertia;
-use App\Models\Payment;
-use App\Models\Contract;
-use Barryvdh\DomPDF\Facade as PDF;
 use App\Enums\PaymentType;
+use App\Models\Contract;
+use App\Models\Payment;
+use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
+use Inertia\Inertia;
 
 class PaymentController extends Controller
 {
@@ -22,7 +22,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $request->merge([
-            'type' => (string)$request->get('type'),
+            'type' => (string) $request->get('type'),
         ]);
 
         $request->validate([
@@ -39,6 +39,7 @@ class PaymentController extends Controller
         $payment = Payment::create($request->all());
 
         session()->flash('flash.banner', 'Einzahlung gespeichert.');
+
         return Redirect::route('contracts.show', $payment->contract);
     }
 
@@ -46,24 +47,25 @@ class PaymentController extends Controller
     {
         $contxt = stream_context_create([
             'ssl' => [
-                'verify_peer' => FALSE,
-                'verify_peer_name' => FALSE,
-                'allow_self_signed'=> TRUE
-            ]
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed'=> true,
+            ],
         ]);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('receipt', compact('contract', 'payment'));
         $pdf->getDomPDF()->setHttpContext($contxt);
-        return $pdf->stream($payment->date . '_quittung.pdf');
+
+        return $pdf->stream($payment->date.'_quittung.pdf');
     }
 
     public function destroy(Request $request, Contract $contract)
     {
-        if (Payment::destroy((int)$request->get('id'))) {
+        if (Payment::destroy((int) $request->get('id'))) {
             session()->flash('flash.banner', 'Einzahlung gelöscht.');
         } else {
             session()->flash('flash.banner', 'Fehler beim Löschen, Einzahlung nicht gefunden.');
         }
-        
+
         return Redirect::back();
     }
 }

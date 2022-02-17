@@ -14,5 +14,6 @@ use BenSampo\Enum\Enum;
 final class ContractType extends Enum
 {
     const BuyContract = '0';
+
     const SellContract = '1';
 }

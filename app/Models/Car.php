@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use App\Enums\ContractType;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Car extends Model
 {
@@ -31,18 +31,18 @@ class Car extends Model
 
     public function getNameAttribute()
     {
-        if (!$this->carModel) {
+        if (! $this->carModel) {
             return '';
         }
 
-        $out = $this->brand->name . ' ' . $this->carModel->name;
+        $out = $this->brand->name.' '.$this->carModel->name;
 
         return $out;
     }
 
     public function getNameWithYearAttribute()
     {
-        return $this->name . ' (' . $this->year . ')';
+        return $this->name.' ('.$this->year.')';
     }
 
     public function getYearAttribute()
@@ -74,7 +74,7 @@ class Car extends Model
         if ($deleted_at) {
             return Carbon::parse($deleted_at)->format('d.m.Y');
         }
-        
+
         return null;
     }
 
@@ -127,10 +127,10 @@ class Car extends Model
     {
         return $query->withCount([
             'contracts AS buy_contracts_count' => function ($query) {
-                $query->where('type', (string)ContractType::BuyContract);
+                $query->where('type', (string) ContractType::BuyContract);
             },
             'contracts AS sell_contracts_count' => function ($query) {
-                $query->where('type', (string)ContractType::SellContract);
+                $query->where('type', (string) ContractType::SellContract);
             },
         ]);
     }
@@ -151,9 +151,9 @@ class Car extends Model
             $parts = explode(' ', $search);
             foreach ($parts as $part) {
                 $query->where(function ($query) use ($part) {
-                    $query->orWhere('colour', 'like', $part . '%')
-                        ->orWhere('stammnummer', 'like', $part . '%')
-                        ->orWhere('vin', 'like', $part . '%')
+                    $query->orWhere('colour', 'like', $part.'%')
+                        ->orWhere('stammnummer', 'like', $part.'%')
+                        ->orWhere('vin', 'like', $part.'%')
                         ->orWhereHas('carModel', function ($query) use ($part) {
                             $query->where('name', 'like', $part.'%')
                             ->orWhereHas('brand', function ($query) use ($part) {
@@ -169,10 +169,8 @@ class Car extends Model
                 $query->onlyTrashed();
             }
         })->when($filters['brand'] ?? null, function ($query, $brand) {
-            $query->whereHas('carModel', function($q) use ($brand)
-            {
+            $query->whereHas('carModel', function ($q) use ($brand) {
                 $q->where('brand_id', '=', $brand);
-            
             })->get();
         });
     }

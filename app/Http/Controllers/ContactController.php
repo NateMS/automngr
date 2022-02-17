@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Exports\Export;
 use App\Models\Contact;
 use App\Models\Contract;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ContactController extends Controller
 {
@@ -27,7 +27,8 @@ class ContactController extends Controller
         return $this->renderContactsList($request, Contact::has('sellContracts'), 'Contacts/Buyers');
     }
 
-    private function renderContactsList(Request $request, $contacts, string $renderPage) {
+    private function renderContactsList(Request $request, $contacts, string $renderPage)
+    {
         $direction = $this->getDirection($request);
         $sortBy = $this->getSortBy($request);
         $contacts = $this->getWithCustomSort($contacts, $sortBy, $direction);
@@ -56,9 +57,9 @@ class ContactController extends Controller
     }
 
     public function letter(Contact $contact)
-    { 
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(resource_path() . '/docx/letter.docx');
-        $templateProcessor->setValue('date', date("d.m.Y"));
+    {
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(resource_path().'/docx/letter.docx');
+        $templateProcessor->setValue('date', date('d.m.Y'));
         $templateProcessor->setValue('company', $contact->company);
         $templateProcessor->setValue('name', $contact->name);
         $templateProcessor->setValue('address', $contact->address);
@@ -66,28 +67,28 @@ class ContactController extends Controller
         $templateProcessor->setValue('country', $contact->country !== 'CH' ? $contact->country : '');
 
         ob_start();
-        $templateProcessor->saveAs("php://output");
+        $templateProcessor->saveAs('php://output');
         $contents = ob_get_contents();
         ob_end_clean();
 
         return response()->streamDownload(function () use ($contents) {
             echo $contents;
-        }, 'Briefvorlage ' . $contact->title . '.docx');
+        }, 'Briefvorlage '.$contact->title.'.docx');
     }
 
     public function print(Request $request)
     {
-       return $this->printList($request, Contact::query(), date('Y-m-d') . '-Alle-Kontakte.xlsx');
+        return $this->printList($request, Contact::query(), date('Y-m-d').'-Alle-Kontakte.xlsx');
     }
 
     public function buyersPrint(Request $request)
     {
-       return $this->printList($request, Contact::has('buyContracts'), date('Y-m-d') . '-Verkäufer.xlsx');
+        return $this->printList($request, Contact::has('buyContracts'), date('Y-m-d').'-Verkäufer.xlsx');
     }
 
     public function sellersPrint(Request $request)
     {
-       return $this->printList($request, Contact::has('sellContracts'), date('Y-m-d') . '-Käufer.xlsx');
+        return $this->printList($request, Contact::has('sellContracts'), date('Y-m-d').'-Käufer.xlsx');
     }
 
     private function printList(Request $request, $contacts, $title)
@@ -160,6 +161,7 @@ class ContactController extends Controller
         );
 
         session()->flash('flash.banner', 'Kontakt erstellt.');
+
         return Redirect::route('contacts.show', $contact);
     }
 
@@ -202,7 +204,7 @@ class ContactController extends Controller
                 'city' => $contact->city,
                 'country' => $contact->country,
                 'deleted_at' => $contact->deleted_at,
-            ]
+            ],
         ]);
     }
 
@@ -239,21 +241,27 @@ class ContactController extends Controller
                     ->orderBy('date', 'desc')
                     ->with('car')
                     ->get()
-                    ->map(function ($contract) { return $this->getContractFields($contract); }),
+                    ->map(function ($contract) {
+                        return $this->getContractFields($contract);
+                    }),
                 'sell_contracts' => $contact->sellContracts()
                     ->orderBy('date', 'desc')
                     ->with('car')
                     ->get()
-                    ->map(function ($contract) { return $this->getContractFields($contract); }),
-            ]
+                    ->map(function ($contract) {
+                        return $this->getContractFields($contract);
+                    }),
+            ],
         ]);
     }
 
-    private function getContractFields(?Contract $contract) {
-        if (!$contract) {
+    private function getContractFields(?Contract $contract)
+    {
+        if (! $contract) {
             return null;
         }
         $car = $contract->car;
+
         return [
             'id' => $contract->id,
             'date' => $contract->date_formatted,
@@ -270,6 +278,7 @@ class ContactController extends Controller
         );
 
         session()->flash('flash.banner', 'Kontakt geändert.');
+
         return Redirect::route('contacts.show', $contact);
     }
 
@@ -293,6 +302,7 @@ class ContactController extends Controller
     {
         $contact->delete();
         session()->flash('flash.banner', 'Kontakt gelöscht.');
+
         return Redirect::back();
     }
 
@@ -300,6 +310,7 @@ class ContactController extends Controller
     {
         $contact->restore();
         session()->flash('flash.banner', 'Kontakt wiederhergestellt.');
+
         return Redirect::back();
     }
 }

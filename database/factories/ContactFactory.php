@@ -3,11 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Contact;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Provider\de_CH\PhoneNumber;
-use Faker\Provider\en_US\Person;
 use Faker\Provider\en_US\Address;
 use Faker\Provider\en_US\Company;
+use Faker\Provider\en_US\Person;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ContactFactory extends Factory
 {
@@ -30,7 +30,7 @@ class ContactFactory extends Factory
             'lastname' => $this->faker->lastName(),
             'phone' => $this->faker->PhoneNumber(),
             'email' => $this->faker->email(),
-            'address' => $this->faker->streetName() . ' ' . $this->faker->buildingNumber(),
+            'address' => $this->faker->streetName().' '.$this->faker->buildingNumber(),
             'zip' => $this->faker->randomNumber(4, true),
             'city' => $this->faker->city(),
             'country' => 'CH',

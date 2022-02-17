@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Contract;
+use App\Enums\ContractType;
+use App\Enums\InsuranceType;
 use App\Models\Car;
 use App\Models\Contact;
+use App\Models\Contract;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Enums\InsuranceType;
-use App\Enums\ContractType;
 
 class ContractFactory extends Factory
 {
@@ -32,8 +32,8 @@ class ContractFactory extends Factory
             'price' => $this->faker->numberBetween(150000, 3500000),
             'contact_id' => $this->faker->numberBetween(1, Contact::count()),
             'car_id' => $this->faker->numberBetween(1, Car::count()),
-            'insurance_type' => (string)InsuranceType::getRandomValue(),
-            'type' => (string)ContractType::getRandomValue(),
+            'insurance_type' => (string) InsuranceType::getRandomValue(),
+            'type' => (string) ContractType::getRandomValue(),
         ];
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentType;
+use App\Models\Contract;
 use Carbon\Carbon;
 use Cknow\Money\Money;
-use App\Models\Contract;
-use App\Enums\PaymentType;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
@@ -42,12 +42,11 @@ class Payment extends Model
 
     public function getTypeAttribute($type)
     {
-         
         return match ($type) {
             PaymentType::Transaction() => 'Banküberweisung',
             PaymentType::Cash() => 'Barzahlung',
             default => 'Überweisung via Cembra',
-        };;  
+        };
     }
 
     public function getTypeTextAttribute()
@@ -56,7 +55,7 @@ class Payment extends Model
             'Banküberweisung' => 'via Banküberweisung erhalten',
             'Barzahlung' => 'in bar erhalten',
             default => 'via Cembra-Überweisung erhalten',
-        };;  
+        };
     }
 
     public function getPrintLinkAttribute()
