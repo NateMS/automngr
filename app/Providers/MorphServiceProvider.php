@@ -14,9 +14,9 @@ class MorphServiceProvider extends ServiceProvider
    public function boot()
    {
       Relation::morphMap([
-        'contracts' => 'App\Models\Contract',
-        'cars' => 'App\Models\Car',
-        'contacts' => 'App\Models\Contact',
+        'contracts' => \App\Models\Contract::class,
+        'cars' => \App\Models\Car::class,
+        'contacts' => \App\Models\Contact::class,
       ]);
      }
 
