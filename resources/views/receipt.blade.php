@@ -62,42 +62,77 @@ MwSt-Nr: CHE-226.272.050
         </tr>
     </table>
     <table width="100%">
-        <tr>
-            <td width="15%"><b>Verkäufer</b></td>
-            <td width="35%">Your SwissCar GmbH</td>
-            <td width="15%"><b>Käufer</b></td>
-            <td width="35%">{{ $contract->contact->full_title }}</td>
-        </tr>
-        <tr>
-            <td>Strasse</td>
-            <td>Bernstrasse 27</td>
-            <td>Strasse</td>
-            <td>{{ $contract->contact->address }}</td>
-        </tr>
-        <tr>
-            <td>PLZ / Ort</td>
-            <td>8952 Schlieren</td>
-            <td>PLZ / Ort</td>
-            <td>{{ $contract->contact->full_city }}</td>
-        </tr>
-        <tr>
-            <td>Telefon</td>
-            <td>079 680 34 44</td>
-            <td>Telefon</td>
-            <td>{{ $contract->contact->phone }}</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>E-Mail</td>
-            <td>{{ $contract->contact->email }}</td>
-        </tr>
+        @if ($contract->isSellContract())
+            <tr>
+                <td width="15%"><b>Verkäufer</b></td>
+                <td width="35%">Your SwissCar GmbH</td>
+                <td width="15%"><b>Käufer</b></td>
+                <td width="35%">{{ $contract->contact->full_title }}</td>
+            </tr>
+            <tr>
+                <td>Strasse</td>
+                <td>Bernstrasse 27</td>
+                <td>Strasse</td>
+                <td>{{ $contract->contact->address }}</td>
+            </tr>
+            <tr>
+                <td>PLZ / Ort</td>
+                <td>8952 Schlieren</td>
+                <td>PLZ / Ort</td>
+                <td>{{ $contract->contact->full_city }}</td>
+            </tr>
+            <tr>
+                <td>Telefon</td>
+                <td>079 680 34 44</td>
+                <td>Telefon</td>
+                <td>{{ $contract->contact->phone }}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>E-Mail</td>
+                <td>{{ $contract->contact->email }}</td>
+            </tr>
+        @else
+            <tr>
+                <td width="15%"><b>Verkäufer</b></td>
+                <td width="35%">{{ $contract->contact->full_title }}</td>
+                <td width="15%"><b>Käufer</b></td>
+                <td width="35%">Your SwissCar GmbH</td>
+            </tr>
+            <tr>
+                <td>Strasse</td>
+                <td>{{ $contract->contact->address }}</td>
+                <td>Strasse</td>
+                <td>Bernstrasse 27</td>
+            </tr>
+            <tr>
+                <td>PLZ / Ort</td>
+                <td>{{ $contract->contact->full_city }}</td>
+                <td>PLZ / Ort</td>
+                <td>8952 Schlieren</td>
+            </tr>
+            <tr>
+                <td>Telefon</td>
+                <td>{{ $contract->contact->phone }}</td>
+                <td>Telefon</td>
+                <td>079 680 34 44</td>
+            </tr>
+            @if ($contract->contact->email != '')
+                <tr>
+                    <td>E-Mail</td>
+                    <td>{{ $contract->contact->email }}</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            @endif
+        @endif
         <tr><td>&nbsp;</td></tr>
     </table>
     <table width="100%">
         <tr><td>Fahrzeug:</td></tr>
         <tr>
-            <td><b>{{ $contract->car->name_with_year }}</b>, Stammnr.: {{ $contract->car->stammnummer }}</td>
+            <td><b>{{ $contract->car->name_with_year }}</b><br>Stammnummer: {{ $contract->car->stammnummer }}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
