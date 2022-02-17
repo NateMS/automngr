@@ -21,7 +21,7 @@
         "eslint-plugin-vue": "^7.11.1",
         "laravel-mix": "^6.0.6",
         "postcss": "^8.1.14",
-        "postcss-import": "^12.0.1",
+        "postcss-import": "^14.0.2",
         "tailwindcss": "^2.0.1",
         "vue-loader": "^16.1.2"
     },
@@ -32,7 +32,7 @@
         "vue": "^3.0.5",
         "vue-currency-input": "^2.0.0",
         "vue-multiselect": "^3.0.0-alpha.2",
-        "vue-unicons": "^3.2.1",
+        "vue-unicons": "^2.1.0",
         "vuex": "^4.0.0"
     }
 }
