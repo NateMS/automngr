@@ -77,20 +77,14 @@ class Contract extends Model
 
     public function getInsuranceTypeFormattedAttribute()
     {
-        switch ($this->insurance_type) {
-            case InsuranceType::QBase: 
-                return 'Q Basis';
-            case InsuranceType::OneStar:
-                return '1 Stern';
-            case InsuranceType::ThreeStar:
-                return '3 Stern';
-            case InsuranceType::FiveStar:
-                return '5 Stern';
-            case InsuranceType::FiveStarPlus:
-                return '5 Stern+';
-            default:
-                return 'Nein';
-        }
+        return match ($this->insurance_type) {
+            InsuranceType::QBase => 'Q Basis',
+            InsuranceType::OneStar => '1 Stern',
+            InsuranceType::ThreeStar => '3 Stern',
+            InsuranceType::FiveStar => '5 Stern',
+            InsuranceType::FiveStarPlus => '5 Stern+',
+            default => 'Nein',
+        };
     }
 
     public function getDeletedAtAttribute($deleted_at)

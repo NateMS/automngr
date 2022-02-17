@@ -130,18 +130,13 @@ class ContactController extends Controller
 
     private function getWithCustomSort($contacts, string $sortBy, string $direction)
     {
-        switch($sortBy) {
-            case 'company':
-                return $contacts->orderBy('company', $direction);
-            case 'fullCity':
-                return $contacts->orderBy('city', $direction);
-            case 'email':
-                return $contacts->orderBy('email', $direction);
-            case 'address':
-                return $contacts->orderBy('address', $direction);
-            default:
-                return $contacts->orderByName($direction);
-        }
+        return match ($sortBy) {
+            'company' => $contacts->orderBy('company', $direction),
+            'fullCity' => $contacts->orderBy('city', $direction),
+            'email' => $contacts->orderBy('email', $direction),
+            'address' => $contacts->orderBy('address', $direction),
+            default => $contacts->orderByName($direction),
+        };
     }
 
     private function getSortBy(Request $request)

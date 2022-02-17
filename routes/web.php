@@ -9,7 +9,6 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
-
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [ContractController::class, 'dashboard'])->name('dashboard');
 

@@ -224,48 +224,40 @@ class CarController extends Controller
 
     private function getWithCustomSort($cars, string $sortBy, string $direction)
     {
-        switch($sortBy) {
-            case 'name':
-                return $cars
-                    ->leftJoin('car_models', 'cars.car_model_id', '=', 'car_models.id')
-                    ->leftJoin('brands', 'car_models.brand_id', '=', 'brands.id')
-                    ->orderBy('brands.name', $direction)
-                    ->orderBy('car_models.name', $direction);
-            case 'initial_date':
-                return $cars->orderBy('initial_date', $direction);
-            case 'stammnummer':
-                return $cars->orderBy('stammnummer', $direction);
-            case 'buy_contract.date':
-                return $cars
-                    ->leftJoin('contracts', function($join) { 
-                        $join->on('contracts.car_id', '=', 'cars.id')
-                                ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '0' order by date desc limit 1)")); 
-                        })
-                    ->orderBy('contracts.date', $direction);
-            case 'buy_contract.price':
-                return $cars
-                    ->leftJoin('contracts', function($join) { 
-                        $join->on('contracts.car_id', '=', 'cars.id')
+        return match ($sortBy) {
+            'name' => $cars
+                ->leftJoin('car_models', 'cars.car_model_id', '=', 'car_models.id')
+                ->leftJoin('brands', 'car_models.brand_id', '=', 'brands.id')
+                ->orderBy('brands.name', $direction)
+                ->orderBy('car_models.name', $direction),
+            'initial_date' => $cars->orderBy('initial_date', $direction),
+            'stammnummer' => $cars->orderBy('stammnummer', $direction),
+            'buy_contract.date' => $cars
+                ->leftJoin('contracts', function($join) { 
+                    $join->on('contracts.car_id', '=', 'cars.id')
                             ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '0' order by date desc limit 1)")); 
-                        })
-                    ->orderBy('contracts.price', $direction);
-            case 'sell_contract.date':
-                return $cars
-                    ->leftJoin('contracts', function($join) { 
-                        $join->on('contracts.car_id', '=', 'cars.id')
-                                ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '1' order by date desc limit 1)")); 
-                        })
-                    ->orderBy('contracts.date', $direction);
-            case 'sell_contract.price':
-                return $cars
-                    ->leftJoin('contracts', function($join) { 
-                        $join->on('contracts.car_id', '=', 'cars.id')
+                    })
+                ->orderBy('contracts.date', $direction),
+            'buy_contract.price' => $cars
+                ->leftJoin('contracts', function($join) { 
+                    $join->on('contracts.car_id', '=', 'cars.id')
+                        ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '0' order by date desc limit 1)")); 
+                    })
+                ->orderBy('contracts.price', $direction),
+            'sell_contract.date' => $cars
+                ->leftJoin('contracts', function($join) { 
+                    $join->on('contracts.car_id', '=', 'cars.id')
                             ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '1' order by date desc limit 1)")); 
-                        })
-                    ->orderBy('contracts.price', $direction);
-            default:
-                return $cars->orderBy('initial_date', $direction);
-        }
+                    })
+                ->orderBy('contracts.date', $direction),
+            'sell_contract.price' => $cars
+                ->leftJoin('contracts', function($join) { 
+                    $join->on('contracts.car_id', '=', 'cars.id')
+                        ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '1' order by date desc limit 1)")); 
+                    })
+                ->orderBy('contracts.price', $direction),
+            default => $cars->orderBy('initial_date', $direction),
+        };
     }
 
     private function getSortBy(Request $request, $defaultSort)
