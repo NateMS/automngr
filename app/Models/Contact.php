@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use App\Enums\ContractType;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Contact extends Model
 {
@@ -49,7 +49,7 @@ class Contact extends Model
         if ($deleted_at) {
             return Carbon::parse($deleted_at)->format('d.m.Y');
         }
-        
+
         return null;
     }
 
@@ -63,7 +63,6 @@ class Contact extends Model
         return implode(', ', array_filter([$this->company, $this->name]));
     }
 
-
     public function getFullTitleWithAddressAttribute()
     {
         return implode(', ', array_filter([$this->full_title, $this->address, $this->full_city]));
@@ -71,7 +70,7 @@ class Contact extends Model
 
     public function getFullCityAttribute()
     {
-        return $this->zip . ' ' . $this->city;
+        return $this->zip.' '.$this->city;
     }
 
     public function getLinkAttribute()
@@ -105,17 +104,16 @@ class Contact extends Model
             $parts = explode(' ', $search);
             foreach ($parts as $part) {
                 $query->where(function ($query) use ($part) {
-                    $query->where('firstname', 'like', '%' . $part . '%')
-                        ->orWhere('lastname', 'like', '%' . $part . '%')
-                        ->orWhere('company', 'like', '%' . $part . '%')
-                        ->orWhere('email', 'like', '%' . $part . '%')
-                        ->orWhere('zip', 'like',  $part . '%')
-                        ->orWhere('city', 'like', '%' . $part . '%')
-                        ->orWhere('address', 'like', '%' . $part . '%')
-                        ->orWhere('phone', 'like', '%' . $part . '%');
+                    $query->where('firstname', 'like', '%'.$part.'%')
+                        ->orWhere('lastname', 'like', '%'.$part.'%')
+                        ->orWhere('company', 'like', '%'.$part.'%')
+                        ->orWhere('email', 'like', '%'.$part.'%')
+                        ->orWhere('zip', 'like', $part.'%')
+                        ->orWhere('city', 'like', '%'.$part.'%')
+                        ->orWhere('address', 'like', '%'.$part.'%')
+                        ->orWhere('phone', 'like', '%'.$part.'%');
                 });
             }
-           
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'with') {
                 $query->withTrashed();

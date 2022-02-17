@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Document;
 use App\Models\Contract;
+use App\Models\Document;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
 
 class DocumentFactory extends Factory
 {

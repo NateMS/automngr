@@ -2,21 +2,21 @@
 
 namespace App\Exports;
 
-use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\Contract;
-use Maatwebsite\Excel\Concerns\WithTitle;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use Maatwebsite\Excel\Concerns\WithColumnFormatting;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class Report implements FromCollection ,WithTitle, WithHeadings, WithStyles, WithColumnFormatting, ShouldAutoSize
+class Report implements FromCollection, WithTitle, WithHeadings, WithStyles, WithColumnFormatting, ShouldAutoSize
 {
     protected $year;
 
@@ -46,7 +46,7 @@ class Report implements FromCollection ,WithTitle, WithHeadings, WithStyles, Wit
         $cars = $cars->merge(Car::unsoldOnly()->get())->unique()->map(function ($car) {
             $bcontract = $car->latestBuyContract();
             $scontract = $car->latestSellContract();
-            if (!$car->isSold()) {
+            if (! $car->isSold()) {
                 $scontract = null;
             }
 
@@ -57,9 +57,9 @@ class Report implements FromCollection ,WithTitle, WithHeadings, WithStyles, Wit
                 'buy_price' => $bcontract ? $bcontract->price_for_excel : null,
                 'seller' => $bcontract ? $bcontract->contact->full_title_with_address : null,
                 'sell_date' => $scontract ? Date::dateTimeToExcel(Carbon::parse($scontract->date)) : null,
-                'sell_price' => $scontract ?  $scontract->price_for_excel : null,
+                'sell_price' => $scontract ? $scontract->price_for_excel : null,
                 'buyer' => $scontract ? $scontract->contact->full_title_with_address : null,
-                'lager' => !$scontract && $bcontract ? $bcontract->price_for_excel : null,
+                'lager' => ! $scontract && $bcontract ? $bcontract->price_for_excel : null,
             ];
         })->sortBy('buy_date');
 
@@ -86,6 +86,6 @@ class Report implements FromCollection ,WithTitle, WithHeadings, WithStyles, Wit
 
     public function title(): string
     {
-        return 'Wagenhandelbuch ' . $this->year;
+        return 'Wagenhandelbuch '.$this->year;
     }
 }

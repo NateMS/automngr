@@ -2,14 +2,15 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class Export implements FromCollection, WithHeadings, WithStyles
 {
     protected $model;
+
     protected $headings;
 
     public function __construct($model, $headings)

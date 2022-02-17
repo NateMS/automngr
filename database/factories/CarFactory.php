@@ -23,7 +23,7 @@ class CarFactory extends Factory
     public function definition()
     {
         return [
-            'stammnummer' => $this->faker->randomNumber(3, true) . '.' . $this->faker->randomNumber(3, true) . '.' . $this->faker->randomNumber(3, true),
+            'stammnummer' => $this->faker->randomNumber(3, true).'.'.$this->faker->randomNumber(3, true).'.'.$this->faker->randomNumber(3, true),
             'vin' => $this->faker->regexify('[A-Z]{3}ZZZ[A-Z0-9]{3}[A-Z1-9]{1}[A-Z]{1}[0-9]{6}'),
             'colour' => $this->faker->safeColorName(),
             'notes' => $this->faker->paragraph(),

@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CarController;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarModelController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
@@ -69,17 +69,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('restore', [ContractController::class, 'restore'])->name('contracts.restore');
             Route::get('print', [ContractController::class, 'print'])->name('contracts.print');
 
-            Route::prefix('payments')->group(function () { 
+            Route::prefix('payments')->group(function () {
                 Route::get('create', [PaymentController::class, 'create'])->name('payments.create');
                 Route::delete('delete', [PaymentController::class, 'destroy'])->name('payments.destroy');
                 Route::post('/', [PaymentController::class, 'store'])->name('payments.store');
                 Route::get('{payment}/print', [PaymentController::class, 'print'])->name('payments.print');
             });
-
         });
     });
 
-    Route::prefix('documents')->group(function () { 
+    Route::prefix('documents')->group(function () {
         Route::get('{document}', [DocumentController::class, 'show'])->name('documents.show');
         Route::delete('delete', [DocumentController::class, 'destroy'])->name('documents.destroy');
         Route::post('upload', [DocumentController::class, 'store'])->name('documents.store');

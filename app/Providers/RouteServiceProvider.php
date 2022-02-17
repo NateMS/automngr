@@ -4,13 +4,13 @@ namespace App\Providers;
 
 use App\Models\Car;
 use App\Models\Contact;
-use App\Models\Payment;
 use App\Models\Contract;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Models\Payment;
 use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -46,6 +46,7 @@ class RouteServiceProvider extends ServiceProvider
                 if (in_array(Route::currentRouteName(), ['cars.show', 'cars.restore'])) {
                     return Car::withTrashed()->find($value);
                 }
+
                 return Car::find($value);
             });
 
@@ -53,6 +54,7 @@ class RouteServiceProvider extends ServiceProvider
                 if (in_array(Route::currentRouteName(), ['contacts.show', 'contacts.restore'])) {
                     return Contact::withTrashed()->find($value);
                 }
+
                 return Contact::find($value);
             });
 
@@ -60,6 +62,7 @@ class RouteServiceProvider extends ServiceProvider
                 if (in_array(Route::currentRouteName(), ['contracts.show', 'contracts.restore', 'payments.destroy', 'payments.print'])) {
                     return Contract::withTrashed()->find($value);
                 }
+
                 return Contract::find($value);
             });
 
