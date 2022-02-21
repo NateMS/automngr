@@ -42,20 +42,26 @@ class Payment extends Model
 
     public function getTypeAttribute($type)
     {
-        return match ($type) {
-            PaymentType::Transaction() => 'Banküberweisung',
-            PaymentType::Cash() => 'Barzahlung',
-            default => 'Überweisung via Cembra',
-        };
+        switch ($type) {
+            case PaymentType::Transaction():
+                return 'Banküberweisung';
+            case PaymentType::Cash():
+                return 'Barzahlung';
+            default:
+                return 'Überweisung via Cembra';
+        }; 
     }
 
     public function getTypeTextAttribute()
     {
-        return match ($this->type) {
-            'Banküberweisung' => 'via Banküberweisung erhalten',
-            'Barzahlung' => 'in bar erhalten',
-            default => 'via Cembra-Überweisung erhalten',
-        };
+        switch ($this->type) {
+            case 'Banküberweisung':
+                return 'via Banküberweisung erhalten';
+            case 'Barzahlung':
+                return 'in bar erhalten';
+            default:
+                return 'via Cembra-Überweisung erhalten';
+        }; 
     }
 
     public function getPrintLinkAttribute()
