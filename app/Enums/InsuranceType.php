@@ -24,4 +24,6 @@ final class InsuranceType extends Enum
     const FiveStar = '4';
 
     const FiveStarPlus = '5';
+
+    const Ja = '6';
 }

@@ -78,6 +78,7 @@ class Contract extends Model
             InsuranceType::ThreeStar => '3 Stern',
             InsuranceType::FiveStar => '5 Stern',
             InsuranceType::FiveStarPlus => '5 Stern+',
+            InsuranceType::Ja => 'Ja',
             default => 'Nein',
         };
     }
