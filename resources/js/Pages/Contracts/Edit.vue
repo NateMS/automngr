@@ -51,6 +51,7 @@ export default {
         price: this.contract.price,
         notes: this.contract.notes,
         insurance_type: this.contract.insurance_type,
+        type: this.contract.type,
       },
     };
   },
