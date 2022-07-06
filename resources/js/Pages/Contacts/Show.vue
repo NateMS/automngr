@@ -9,6 +9,9 @@
 
         <template #info>
             <small-title title="Kontakt" class="mb-3" />
+            <div v-if="contact.deleted_at" class="col-span-12 bg-red-500 p-2 -mb-1 text-white rounded-t-md font-bold">
+                Kontakt gelöscht am {{ contact.deleted_at }}
+            </div>
             <contact-card :contact="contact" />
         </template>
 

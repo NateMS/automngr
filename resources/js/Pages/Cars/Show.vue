@@ -8,6 +8,9 @@
         </template>
         <template #info>
             <small-title title="Auto" class="mb-3" />
+            <div v-if="car.deleted_at" class="col-span-12 bg-red-500 p-2 -mb-1 text-white rounded-t-md font-bold">
+                Auto gelöscht am {{ car.deleted_at }}
+            </div>
             <car-card :car="car" />
         </template>
         <template #actions>

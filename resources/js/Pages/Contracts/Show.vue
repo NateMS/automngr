@@ -5,7 +5,11 @@
         </template>
         <template #info>
                     <small-title title="Vertragsinformationen" class="mb-3" />
-                    <div class="grid  grid-cols-12 gap-2 p-5 bg-white shadow rounded-md font-medium">
+                    <div v-if="contract.deleted_at" class="col-span-12 bg-red-500 p-2 -mb-1 text-white rounded-t-md font-bold">
+                        Vertrag gelöscht am {{ contract.deleted_at }}
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 p-5 bg-white shadow rounded-md font-medium">
+                      
                         <div class="col-span-4">
                             Datum
                         </div>
