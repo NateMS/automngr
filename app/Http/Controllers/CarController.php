@@ -122,7 +122,7 @@ class CarController extends Controller
                     'known_damage' => $car->known_damage,
                     'seller' =>  $contract ? $contract->contact->full_title : null,
                     'buy_date' =>  $contract ? $contract->date_formatted : null,
-                    'price' => $contract ? $contract->price : null,
+                    'price' => $contract ? $contract->price_for_excel : null,
                 ];
             });
 
