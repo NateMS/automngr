@@ -73,10 +73,10 @@ class CarController extends Controller
                     'known_damage' => $car->known_damage,
                     'seller' =>  $bcontract ? $bcontract->contact->full_title : null,
                     'buy_date' =>  $bcontract ? $bcontract->date_formatted : null,
-                    'price' => $bcontract ? $bcontract->price : null,
+                    'price' => $bcontract ? $bcontract->price_for_excel : null,
                     'buyer' =>  $scontract ? $scontract->contact->full_title : null,
                     'sell_date' =>  $scontract ? $scontract->date_formatted : null,
-                    'sell_price' => $scontract ? $scontract->price : null,
+                    'sell_price' => $scontract ? $scontract->price_for_excel : null,
                 ];
             });
 
@@ -172,10 +172,10 @@ class CarController extends Controller
                     'known_damage' => $car->known_damage,
                     'seller' =>  $bcontract ? $bcontract->contact->full_title : null,
                     'buy_date' =>  $bcontract ? $bcontract->date_formatted : null,
-                    'price' => $bcontract ? $bcontract->price : null,
+                    'price' => $bcontract ? $bcontract->price_for_excel : null,
                     'buyer' =>  $scontract ? $scontract->contact->full_title : null,
                     'sell_date' =>  $scontract ? $scontract->date_formatted : null,
-                    'sell_price' => $scontract ? $scontract->price : null,
+                    'sell_price' => $scontract ? $scontract->price_for_excel : null,
                 ];
             });
 
