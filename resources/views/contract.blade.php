@@ -187,10 +187,12 @@ MwSt-Nr: CHE-226.272.050
             <td>Restbetrag</td>
             <td>{{ $contract->left_to_pay }}</td>
         </tr>
-        <tr>
-            <td>Bankverbindung IBAN</td>
-            <td>CH69 0900 0000 1549 3981 7</td>
-        </tr>
+        @if ($contract->isSellContract())
+            <tr>
+                <td>Bankverbindung IBAN</td>
+                <td>CH69 0900 0000 1549 3981 7</td>
+            </tr>
+        @endif
         <tr>
             <td>Lieferdatum</td>
             <td>{{ $contract->delivery_date_formatted }}</td>
