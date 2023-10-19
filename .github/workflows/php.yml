@@ -43,6 +43,9 @@ jobs:
     - name: Build
       run: npm run build --if-present
 
+    - name: Laravel mix
+      run: mix --production
+
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
