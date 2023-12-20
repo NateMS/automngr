@@ -91,14 +91,16 @@ export default {
   methods: {
     fetchCity(newVal, oldVal) {
       if (newVal !== oldVal && newVal.length === 4 && this.form.country === 'CH') {
-        axios.get(`https://swisspost.opendatasoft.com/api/records/1.0/search/?dataset=plz_verzeichnis_v2&q=&facet=ortbez18&refine.postleitzahl=${newVal}`)
+        axios.get(`https://openplzapi.org/ch/Localities?postalCode=${newVal}`)
           .then((response) => {
-            let records = response.data.records;
-            if (records.length > 1) {
+            console.log(response);
+            let data = response.data;
+            console.log(data);
+            /*if (records.length > 1) {
               records = records.filter(rec => rec.geometry);
-            }
-            if (records[0]) {
-              this.form.city = records[0].fields.ortbez18;
+            }*/
+            if (data[0]) {
+              this.form.city = data[0].name;
             }
           });
       }
