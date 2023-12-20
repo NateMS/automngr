@@ -20,9 +20,19 @@ Steps:
 2. add user credentials in .env
 2. run `composer update --ignore-platform-reqs`
 3. run `composer install --ignore-platform-reqs`
-1. run `./vendor/bin/sail php artisan key:generate`
-2. start app by running `./vendor/bin/sail up` inside the main directory (or configure a bash alias: `alias sail='bash vendor/bin/sail'`) then you can use `sail up`
-3. Run migrations and seed db: `sail php artisan migrate:fresh --seed`
-4. `sail npm run watch`
-5. Access the web application at `0.0.0.0`
-6. The default credentials can be seen/set in the .env
+4. start app by running `./vendor/bin/sail up` inside the main directory (or configure a bash alias: `alias sail='bash vendor/bin/sail'`) then you can use `sail up`
+5. run `./vendor/bin/sail php artisan key:generate`
+6. Run migrations and seed db: `sail php artisan migrate:fresh --seed`
+7. `sail npm run watch`
+8. Access the web application at `0.0.0.0`
+9. The default credentials can be seen/set in the .env
+
+If you get permission error when trying to generate the key:
+```
+sail root-shell
+chmod -R 777 /var/www/html/
+chown -R www-data:www-data /var/www/html/
+exit
+sail down
+sail up -d
+```
