@@ -93,9 +93,7 @@ export default {
       if (newVal !== oldVal && newVal.length === 4 && this.form.country === 'CH') {
         axios.get(`https://openplzapi.org/ch/Localities?postalCode=${newVal}`)
           .then((response) => {
-            console.log(response);
             let data = response.data;
-            console.log(data);
             /*if (records.length > 1) {
               records = records.filter(rec => rec.geometry);
             }*/
