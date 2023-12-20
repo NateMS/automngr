@@ -36,20 +36,20 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Nadim Salloum',
-            'email' => env('USER_1_EMAIL'),
-            'password' => bcrypt(env('USER_1_PW')),
+            'email' => env('USER_1_EMAIL', 'test@test.ch'),
+            'password' => bcrypt(env('USER_1_PW', 'abc123')),
         ]);
 
         User::factory()->create([
             'name' => 'Mohamad Salloum',
-            'email' => env('USER_2_EMAIL'),
-            'password' => bcrypt(env('USER_2_PW')),
+            'email' => env('USER_2_EMAIL', 'test2@test.ch'),
+            'password' => bcrypt(env('USER_2_PW', 'abc123')),
         ]);
 
         User::factory()->create([
             'name' => 'Nadim Salloum',
-            'email' => env('USER_3_EMAIL'),
-            'password' => bcrypt(env('USER_3_PW')),
+            'email' => env('USER_3_EMAIL', 'test3@test.ch'),
+            'password' => bcrypt(env('USER_3_PW', 'abc123')),
         ]);
 
         foreach ($this->getBrands() as $brandItem) {
