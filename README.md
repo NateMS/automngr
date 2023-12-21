@@ -5,7 +5,7 @@ Manage Cars, Contacts and Contracts
 - Export as Excel
 - Print Contracts as PDF
 
-Running on Laravel 8
+Running on Laravel 9
 
 ## Project Setup
 
