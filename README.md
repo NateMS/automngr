@@ -18,7 +18,7 @@ Steps:
     -u "$(id -u):$(id -g)" \
     -v $(pwd):/opt \
     -w /opt \
-    laravelsail/php80-composer:latest \
+    laravelsail/php81-composer:latest \
     composer install --ignore-platform-reqs
 `
 3. start app by running `./vendor/bin/sail up` inside the main directory (or configure a bash alias: `alias sail='bash vendor/bin/sail'`) then you can use `sail up`
