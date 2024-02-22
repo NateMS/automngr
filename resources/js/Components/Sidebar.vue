@@ -78,7 +78,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import JetNavLink from '@/Jetstream/NavLink';
+import JetNavLink from '@/Jetstream/NavLink.vue';
 
 export default {
   components: {

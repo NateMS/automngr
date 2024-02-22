@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout';
+import Layout from '@/Layouts/Layout.vue';
 import BreadCrumb from '@/Components/BreadCrumb.vue';
 import ContactCreateOrSelect from '@/Components/Contacts/CreateOrSelect.vue';
 import CarCreateOrSelect from '@/Components/Cars/CreateOrSelect.vue';

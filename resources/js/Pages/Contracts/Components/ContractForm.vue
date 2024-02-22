@@ -73,14 +73,14 @@
 </template>
 
 <script>
-import JetButton from '@/Jetstream/Button';
+import JetButton from '@/Jetstream/Button.vue';
 import JetLabel from '@/Jetstream/Label.vue';
-import JetActionMessage from '@/Jetstream/ActionMessage';
-import JetInputError from '@/Jetstream/InputError';
-import JetInput from '@/Jetstream/Input';
-import JetFormSection from '@/Jetstream/FormSection';
-import { useForm } from '@inertiajs/inertia-vue3';
-import CurrencyInput from '@/Components/CurrencyInput';
+import JetActionMessage from '@/Jetstream/ActionMessage.vue';
+import JetInputError from '@/Jetstream/InputError.vue';
+import JetInput from '@/Jetstream/Input.vue';
+import JetFormSection from '@/Jetstream/FormSection.vue';
+import { useForm } from '@inertiajs/vue3';
+import CurrencyInput from '@/Components/CurrencyInput.vue';
 
 export default {
   components: {

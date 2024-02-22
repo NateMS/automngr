@@ -83,10 +83,10 @@
 <script>
 import JetLabel from '@/Jetstream/Label.vue';
 import JetInput from '@/Jetstream/Input.vue';
-import JetActionMessage from '@/Jetstream/ActionMessage';
-import JetInputError from '@/Jetstream/InputError';
+import JetActionMessage from '@/Jetstream/ActionMessage.vue';
+import JetInputError from '@/Jetstream/InputError.vue';
 import Multiselect from 'vue-multiselect';
-import CurrencyInput from '@/Components/CurrencyInput';
+import CurrencyInput from '@/Components/CurrencyInput.vue';
 
 export default {
   components: {

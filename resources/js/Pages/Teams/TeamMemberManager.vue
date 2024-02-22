@@ -140,7 +140,7 @@
                                 <!-- Leave Team -->
                                 <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmLeavingTeam"
-                                                    v-if="$page.props.user.id === user.id">
+                                                    v-if="$page.props.auth.user.id === user.id">
                                     Leave
                                 </button>
 
@@ -247,15 +247,15 @@
 </template>
 
 <script>
-import JetActionMessage from '@/Jetstream/ActionMessage';
+import JetActionMessage from '@/Jetstream/ActionMessage.vue';
 import JetActionSection from '@/Jetstream/ActionSection';
-import JetButton from '@/Jetstream/Button';
+import JetButton from '@/Jetstream/Button.vue';
 import JetConfirmationModal from '@/Jetstream/ConfirmationModal';
 import JetDangerButton from '@/Jetstream/DangerButton';
 import JetDialogModal from '@/Jetstream/DialogModal';
-import JetFormSection from '@/Jetstream/FormSection';
-import JetInput from '@/Jetstream/Input';
-import JetInputError from '@/Jetstream/InputError';
+import JetFormSection from '@/Jetstream/FormSection.vue';
+import JetInput from '@/Jetstream/Input.vue';
+import JetInputError from '@/Jetstream/InputError.vue';
 import JetLabel from '@/Jetstream/Label';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton';
 import JetSectionBorder from '@/Jetstream/SectionBorder';
@@ -336,7 +336,7 @@ export default {
     },
 
     leaveTeam() {
-      this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.props.user]));
+      this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.props.auth.user]));
     },
 
     confirmTeamMemberRemoval(teamMember) {

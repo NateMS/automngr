@@ -21,9 +21,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import Sidebar from '@/Components/Sidebar';
-import Navbar from '@/Components/Navbar';
-import JetBanner from '@/Jetstream/Banner';
+import Sidebar from '@/Components/Sidebar.vue';
+import Navbar from '@/Components/Navbar.vue';
+import JetBanner from '@/Jetstream/Banner.vue';
 
 export default {
   computed: {

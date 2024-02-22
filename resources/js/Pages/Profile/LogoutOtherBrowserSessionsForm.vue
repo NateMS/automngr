@@ -87,12 +87,12 @@
 </template>
 
 <script>
-import JetActionMessage from '@/Jetstream/ActionMessage';
+import JetActionMessage from '@/Jetstream/ActionMessage.vue';
 import JetActionSection from '@/Jetstream/ActionSection';
-import JetButton from '@/Jetstream/Button';
+import JetButton from '@/Jetstream/Button.vue';
 import JetDialogModal from '@/Jetstream/DialogModal';
-import JetInput from '@/Jetstream/Input';
-import JetInputError from '@/Jetstream/InputError';
+import JetInput from '@/Jetstream/Input.vue';
+import JetInputError from '@/Jetstream/InputError.vue';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton';
 
 export default {

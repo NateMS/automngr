@@ -1,7 +1,6 @@
 // Import modules...
 import { createApp, h } from 'vue';
-import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
-import { InertiaProgress } from '@inertiajs/progress';
+import { createInertiaApp, Link } from '@inertiajs/vue3'
 import Unicon from 'vue-unicons';
 import { createStore } from 'vuex';
 import {
@@ -36,20 +35,22 @@ const store = createStore({
 
 const el = document.getElementById('app');
 
-createApp({
-  render: () => h(InertiaApp, {
-    initialPage: JSON.parse(el.dataset.page),
-    resolveComponent: (name) => require(`./Pages/${name}`).default,
-  }),
+createInertiaApp({
+  progress: {
+    color: '#4B5563',
+  },
+  resolve: (name) => require(`./Pages/${name}.vue`),
+  setup({ el, App, props, plugin }) {
+    return createApp({ render: () => h(App, props) })
+      .use(plugin)
+      .use(store)
+      .component('inertia-link', Link)
+      .use(Unicon, {
+        fill: '#4B5563',
+        height: 32,
+        width: 32,
+      })
+      .mixin({ methods: { route } })
+      .mount(el)      
+  },
 })
-  .mixin({ methods: { route } })
-  .use(InertiaPlugin)
-  .use(store)
-  .use(Unicon, {
-    fill: '#4B5563',
-    height: 32,
-    width: 32,
-  })
-  .mount(el);
-
-InertiaProgress.init({ color: '#4B5563' });

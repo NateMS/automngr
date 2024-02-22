@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import JetButton from '@/Jetstream/Button';
-import JetActionMessage from '@/Jetstream/ActionMessage';
-import JetFormSection from '@/Jetstream/FormSection';
+import JetButton from '@/Jetstream/Button.vue';
+import JetActionMessage from '@/Jetstream/ActionMessage.vue';
+import JetFormSection from '@/Jetstream/FormSection.vue';
 import CarFormFields from '@/Pages/Cars/Components/CarFormFields.vue';
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/vue3';
 
 export default {
   components: {

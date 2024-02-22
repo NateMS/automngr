@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import AppLayout from '@/Layouts/AppLayout';
+import AppLayout from '@/Layouts/AppLayout.vue';
 import JetSectionBorder from '@/Jetstream/SectionBorder';
 import TeamMemberManager from './TeamMemberManager';
 import DeleteTeamForm from './DeleteTeamForm';

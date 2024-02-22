@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import Paginator from '@/Components/Paginator';
+import Paginator from '@/Components/Paginator.vue';
 import StandardButton from '@/Components/Buttons/StandardButton.vue';
 import { pickBy, throttle, mapValues } from 'lodash';
 

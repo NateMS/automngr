@@ -9,7 +9,7 @@
         <div>
             <div class="max-w-7xl py-10 sm:px-6 lg:px-8">
                 <div v-if="$page.props.jetstream.canUpdateProfileInformation">
-                    <update-profile-information-form :user="$page.props.user" />
+                    <update-profile-information-form :user="$page.props.auth.user" />
 
                     <jet-section-border />
                 </div>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout';
+import Layout from '@/Layouts/Layout.vue';
 import JetSectionBorder from '@/Jetstream/SectionBorder';
 import DeleteUserForm from './DeleteUserForm';
 import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm';

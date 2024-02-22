@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout';
+import Layout from '@/Layouts/Layout.vue';
 import DashItem from '@/Components/Dashboard/DashItem.vue';
 import ContractTable from '@/Components/Contracts/ContractTable.vue';
 

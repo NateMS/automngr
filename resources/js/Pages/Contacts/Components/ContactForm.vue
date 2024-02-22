@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import JetButton from '@/Jetstream/Button';
-import JetActionMessage from '@/Jetstream/ActionMessage';
-import JetFormSection from '@/Jetstream/FormSection';
-import { useForm } from '@inertiajs/inertia-vue3';
+import JetButton from '@/Jetstream/Button.vue';
+import JetActionMessage from '@/Jetstream/ActionMessage.vue';
+import JetFormSection from '@/Jetstream/FormSection.vue';
+import { useForm } from '@inertiajs/vue3';
 import ContactFormFields from './ContactFormFields';
 
 export default {

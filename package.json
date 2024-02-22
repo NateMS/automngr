@@ -11,8 +11,6 @@
         "eslint": "./node_modules/.bin/eslint resources/js/ --ext .js,.vue --fix"
     },
     "devDependencies": {
-        "@inertiajs/inertia": "^0.8.4",
-        "@inertiajs/progress": "^0.2.4",
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/typography": "^0.3.0",
         "@types/lodash": "^4.14.168",
@@ -26,13 +24,13 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "@inertiajs/inertia-vue3": "^0.3.5",
-        "axios": "^0.21",
+        "@inertiajs/vue3": "^1.0.14",
+        "axios": "^1.6.7",
         "lodash": "^4.17.21",
-        "vue": "^3.0.5",
+        "vue": "^3.2.13",
         "vue-currency-input": "^2.0.0",
-        "vue-multiselect": "^3.0.0-alpha.2",
+        "vue-multiselect": "^3.0.0-beta.3",
         "vue-unicons": "^3.3.1",
-        "vuex": "^4.0.0"
+        "vuex": "^4.0.2"
     }
 }

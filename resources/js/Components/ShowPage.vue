@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout';
+import Layout from '@/Layouts/Layout.vue';
 import SmallTitle from './SmallTitle.vue';
 
 export default {

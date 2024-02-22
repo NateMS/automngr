@@ -39,13 +39,13 @@
 </template>
 
 <script>
-import JetButton from '@/Jetstream/Button';
+import JetButton from '@/Jetstream/Button.vue';
 import JetLabel from '@/Jetstream/Label.vue';
-import JetInputError from '@/Jetstream/InputError';
-import JetInput from '@/Jetstream/Input';
-import { useForm } from '@inertiajs/inertia-vue3';
+import JetInputError from '@/Jetstream/InputError.vue';
+import JetInput from '@/Jetstream/Input.vue';
+import { useForm } from '@inertiajs/vue3';
 import DialogModal from '@/Jetstream/DialogModal.vue';
-import CurrencyInput from '@/Components/CurrencyInput';
+import CurrencyInput from '@/Components/CurrencyInput.vue';
 
 export default {
   components: {

@@ -45,10 +45,10 @@
 <script>
 import CarFormFields from '@/Pages/Cars/Components/CarFormFields.vue';
 import CarCard from '@/Components/CarCard.vue';
-import JetFormSection from '@/Jetstream/FormSection';
+import JetFormSection from '@/Jetstream/FormSection.vue';
 import Multiselect from 'vue-multiselect';
 import JetLabel from '@/Jetstream/Label.vue';
-import JetButton from '@/Jetstream/Button';
+import JetButton from '@/Jetstream/Button.vue';
 
 export default {
   components: {

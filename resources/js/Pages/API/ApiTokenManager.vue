@@ -164,16 +164,16 @@
 </template>
 
 <script>
-import JetActionMessage from '@/Jetstream/ActionMessage';
+import JetActionMessage from '@/Jetstream/ActionMessage.vue';
 import JetActionSection from '@/Jetstream/ActionSection';
-import JetButton from '@/Jetstream/Button';
+import JetButton from '@/Jetstream/Button.vue';
 import JetConfirmationModal from '@/Jetstream/ConfirmationModal';
 import JetDangerButton from '@/Jetstream/DangerButton';
 import JetDialogModal from '@/Jetstream/DialogModal';
-import JetFormSection from '@/Jetstream/FormSection';
-import JetInput from '@/Jetstream/Input';
+import JetFormSection from '@/Jetstream/FormSection.vue';
+import JetInput from '@/Jetstream/Input.vue';
 import JetCheckbox from '@/Jetstream/Checkbox';
-import JetInputError from '@/Jetstream/InputError';
+import JetInputError from '@/Jetstream/InputError.vue';
 import JetLabel from '@/Jetstream/Label';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton';
 import JetSectionBorder from '@/Jetstream/SectionBorder';

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/vue3';
 import DocumentItem from './Item.vue';
 import DocumentUpload from './Upload.vue';
 import SmallTitle from './../SmallTitle.vue';

@@ -14,7 +14,7 @@
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
                     <jet-label for="year" value="Jahr" />
-                    <select v-model="year" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    <select :year class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                         <option v-for="year in years" :value="year" v-bind:key="year" :selected="this.year == year">{{ year }}</option>
                     </select>
                 </div>
@@ -31,9 +31,10 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout';
+import Layout from '@/Layouts/Layout.vue';
 import JetLabel from '@/Jetstream/Label.vue';
-import JetFormSection from '@/Jetstream/FormSection';
+import { ref } from 'vue'
+import JetFormSection from '@/Jetstream/FormSection.vue';
 
 export default {
   components: {

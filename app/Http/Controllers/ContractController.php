@@ -10,7 +10,7 @@ use App\Models\Car;
 use App\Models\Contact;
 use App\Models\Contract;
 use App\Models\Payment;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;

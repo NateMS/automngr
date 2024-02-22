@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Layout';
+import Layout from '@/Layouts/Layout.vue';
 import BreadCrumb from '@/Components/BreadCrumb.vue';
 import ContactForm from './Components/ContactForm.vue';
 

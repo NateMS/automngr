@@ -72,7 +72,7 @@
 <script>
 import JetLabel from '@/Jetstream/Label.vue';
 import JetInput from '@/Jetstream/Input.vue';
-import JetInputError from '@/Jetstream/InputError';
+import JetInputError from '@/Jetstream/InputError.vue';
 
 export default {
   components: {

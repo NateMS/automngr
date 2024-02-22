@@ -56,8 +56,8 @@
 import JetActionSection from '@/Jetstream/ActionSection';
 import JetDialogModal from '@/Jetstream/DialogModal';
 import JetDangerButton from '@/Jetstream/DangerButton';
-import JetInput from '@/Jetstream/Input';
-import JetInputError from '@/Jetstream/InputError';
+import JetInput from '@/Jetstream/Input.vue';
+import JetInputError from '@/Jetstream/InputError.vue';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton';
 
 export default {
