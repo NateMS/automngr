@@ -41,6 +41,7 @@
         <tr>
             <td align="left">
                 <pre>
+@if ($contract->isSellContract())
 <b>Your SwissCar GmbH</b>
 Bernstrasse 27
 8952 Schlieren
@@ -49,6 +50,14 @@ Tel: 079 680 34 44
 E-Mail: info@yourswisscar.com
 
 MwSt-Nr: CHE-226.272.050
+@else
+<b>{{ $contract->contact->full_title }}</b>
+{{ $contract->contact->address }}
+{{ $contract->contact->full_city }}
+
+Tel: {{ $contract->contact->phone }}
+E-Mail: {{ $contract->contact->email }}
+@endif
                 </pre>
             </td>
             @if ($contract->isSellContract())
