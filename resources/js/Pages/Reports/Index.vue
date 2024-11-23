@@ -14,8 +14,8 @@
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
                     <jet-label for="year" value="Jahr" />
-                    <select :year class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                        <option v-for="year in years" :value="year" v-bind:key="year" :selected="this.year == year">{{ year }}</option>
+                    <select v-model="year" id="year" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <option v-for="year in years" :value="year" v-bind:key="year">{{ year }}</option>
                     </select>
                 </div>
             </template>
@@ -45,6 +45,12 @@ export default {
   props: {
     year: Number,
     years: Array,
+  },
+  setup(props) {
+    const year = ref(props.year);
+    return {
+      year,
+    };
   },
   data() {
     return {
