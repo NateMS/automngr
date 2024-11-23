@@ -137,10 +137,12 @@ class Car extends Model
     {
         return $query->withCount([
             'contracts AS buy_contracts_count' => function ($query) {
-                $query->where('type', (string) ContractType::BuyContract);
+                $query->where('type', (string) ContractType::BuyContract)
+                ->whereNull('deleted_at');
             },
             'contracts AS sell_contracts_count' => function ($query) {
-                $query->where('type', (string) ContractType::SellContract);
+                $query->where('type', (string) ContractType::SellContract)
+                ->whereNull('deleted_at');
             },
         ]);
     }
@@ -150,11 +152,13 @@ class Car extends Model
         return $query->withCount([
             'contracts AS buy_contracts_count' => function ($query) use ($year) {
                 $query->where('type', (string) ContractType::BuyContract)
-                ->whereYear('date', '<=', $year);
+                ->whereYear('date', '<=', $year)
+                ->whereNull('deleted_at');
             },
             'contracts AS sell_contracts_count' => function ($query) use ($year) {
                 $query->where('type', (string) ContractType::SellContract)
-                ->whereYear('date', '<=', $year);
+                ->whereYear('date', '<=', $year)
+                ->whereNull('deleted_at');
             },
         ]);
     }
@@ -166,7 +170,7 @@ class Car extends Model
 
     public function scopeUnsoldOnlyByYear($query, $year)
     {
-        return $query->withContractCountUpToYear($year)->havingRaw('buy_contracts_count > sell_contracts_count OR sell_contracts_count = 0');
+        return $query->withContractCountUpToYear($year)->havingRaw('buy_contracts_count > sell_contracts_count');
     }
 
     public function scopeSoldOnly($query)

@@ -42,11 +42,15 @@ class Report implements FromCollection, WithTitle, WithHeadings, WithStyles, Wit
 
     public function collection()
     {
-        $cars = Contract::with('car')->soldByYear($this->year)->get()->pluck('car');
+        $cars = Contract::with(['car' => function($query) {
+            $query->whereNull('deleted_at');
+        }])->soldByYear($this->year)->get()->pluck('car');
         $cars = $cars->merge(Car::unsoldOnlyByYear($this->year)->get())->unique()->map(function ($car) {
             $bcontract = $car->latestBuyContractUpToYear($this->year);
             $scontract = $car->latestSellContractUpToYear($this->year);
             if (! $car->isSold()) {
+                $scontract = null;
+            } elseif ($scontract && $bcontract && $scontract->date < $bcontract->date) {
                 $scontract = null;
             }
 
