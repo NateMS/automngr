@@ -3,13 +3,15 @@ FROM php:8.2-cli-alpine AS composer-stage
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-RUN apk add --no-cache git unzip icu-dev libzip-dev libpng-dev freetype-dev libjpeg-turbo-dev libxml2-dev \
+RUN --mount=type=cache,target=/var/cache/apk \
+    apk add git unzip icu-dev libzip-dev libpng-dev freetype-dev libjpeg-turbo-dev libxml2-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install intl bcmath zip gd xml
+    && docker-php-ext-install -j$(nproc) intl bcmath zip gd xml
 
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+RUN --mount=type=cache,target=/root/.composer/cache \
+    composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 
 COPY . .
 RUN composer dump-autoload --optimize --no-dev
@@ -19,7 +21,8 @@ FROM node:18-alpine AS node-stage
 
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
 
 COPY . .
 RUN npm run production
@@ -27,7 +30,8 @@ RUN npm run production
 # Stage 3: Production image
 FROM php:8.2-fpm-alpine
 
-RUN apk add --no-cache \
+RUN --mount=type=cache,target=/var/cache/apk \
+    apk add \
     nginx \
     supervisor \
     freetype-dev \
