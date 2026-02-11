@@ -1,6 +1,12 @@
 #!/bin/sh
 set -e
 
+# Create database if it doesn't exist
+php -r "
+\$pdo = new PDO('mysql:host='.getenv('DB_HOST').';port='.(getenv('DB_PORT')?:'3306'), getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
+\$pdo->exec('CREATE DATABASE IF NOT EXISTS \`'.getenv('DB_DATABASE').'\`');
+"
+
 # Run migrations
 php artisan migrate --force
 
