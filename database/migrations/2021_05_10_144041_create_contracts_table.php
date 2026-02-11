@@ -22,13 +22,13 @@ class CreateContractsTable extends Migration
             $table->date('delivery_date');
             $table->text('notes')->nullable();
             $table->foreignId('contact_id')
+                ->constrained('contacts')
                 ->onUpdate('cascade')
-                ->onDelete('cascade')
-                ->constrained('contacts');
+                ->onDelete('cascade');
             $table->foreignId('car_id')
+                ->constrained('cars')
                 ->onUpdate('cascade')
-                ->onDelete('cascade')
-                ->constrained('cars');
+                ->onDelete('cascade');
             $table->enum('insurance_type', InsuranceType::getValues())
             ->default(InsuranceType::Keine);
             $table->enum('type', ContractType::getValues())

@@ -21,9 +21,9 @@ class CreatePaymentsTable extends Migration
             $table->enum('type', PaymentType::getValues())
                 ->default(PaymentType::Transaction);
             $table->foreignId('contract_id')
+                ->constrained('contracts')
                 ->onUpdate('cascade')
-                ->onDelete('cascade')
-                ->constrained('contracts');
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

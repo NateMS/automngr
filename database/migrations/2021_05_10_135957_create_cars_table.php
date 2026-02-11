@@ -24,9 +24,9 @@ class CreateCarsTable extends Migration
             $table->date('last_check_date')->nullable();
             $table->integer('kilometers')->nullable();
             $table->foreignId('car_model_id')
+                ->constrained('car_models')
                 ->onUpdate('cascade')
-                ->onDelete('cascade')
-                ->constrained('car_models');
+                ->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

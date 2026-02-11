@@ -17,9 +17,9 @@ class CreateCarModelsTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('brand_id')
+                ->constrained('brands')
                 ->onUpdate('cascade')
-                ->onDelete('cascade')
-                ->constrained('brands');
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
