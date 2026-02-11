@@ -1,10 +1,11 @@
 #!/bin/sh
 set -e
 
-# Ensure storage directories exist (may be empty from volume mounts)
-mkdir -p storage/framework/{cache/data,sessions,views} storage/logs bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache
-chmod -R 775 storage bootstrap/cache
+# Initialize storage directory if empty (e.g. from a fresh volume mount)
+if [ -z "$(ls -A /var/www/html/storage 2>/dev/null)" ] && [ -d /var/www/storage-init ]; then
+    echo "Initializing storage directory from backup..."
+    cp -R /var/www/storage-init/. /var/www/html/storage
+fi
 
 # Create database if it doesn't exist
 php -r "
@@ -20,5 +21,12 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-# Start supervisord (nginx + php-fpm)
+# Fix permissions after artisan commands created files as root
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+
+# Clean up storage-init backup
+rm -rf /var/www/storage-init
+
+# Start supervisord (or whatever CMD was passed)
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
