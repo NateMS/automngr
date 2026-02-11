@@ -1,5 +1,10 @@
 # Stage 1: Composer dependencies
-FROM composer:2 AS composer-stage
+FROM php:8.2-cli-alpine AS composer-stage
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+RUN apk add --no-cache git unzip icu-dev libzip-dev \
+    && docker-php-ext-install intl bcmath zip
 
 WORKDIR /app
 COPY composer.json composer.lock ./
