@@ -138,10 +138,10 @@ E-Mail: {{ $contract->contact->email }}
     <h4>Fahrzeug</h4>
     <table width="100%">
         <tr>
-            <td width="20%">Marke & Modell</td>
-            <td width="30%">{{ $contract->car->name }}</td>
-            <td width="20%">Farbe</td>
-            <td width="30%">{{ $contract->car->colour }}</td>
+            <td width="25%">Marke & Modell</td>
+            <td width="25%">{{ $contract->car->name }}</td>
+            <td width="25%">Farbe</td>
+            <td width="25%">{{ $contract->car->colour }}</td>
         </tr>
         <tr>
             <td>Chassisnummer</td>
@@ -165,8 +165,14 @@ E-Mail: {{ $contract->contact->email }}
     </table>
     <table width="100%">
         <tr>
-            <td width="20%">Kaufpreis</td>
-            <td width="80%"><b>{{ $contract->price }}</b></td>
+            <td width="25%">
+                    @if ($contract->isSellContract())
+                        Kaufpreis inkl. MwSt 8.1%
+                    @else
+                        Kaufpreis
+                    @endif
+            </td>
+            <td width="75%"><b>{{ $contract->price }}</b></td>
         </tr>
             <tr>
                 <td valign="top">Anzahlung</td>
