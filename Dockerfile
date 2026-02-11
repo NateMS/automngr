@@ -3,8 +3,9 @@ FROM php:8.2-cli-alpine AS composer-stage
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-RUN apk add --no-cache git unzip icu-dev libzip-dev \
-    && docker-php-ext-install intl bcmath zip
+RUN apk add --no-cache git unzip icu-dev libzip-dev libpng-dev freetype-dev libjpeg-turbo-dev libxml2-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install intl bcmath zip gd xml
 
 WORKDIR /app
 COPY composer.json composer.lock ./
@@ -20,8 +21,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
-COPY webpack.mix.js webpack.config.js tailwind.config.js postcss.config.jcs ./
-COPY resources/ resources/
+COPY . .
 RUN npm run production
 
 # Stage 3: Production image
@@ -83,6 +83,8 @@ RUN mkdir -p storage/framework/cache/data \
     && chown -R www-data:www-data storage bootstrap/cache public/documents \
     && chmod -R 775 storage bootstrap/cache public/documents
 
+COPY docker/entrypoint.sh /entrypoint.sh
+
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/entrypoint.sh"]

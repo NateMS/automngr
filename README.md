@@ -38,16 +38,11 @@ The app is deployed as a Docker container to a Hetzner VPS with Caddy as reverse
 
 1. Push to `master` triggers the GitHub Actions workflow at `.github/workflows/deploy.yml`
 2. The workflow builds a Docker image and pushes it to GitHub Container Registry (`ghcr.io/natems/automngr`)
-3. It then SSHes into the VPS and pulls the new image, restarts the container, and runs migrations
+3. On the VPS, pull the new image and restart — migrations and caching run automatically on container startup via the entrypoint script
 
-The deploy path on the VPS is hardcoded to `/opt/vps/services/automngr` in the workflow.
-
-### Manual deploy
+### Deploy
 
 ```bash
-ssh your-vps
 cd /opt/vps/services/automngr
-docker compose pull
-docker compose down && docker compose up -d
-docker compose exec -T app php artisan migrate --force
+docker compose pull && docker compose up -d
 ```

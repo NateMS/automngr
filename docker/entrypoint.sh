@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+# Run migrations
+php artisan migrate --force
+
+# Cache configuration
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Start supervisord (nginx + php-fpm)
+exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
