@@ -1,6 +1,11 @@
 #!/bin/sh
 set -e
 
+# Ensure storage directories exist (may be empty from volume mounts)
+mkdir -p storage/framework/{cache/data,sessions,views} storage/logs bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+
 # Create database if it doesn't exist
 php -r "
 \$pdo = new PDO('mysql:host='.getenv('DB_HOST').';port='.(getenv('DB_PORT')?:'3306'), getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
