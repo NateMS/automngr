@@ -39,6 +39,7 @@ RUN --mount=type=cache,target=/var/cache/apk \
     libpng-dev \
     libzip-dev \
     icu-dev \
+    icu-data-full \
     libxml2-dev \
     oniguruma-dev
 
