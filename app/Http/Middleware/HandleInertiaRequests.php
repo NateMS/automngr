@@ -38,13 +38,15 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => function () use ($request) {
+                $user = $request->user();
+                if (! $user) {
+                    return ['user' => null];
+                }
+
                 return [
-                    'user' => $request->user() ? [
-                        'id' => $request->user()->id,
-                        'firstname' => $request->user()->firstname,
-                        'lastname' => $request->user()->lastname,
-                        'email' => $request->user()->email,
-                    ] : null,
+                    'user' => array_merge($user->toArray(), [
+                        'two_factor_enabled' => ! is_null($user->two_factor_secret),
+                    ]),
                 ];
             },
             'flash' => function () use ($request) {
