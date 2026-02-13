@@ -22,8 +22,8 @@ php artisan route:cache
 php artisan view:cache
 
 # Fix permissions after artisan commands created files as root
-chown -R www-data:www-data storage bootstrap/cache
-chmod -R 775 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache public/documents
+chmod -R 775 storage bootstrap/cache public/documents
 
 # Clean up storage-init backup
 rm -rf /var/www/storage-init
