@@ -16,6 +16,9 @@ php -r "
 # Run migrations
 php artisan migrate --force
 
+# Create storage symlink (public/storage -> storage/app/public)
+php artisan storage:link --force
+
 # Cache configuration
 php artisan config:cache
 php artisan route:cache
