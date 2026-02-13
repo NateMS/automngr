@@ -34,6 +34,7 @@ RUN --mount=type=cache,target=/var/cache/apk \
     apk add \
     nginx \
     supervisor \
+    tzdata \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng-dev \
@@ -42,6 +43,8 @@ RUN --mount=type=cache,target=/var/cache/apk \
     icu-data-full \
     libxml2-dev \
     oniguruma-dev
+
+ENV TZ=Europe/Zurich
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
@@ -54,9 +57,10 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         xml \
         opcache
 
-# PHP upload configuration
+# PHP configuration
 RUN echo "upload_max_filesize=64M" >> /usr/local/etc/php/conf.d/uploads.ini \
-    && echo "post_max_size=64M" >> /usr/local/etc/php/conf.d/uploads.ini
+    && echo "post_max_size=64M" >> /usr/local/etc/php/conf.d/uploads.ini \
+    && echo "date.timezone=Europe/Zurich" >> /usr/local/etc/php/conf.d/timezone.ini
 
 # OPcache configuration
 RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/opcache.ini \
