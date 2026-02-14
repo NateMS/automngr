@@ -80,7 +80,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::prefix('documents')->group(function () {
         Route::get('{document}', [DocumentController::class, 'show'])->name('documents.show');
-        Route::delete('delete', [DocumentController::class, 'destroy'])->name('documents.destroy');
+        Route::delete('{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
         Route::post('upload', [DocumentController::class, 'store'])->name('documents.store');
     });
 

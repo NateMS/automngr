@@ -35,11 +35,10 @@ export default {
   },
   methods: {
     deleteDocument(documentId) {
-      const form = useForm(`deleteDocument${documentId}`, { id: documentId });
-      form.delete(route('documents.destroy', this.id), {
+      const form = useForm({});
+      form.delete(route('documents.destroy', documentId), {
         preserveScroll: true,
         onSuccess: () => {
-          form.reset();
           this.documents = this.initial_documents;
         },
       });

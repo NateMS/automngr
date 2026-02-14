@@ -60,16 +60,8 @@ class DocumentController extends Controller
         ];
     }
 
-    public function destroy(Request $request)
+    public function destroy(Document $document)
     {
-        $document = Document::find((int) $request->get('id'));
-
-        if (! $document) {
-            session()->flash('flash.banner', 'Fehler beim Löschen, Dokument nicht gefunden.');
-
-            return Redirect::back();
-        }
-
         Storage::disk('documents')->delete($document->storage_path);
 
         $document->delete();
