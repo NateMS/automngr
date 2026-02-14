@@ -9,6 +9,7 @@ use App\Http\Controllers\ContractController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
@@ -86,6 +87,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
     Route::get('activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
+
+    Route::get('settings', [SettingsController::class, 'index'])->name('settings');
+    Route::post('settings', [SettingsController::class, 'update'])->name('settings.update');
 
     Route::post('brands', [BrandController::class, 'store'])->name('brands.store');
     Route::post('models', [CarModelController::class, 'store'])->name('models.store');

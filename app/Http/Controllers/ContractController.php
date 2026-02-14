@@ -155,7 +155,7 @@ class ContractController extends Controller
             'type' => ['required', 'string', Rule::in(ContractType::getValues())],
             'date' => ['required', 'date_format:"d.m.Y"'],
             'delivery_date' => ['nullable', 'date_format:"d.m.Y"', 'after_or_equal:date'],
-            'price' => ['required', 'integer', 'min:1'],
+            'price' => ['required', 'integer', 'min:1', 'max:2000000000'],
             'car_id' => ['required', 'exists:App\Models\Car,id'],
             'contact_id' => ['required', 'exists:App\Models\Contact,id'],
             'insurance_type' => ['nullable', 'string', Rule::in(InsuranceType::getValues())],
@@ -226,7 +226,7 @@ class ContractController extends Controller
         $request->validate([
             'date' => ['required', 'date_format:"d.m.Y"'],
             'delivery_date' => ['nullable', 'date_format:"d.m.Y"', 'after_or_equal:date'],
-            'price' => ['required', 'integer', 'min:1'],
+            'price' => ['required', 'integer', 'min:1', 'max:2000000000'],
             'insurance_type' => ['nullable', 'string', Rule::in(InsuranceType::getValues())],
             'notes' => ['nullable'],
         ]);
