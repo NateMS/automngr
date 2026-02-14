@@ -1,4 +1,5 @@
 {
+    "name": "automngr",
     "private": true,
     "scripts": {
         "dev": "npm run development",
