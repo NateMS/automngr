@@ -4,12 +4,12 @@ import { createInertiaApp, Link } from '@inertiajs/vue3'
 import Unicon from 'vue-unicons';
 import { createStore } from 'vuex';
 import {
-  uniChart, uniFileAlt, uniPalette, uniCalendarAlt, uniPlusCircle, uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt,
+  uniChart, uniFileAlt, uniPalette, uniCalendarAlt, uniPlusCircle, uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt, uniHistory
 } from 'vue-unicons/dist/icons';
 
 import './bootstrap';
 
-Unicon.add([uniChart, uniFileAlt, uniPalette, uniCalendarAlt, uniPlusCircle, uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt]);
+Unicon.add([uniChart, uniFileAlt, uniPalette, uniCalendarAlt, uniPlusCircle, uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt, uniHistory]);
 
 // Create a new store instance.
 const store = createStore({

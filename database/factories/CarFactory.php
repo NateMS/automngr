@@ -31,7 +31,7 @@ class CarFactory extends Factory
             'initial_date' => $this->faker->date(),
             'last_check_date' => $this->faker->date(),
             'kilometers' => $this->faker->numberBetween(5000, 200000),
-            'car_model_id' => $this->faker->numberBetween(1, CarModel::count()),
+            'car_model_id' => CarModel::factory(),
         ];
     }
 }

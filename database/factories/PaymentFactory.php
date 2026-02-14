@@ -27,7 +27,7 @@ class PaymentFactory extends Factory
             'amount' => $this->faker->numberBetween(1000, 10000),
             'date' => $this->faker->date(),
             'type' => (string) PaymentType::getRandomValue(),
-            'contract_id' => $this->faker->numberBetween(1, Contract::count()),
+            'contract_id' => Contract::factory(),
         ];
     }
 }

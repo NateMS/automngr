@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarModelController;
@@ -83,6 +84,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::delete('{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
         Route::post('upload', [DocumentController::class, 'store'])->name('documents.store');
     });
+
+    Route::get('activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
 
     Route::post('brands', [BrandController::class, 'store'])->name('brands.store');
     Route::post('models', [CarModelController::class, 'store'])->name('models.store');

@@ -14,6 +14,10 @@
                 <unicon fill="currentColor" class="mr-2" height="22" width="22" name="chart"></unicon>
                 Berichte
             </jet-nav-link>
+            <jet-nav-link :href="route('activity-log')" :active="route().current('activity-log')">
+                <unicon fill="currentColor" class="mr-2" height="22" width="22" name="history"></unicon>
+                Aktivitätslog
+            </jet-nav-link>
         </div>
 
         <div class="mb-4 px-4">
