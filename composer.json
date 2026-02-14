@@ -15,7 +15,7 @@
         "fakerphp/faker": "^1.24.1",
         "guzzlehttp/guzzle": "^7.10",
         "inertiajs/inertia-laravel": "^1.0",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/jetstream": "^5.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.11",
