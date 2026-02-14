@@ -294,15 +294,7 @@ class ContractController extends Controller
 
     public function print(Contract $contract)
     {
-        $contxt = stream_context_create([
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed'=> true,
-            ],
-        ]);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contract', compact('contract'));
-        $pdf->getDomPDF()->setHttpContext($contxt);
 
         return $pdf->stream($contract->date.'_'.$contract->type_formatted.'.pdf');
     }

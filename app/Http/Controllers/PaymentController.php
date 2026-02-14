@@ -47,15 +47,7 @@ class PaymentController extends Controller
 
     public function print(Contract $contract, Payment $payment)
     {
-        $contxt = stream_context_create([
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed'=> true,
-            ],
-        ]);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('receipt', compact('contract', 'payment'));
-        $pdf->getDomPDF()->setHttpContext($contxt);
 
         return $pdf->stream($payment->date.'_quittung.pdf');
     }
