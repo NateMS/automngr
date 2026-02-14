@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+# Ensure files created by PHP-FPM are world-readable (dirs 755, files 644)
+umask 0022
+
 # Initialize storage directory if empty (e.g. from a fresh volume mount)
 if [ -z "$(ls -A /var/www/html/storage 2>/dev/null)" ] && [ -d /var/www/storage-init ]; then
     echo "Initializing storage directory from backup..."
@@ -25,7 +28,7 @@ php artisan route:cache
 php artisan view:cache
 
 # Fix permissions after artisan commands created files as root
-chown -R www-data:www-data storage bootstrap/cache public/documents
+chown -R www-data:www-data storage bootstrap/cache public/documents public/storage
 chmod -R 775 storage bootstrap/cache public/documents
 
 # Clean up storage-init backup
