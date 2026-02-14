@@ -5,7 +5,7 @@ Manage Cars, Contacts and Contracts
 - Export as Excel
 - Print Contracts as PDF
 
-Laravel 10 + Vue 3 (Inertia.js)
+Laravel 12 + Vue 3 (Inertia.js) + Vite + Tailwind CSS 4
 
 ## Local Development
 
@@ -20,14 +20,14 @@ docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v $(pwd):/opt \
     -w /opt \
-    laravelsail/php82-composer:latest \
+    laravelsail/php84-composer:latest \
     composer install --ignore-platform-reqs
 ```
 3. Start the app: `./vendor/bin/sail up -d`
 4. Generate app key: `./vendor/bin/sail php artisan key:generate`
 5. Run migrations and seed: `./vendor/bin/sail php artisan migrate:fresh --seed`
 6. Install frontend dependencies: `./vendor/bin/sail npm install`
-7. Watch for changes: `./vendor/bin/sail npm run watch`
+7. Start Vite dev server: `./vendor/bin/sail npm run dev`
 8. Access the app at `http://localhost`
 
 ## Deployment

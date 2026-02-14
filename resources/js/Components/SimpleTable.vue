@@ -7,7 +7,7 @@
         <div v-if="form || print" class="md:my-4 my-2 flex justify-between items-center">
             <div v-if="form" class="flex items-center w-full max-w-md md:mr-4 mr-2">
                 <div class="flex w-full bg-white shadow rounded">
-                    <input type="text" ref="search" v-model="form.search" autofocus="true" name="search" placeholder="Suchen..." class="relative border-gray-200 w-full sm:px-6 px-3 py-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded" autocomplete="off">
+                    <input type="text" ref="search" v-model="form.search" autofocus="true" name="search" placeholder="Suchen..." class="relative border-gray-200 w-full sm:px-6 px-3 py-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 rounded" autocomplete="off">
                 </div>
                 <button @click="reset" type="button" class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-blue-200">Reset</button>
             </div>

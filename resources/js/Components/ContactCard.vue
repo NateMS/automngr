@@ -39,9 +39,9 @@
 
 <script>
 
-export default ({
+export default {
   props: {
     contact: Object,
   },
-});
+};
 </script>

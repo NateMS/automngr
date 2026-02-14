@@ -18,7 +18,7 @@
 
 <script>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import ApiTokenManager from './ApiTokenManager';
+import ApiTokenManager from './ApiTokenManager.vue';
 
 export default {
   props: [

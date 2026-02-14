@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/root/.composer/cache \
     composer install --no-dev --optimize-autoloader --no-interaction --no-progress --prefer-dist
 
 # Stage 2: Build frontend assets
-FROM node:18-alpine AS node-stage
+FROM node:22-alpine AS node-stage
 
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -25,7 +25,7 @@ RUN --mount=type=cache,target=/root/.npm \
     npm ci
 
 COPY . .
-RUN npm run production
+RUN npm run build
 
 # Stage 3: Production image
 FROM php:8.4-fpm-alpine
@@ -81,9 +81,7 @@ RUN chmod +x /entrypoint.sh
 COPY --from=composer-stage /app /var/www/html
 
 # Copy built frontend assets
-COPY --from=node-stage /app/public/js ./public/js
-COPY --from=node-stage /app/public/css ./public/css
-COPY --from=node-stage /app/public/mix-manifest.json ./public/mix-manifest.json
+COPY --from=node-stage /app/public/build ./public/build
 
 # Clean up dev/unnecessary files
 RUN rm -rf node_modules tests .github htdocs \

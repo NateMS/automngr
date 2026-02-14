@@ -1,3 +1,36 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@source "../js/**/*.vue";
+@source "../../vendor/laravel/jetstream/**/*.blade.php";
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    button,
+    [role="button"],
+    a {
+        cursor: pointer;
+    }
+}
+
+@theme {
+    --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    --color-indigo-100: #e6e8ff;
+    --color-indigo-300: #b2b7ff;
+    --color-indigo-400: #7886d7;
+    --color-indigo-500: #6574cd;
+    --color-indigo-600: #5661b3;
+    --color-indigo-700: #40497d;
+    --color-indigo-800: #2f365f;
+    --color-indigo-900: #191e38;
+}

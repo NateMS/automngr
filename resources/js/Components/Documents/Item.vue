@@ -7,7 +7,7 @@
             <unicon fill="currentColor" class="p-2" height="70" width="70" name="file-alt"></unicon>
             <span class="text-xl font-bold">{{ document.extension }}</span>
         </span>
-        <span class="overflow-ellipsis overflow-hidden"> {{ document.name }}</span>
+        <span class="text-ellipsis overflow-hidden"> {{ document.name }}</span>
         <span class="text-xs text-grey">{{ document.created_at }}, {{ document.size }}</span>
     </a>
 </template>

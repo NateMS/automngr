@@ -7,7 +7,7 @@ import {
   uniChart, uniFileAlt, uniPalette, uniCalendarAlt, uniPlusCircle, uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt,
 } from 'vue-unicons/dist/icons';
 
-require('./bootstrap');
+import './bootstrap';
 
 Unicon.add([uniChart, uniFileAlt, uniPalette, uniCalendarAlt, uniPlusCircle, uniMeh, uniUsersAlt, uniCarSideview, uniDashboard, uniSearch, uniFilter, uniFilterSlash, uniTrashAlt, uniPen, uniExclamationTriangle, uniMapMarker, uniPhone, uniEnvelope, uniFileDownload, uniArrowDown, uniArrowUp, uniArrowRight, uniAngleRight, uniAngleUp, uniAngleDown, uniAngleLeft, uniFileUploadAlt]);
 
@@ -33,13 +33,17 @@ const store = createStore({
   },
 });
 
-const el = document.getElementById('app');
+const pages = import.meta.glob('./Pages/**/*.vue', { eager: true });
 
 createInertiaApp({
   progress: {
     color: '#4B5563',
   },
-  resolve: (name) => require(`./Pages/${name}.vue`),
+  resolve: (name) => {
+    const page = pages[`./Pages/${name}.vue`];
+    if (!page) throw new Error(`Page not found: ${name}`);
+    return page.default ?? page;
+  },
   setup({ el, App, props, plugin }) {
     return createApp({ render: () => h(App, props) })
       .use(plugin)
@@ -51,6 +55,6 @@ createInertiaApp({
         width: 32,
       })
       .mixin({ methods: { route } })
-      .mount(el)      
+      .mount(el)
   },
 })

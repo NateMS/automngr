@@ -63,7 +63,7 @@ export default {
   },
   data() {
     return {
-      form: useForm('CreatePayment', {
+      form: useForm({
         id: null,
         date: new Date().toJSON().slice(0,10).split('-').reverse().join('.'),
         amount: this.left_to_pay,

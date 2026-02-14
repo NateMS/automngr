@@ -60,10 +60,10 @@
 
 <script>
 
-export default ({
+export default {
   props: {
     car: Object,
     hideEmpty: String,
   },
-});
+};
 </script>
