@@ -30,8 +30,8 @@ class ContractFactory extends Factory
             'delivery_date' => $this->faker->date(),
             'notes' => $this->faker->word(),
             'price' => $this->faker->numberBetween(150000, 3500000),
-            'contact_id' => $this->faker->numberBetween(1, Contact::count()),
-            'car_id' => $this->faker->numberBetween(1, Car::count()),
+            'contact_id' => Contact::factory(),
+            'car_id' => Car::factory(),
             'insurance_type' => (string) InsuranceType::getRandomValue(),
             'type' => (string) ContractType::getRandomValue(),
         ];

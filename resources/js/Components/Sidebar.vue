@@ -2,7 +2,7 @@
     <div class="w-3/4 md:w-1/3 lg:w-64 fixed md:top-0 md:left-0 h-screen lg:block bg-indigo-800 z-30" :class="sideBarOpen ? '' : 'hidden'" id="main-nav">
 
         <inertia-link :href="route('dashboard')" class="w-full h-20 bg-indigo-900 flex justify-center items-center mb-8 text-indigo-100 font-semibold text-2xl hover:text-indigo-300 transition">
-            Your SwissCar
+            {{ $page.props.company_name || 'Your SwissCar' }}
         </inertia-link>
 
         <div class="mb-4 px-4">
@@ -71,6 +71,19 @@
             <jet-nav-link :href="route('contacts.sellers')" :active="route().current('contacts.sellers')">
                 <unicon fill="currentColor" class="mr-2 ml-3" height="22" width="22" name="angle-right"></unicon>
                 Verkäufer
+            </jet-nav-link>
+        </div>
+        <div class="mb-4 px-4">
+            <p class="text-sm font-semibold mb-1 text-indigo-100 flex items-center">
+                Admin
+            </p>
+            <jet-nav-link :href="route('activity-log')" :active="route().current('activity-log')">
+                <unicon fill="currentColor" class="mr-2" height="22" width="22" name="history"></unicon>
+                Aktivitätslog
+            </jet-nav-link>
+            <jet-nav-link :href="route('settings')" :active="route().current('settings')">
+                <unicon fill="currentColor" class="mr-2" height="22" width="22" name="setting"></unicon>
+                Einstellungen
             </jet-nav-link>
         </div>
     </div>

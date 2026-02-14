@@ -8,10 +8,20 @@ use Carbon\Carbon;
 use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Payment extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
+    }
 
     protected $fillable = [
         'amount',

@@ -24,7 +24,7 @@ class CarModelFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'brand_id' => $this->faker->numberBetween(1, Brand::count()),
+            'brand_id' => Brand::factory(),
         ];
     }
 }

@@ -42,14 +42,14 @@
             <td align="left">
                 <pre>
 @if ($contract->isSellContract())
-<b>Your SwissCar GmbH</b>
-Bernstrasse 27
-8952 Schlieren
+<b>{{ App\Models\Setting::get('company_name', 'Your SwissCar GmbH') }}</b>
+{{ App\Models\Setting::get('street', 'Bernstrasse 27') }}
+{{ App\Models\Setting::get('city', '8952 Schlieren') }}
 
-Tel: 079 680 34 44
-E-Mail: info@yourswisscar.com
+Tel: {{ App\Models\Setting::get('phone', '079 680 34 44') }}
+E-Mail: {{ App\Models\Setting::get('email', 'info@yourswisscar.com') }}
 
-MwSt-Nr: CHE-226.272.050
+MwSt-Nr: {{ App\Models\Setting::get('vat_number', 'CHE-226.272.050') }}
 @else
 <b>{{ $contract->contact->full_title }}</b>
 {{ $contract->contact->address }}
@@ -81,48 +81,48 @@ E-Mail: {{ $contract->contact->email }}
                 <td width="15%"><b>Verkäufer</b></td>
                 <td width="35%">{{ $contract->contact->full_title }}</td>
                 <td width="15%"><b>Käufer</b></td>
-                <td width="35%">Your SwissCar GmbH</td>
+                <td width="35%">{{ App\Models\Setting::get('company_name', 'Your SwissCar GmbH') }}</td>
             </tr>
             <tr>
                 <td>Strasse</td>
                 <td>{{ $contract->contact->address }}</td>
                 <td>Strasse</td>
-                <td>Bernstrasse 27</td>
+                <td>{{ App\Models\Setting::get('street', 'Bernstrasse 27') }}</td>
             </tr>
             <tr>
                 <td>PLZ / Ort</td>
                 <td>{{ $contract->contact->full_city }}</td>
                 <td>PLZ / Ort</td>
-                <td>8952 Schlieren</td>
+                <td>{{ App\Models\Setting::get('city', '8952 Schlieren') }}</td>
             </tr>
             <tr>
                 <td>Telefon</td>
                 <td>{{ $contract->contact->phone }}</td>
                 <td>Telefon</td>
-                <td>079 680 34 44</td>
+                <td>{{ App\Models\Setting::get('phone', '079 680 34 44') }}</td>
             </tr>
         @else
             <tr>
                 <td width="15%"><b>Verkäufer</b></td>
-                <td width="35%">Your SwissCar GmbH</td>
+                <td width="35%">{{ App\Models\Setting::get('company_name', 'Your SwissCar GmbH') }}</td>
                 <td width="15%"><b>Käufer</b></td>
                 <td width="35%">{{ $contract->contact->full_title }}</td>
             </tr>
             <tr>
                 <td>Strasse</td>
-                <td>Bernstrasse 27</td>
+                <td>{{ App\Models\Setting::get('street', 'Bernstrasse 27') }}</td>
                 <td>Strasse</td>
                 <td>{{ $contract->contact->address }}</td>
             </tr>
             <tr>
                 <td>PLZ / Ort</td>
-                <td>8952 Schlieren</td>
+                <td>{{ App\Models\Setting::get('city', '8952 Schlieren') }}</td>
                 <td>PLZ / Ort</td>
                 <td>{{ $contract->contact->full_city }}</td>
             </tr>
             <tr>
                 <td>Telefon</td>
-                <td>079 680 34 44</td>
+                <td>{{ App\Models\Setting::get('phone', '079 680 34 44') }}</td>
                 <td>Telefon</td>
                 <td>{{ $contract->contact->phone }}</td>
             </tr>
@@ -167,7 +167,7 @@ E-Mail: {{ $contract->contact->email }}
         <tr>
             <td width="25%">
                     @if ($contract->isSellContract())
-                        Kaufpreis inkl. MwSt 8.1%
+                        Kaufpreis inkl. MwSt {{ App\Models\Setting::get('vat_rate', '8.1') }}%
                     @else
                         Kaufpreis
                     @endif
@@ -205,7 +205,7 @@ E-Mail: {{ $contract->contact->email }}
         @if ($contract->isSellContract())
             <tr>
                 <td>Bankverbindung IBAN</td>
-                <td>CH69 0900 0000 1549 3981 7</td>
+                <td>{{ App\Models\Setting::get('iban', 'CH69 0900 0000 1549 3981 7') }}</td>
             </tr>
         @endif
         <tr>
@@ -241,7 +241,7 @@ Mündliche Vereinbarungen sind ungültig.
     <table width="100%">
         <tr>
             <td width="20%">Ort, Datum</td>
-            <td width="30%">Schlieren, {{ $contract->date_formatted }}</td>
+            <td width="30%">{{ App\Models\Setting::get('signature_city', 'Schlieren') }}, {{ $contract->date_formatted }}</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>

@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\Contract;
 use App\Models\Document;
 use App\Models\Payment;
+use App\Models\Setting;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
         Contact::truncate();
         CarModel::truncate();
         Brand::truncate();
+        Setting::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         User::factory()->create([
@@ -79,6 +81,22 @@ class DatabaseSeeder extends Seeder
         $payments = Payment::factory()
             ->count(60)
             ->create();
+
+        $settings = [
+            'company_name' => 'Your SwissCar GmbH',
+            'street' => 'Bernstrasse 27',
+            'city' => '8952 Schlieren',
+            'phone' => '079 680 34 44',
+            'email' => 'info@yourswisscar.com',
+            'vat_number' => 'CHE-226.272.050',
+            'iban' => 'CH69 0900 0000 1549 3981 7',
+            'signature_city' => 'Schlieren',
+            'vat_rate' => '8.1',
+        ];
+
+        foreach ($settings as $key => $value) {
+            Setting::set($key, $value);
+        }
     }
 
     public function getBrands(): array
