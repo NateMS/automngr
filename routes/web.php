@@ -32,8 +32,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('edit', [ContactController::class, 'edit'])->name('contacts.edit');
             Route::get('letter', [ContactController::class, 'letter'])->name('contacts.letter');
             Route::put('/', [ContactController::class, 'update'])->name('contacts.update');
-            Route::get('delete', [ContactController::class, 'destroy'])->name('contacts.destroy');
-            Route::get('restore', [ContactController::class, 'restore'])->name('contacts.restore');
+            Route::delete('delete', [ContactController::class, 'destroy'])->name('contacts.destroy');
+            Route::post('restore', [ContactController::class, 'restore'])->name('contacts.restore');
         });
     });
 
@@ -52,8 +52,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('/', [CarController::class, 'show'])->name('cars.show');
             Route::get('edit', [CarController::class, 'edit'])->name('cars.edit');
             Route::put('/', [CarController::class, 'update'])->name('cars.update');
-            Route::get('delete', [CarController::class, 'destroy'])->name('cars.destroy');
-            Route::get('restore', [CarController::class, 'restore'])->name('cars.restore');
+            Route::delete('delete', [CarController::class, 'destroy'])->name('cars.destroy');
+            Route::post('restore', [CarController::class, 'restore'])->name('cars.restore');
         });
     });
 
@@ -65,13 +65,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('/', [ContractController::class, 'show'])->name('contracts.show');
             Route::get('edit', [ContractController::class, 'edit'])->name('contracts.edit');
             Route::put('/', [ContractController::class, 'update'])->name('contracts.update');
-            Route::get('delete', [ContractController::class, 'destroy'])->name('contracts.destroy');
-            Route::get('restore', [ContractController::class, 'restore'])->name('contracts.restore');
+            Route::delete('delete', [ContractController::class, 'destroy'])->name('contracts.destroy');
+            Route::post('restore', [ContractController::class, 'restore'])->name('contracts.restore');
             Route::get('print', [ContractController::class, 'print'])->name('contracts.print');
 
             Route::prefix('payments')->group(function () {
                 Route::get('create', [PaymentController::class, 'create'])->name('payments.create');
-                Route::delete('delete', [PaymentController::class, 'destroy'])->name('payments.destroy');
+                Route::delete('{payment}', [PaymentController::class, 'destroy'])->name('payments.destroy');
                 Route::post('/', [PaymentController::class, 'store'])->name('payments.store');
                 Route::get('{payment}/print', [PaymentController::class, 'print'])->name('payments.print');
             });

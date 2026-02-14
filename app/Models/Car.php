@@ -85,7 +85,7 @@ class Car extends Model
 
     public function brand()
     {
-        return $this->carModel->brand();
+        return $this->hasOneThrough(Brand::class, CarModel::class, 'id', 'id', 'car_model_id', 'brand_id');
     }
 
     public function carModel()

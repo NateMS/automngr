@@ -31,10 +31,11 @@ export default {
   },
   methods: {
     deletePayment(id) {
-      const form = useForm(`deletePayment${id}`, { id });
-      form.delete(route('payments.destroy', this.contract.id), {
+      const payment = this.payments.find(p => p.id === id);
+      if (!payment) return;
+      const form = useForm({});
+      form.delete(payment.delete_link, {
         preserveScroll: true,
-        onSuccess: () => form.reset(),
       });
     },
   },

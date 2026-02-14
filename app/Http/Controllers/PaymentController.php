@@ -27,7 +27,7 @@ class PaymentController extends Controller
 
         $request->validate([
             'date' => ['required', 'date_format:"d.m.Y"'],
-            'amount' => ['required', 'integer'],
+            'amount' => ['required', 'integer', 'min:1'],
             'type' => ['required', 'string', Rule::in(PaymentType::getValues())],
             'contract_id' => ['required', 'exists:App\Models\Contract,id'],
         ]);
@@ -36,7 +36,9 @@ class PaymentController extends Controller
             'date' => Carbon::parse($request->get('date'))->format('Y-m-d'),
         ]);
 
-        $payment = Payment::create($request->all());
+        $payment = Payment::create($request->only([
+            'date', 'amount', 'type', 'contract_id',
+        ]));
 
         session()->flash('flash.banner', 'Einzahlung gespeichert.');
 
@@ -58,13 +60,14 @@ class PaymentController extends Controller
         return $pdf->stream($payment->date.'_quittung.pdf');
     }
 
-    public function destroy(Request $request, Contract $contract)
+    public function destroy(Contract $contract, Payment $payment)
     {
-        if (Payment::destroy((int) $request->get('id'))) {
-            session()->flash('flash.banner', 'Einzahlung gelöscht.');
-        } else {
-            session()->flash('flash.banner', 'Fehler beim Löschen, Einzahlung nicht gefunden.');
+        if ($payment->contract_id !== $contract->id) {
+            abort(404);
         }
+
+        $payment->delete();
+        session()->flash('flash.banner', 'Einzahlung gelöscht.');
 
         return Redirect::back();
     }

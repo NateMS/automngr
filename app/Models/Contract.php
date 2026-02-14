@@ -32,6 +32,10 @@ class Contract extends Model
 
     public function getDeliveryDateFormattedAttribute()
     {
+        if (! $this->delivery_date) {
+            return null;
+        }
+
         return Carbon::parse($this->delivery_date)->format('d.m.Y');
     }
 

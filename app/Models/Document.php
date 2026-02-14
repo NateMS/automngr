@@ -52,8 +52,8 @@ class Document extends Model
         return route('documents.show', $this->id);
     }
 
-    public function getPathAttribute()
+    public function getStoragePathAttribute()
     {
-        return public_path("documents/{$this->documentable_type}/{$this->documentable->id}/{$this->internal_name}");
+        return "{$this->documentable_type}/{$this->documentable_id}/{$this->internal_name}";
     }
 }

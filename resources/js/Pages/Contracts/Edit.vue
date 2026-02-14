@@ -47,7 +47,7 @@ export default {
       },
       data: {
         date: new Date(this.contract.date).toJSON().slice(0,10).split('-').reverse().join('.'),
-        delivery_date: new Date(this.contract.delivery_date).toJSON().slice(0,10).split('-').reverse().join('.'),
+        delivery_date: this.contract.delivery_date ? new Date(this.contract.delivery_date).toJSON().slice(0,10).split('-').reverse().join('.') : null,
         price: this.contract.price,
         notes: this.contract.notes,
         insurance_type: this.contract.insurance_type,

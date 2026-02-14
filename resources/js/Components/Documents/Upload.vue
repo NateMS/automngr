@@ -10,8 +10,8 @@
             <p>Upload fehlgeschlagen.</p>
             <a href="javascript:void(0)" @click="reset()">Erneut versuchen</a>
         </span>
-        <span v-if="isFailed">
-            <pre>{{ uploadError }}</pre>
+        <span v-if="isFailed" class="text-sm text-red-600 mt-1">
+            <p v-for="msg in uploadErrors" :key="msg">{{ msg }}</p>
         </span>
     </span>
 </template>
@@ -44,6 +44,9 @@ export default {
     isFailed() {
       return this.currentStatus === STATUS_FAILED;
     },
+    uploadErrors() {
+      return this.uploadError || [];
+    },
   },
   methods: {
     reset() {
@@ -60,7 +63,14 @@ export default {
           this.reset();
         })
         .catch((err) => {
-          this.uploadError = err.response;
+          const data = err.response?.data;
+          if (data?.errors) {
+            this.uploadError = Object.values(data.errors).flat();
+          } else if (data?.message) {
+            this.uploadError = [data.message];
+          } else {
+            this.uploadError = ['Upload fehlgeschlagen.'];
+          }
           this.currentStatus = STATUS_FAILED;
         });
     },

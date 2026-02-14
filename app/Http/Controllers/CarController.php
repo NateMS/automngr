@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ContractType;
 use App\Exports\Export;
+use App\Http\Traits\MapsContractFields;
 use App\Models\Brand;
 use App\Models\Car;
-use App\Models\Contract;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CarController extends Controller
 {
+    use MapsContractFields;
+
     public function index(Request $request)
     {
         return $this->renderCarsList($request, Car::withContractCount(), 'Cars/Index');
@@ -32,104 +35,20 @@ class CarController extends Controller
 
     public function print(Request $request)
     {
-        $headings = [
-            'Marke',
-            'Modell',
-            'Stammnummer',
-            'Chassisnummer',
-            'Farbe',
-            'Inverkehrssetzung',
-            'Letzte Überprüfung',
-            'Kilometerstand',
-            'Bemerkungen',
-            'Bekannter Schaden',
-            'Verkäufer',
-            'Einkaufsdatum',
-            'Einkaufspreis',
-            'Käufer',
-            'Verkaufsdatum',
-            'Verkaufspreis',
-        ];
-
-        $direction = $this->getDirection($request, 'desc');
-        $sortBy = $this->getSortBy($request, 'buy_contract.date');
-        $cars = $this->getWithCustomSort(Car::query(), $sortBy, $direction)
-            ->filter($request->only('search', 'trashed'))
-            ->get()
-            ->map(function ($car) {
-                $bcontract = $car->latestBuyContract();
-                $scontract = $car->latestSellContract();
-
-                return [
-                    'brand' => $car->brand->name,
-                    'model' => $car->carModel->name,
-                    'stammnummer' => $car->stammnummer,
-                    'vin' => $car->vin,
-                    'colour' => $car->colour,
-                    'initial_date' => $car->initial_date_formatted,
-                    'last_check_date' => $car->last_check_date_formatted,
-                    'kilometers' => $car->kilometers_formatted,
-                    'notes' => $car->notes,
-                    'known_damage' => $car->known_damage,
-                    'seller' =>  $bcontract ? $bcontract->contact->full_title : null,
-                    'buy_date' =>  $bcontract ? $bcontract->date_formatted : null,
-                    'price' => $bcontract ? $bcontract->price_for_excel : null,
-                    'buyer' =>  $scontract ? $scontract->contact->full_title : null,
-                    'sell_date' =>  $scontract ? $scontract->date_formatted : null,
-                    'sell_price' => $scontract ? $scontract->price_for_excel : null,
-                ];
-            });
-
-        return Excel::download(new Export($cars, $headings), date('Y-m-d').'-Alle-Autos.xlsx');
+        return $this->exportCars($request, Car::query(), date('Y-m-d').'-Alle-Autos.xlsx', true);
     }
 
     public function unsoldPrint(Request $request)
     {
-        $headings = [
-            'Marke',
-            'Modell',
-            'Stammnummer',
-            'Chassisnummer',
-            'Farbe',
-            'Inverkehrssetzung',
-            'Letzte Überprüfung',
-            'Kilometerstand',
-            'Bemerkungen',
-            'Bekannter Schaden',
-            'Verkäufer',
-            'Einkaufsdatum',
-            'Einkaufspreis',
-        ];
-
-        $direction = $this->getDirection($request, 'desc');
-        $sortBy = $this->getSortBy($request, 'buy_contract.date');
-        $cars = $this->getWithCustomSort(Car::unsoldOnly(), $sortBy, $direction)
-            ->filter($request->only('search', 'trashed'))
-            ->get()
-            ->map(function ($car) {
-                $contract = $car->latestBuyContract();
-
-                return [
-                    'brand' => $car->brand->name,
-                    'model' => $car->carModel->name,
-                    'stammnummer' => $car->stammnummer,
-                    'vin' => $car->vin,
-                    'colour' => $car->colour,
-                    'initial_date' => $car->initial_date_formatted,
-                    'last_check_date' => $car->last_check_date_formatted,
-                    'kilometers' => $car->kilometers_formatted,
-                    'notes' => $car->notes,
-                    'known_damage' => $car->known_damage,
-                    'seller' =>  $contract ? $contract->contact->full_title : null,
-                    'buy_date' =>  $contract ? $contract->date_formatted : null,
-                    'price' => $contract ? $contract->price_for_excel : null,
-                ];
-            });
-
-        return Excel::download(new Export($cars, $headings), date('Y-m-d').'-Meine-Autos.xlsx');
+        return $this->exportCars($request, Car::unsoldOnly(), date('Y-m-d').'-Meine-Autos.xlsx', false);
     }
 
     public function soldPrint(Request $request)
+    {
+        return $this->exportCars($request, Car::soldOnly(), date('Y-m-d').'-Verkaufte-Autos.xlsx', true);
+    }
+
+    private function exportCars(Request $request, $query, string $filename, bool $includeSellColumns)
     {
         $headings = [
             'Marke',
@@ -145,23 +64,30 @@ class CarController extends Controller
             'Verkäufer',
             'Einkaufsdatum',
             'Einkaufspreis',
-            'Käufer',
-            'Verkaufsdatum',
-            'Verkaufspreis',
         ];
+
+        if ($includeSellColumns) {
+            $headings = array_merge($headings, [
+                'Käufer',
+                'Verkaufsdatum',
+                'Verkaufspreis',
+            ]);
+        }
 
         $direction = $this->getDirection($request, 'desc');
         $sortBy = $this->getSortBy($request, 'buy_contract.date');
-        $cars = $this->getWithCustomSort(Car::soldOnly(), $sortBy, $direction)
+        $cars = $this->getWithCustomSort($query, $sortBy, $direction)
+            ->with(['carModel.brand', 'contracts.contact'])
             ->filter($request->only('search', 'trashed'))
             ->get()
-            ->map(function ($car) {
-                $bcontract = $car->latestBuyContract();
-                $scontract = $car->latestSellContract();
-
-                return [
-                    'brand' => $car->brand->name,
-                    'model' => $car->carModel->name,
+            ->map(function ($car) use ($includeSellColumns) {
+                $buyContract = $car->contracts
+                    ->where('type', (string) ContractType::BuyContract)
+                    ->sortByDesc('date')
+                    ->first();
+                $row = [
+                    'brand' => $car->carModel?->brand?->name,
+                    'model' => $car->carModel?->name,
                     'stammnummer' => $car->stammnummer,
                     'vin' => $car->vin,
                     'colour' => $car->colour,
@@ -170,16 +96,25 @@ class CarController extends Controller
                     'kilometers' => $car->kilometers_formatted,
                     'notes' => $car->notes,
                     'known_damage' => $car->known_damage,
-                    'seller' =>  $bcontract ? $bcontract->contact->full_title : null,
-                    'buy_date' =>  $bcontract ? $bcontract->date_formatted : null,
-                    'price' => $bcontract ? $bcontract->price_for_excel : null,
-                    'buyer' =>  $scontract ? $scontract->contact->full_title : null,
-                    'sell_date' =>  $scontract ? $scontract->date_formatted : null,
-                    'sell_price' => $scontract ? $scontract->price_for_excel : null,
+                    'seller' => $buyContract?->contact?->full_title,
+                    'buy_date' => $buyContract?->date_formatted,
+                    'price' => $buyContract?->price_for_excel,
                 ];
+
+                if ($includeSellColumns) {
+                    $sellContract = $car->contracts
+                        ->where('type', (string) ContractType::SellContract)
+                        ->sortByDesc('date')
+                        ->first();
+                    $row['buyer'] = $sellContract?->contact?->full_title;
+                    $row['sell_date'] = $sellContract?->date_formatted;
+                    $row['sell_price'] = $sellContract?->price_for_excel;
+                }
+
+                return $row;
             });
 
-        return Excel::download(new Export($cars, $headings), date('Y-m-d').'-Verkaufte-Autos.xlsx');
+        return Excel::download(new Export($cars, $headings), $filename);
     }
 
     private function renderCarsList(Request $request, $cars, string $renderPage, string $defaultSort = 'buy_contract.date')
@@ -211,24 +146,22 @@ class CarController extends Controller
         ]);
     }
 
-    private function getContractFields(?Contract $contract)
-    {
-        if (! $contract) {
-            return null;
-        }
-        $contact = $contract->contact;
-
-        return [
-            'id' => $contract->id,
-            'date' => $contract->date_formatted,
-            'price' => $contract->price->format(),
-            'contact' => $contact->full_title,
-            'link' => route('contracts.show', $contract),
-        ];
-    }
-
     private function getWithCustomSort($cars, string $sortBy, string $direction)
     {
+        $buySubquery = DB::table('contracts')
+            ->select('id')
+            ->whereColumn('contracts.car_id', 'cars.id')
+            ->where('type', (string) ContractType::BuyContract)
+            ->orderByDesc('date')
+            ->limit(1);
+
+        $sellSubquery = DB::table('contracts')
+            ->select('id')
+            ->whereColumn('contracts.car_id', 'cars.id')
+            ->where('type', (string) ContractType::SellContract)
+            ->orderByDesc('date')
+            ->limit(1);
+
         return match ($sortBy) {
             'name' => $cars
                 ->leftJoin('car_models', 'cars.car_model_id', '=', 'car_models.id')
@@ -238,29 +171,28 @@ class CarController extends Controller
             'initial_date' => $cars->orderBy('initial_date', $direction),
             'stammnummer' => $cars->orderBy('stammnummer', $direction),
             'buy_contract.date' => $cars
-                ->leftJoin('contracts', function ($join) {
+                ->leftJoin('contracts', function ($join) use ($buySubquery) {
                     $join->on('contracts.car_id', '=', 'cars.id')
-                            ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '0' order by date desc limit 1)"));
+                        ->where('contracts.id', '=', $buySubquery);
                 })
                 ->orderBy('contracts.date', $direction),
             'buy_contract.price' => $cars
-                ->leftJoin('contracts', function ($join) {
+                ->leftJoin('contracts', function ($join) use ($buySubquery) {
                     $join->on('contracts.car_id', '=', 'cars.id')
-                        ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '0' order by date desc limit 1)"));
+                        ->where('contracts.id', '=', $buySubquery);
                 })
                 ->orderBy('contracts.price', $direction),
             'sell_contract.date' => $cars
-                ->leftJoin('contracts', function ($join) {
+                ->leftJoin('contracts', function ($join) use ($sellSubquery) {
                     $join->on('contracts.car_id', '=', 'cars.id')
-                            ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '1' order by date desc limit 1)"));
+                        ->where('contracts.id', '=', $sellSubquery);
                 })
                 ->orderBy('contracts.date', $direction),
             'sell_contract.price' => $cars
-                ->leftJoin('contracts', function ($join) {
+                ->leftJoin('contracts', function ($join) use ($sellSubquery) {
                     $join->on('contracts.car_id', '=', 'cars.id')
-                        ->on('contracts.id', '=', DB::raw("(SELECT id from contracts WHERE contracts.car_id = cars.id and type = '1' order by date desc limit 1)"));
-                }
-            )
+                        ->where('contracts.id', '=', $sellSubquery);
+                })
                 ->orderBy('contracts.price', $direction),
             default => $cars->orderBy('initial_date', $direction),
         };
@@ -275,27 +207,18 @@ class CarController extends Controller
         return $defaultSort;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return Inertia::render('Cars/Create', [
-            'brands' => Brand::all()->map(function ($brand) {
-                return [
+            'brands' => Brand::with('carModels:id,name,brand_id')->get(['id', 'name'])
+                ->map(fn ($brand) => [
                     'id' => $brand->id,
                     'name' => $brand->name,
-                    'models' => $brand->carModels()->get()
-                    ->map(function ($carModel) {
-                        return [
-                            'id' => $carModel->id,
-                            'name' => $carModel->name,
-                        ];
-                    }),
-                ];
-            }),
+                    'models' => $brand->carModels->map(fn ($carModel) => [
+                        'id' => $carModel->id,
+                        'name' => $carModel->name,
+                    ]),
+                ]),
         ]);
     }
 
@@ -324,7 +247,10 @@ class CarController extends Controller
             $request->merge(['last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d')]);
         }
 
-        return Car::create($request->all());
+        return Car::create($request->only([
+            'stammnummer', 'vin', 'colour', 'notes', 'known_damage',
+            'initial_date', 'last_check_date', 'kilometers', 'car_model_id',
+        ]));
     }
 
     public function storeForContract(Request $request)
@@ -423,19 +349,15 @@ class CarController extends Controller
                 'notes' => $car->notes,
                 'deleted_at' => $car->deleted_at,
             ],
-            'brands' => Brand::all()->map(function ($brand) {
-                return [
+            'brands' => Brand::with('carModels:id,name,brand_id')->get(['id', 'name'])
+                ->map(fn ($brand) => [
                     'id' => $brand->id,
                     'name' => $brand->name,
-                    'models' => $brand->carModels()->get()
-                        ->map(function ($carModel) {
-                            return [
-                                'id' => $carModel->id,
-                                'name' => $carModel->name,
-                            ];
-                        }),
-                ];
-            }),
+                    'models' => $brand->carModels->map(fn ($carModel) => [
+                        'id' => $carModel->id,
+                        'name' => $carModel->name,
+                    ]),
+                ]),
         ]);
     }
 
@@ -473,7 +395,10 @@ class CarController extends Controller
             $request->merge(['last_check_date' => Carbon::parse($request->get('last_check_date'))->format('Y-m-d')]);
         }
 
-        return $car->update($request->all());
+        return $car->update($request->only([
+            'stammnummer', 'vin', 'colour', 'notes', 'known_damage',
+            'initial_date', 'last_check_date', 'kilometers', 'car_model_id',
+        ]));
     }
 
     public function destroy(Car $car)

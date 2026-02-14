@@ -1,5 +1,5 @@
 <template>
-    <inertia-link :href="href" :class="allClasses">
+    <inertia-link :href="href" :method="method" :as="method !== 'get' ? 'button' : 'a'" :class="allClasses">
         <slot></slot>
     </inertia-link>
 </template>
@@ -11,6 +11,7 @@ export default {
     class: String,
     href: String,
     colour: String,
+    method: { type: String, default: 'get' },
   },
   computed: {
     allClasses() {

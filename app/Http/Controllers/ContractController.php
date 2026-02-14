@@ -26,6 +26,7 @@ class ContractController extends Controller
             'sold_this_year' => Contract::soldThisYear()->count(),
             'my_cars' => Car::unsoldOnly()->count(),
             'buy_contracts' => Contract::buyContracts()
+                                ->with(['car.carModel.brand', 'contact'])
                                 ->orderBy('date', 'desc')
                                 ->limit(10)
                                 ->get()
@@ -38,6 +39,7 @@ class ContractController extends Controller
                                     ];
                                 }),
             'sell_contracts' => Contract::sellContracts()
+                                ->with(['car.carModel.brand', 'contact'])
                                 ->orderBy('date', 'desc')
                                 ->limit(10)
                                 ->get()
@@ -63,17 +65,17 @@ class ContractController extends Controller
             'contact' => $this->getContactFields($contact),
             'type' => $type,
             'insurance_types' => InsuranceType::asSelectArray(),
-            'contacts' => Contact::all()->map(function ($contact) {
+            'contacts' => Contact::select('id', 'firstname', 'lastname', 'company', 'phone', 'address', 'zip', 'city', 'country', 'email')->get()->map(function ($contact) {
                 return $this->getContactFields($contact);
             }),
-            'cars' => Car::all()->map(function ($car) {
+            'cars' => Car::with('carModel.brand')->select('id', 'stammnummer', 'vin', 'colour', 'initial_date', 'car_model_id')->get()->map(function ($car) {
                 return $this->getCarFields($car);
             }),
-            'brands' => Brand::all()->map(function ($brand) {
+            'brands' => Brand::with('carModels:id,name,brand_id')->get(['id', 'name'])->map(function ($brand) {
                 return [
                     'id' => $brand->id,
                     'name' => $brand->name,
-                    'models' => $brand->carModels()->get(['id', 'name']),
+                    'models' => $brand->carModels->map(fn ($m) => ['id' => $m->id, 'name' => $m->name]),
                 ];
             }),
         ]);
@@ -152,8 +154,8 @@ class ContractController extends Controller
         $request->validate([
             'type' => ['required', 'string', Rule::in(ContractType::getValues())],
             'date' => ['required', 'date_format:"d.m.Y"'],
-            'delivery_date' => ['nullable', 'date_format:"d.m.Y"'],
-            'price' => ['required', 'integer'],
+            'delivery_date' => ['nullable', 'date_format:"d.m.Y"', 'after_or_equal:date'],
+            'price' => ['required', 'integer', 'min:1'],
             'car_id' => ['required', 'exists:App\Models\Car,id'],
             'contact_id' => ['required', 'exists:App\Models\Contact,id'],
             'insurance_type' => ['nullable', 'string', Rule::in(InsuranceType::getValues())],
@@ -162,10 +164,14 @@ class ContractController extends Controller
 
         $request->merge([
             'date' => Carbon::parse($request->get('date'))->format('Y-m-d'),
-            'delivery_date' => Carbon::parse($request->get('delivery_date'))->format('Y-m-d'),
+            'delivery_date' => $request->get('delivery_date')
+                ? Carbon::parse($request->get('delivery_date'))->format('Y-m-d')
+                : null,
         ]);
 
-        $contract = Contract::create($request->all());
+        $contract = Contract::create($request->only([
+            'date', 'delivery_date', 'price', 'contact_id', 'car_id', 'type', 'notes', 'insurance_type',
+        ]));
 
         $request->merge([
             'type' => (string) $request->get('payment_type'),
@@ -176,7 +182,7 @@ class ContractController extends Controller
             Payment::create(
                 $request->validate([
                     'date' => ['required', 'date'],
-                    'amount' => ['required', 'integer'],
+                    'amount' => ['required', 'integer', 'min:1'],
                     'type' => ['required', 'string', Rule::in(PaymentType::getValues())],
                     'contract_id' => ['required', 'exists:App\Models\Contract,id'],
                 ])
@@ -219,18 +225,22 @@ class ContractController extends Controller
 
         $request->validate([
             'date' => ['required', 'date_format:"d.m.Y"'],
-            'delivery_date' => ['nullable', 'date_format:"d.m.Y"'],
-            'price' => ['required', 'integer'],
+            'delivery_date' => ['nullable', 'date_format:"d.m.Y"', 'after_or_equal:date'],
+            'price' => ['required', 'integer', 'min:1'],
             'insurance_type' => ['nullable', 'string', Rule::in(InsuranceType::getValues())],
             'notes' => ['nullable'],
         ]);
 
         $request->merge([
             'date' => Carbon::parse($request->get('date'))->format('Y-m-d'),
-            'delivery_date' => Carbon::parse($request->get('delivery_date'))->format('Y-m-d'),
+            'delivery_date' => $request->get('delivery_date')
+                ? Carbon::parse($request->get('delivery_date'))->format('Y-m-d')
+                : null,
         ]);
 
-        $contract->update($request->all());
+        $contract->update($request->only([
+            'date', 'delivery_date', 'price', 'notes', 'insurance_type',
+        ]));
 
         session()->flash('flash.banner', 'Vertrag geändert.');
 

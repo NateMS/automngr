@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exports\Export;
+use App\Http\Traits\MapsContractFields;
 use App\Models\Contact;
-use App\Models\Contract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ContactController extends Controller
 {
+    use MapsContractFields;
     public function index(Request $request)
     {
         return $this->renderContactsList($request, Contact::query(), 'Contacts/Index');
@@ -253,22 +254,6 @@ class ContactController extends Controller
                     }),
             ],
         ]);
-    }
-
-    private function getContractFields(?Contract $contract)
-    {
-        if (! $contract) {
-            return null;
-        }
-        $car = $contract->car;
-
-        return [
-            'id' => $contract->id,
-            'date' => $contract->date_formatted,
-            'price' => $contract->price->format(),
-            'car' => $car->name_with_year,
-            'link' => route('contracts.show', $contract),
-        ];
     }
 
     public function update(Request $request, Contact $contact)
