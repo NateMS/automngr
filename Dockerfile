@@ -93,6 +93,7 @@ RUN mkdir -p storage/framework/cache/data \
     storage/framework/sessions \
     storage/framework/views \
     storage/logs \
+    storage/app/public/settings \
     bootstrap/cache \
     public/documents \
     && cp -R storage /var/www/storage-init
