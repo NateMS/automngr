@@ -1,5 +1,5 @@
 # Stage 1: Composer dependencies
-FROM php:8.2-cli-alpine AS composer-stage
+FROM php:8.4-cli-alpine AS composer-stage
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -28,7 +28,7 @@ COPY . .
 RUN npm run production
 
 # Stage 3: Production image
-FROM php:8.2-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 RUN --mount=type=cache,target=/var/cache/apk \
     apk add \
