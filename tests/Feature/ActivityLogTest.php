@@ -59,7 +59,7 @@ class ActivityLogTest extends TestCase
             ->first();
 
         $this->assertNotNull($activity);
-        $this->assertEquals('Changed', $activity->properties['attributes']['firstname']);
+        $this->assertEquals('Changed', $activity->attribute_changes['attributes']['firstname']);
     }
 
     public function test_deleting_model_generates_log_entry()

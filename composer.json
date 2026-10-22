@@ -13,15 +13,15 @@
         "bensampo/laravel-enum": "^6.10",
         "cknow/laravel-money": "^8.4",
         "fakerphp/faker": "^1.24.1",
-        "guzzlehttp/guzzle": "^7.10",
-        "inertiajs/inertia-laravel": "^1.0",
-        "laravel/framework": "^12.0",
+        "guzzlehttp/guzzle": "^8.0",
+        "inertiajs/inertia-laravel": "^3.0",
+        "laravel/framework": "^13.0",
         "laravel/jetstream": "^5.0",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.11",
-        "maatwebsite/excel": "^3.1",
+        "laravel/tinker": "^3.0",
+        "maatwebsite/excel": "^4.0",
         "phpoffice/phpword": "^1.4",
-        "spatie/laravel-activitylog": "^4.11",
+        "spatie/laravel-activitylog": "^5.0",
         "tightenco/ziggy": "^2.6"
     },
     "require-dev": {
@@ -29,7 +29,7 @@
         "laravel/sail": "^1.53",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.1",
-        "phpunit/phpunit": "^11.0"
+        "phpunit/phpunit": "^13.0"
     },
     "autoload": {
         "psr-4": {

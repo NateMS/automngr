@@ -5,7 +5,7 @@ Manage Cars, Contacts and Contracts
 - Export as Excel
 - Print Contracts as PDF
 
-Laravel 12 + Vue 3 (Inertia.js) + Vite + Tailwind CSS 4
+Laravel 13 + Vue 3 (Inertia.js) + Vite + Tailwind CSS 4
 
 ## Local Development
 
