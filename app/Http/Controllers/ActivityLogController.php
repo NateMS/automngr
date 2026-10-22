@@ -84,8 +84,8 @@ class ActivityLogController extends Controller
 
     private function formatProperties(Activity $activity): ?array
     {
-        $old = $activity->properties->get('old');
-        $new = $activity->properties->get('attributes');
+        $old = $activity->attribute_changes?->get('old');
+        $new = $activity->attribute_changes?->get('attributes');
 
         if (! $old && ! $new) {
             return null;

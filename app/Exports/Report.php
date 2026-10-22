@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Car;
 use App\Models\Contract;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -40,7 +41,7 @@ class Report implements FromCollection, WithTitle, WithHeadings, WithStyles, Wit
         ];
     }
 
-    public function collection()
+    public function collection(): Collection
     {
         $cars = Contract::with(['car' => function($query) {
             $query->whereNull('deleted_at');
@@ -70,7 +71,7 @@ class Report implements FromCollection, WithTitle, WithHeadings, WithStyles, Wit
         return $cars;
     }
 
-    public function styles(Worksheet $sheet)
+    public function styles(Worksheet $sheet): array
     {
         return [
             1 => ['font' => ['bold' => true]],
