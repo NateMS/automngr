@@ -93,4 +93,14 @@ class CarTest extends TestCase
 
         $this->assertSoftDeleted('cars', ['id' => $car->id]);
     }
+
+    public function test_deleted_car_can_still_be_shown()
+    {
+        $car = Car::factory()->create();
+        $car->delete();
+
+        $this->actingAs($this->user)
+            ->get(route('cars.show', $car))
+            ->assertOk();
+    }
 }
