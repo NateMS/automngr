@@ -103,7 +103,7 @@ export default {
       currencyOptions: {
         currency: 'CHF',
         locale: 'de-CH',
-        exportValueAsInteger: true,
+        valueScaling: 'precision',
         hideGroupingSeparatorOnFocus: false,
       },
     };
