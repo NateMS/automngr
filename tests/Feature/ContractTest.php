@@ -127,6 +127,16 @@ class ContractTest extends TestCase
         $this->assertSoftDeleted('contracts', ['id' => $contract->id]);
     }
 
+    public function test_deleted_contract_can_still_be_shown()
+    {
+        $contract = Contract::factory()->create();
+        $contract->delete();
+
+        $this->actingAs($this->user)
+            ->get(route('contracts.show', $contract))
+            ->assertOk();
+    }
+
     public function test_restore_restores_contract()
     {
         $contract = Contract::factory()->create();

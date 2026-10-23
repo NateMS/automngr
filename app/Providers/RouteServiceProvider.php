@@ -41,35 +41,35 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        Route::bind('car', function ($value) {
+            if (in_array(Route::currentRouteName(), ['cars.show', 'cars.restore'])) {
+                return Car::withTrashed()->find($value);
+            }
+
+            return Car::find($value);
+        });
+
+        Route::bind('contact', function ($value) {
+            if (in_array(Route::currentRouteName(), ['contacts.show', 'contacts.restore'])) {
+                return Contact::withTrashed()->find($value);
+            }
+
+            return Contact::find($value);
+        });
+
+        Route::bind('contract', function ($value) {
+            if (in_array(Route::currentRouteName(), ['contracts.show', 'contracts.restore', 'payments.destroy', 'payments.print'])) {
+                return Contract::withTrashed()->find($value);
+            }
+
+            return Contract::find($value);
+        });
+
+        Route::bind('payment', function ($value) {
+            return \App\Models\Payment::find($value);
+        });
+
         $this->routes(function () {
-            Route::bind('car', function ($value) {
-                if (in_array(Route::currentRouteName(), ['cars.show', 'cars.restore'])) {
-                    return Car::withTrashed()->find($value);
-                }
-
-                return Car::find($value);
-            });
-
-            Route::bind('contact', function ($value) {
-                if (in_array(Route::currentRouteName(), ['contacts.show', 'contacts.restore'])) {
-                    return Contact::withTrashed()->find($value);
-                }
-
-                return Contact::find($value);
-            });
-
-            Route::bind('contract', function ($value) {
-                if (in_array(Route::currentRouteName(), ['contracts.show', 'contracts.restore', 'payments.destroy', 'payments.print'])) {
-                    return Contract::withTrashed()->find($value);
-                }
-
-                return Contract::find($value);
-            });
-
-            Route::bind('payment', function ($value) {
-                return \App\Models\Payment::find($value);
-            });
-
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)
