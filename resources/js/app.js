@@ -33,6 +33,15 @@ const store = createStore({
   },
 });
 
+// The "Back to the application" button of error pages shown in Inertia's error dialog
+// cannot navigate the top window (sandboxed iframe), so it asks us to close the dialog.
+window.addEventListener('message', (event) => {
+  const dialog = document.getElementById('inertia-error-dialog');
+  if (event.data === 'inertia-error-dialog:close' && event.source === dialog?.querySelector('iframe')?.contentWindow) {
+    dialog.close();
+  }
+});
+
 const pages = import.meta.glob('./Pages/**/*.vue', { eager: true });
 
 createInertiaApp({
